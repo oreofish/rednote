@@ -2,17 +2,17 @@ common: &common
   adapter: mysql2
   encoding: utf8
   username: root
-  password: abcd1234
+  password: root
   host: localhost
 
 development:
   <<: *common
-  database: note_dev
+  database: redidea_dev
 
 test:
   <<: *common
-  database: note_test
+  database: redidea_test
 
 production:
   <<: *common
-  database: note_product
+  database: redidea_product
