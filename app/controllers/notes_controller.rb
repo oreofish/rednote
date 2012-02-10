@@ -36,13 +36,17 @@ class NotesController < ApplicationController
 
   # params[:nickname]
   def newblog
-    # TODO: check if current user is with nickname == params[:nickname]
+    
     @note = Note.new
     @note.content = 'write something here'
     @note.kind = 1
 
     respond_to do |format|
-      format.html { render "new" }
+      if current_user.nickname != params[:nickname] 
+        format.html { redirect_to notes_path }
+      else
+        format.html { render "new" }
+      end
     end
   end
 
