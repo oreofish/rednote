@@ -7,16 +7,29 @@
     <%= devise_error_messages! %>
 
     <div class="group wat-cf">
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email %></div>
-      <span class='description'>Ex. test@example.com</span>
-    </div>
+			<div class="left">
+				<label class="label">帐号：</label>
+			</div>
+			<div class="right">
+				<%= f.nickname_field :nickname %>
+			</div>
+			<span class="description">muhaha</span>
+		</div>
 
-    <div class="group wat-cf">
-      <div><%= f.label :password %><br />
-      <%= f.password_field :password %></div>
-      <span class='description'>至少6个字符</span>
-    </div>
+		<div class="group wat-cf">
+      <div>
+				<%= f.label "邮箱：" %><br/>
+      	<%= f.email_field :email %></div>
+      	<span class='description'>Ex. test@example.com</span>
+    	</div>
+		</div>
+
+    	<div class="group wat-cf">
+      	<div>
+					<%= f.label :password %><br />
+      		<%= f.password_field :password %></div>
+      	<span class='description'>至少6个字符</span>
+    	</div>
 
     <div class="group wat-cf">
       <div><%= f.label '确认密码'%><br />

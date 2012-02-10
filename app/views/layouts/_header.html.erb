@@ -4,7 +4,11 @@
     <ul class="wat-cf">
       <li><a href="#"><%= t("web-app-theme.profile", :default => "Profile") %></a></li>
       <li><a href="#"><%= t("web-app-theme.settings", :default => "Settings") %></a></li>
-			<li><%= link_to "退出", destroy_user_session_path, :method => :delete %></li>
+			<% if user_signed_in? %>
+				<li><%= link_to "退出", destroy_user_session_path, :method => :delete %></li>
+			<% else %>
+				<li><%= link_to "登录", new_user_session_path, :method => :new %></li>
+			<% end %>
     </ul>
   </div>
   <div id="main-navigation">
