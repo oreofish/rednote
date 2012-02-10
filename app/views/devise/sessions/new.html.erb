@@ -1,15 +1,15 @@
 <%# encoding: utf-8 %>
 <div class='block' id='block-login'>
   <h2>登录</h2>
-  <div class='content login'>
+  <div class="content login">
     <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form login" }) do |f| %>
-    <div class='group wat-cf'>
-      <div class='left'><%= f.label "帐号" %></div>
+    <div class="group wat-cf">
+      <div class='left'><%= f.label "帐号：" %></div>
       <div class='right'><%= f.text_field :nickname, :size => 25 %></div>
     </div>
 
     <div class='group wat-cf'>
-      <div class='left'><%= f.label "密码" %></div>
+      <div class='left'><%= f.label "密码：" %></div>
       <div class='right'><%= f.password_field :password, :size => 25 %></div>
     </div>
     
