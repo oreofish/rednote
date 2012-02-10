@@ -1,7 +1,9 @@
 Rednote::Application.routes.draw do
   resources :notes
 
-  devise_for :users
+  devise_for :users do
+    match "/users/sign_up", :to => "devise/sessions#new"
+  end
 
   root :to => "notes#index"
   # The priority is based upon order of creation:
