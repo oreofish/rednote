@@ -6,7 +6,6 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @notes }
     end
   end
 
@@ -17,18 +16,33 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @note }
     end
   end
 
   # GET /notes/new
   # GET /notes/new.json
   def new
+    # according to kind of note to create
+    # kind = {
+    #   1 : blog, 
+    #   2 : link,
+    #   3 : image,
+    #   4 : code
+    # };
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  # params[:nickname]
+  def newblog
+    # TODO: check if current user is with nickname == params[:nickname]
     @note = Note.new
+    @note.content = 'write something here'
+    @note.kind = 1
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @note }
+      format.html { render "new" }
     end
   end
 
@@ -40,15 +54,13 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(params[:note])
+    @note = current_user.notes.build(params[:note])
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render json: @note, status: :created, location: @note }
+        format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,10 +73,8 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
-        format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,7 +87,6 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to notes_url }
-      format.json { head :ok }
     end
   end
 end
