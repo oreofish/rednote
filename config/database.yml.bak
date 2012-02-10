@@ -7,12 +7,12 @@ common: &common
 
 development:
   <<: *common
-  database: redidea_dev
+  database: note_dev
 
 test:
   <<: *common
-  database: redidea_test
+  database: note_test
 
 production:
   <<: *common
-  database: redidea_product
+  database: note_product
