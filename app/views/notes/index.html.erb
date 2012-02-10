@@ -6,7 +6,7 @@
     <th>Content</th>
     <th>Image</th>
     <th>Link</th>
-    <th>Type</th>
+    <th>Kind</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +18,7 @@
     <td><%= note.content %></td>
     <td><%= note.image %></td>
     <td><%= note.link %></td>
-    <td><%= note.type %></td>
+    <td><%= note.kind %></td>
     <td><%= link_to 'Show', note %></td>
     <td><%= link_to 'Edit', edit_note_path(note) %></td>
     <td><%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %></td>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Note', new_note_path %>
+<%= link_to 'New Blog', "#{current_user.nickname}/new/blog" %>
