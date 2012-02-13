@@ -313,6 +313,10 @@ ul.list li .left {
   float: left;  
 }
 
+ul.list li .right{
+	float: right;
+}
+
 ul.list li .left .avatar {
   width: 50px;
   height: 50px;
