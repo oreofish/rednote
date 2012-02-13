@@ -66,6 +66,21 @@ class NotesController < ApplicationController
     end
   end
 
+  # params[:nickname]
+  def newbook
+    @note = Note.new
+    @note.content = 'write some comment here'
+    @note.kind = 5
+
+    respond_to do |format|
+      if current_user.nickname != params[:nickname] 
+        format.html { redirect_to notes_path }
+      else
+        format.html { render "new" }
+      end
+    end
+  end
+
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
