@@ -28,6 +28,7 @@ class NotesController < ApplicationController
     #   2 : link,
     #   3 : image,
     #   4 : code
+    #   5 : book
     # };
     respond_to do |format|
       format.html
@@ -40,6 +41,21 @@ class NotesController < ApplicationController
     @note = Note.new
     @note.content = 'write something here'
     @note.kind = 1
+
+    respond_to do |format|
+      if current_user.nickname != params[:nickname] 
+        format.html { redirect_to notes_path }
+      else
+        format.html { render "new" }
+      end
+    end
+  end
+
+  # params[:nickname]
+  def newimage
+    @note = Note.new
+    @note.content = 'write some comment here'
+    @note.kind = 3
 
     respond_to do |format|
       if current_user.nickname != params[:nickname] 
@@ -64,7 +80,8 @@ class NotesController < ApplicationController
       if @note.save
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to notes_path, notice: 'Note creation was failed.' }
+
       end
     end
   end

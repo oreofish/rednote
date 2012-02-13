@@ -34,9 +34,8 @@
 			
 			<br />
 			
-            <% if not current_user.nil? %>
-              <%= link_to 'New Blog', "#{current_user.nickname}/new/blog" %>
-            <% end %>
+            <%= link_to 'New Blog', "#{current_user.nickname}/new/blog" %>
+            <%= link_to 'New Image', "#{current_user.nickname}/new/image" %>
 		</div>
   </div>
 </div>
