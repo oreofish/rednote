@@ -6,31 +6,24 @@
 	<div class="content">
 		<h2 class="title">Listing notes</h2>
 		<div class="inner">
-			<table>
-			  <tr>
-			    <th>User</th>
-			    <th>Content</th>
-			    <th>Image</th>
-			    <th>Link</th>
-			    <th>Kind</th>
-			    <th></th>
-			    <th></th>
-			    <th></th>
-			  </tr>
-			
-			<% @notes.each do |note| %>
-			  <tr>
-			    <td><%= note.user_id %></td>
-			    <td><%= note.content %></td>
-			    <td><%= note.image %></td>
-			    <td><%= note.link %></td>
-			    <td><%= note.kind %></td>
-			    <td><%= link_to 'Show', note %></td>
-			    <td><%= link_to 'Edit', edit_note_path(note) %></td>
-			    <td><%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %></td>
-			  </tr>
+			<ul class="list">
+				<% @notes.each do |note| %>
+					<li>
+						<div class="left"><%= note.user_id %></div>
+			   		<div class="item"><%= note.content %>
+			    		<%= note.image %>
+			    		<%= note.link %>
+							<br/>
+							<div class="right">
+			    			<%= note.kind %> |
+			    			<%= link_to 'Show', note %> |
+				    		<%= link_to 'Edit', edit_note_path(note) %> |
+			    			<%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %>
+			  			</div>
+						</div>
+					</li>
 			<% end %>
-			</table>
+			</ul>
 			
 			<br />
 			
