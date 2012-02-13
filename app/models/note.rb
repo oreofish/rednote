@@ -20,4 +20,5 @@ class Note < ActiveRecord::Base
   belongs_to :user
   attr_accessible :content, :image, :link, :kind
 
+  mount_uploader :image, ImageUploader
 end
