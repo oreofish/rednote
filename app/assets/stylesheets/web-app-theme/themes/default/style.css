@@ -441,11 +441,11 @@ a.button:active, button.button:active {
   float: right;
 }
 
-.login div.left, .signup div div.left {
+.login div.left, .signup div.left {
   width: 21%;
   float: left;
 }
-.login div.right, .signup div div.right {
+.login div.right, .signup div.right {
   width: 74%;
   float: right;
 }

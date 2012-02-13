@@ -1,6 +1,7 @@
 Rednote::Application.routes.draw do
 
   get "users/index"
+	get "users/css"
 
   devise_for :users
   root :to => "notes#index"

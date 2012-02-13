@@ -1,34 +1,27 @@
-<h1>Users#info</h1>
-<p>
-用户图像
-</p>
-<p>
-<%= @nickname %>
-</p>
-<p>
-发布数: <%= @notes_size %> 
-</p>
-<p>
----------------------------------------华丽丽的分割线--------------------------------------
-</p>
-<ul>
-    <li>
-    <a href="">user.nickname的全部动态</a>
-    <a href="">分享</a>
-    </li>
-</ul>
-<p>
----------------------------------------华丽丽的分割线--------------------------------------
-</p>
-<ul>
-    <% if @notes_size == 0 %>
-        <p> 你还没有分享!!</p>
-    <% else %>
-        <p> 分享列表!!</p>
-        <% @notes.each do |note| %>
-            <%= note %>
-        <% end %>
-    <% end %>
-    <p>
-</ul>
+<h2 class="title">Users#info</h2>
+<div class="block">
+	<p>用户图像</p>
+	<p><%= @nickname %></p>
+	<p>发布数: <%= @notes_size %></p>
+</div>
 
+<div class="block">
+	<div class="secondary-navigation">
+		<ul class="wat-cf">
+			<li class="first active"><a href="">全部动态</a></li>
+			<li><a href="">分享</a></li>
+		</ul>
+	</div>
+	<div class="content">
+		<ul class="list">
+    	<% if @notes_size == 0 %>
+    		<p> 你还没有分享!!</p>
+    	<% else %>
+     		<p> 分享列表!!</p>
+      	<% @notes.each do |note| %>
+      		<li><%= note %></li>
+      	<% end %>
+    	<% end %>
+		</ul>
+	</div>
+</div>
