@@ -9,6 +9,7 @@ Rednote::Application.routes.draw do
   match ':nickname/new/blog' => 'notes#newblog'
   match ':nickname/new/image' => 'notes#newimage'
   match ':nickname/new/book' => 'notes#newbook'
+	match ':nickname/new/code' => 'notes#newcode'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
