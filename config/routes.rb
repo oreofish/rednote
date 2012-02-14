@@ -10,6 +10,7 @@ Rednote::Application.routes.draw do
   match ':nickname/new/image' => 'notes#newimage'
   match ':nickname/new/book' => 'notes#newbook'
 	match ':nickname/new/code' => 'notes#newcode'
+  match ':nickname/new/link' => 'notes#newlink'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
