@@ -1,6 +1,6 @@
 <h2 class="title">Users#info</h2>
 <div class="block">
-    <p><%= image_tag(@avatar) %></p>
+    <%= link_to image_tag(@avatar), users_avatar_path %>
 	<p><%= @nickname %></p>
 	<p>发布数: <%= @notes_size %></p>
 </div>
@@ -9,17 +9,15 @@
 	<div class="secondary-navigation">
 		<ul class="wat-cf">
 			<li class="first active"><a href="">全部动态</a></li>
-			<li><a href="">分享</a></li>
 		</ul>
 	</div>
 	<div class="content">
 		<ul class="list">
     	<% if @notes_size == 0 %>
-    		<p> 你还没有分享!!</p>
+    		<p> 你还没有动态!!</p>
     	<% else %>
-     		<p> 分享列表!!</p>
+     		<p> 动态列表!!</p>
       	<% @notes.each do |note| %>
-     		<h1> 分享</h1>
       		<li><%= note.content %></li>
       		<p>回复数量</p>
       	<% end %>
