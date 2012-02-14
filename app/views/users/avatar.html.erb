@@ -1,5 +1,4 @@
 <h2 class="title">用户头像</h2>
-<%= current_user.nickname %>
 <%= image_tag(current_user.avatar) %>
 <h2 class="title">头像选择</h2>
 <% Dir.open("public/images/icons/").each do |file| %>

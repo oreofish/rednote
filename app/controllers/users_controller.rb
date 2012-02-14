@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   private
     def default_avatar
         if current_user.avatar == nil
-            current_user.avatar = "/images/icons/0.jpeg"
+            current_user.avatar = "/images/icons/00.jpeg"
         end
     end
 end
