@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     before_filter :default_avatar
   def index
+      @avatar = current_user.avatar
       @nickname = current_user.nickname
       @notes = current_user.notes
       @notes_size = current_user.notes.size

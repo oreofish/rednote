@@ -1,6 +1,6 @@
 <h2 class="title">Users#info</h2>
 <div class="block">
-	<p>用户图像</p>
+    <p><%= image_tag(@avatar) %></p>
 	<p><%= @nickname %></p>
 	<p>发布数: <%= @notes_size %></p>
 </div>
@@ -19,7 +19,9 @@
     	<% else %>
      		<p> 分享列表!!</p>
       	<% @notes.each do |note| %>
-      		<li><%= note %></li>
+     		<h1> 分享</h1>
+      		<li><%= note.content %></li>
+      		<p>回复数量</p>
       	<% end %>
     	<% end %>
 		</ul>
