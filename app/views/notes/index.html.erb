@@ -10,9 +10,17 @@
 				<% @notes.each do |note| %>
 					<li>
 						<div class="left"><%= note.user_id %></div>
-			   		<div class="item"><%= note.content %>
-			    		<%= note.image %>
-			    		<%= note.link %>
+                        <div class="item">
+                            <% if note.kind == 2 %>
+                                <%= link_to "#{note.link}", note.link %>
+							    <br/>
+                                <%= note.content %>
+                            <% else %>
+                            <%= note.content %>
+			    		    <%= note.image %>
+			    		    <%= note.link %>
+                            <% end %>
+                            <%= note.content %>
 							<br/>
 							<div class="right">
 			    			<%= note.kind %> |
@@ -30,6 +38,7 @@
             <%= link_to 'New Blog', "#{current_user.nickname}/new/blog" %>
             <%= link_to 'New Image', "#{current_user.nickname}/new/image" %>
             <%= link_to 'New Book', "#{current_user.nickname}/new/book" %>
+            <%= link_to 'New Link', "#{current_user.nickname}/new/link" %>
 		</div>
   </div>
 </div>
