@@ -16,7 +16,7 @@
                 <%= note.content %>
               <% else %>
                 <%= note.content %><br/>
-			    		  <%= note.image %><br/>
+			    		  <%= image_tag("#{note.image_url}") %><br/>
 			    		  <%= note.link %><br/>
               <% end %>
               <%= note.content %>
