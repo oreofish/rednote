@@ -81,6 +81,20 @@ class NotesController < ApplicationController
     end
   end
 
+  def newcode
+    @note = Note.new
+    @note.content = 'write some code here'
+    @note.kind = 4
+		@languages = ["C","Clojure","CSS","Delphi","diff","ERB","Groovy","HAML","HTML","Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"]
+    respond_to do |format|
+      if current_user.nickname != params[:nickname] 
+        format.html { redirect_to notes_path }
+      else
+        format.html { render "new" }
+			end
+		end
+	end
+
   def newlink
     @note = Note.new
     @note.content = 'write something here'
@@ -91,9 +105,9 @@ class NotesController < ApplicationController
         format.html { redirect_to notes_path }
       else
         format.html { render "new" }
-      end
-    end
-  end
+			end
+		end
+	end
 
   # GET /notes/1/edit
   def edit
@@ -104,10 +118,13 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
-    broadcast '/notes/new', "{ 'kind' : #{@note.kind} }"
+    if @note.kind==4 
+      @note.link = params[:language][:id].strip.downcase.to_sym
+    end
 
     respond_to do |format|
       if @note.save
+        broadcast '/notes/new', "{ 'kind' : #{@note.kind} }"
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
       else
         format.html { redirect_to notes_path, notice: 'Note creation was failed.' }

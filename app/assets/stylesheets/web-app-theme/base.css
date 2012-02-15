@@ -22,7 +22,7 @@ h3 { font-size: 18px; margin: 10px 0; font-weight: normal;}
 h4 { font-size: 16px; margin: 10px 0; font-weight: normal;}
 hr {height: 1px; border: 0; }
 p { margin: 15px 0;}
-a img { border: none; }
+a img { border: none;}
 
 body {
   font-size: 12px;
@@ -44,8 +44,9 @@ body {
 
 #header h1 {
   margin: 0;
-  padding: 10px 0;  
+  padding: 10px 0px;  
 	padding-left: 20%;
+	float: left;
 }
 
 #header h1 a:link, #header h1 a:active, #header h1 a:hover, #header h1 a:visited {
@@ -290,12 +291,6 @@ input.checkbox {
   color: red;
 }
 
-.form input.text_field, .form textarea.text_area {
-  width: 100%;
-  border-width: 1px;
-  border-style: solid;
-}
-
 /* lists */
 
 ul.list {
@@ -411,4 +406,16 @@ button.button:active, a.button:active {
 }
 .link_button{
   cursor: pointer;
+}
+
+.avatar a img{
+	border: 5px solid #CCC;
+	margin: 15px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+.avatar a img:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }
