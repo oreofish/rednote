@@ -22,7 +22,7 @@ h3 { font-size: 18px; margin: 10px 0; font-weight: normal;}
 h4 { font-size: 16px; margin: 10px 0; font-weight: normal;}
 hr {height: 1px; border: 0; }
 p { margin: 15px 0;}
-a img { border: none; }
+a img { border: none;}
 
 body {
   font-size: 12px;
@@ -406,4 +406,16 @@ button.button:active, a.button:active {
 }
 .link_button{
   cursor: pointer;
+}
+
+.avatar a img{
+	border: 5px solid #CCC;
+	margin: 15px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+
+.avatar a img:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }

@@ -13,6 +13,8 @@
 #
 
 class Note < ActiveRecord::Base
+  acts_as_commentable
+
   validates :content, :presence => true
   validates :kind, :presence => true
   validates :user_id, :presence => true

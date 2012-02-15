@@ -44,18 +44,3 @@
 			<% end %>
 		</div>
 	</div>
-<%= render :inline => CodeRay.highlight('use strict;
-use Switch;
-
-my $x = undef;
-
-if (defined($x)) { print("X Does Not Fail\n\n"); }
-else { print("X Fails\n\n");}
-
-my $y = $x & 1;
-if (defined($y)) { print("Y Does Not Fail\n\n"); }
-else { print("Y Fails\n\n");}
-
-my $failure |= ($x >> 2) & 1;
-if (defined($failure)) { print("Does Not Fail\n\n"); }
-else { print("Fails\n\n");}', :php, options = {:css => :class}) %>
