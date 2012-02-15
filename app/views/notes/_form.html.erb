@@ -1,6 +1,6 @@
 				<% @notes.each do |note| %>
 					<li>
-						<div class="left"><%= note.user_id %></div>
+						<div class="left"><%= image_tag(User.find(note.user_id).avatar) %></div>
             <div class="item">
             	<% if note.kind == 2 %>
               	<%= link_to "#{note.link}", note.link %><br/>
