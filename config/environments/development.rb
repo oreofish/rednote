@@ -36,4 +36,17 @@ Rednote::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.redflag-linux.com",
+    port: 25,
+    domain: 'redflag-linux.com',
+    user_name: 'jianxing',
+    password: ENV["MAIL_PASSWORD"],
+    authentication: 'plain'
+  }
+
+
 end

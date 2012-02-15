@@ -11,6 +11,9 @@ Rednote::Application.routes.draw do
   match ':nickname/new/book' => 'notes#newbook'
 	match ':nickname/new/code' => 'notes#newcode'
   match ':nickname/new/link' => 'notes#newlink'
+  match '/mails', :to => 'mails#index'
+  match '/mails/interview', :to => 'mails#interview'
+  match '/mails/invite', :to => 'mails#invite'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

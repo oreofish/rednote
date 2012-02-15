@@ -1,0 +1,18 @@
+<%# encoding: utf-8 %>
+<h1>面试邮件</h1>
+<%= form_tag :action => :interview do %>
+  <div class="field">
+    <br />
+    邮件标题:<br /><%= text_area_tag :subject, "中科红旗面试邀请", :cols => 66, :rows => 1 %><br />
+    邮件内容:<br /><%= text_area_tag :body, "__NAME__\n\n你好，我是中科红旗负责桌面部门的邢健，现邀请你于__TIME__到北京海淀区万泉河路68号紫金大厦6层参加面试。\n请回复邮件确认能否按时参加，如需改为其他时间，也请邮件联系。\n\n邢健", :cols => 66, :rows => 10 %><br />
+    应聘者列表(请填写下面文本框，内容格式为邮件, 姓名, 时间):<br />
+    <%= text_area_tag :interview, 'oreofish@gmail.com, 张豆豆, 本周二下午3点', :cols => 66, :rows => 10 %>
+    <br />
+    <button class='button' type='submit'>
+      <%= image_tag "web-app-theme/icons/tick.png"%>发送面试邀请
+    </button>
+    <br />
+    <br />
+  </div>
+<% end %>
+
