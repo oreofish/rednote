@@ -20,7 +20,7 @@
 			    		    <%= note.image %>
 			    		    <%= note.link %>
                             <% end %>
-                            <%= note.content %>
+                            <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id) %>
 							<br/>
 							<div class="right">
 			    			<%= note.kind %> |

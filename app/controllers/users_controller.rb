@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-    before_filter :default_avatar
   def index
       @avatar = current_user.avatar
       @nickname = current_user.nickname
@@ -12,20 +11,12 @@ class UsersController < ApplicationController
   end
 
   def avatar
-      if params[:icon] != nil
         current_user.avatar = params[:icon]
         current_user.save!
-      end
 
       respond_to do |format|
           format.html # index.html.erb
       end
   end
 
-  private
-    def default_avatar
-        if current_user.avatar == nil
-            current_user.avatar = "/images/icons/00.jpeg"
-        end
-    end
 end

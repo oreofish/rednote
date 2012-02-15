@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  resources :comments
+
   get "users/index"
   get "users/avatar"
 
