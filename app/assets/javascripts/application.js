@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require rednote_utils
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";

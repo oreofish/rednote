@@ -104,6 +104,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
+    broadcast '/notes/new', "{ 'kind' : #{@note.kind} }"
 
     respond_to do |format|
       if @note.save
