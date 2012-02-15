@@ -1,8 +1,7 @@
 <%# encoding: utf-8 %>
 
 <div class="block">
-  <div class="secondary-navigation">
-	</div>
+  <div class="secondary-navigation"></div>
 	<div class="content">
 		<h2 class="title">Listing notes</h2>
 		<div class="inner">
@@ -14,12 +13,15 @@
             	<% if note.kind == 2 %>
               	<%= link_to "#{note.link}", note.link %><br/>
                 <%= note.content %>
-              <% else %>
+              <% elsif note.kind ==4 %>
+								<%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
+							<% else %>
                 <%= note.content %><br/>
 			    		  <%= image_tag("#{note.image_url}") %><br/>
 			    		  <%= note.link %><br/>
+              	<%= note.content %><br/>
               <% end %>
-              <%= note.content %>
+              <%= note.description %>
 							<br/>
 							<div class="right">
 			    			<%= note.kind %> |
@@ -27,19 +29,17 @@
 				    		<%= link_to 'Edit', edit_note_path(note) %> |
 			    			<%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %>
 			  			</div>
-						</br>
+							<br/>
 						</div>
 					</li>
-			<% end %>
+				<% end %>
 			</ul>
-			
-			<br />
-			
+			<br/>
             <%= link_to 'New Blog', "#{current_user.nickname}/new/blog" %>
             <%= link_to 'New Image', "#{current_user.nickname}/new/image" %>
             <%= link_to 'New Book', "#{current_user.nickname}/new/book" %>
             <%= link_to 'New Code', "#{current_user.nickname}/new/code" %>
             <%= link_to 'New Link', "#{current_user.nickname}/new/link" %>
 		</div>
-  </div>
+	</div>
 </div>

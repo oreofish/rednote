@@ -85,6 +85,7 @@ class NotesController < ApplicationController
     @note = Note.new
     @note.content = 'write some code here'
     @note.kind = 4
+		@languages = ["C, C++","Clojure","CSS","Delphi","diff","ERB","Groovy","HAML","HTML","Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"]
     respond_to do |format|
       if current_user.nickname != params[:nickname] 
         format.html { redirect_to notes_path }
@@ -117,6 +118,9 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
+		if @note.kind==4 
+			@note.link = params[:language][:id].strip.downcase.to_sym
+		end
 
     respond_to do |format|
       if @note.save
