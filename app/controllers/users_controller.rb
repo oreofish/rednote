@@ -11,8 +11,10 @@ class UsersController < ApplicationController
   end
 
   def avatar
+      if params[:icon] != nil
         current_user.avatar = params[:icon]
         current_user.save!
+      end
 
       respond_to do |format|
           format.html # index.html.erb
