@@ -1,6 +1,6 @@
 <h2 class="title">Users#info</h2>
 <div class="block">
-	<p>用户图像</p>
+    <%= link_to image_tag(@avatar), users_avatar_path %>
 	<p><%= @nickname %></p>
 	<p>发布数: <%= @notes_size %></p>
 </div>
@@ -9,7 +9,6 @@
 	<div class="secondary-navigation">
 		<ul class="wat-cf">
 			<li class="first active"><a href="">全部动态</a></li>
-			<li><a href="">分享</a></li>
 		</ul>
 	</div>
 	<div class="content">
