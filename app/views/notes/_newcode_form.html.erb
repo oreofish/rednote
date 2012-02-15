@@ -1,0 +1,76 @@
+	<div class="secondary-navigation">
+	</div>
+	<div class="content">
+		<h2 class="title">New Codes</h2>
+		<div class="inner">
+			<%= form_for(@note, :html => { :class => "form"}) do |f| %>
+			  <% if @note.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+			
+			      <ul>
+			      	<% @note.errors.full_messages.each do |msg| %>
+			        	<li><%= msg %></li>
+			      	<% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+				<div class="columns wat-cf">
+					<div class="column left">
+			  		<div class="group">
+			    		<%= f.label 'content:' %><br />
+			    		<%= f.text_area :content, :class => "text_area", :rows => 6 %>
+			  		</div>
+			
+			  		<div class="group">
+			    		<%= f.label 'description:' %><br />
+			    		<%= f.text_area :description, :class => "text_area", :rows => 3 %>
+			  		</div>
+
+					  <div class="group">
+					    <%= f.hidden_field :kind %>
+					  </div>
+					</div>
+					<div class="column right">
+						<div class="group">
+							<label class="label">Select Language</label>
+							<select>
+								<option value="1">C,C++</option>
+								<option value="2">Clojure</option>
+								<option value="3">CSS</option>
+								<option value="4">Delphi</option>
+								<option value="5">diff</option>
+								<option value="6">ERB</option>
+								<option value="7">Groovy</option>
+								<option value="8">HAML</option>
+								<option value="9">HTML</option>
+								<option value="10">Java</option>
+								<option value="11">JavaScript</option>
+								<option value="12">JSON</option>
+								<option value="13">PHP</option>
+								<option value="14">Python</option>
+								<option value="15">Ruby</option>
+								<option value="16">SQL</option>
+								<option value="17">XML</option>
+								<option value="18">YAML</option>
+							</select>
+						</div>
+					
+					  <div class="group">
+					    <%= f.submit %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+
+<%= render :inline => CodeRay.highlight('<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<p>My first paragraph.</p>
+
+</body>
+</html>', :html, options = {:css => :class}) %>
