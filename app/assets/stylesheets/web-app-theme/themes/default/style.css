@@ -227,7 +227,7 @@ hr {
 #sidebar ul li {
   background-position: 0 11px;
   background-repeat: no-repeat;
-  background-image: url("images/arrow.png");
+  _background-image: url("images/arrow.png");
   border-bottom: 1px dashed #777777;
   list-style-type: none;
 }

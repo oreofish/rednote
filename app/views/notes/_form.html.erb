@@ -1,33 +1,27 @@
-<%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
-      <ul>
-      <% @note.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :link %><br />
-    <%= f.text_field :link %>
-  </div>
-  <div class="field">
-    <%= f.label :kind %><br />
-    <%= f.number_field :kind %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+				<% @notes.each do |note| %>
+					<li>
+						<div class="left"><%= note.user_id %></div>
+            <div class="item">
+            	<% if note.kind == 2 %>
+              	<%= link_to "#{note.link}", note.link %><br/>
+                <%= note.content %>
+              <% elsif note.kind ==4 %>
+								<%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
+							<% else %>
+                <%= note.content %><br/>
+			    		  <%= image_tag("#{note.image_url}") %><br/>
+			    		  <%= note.link %><br/>
+              	<%= note.content %><br/>
+              <% end %>
+              <%= note.description %>
+							<br/>
+							<div class="right">
+			    			<%= note.kind %> |
+			    			<%= link_to 'Show', note %> |
+				    		<%= link_to 'Edit', edit_note_path(note) %> |
+			    			<%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %>
+			  			</div>
+							<br/>
+						</div>
+					</li>
+				<% end %>
