@@ -46,6 +46,13 @@ var flashController = {
     }
 };
 
+var logger = {
+    record: function(msg) {
+        console.log(msg);
+        flashController.doSuccess("<b>有更新，刷新显示</b>" );
+    }
+};
+
 function setup_faye(){
     var server = location.host.replace(/:\d*/, '');
     if (/localhost/.test(server)) {
@@ -58,13 +65,12 @@ function setup_faye(){
     });
 
     // faye 
-    Slot = {
+    var Slot = {
         incoming: function(message, callback) {
             switch( message['channel'] ) {
                 case "/notes/new":
-                    console.log('incoming notes update');
-                    console.log(message);
-                    flashController.doMessage("<b>有更新，刷新显示</b>" );
+                case "/notes/destroy":
+                    logger.record(message);
                     break;
             }
             callback(message);

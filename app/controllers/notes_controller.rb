@@ -1,4 +1,6 @@
 class NotesController < ApplicationController
+  before_filter :authorized_user, :only => :destroy
+
   # GET /notes
   # GET /notes.json
   def index
@@ -153,9 +155,20 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
+    broadcast '/notes/destroy', %Q/
+      { 
+        'kind' : #{@note.kind},
+        'user' : #{current_user.nickname}
+      }/
 
     respond_to do |format|
       format.html { redirect_to notes_url }
     end
+  end
+
+  private
+  def authorized_user
+    note = current_user.notes.find_by_id(params[:id])
+    redirect_to root_path if note.nil?
   end
 end
