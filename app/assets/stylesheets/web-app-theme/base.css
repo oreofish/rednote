@@ -54,8 +54,9 @@ body {
 }
 
 #main {  
-  width: 75%;
-  float: right;    
+  width: 55%;
+  float: right;
+  padding-right: 20%;
 }
 
 .actions-bar {
