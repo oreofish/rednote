@@ -34,6 +34,24 @@ function scrolltop() {
     __backtopfuc();
 };
 
+var commentsManager = {
+    bindHandlers: function() {
+        var $items = $('a.comment_link');
+        $items.each( function(idx, el) {
+            var $list = $(el).parent().find('.comments_list');
+
+            $(el).unbind('click');
+            $(el).bind( {
+                'click': function(ev) {
+                    $list.toggle('blind');
+                }
+            });
+        });
+    }
+};
+
+
 $(document).ready( function() {
     scrolltop();
+    commentsManager.bindHandlers();
 } );

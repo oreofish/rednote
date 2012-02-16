@@ -1,4 +1,5 @@
 (function() {
-    var $item = $( '.<%= @note.id %>_comment' );
-    $item.append( "<%= j render( 'comment_box') %>" );
+    var $item = $( '#<%= @note.id %>_comment' );
+    var $list = $item.find('.comments_list');
+    $list.html( "<%= j render( 'comment_box') %>" );
 }());
