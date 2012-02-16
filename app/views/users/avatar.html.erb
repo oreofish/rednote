@@ -1,13 +1,13 @@
 <h2 class="title">当前头像</h2>
-<%= image_tag(current_user.avatar) %>
+<%= image_tag(current_user.avatar, :class => "avatar") %>
 <div class="block">
 	<div class="secondary-navigation"></div>
 	<div class="content">
 		<h2 class="title">头像选择</h2>
-		<div class="avatar">
+		<div class="avatars">
 			<% Dir.open("public/images/icons/").each do |file| %>
     		<% if file[/\.[^\.]+$/] == ".gif" %>
-        	<%= link_to image_tag("/images/icons/#{file}"), users_avatar_path(:icon => "/images/icons/#{file}") %>
+              <%= link_to image_tag("/images/icons/#{file}", :class => "avatar"), users_avatar_path(:icon => "/images/icons/#{file}") %>
     		<% end %>
 			<% end %>
 		</div>
