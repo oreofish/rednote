@@ -48,6 +48,14 @@ hr {
   color: #dddddd;
 }
 
+textarea {
+  width: 100%;
+  border: 1px solid #dddddd;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 #header {
   height: 80px;
   background-color: #333333;
@@ -300,7 +308,7 @@ hr {
   font-weight: normal;
   color: #666666;
 }
-.form input.text_field, .form textarea.text_area {
+.form input.text_field {
   width: 100%;
   border: 1px solid #dddddd;
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -308,15 +316,19 @@ hr {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 .form input.button {
-  background: #dddddd;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #c1c1c1;
+  background: #edeeed url("images/button-background.png") top;
+  border: 1px solid #c3c4ba;
+  font-family: "MuseoSans500", helvetica, arial, sans-serif;
+  font-weight: normal;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   padding: 2px 5px;
   cursor: pointer;
   color: #111111;
-  font-weight: bold;
   font-size: 11px;
 }
 .form input.button:hover {

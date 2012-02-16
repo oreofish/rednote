@@ -29,6 +29,12 @@ body {
   font-family: sans-serif;  
 }
 
+textarea {
+  font-size: 1.2em;
+  padding: 1px 0;
+  margin: 0;
+}
+
 #container {
   min-width: 960px;
 }
@@ -235,7 +241,7 @@ input.checkbox {
 }
 
 .form .group {
-  margin-bottom: 15px;
+  margin: 15px;
 }
 
 .form div.left {
@@ -260,7 +266,7 @@ input.checkbox {
   float: right;
 }
 
-.form label.label, .form input.text_field, .form textarea.text_area {
+.form label.label, .form input.text_field {
   font-size: 1.2em;
   padding: 1px 0;
   margin: 0;

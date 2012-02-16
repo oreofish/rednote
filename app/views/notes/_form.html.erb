@@ -1,28 +1,26 @@
-				<% @notes.each do |note| %>
-					<li>
-						<div class="left"><%= image_tag(User.find(note.user_id).avatar) %></div>
-            <div class="item">
-            	<% if note.kind == 2 %>
-              	<%= link_to "#{note.link}", note.link %><br/>
-                <%= note.content %>
-              <% elsif note.kind ==4 %>
-								<%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
-							<% else %>
-                <%= note.content %><br/>
-			    		  <%= image_tag("#{note.image_url}") %><br/>
-			    		  <%= note.link %><br/>
-              	<%= note.content %><br/>
-              <% end %>
-              <%= note.description %>
-							<%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id) %>
-							<br/>
-							<div class="right">
-			    			<%= note.kind %> |
-			    			<%= link_to 'Show', note %> |
-				    		<%= link_to 'Edit', edit_note_path(note) %> |
-			    			<%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %>
-			  			</div>
-							<br/>
-						</div>
-					</li>
-				<% end %>
+<% @notes.each do |note| %>
+  <br/>
+  <li id="<%= note.id %>">
+  <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
+  <div class="item">
+    <% if note.kind == 1 %>
+      <%= link_to "#{note.link}", note.link %><br/>
+      <%= note.content %><br/>
+    <% elsif note.kind == 2 or note.kind == 5 %>
+      <%= link_to "#{note.link}", note.link %><br/>
+    <% elsif note.kind ==4 %>
+      <%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
+    <% elsif note.kind == 3 %>
+      <%= image_tag("#{note.image_url}") %><br/>
+    <% end %>
+    <%= note.description %>
+    <br/>
+    <div class="right">
+      <%= link_to 'Show', note %> |
+      <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
+      <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id) %>
+    </div>
+    <br/>
+  </div>
+  </li>
+<% end %>
