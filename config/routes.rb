@@ -8,7 +8,12 @@ Rednote::Application.routes.draw do
   devise_for :users
   root :to => "notes#index"
 
-  resources :notes
+  resources :notes do
+    collection do
+      get 'page'
+    end
+  end
+
   match ':nickname/new/blog' => 'notes#newblog'
   match ':nickname/new/image' => 'notes#newimage'
   match ':nickname/new/book' => 'notes#newbook'

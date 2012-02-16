@@ -4,10 +4,27 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.offset(0).limit(5)
+    session[:current_page] = 0
 
     respond_to do |format|
       format.html # index.html.erb
+    end
+  end
+
+  # GET /notes/page
+  # get next page by ajax request
+  def page
+    session[:current_page] += 1
+    currentPage = session[:current_page]
+    @notes = Note.offset(currentPage * 5).limit(5)
+
+    respond_to do |format|
+      if @notes.count() > 0
+        format.js
+      else
+        format.js { render :nothing => true }
+      end
     end
   end
 
