@@ -18,7 +18,9 @@
     <div class="right">
       <%= link_to 'Show', note %> |
       <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
-      <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id) %>
+      <div class="<%= note.id %>_comment">
+          <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true %>
+      </div>
     </div>
     <br/>
   </div>

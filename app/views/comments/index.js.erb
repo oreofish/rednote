@@ -1,0 +1,4 @@
+(function() {
+    var $item = $( '.<%= @note.id %>_comment' );
+    $item.append( "<%= j render( 'comment_box') %>" );
+}());
