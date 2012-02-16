@@ -21,10 +21,12 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to comments_path(:note_id => @comment.commentable_id)  }
+         @comments = @note.comments
+         @comment = Comment.new(:commentable_id => @note.id)
+        format.js { render "index" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        format.html { render action: "new" }
+        format.js { render "index" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
