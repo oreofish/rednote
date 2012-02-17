@@ -1,52 +1,46 @@
-var notesManager = {
+rednote.notesManager = {
     init: function() {
         var that = this;
-        $(window).bind("scroll", function() {
-            $this = $(this);
-            if (that.scrollAtBottom()) {
-                that.refreshNextPage();
-            } else {
-                console.log( 'no need to load next page' );
-            }
-        });
+        if (!rednote.util.isScrollVisible()) {
+            //TODO: add timeout loading of nextpage
+        }
+
+        $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
     },
 
-    scrollAtBottom: function() {
-        var totalHeight, currentScroll, visibleHeight;
-        if (document.documentElement.scrollTop)
-            currentScroll = document.documentElement.scrollTop;
-        else
-            currentScroll = document.body.scrollTop;
-
-        if (document.documentElement.scrollHeight)
-            totalHeight = document.documentElement.scrollHeight;
-        else
-            totalHeight = document.body.scrollHeight;
-
-        visibleHeight = document.documentElement.clientHeight;
-
-        if (totalHeight <= currentScroll + visibleHeight)
-            return true;
-        else
-            return false;
-    }, 
+    checkAndLoadNextPage: function() {
+        if (rednote.util.scrollNearBottom()) {
+            rednote.notesManager.refreshNextPage();
+        }
+    },
 
     refreshNextPage: function() {
         console.log('try refreshNextPage');
-        $.get('/notes/page', function(data) {
-            console.log('load next page');
-            if (data.trim().length == 0)
-                return;
+        $.ajax({
+            url: '/notes/page',
+            beforeSend: function() {
+                //TODO: busy waiting here
+                console.log('send load request');
+                $(window).unbind("scroll", rednote.notesManager.checkAndLoadNextPage);
+            }, 
+            success: function(data) {
+                if (data.trim().length == 0)
+                    return;
 
-            var cb = eval(data);
-            if ( typeof cb === "function" ) {
-                cb();
+                var cb = eval(data);
+                if ( typeof cb === "function" ) {
+                    console.log('load next page');
+                    cb();
+                }
+            },
+            complete: function() {
+                $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
             }
         });
     }
 };
 
 $(function() {
-    notesManager.init();
+    rednote.notesManager.init();
 });
 

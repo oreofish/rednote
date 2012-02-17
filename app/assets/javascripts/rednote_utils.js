@@ -15,8 +15,45 @@
  * =====================================================================================
 */
 
+rednote = {}
+rednote.util = {
+    scrollNearBottom: function() {
+        var totalHeight, currentScroll, visibleHeight;
+        if (document.documentElement.scrollTop)
+            currentScroll = document.documentElement.scrollTop;
+        else
+            currentScroll = document.body.scrollTop;
+
+        if (document.documentElement.scrollHeight)
+            totalHeight = document.documentElement.scrollHeight;
+        else
+            totalHeight = document.documentElement.offsetHeight;
+
+        visibleHeight = document.documentElement.clientHeight;
+
+        if (totalHeight <= currentScroll + visibleHeight + 40)
+            return true;
+        else
+            return false;
+    }, 
+
+    isScrollVisible: function() {
+        var totalHeight, visibleHeight;
+        if (document.documentElement.scrollHeight)
+            totalHeight = document.documentElement.scrollHeight;
+        else
+            totalHeight = document.documentElement.offsetHeight;
+
+        visibleHeight = document.documentElement.clientHeight;
+        if (visibleHeight > totalHeight)
+            return true;
+        else
+            return false;
+    }
+};
+
 // handle flash messages and animations
-var flashController = {
+rednote.flashController = {
     doMessage: function(msg) {
         this.stop();
         $('.flash').html('<div class="message notice"> '+msg+'  </div>');
@@ -46,10 +83,10 @@ var flashController = {
     }
 };
 
-var logger = {
+rednote.logger = {
     record: function(msg) {
         console.log(msg);
-        flashController.doSuccess("<b>有更新，刷新显示</b>" );
+        rednote.flashController.doSuccess("<b>有更新，刷新显示</b>" );
     }
 };
 
@@ -70,7 +107,7 @@ function setup_faye(){
             switch( message['channel'] ) {
                 case "/notes/new":
                 case "/notes/destroy":
-                    logger.record(message);
+                    rednote.logger.record(message);
                     break;
             }
             callback(message);
