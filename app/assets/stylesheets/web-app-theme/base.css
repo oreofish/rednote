@@ -102,6 +102,11 @@ textarea {
 #sidebar ul.navigation li a:link, #sidebar ul.navigation li a:visited {
   display: block;
   padding: 10px 15px;
+  color: #111111;
+}
+
+#sidebar ul.navigation li a:hover {
+  color: #4a4a4a;
 }
 
 #sidebar .block .sidebar-block, #sidebar .notice {

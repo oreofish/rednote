@@ -35,8 +35,12 @@ h1, h2, h3 {
   font-family: "Museo700", helvetica, arial, sans-serif;
 }
 
-a:link, a:visited, a:hover, a:active {
-  color: #111111;
+a:link, a:active, a:visited {
+  color: #b4b4b4;
+}
+
+a:hover {
+  color:#111111;
 }
 
 a {
@@ -90,8 +94,8 @@ textarea {
 #main .block .content {
   padding-top: 1px;
 }
-#main .block .content .inner {
-  padding: 0 15px 15px;
+#main .block .inner {
+  padding: 15px 15px 15px;
 }
 #main .block .content h2 {
   margin-left: 15px;
@@ -107,6 +111,14 @@ textarea {
   text-transform: normal;
   letter-spacing: normal;
   line-height: 1.45em;
+}
+
+#main .block .content a {
+  color: #111111;
+}
+
+#main .block .content a:hover {
+  color: #a4a4a4;
 }
 
 #main-navigation {

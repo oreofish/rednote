@@ -88,7 +88,6 @@ class NotesController < ApplicationController
   # params[:nickname]
   def newbook
     @note = Note.new
-    @note.content = 'write some comment here'
     @note.kind = 5
 
     respond_to do |format|
@@ -140,6 +139,8 @@ class NotesController < ApplicationController
     @note = current_user.notes.build(params[:note])
     if @note.kind==4 
       @note.link = params[:language][:id].strip.downcase.to_sym
+    elsif @note.kind==5
+      @note.content = @note.book.url.gsub(/.*\//, '')
     end
 
     respond_to do |format|
