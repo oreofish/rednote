@@ -36,12 +36,13 @@ function scrolltop() {
 
 var commentsManager = {
     bindHandlers: function() {
-        var $items = $('a.comment_link');
+        var $items = $('.item').has('.comments_link');
         $items.each( function(idx, el) {
-            var $list = $(el).parent().find('.comments_list');
+            var $link = $(el).find('.comments_link');
+            var $list = $(el).find('.comments_list');
 
-            $(el).unbind('click');
-            $(el).bind( {
+            $link.unbind('click');
+            $link.bind( {
                 'click': function(ev) {
                     $list.toggle('blind');
                 }
