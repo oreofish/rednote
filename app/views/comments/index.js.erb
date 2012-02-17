@@ -1,5 +1,5 @@
 (function() {
-    var $item = $( '#<%= @note.id %>_comment' );
-    var $list = $item.find('.comments_list');
+    var $note = $('#note<%= @note.id %>').has('a.comments_link');
+    var $list = $note.find('.comments_list');
     $list.html( "<%= j render( 'comment_box') %>" );
 }());
