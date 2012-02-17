@@ -1,39 +1,31 @@
 <% @notes.each do |note| %>
-  <div id="note<%= note.id %>", class="block">
+  <li id="note<%= note.id %>">
+  <div class="block">
     <h2 class="title"></h2>
     <div class="inner">
-      <ul class="list">
-        <li>
-        <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
-        <div class="item">
-          <% if note.kind == 1 %>
-            <%= link_to "#{note.link}", note.link %><br/>
-            <%= note.content %><br/>
-          <% elsif note.kind == 2 or note.kind == 5 %>
-            <%= link_to "#{note.link}", note.link %><br/>
-          <% elsif note.kind ==4 %>
-            <%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
-          <% elsif note.kind == 3 %>
-            <%= image_tag("#{note.image_url}") %><br/>
-          <% end %>
-          <%= note.description %>
-          <br/>
-          <div class="right">
-            <%= link_to 'Show', note %> |
-            <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
-          </div>
-          <div id="<%= note.id %>_comment">
-            <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comment_link" %>
-            <div class="comments_list" style="display: none">
-              <div class="<%= note.id %>_comment">
-                <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true %>
-              </div>
-            </div>
-          </div>
-          <br/>
+      <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
+      <div class="item">
+        <% if note.kind == 1 %>
+          <%= link_to "#{note.link}", note.link %><br/>
+          <%= note.content %><br/>
+        <% elsif note.kind == 2 or note.kind == 5 %>
+          <%= link_to "#{note.link}", note.link %><br/>
+        <% elsif note.kind ==4 %>
+          <%= render :inline => CodeRay.highlight(note.content, note.link, options = {:css => :class}) %>
+        <% elsif note.kind == 3 %>
+          <%= image_tag("#{note.image_url}") %><br/>
+        <% end %>
+        <%= note.description %>
+        <br/>
+        <div class="right">
+          <%= link_to 'Show', note %> |
+          <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
         </div>
-        </li>
-      </ul>
+        <div class="<%= note.id %>_comment">
+          <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true %>
+        </div>
+      </div>
     </div>
   </div>
+  </li>
 <% end %>
