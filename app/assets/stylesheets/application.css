@@ -13,19 +13,21 @@
  */
 .backToTop {
     display: none;
-    width:18px;
-    line-height:1.2;
+    width:50px;
+    height:50px;
+    line-height:4.5;
     padding:5px 0;
-    background-color:#000;
+    background: #666 url(/images/backtotop.gif) center center no-repeat;
+    background-color:#666 ;
     color:#fff;
     font-size:$small-font;
     text-align:center;
     position:fixed;
     _position:absolute;
-    right:10px;
+    right:15%;
     bottom:1%;
     _bottom:"auto";
     cursor:pointer;
     opacity:.6;
     filter:Alpha(opacity=60);
-}                                                           }
+}         
