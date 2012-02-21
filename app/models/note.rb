@@ -14,11 +14,11 @@
 
 class Note < ActiveRecord::Base
   acts_as_commentable
-  validates :kind, :presence => true
+  validates :summary, :presence => true
   validates :user_id, :presence => true
 
   belongs_to :user
-  attr_accessible :content, :image, :link, :kind, :book, :description,
+  attr_accessible :summary, :description,
     :image_cache
 
   mount_uploader :image, ImageUploader
