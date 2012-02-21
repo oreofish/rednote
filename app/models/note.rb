@@ -4,24 +4,23 @@
 #
 #  id          :integer(4)      not null, primary key
 #  user_id     :integer(4)
-#  content     :text
-#  image       :string(255)
-#  link        :string(255)
+#  summary     :text
 #  kind        :integer(4)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
-#  book        :string(255)
 #  description :text
 #
 
 class Note < ActiveRecord::Base
   acts_as_commentable
-  validates :summary, :presence => true
+  validates :summary, :presence => true,
+                      :length   => { :maximum => 100 }
   validates :user_id, :presence => true
+  validates :kind,    :presence => true
+  validates :description, :length   => { :maximum => 20000 }
 
   belongs_to :user
-  attr_accessible :summary, :description,
-    :image_cache
+  attr_accessible :summary, :description, :kind, :image_cache
 
   mount_uploader :image, ImageUploader
   mount_uploader :book, BookUploader

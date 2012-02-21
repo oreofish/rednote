@@ -20,6 +20,14 @@ class Comment < ActiveRecord::Base
 
   default_scope :order => 'created_at ASC'
 
+  validates :user_id,        :presence => true
+  validates :commentable_id, :presence => true
+  validates :title,   :length       => { :maximum => 30 }
+  validates :comment, :presence     => true,
+                      :length       => { :maximum => 255 }
+
+  attr_accessible :title, :comment, :commentable_id, :commentable_type
+
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
   #acts_as_voteable

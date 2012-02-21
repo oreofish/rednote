@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120221191045) do
     t.integer  "user_id"
     t.text     "summary"
     t.integer  "kind"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.text     "description"
   end
 
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20120221191045) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                                                 :null => false
+    t.datetime "updated_at",                                                                 :null => false
     t.string   "nickname"
     t.string   "avatar"
   end

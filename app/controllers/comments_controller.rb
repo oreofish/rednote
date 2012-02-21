@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @note = @comment.commentable
     @comment.destroy
-    @comments = @note.comments
+    @comments = @note.comments if @note
     @comment = Comment.new(:commentable_id => @note.id)
 
     respond_to do |format|
