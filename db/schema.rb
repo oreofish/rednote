@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215032027) do
+ActiveRecord::Schema.define(:version => 20120221040142) do
 
   create_table "comments", :force => true do |t|
     t.string   "title",            :limit => 50, :default => ""
@@ -29,13 +29,10 @@ ActiveRecord::Schema.define(:version => 20120215032027) do
 
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
-    t.text     "content"
-    t.string   "image"
-    t.string   "link"
+    t.text     "summary"
     t.integer  "kind"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.string   "book"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "description"
   end
 
@@ -50,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20120215032027) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                                                 :null => false
-    t.datetime "updated_at",                                                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "nickname"
     t.string   "avatar",                                :default => "/images/icons/00.jpeg"
   end
