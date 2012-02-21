@@ -28,5 +28,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname
 
   has_many :notes, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :likes, :dependent => :destroy
 
 end

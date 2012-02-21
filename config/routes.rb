@@ -4,6 +4,10 @@ Rednote::Application.routes.draw do
 
   get "users/index"
   get "users/avatar"
+  get "users/mycomments"
+  get "users/comments"
+  get "users/reading"
+  get "users/done"
 
   devise_for :users
   root :to => "notes#index"

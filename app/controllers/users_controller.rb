@@ -10,6 +10,46 @@ class UsersController < ApplicationController
       end
   end
 
+  def mycomments
+      @avatar = current_user.avatar
+      @nickname = current_user.nickname
+      @comments = current_user.comments
+      
+      respond_to do |format|
+          format.html 
+      end
+  end
+
+  def comments
+      @avatar = current_user.avatar
+      @nickname = current_user.nickname
+      @comments = Comment.find_by_sql("SELECT * FROM comments")
+      
+      respond_to do |format|
+          format.html 
+      end
+  end
+
+  def reading
+      @avatar = current_user.avatar
+      @nickname = current_user.nickname
+      @notes = Note.find_by_sql("SELECT * FROM notes")
+      
+      respond_to do |format|
+          format.html 
+      end
+  end
+
+  def done
+      @avatar = current_user.avatar
+      @nickname = current_user.nickname
+      @notes = Note.find_by_sql("SELECT * FROM notes")
+      
+      respond_to do |format|
+          format.html 
+      end
+  end
+
   def avatar
       if params[:icon] != nil
         current_user.avatar = params[:icon]

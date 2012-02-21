@@ -126,6 +126,10 @@ textarea {
   padding: 15px 15px 15px;  
 }
 
+#main .list .block {
+  margin: 15px;
+}
+
 #main .main p.first {
   margin-top: 0;
 }
