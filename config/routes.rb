@@ -18,11 +18,6 @@ Rednote::Application.routes.draw do
     end
   end
 
-  match ':nickname/new/blog' => 'notes#newblog'
-  match ':nickname/new/image' => 'notes#newimage'
-  match ':nickname/new/book' => 'notes#newbook'
-	match ':nickname/new/code' => 'notes#newcode'
-  match ':nickname/new/link' => 'notes#newlink'
   match '/mails', :to => 'mails#index'
   match '/mails/interview', :to => 'mails#interview'
   match '/mails/invite', :to => 'mails#invite'

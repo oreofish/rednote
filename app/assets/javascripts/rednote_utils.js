@@ -16,6 +16,7 @@
 */
 
 rednote = {}
+
 rednote.util = {
     scrollNearBottom: function() {
         var totalHeight, currentScroll, visibleHeight;

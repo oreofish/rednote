@@ -3,8 +3,8 @@
       <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
       <div class="item">
         <div class="content">
-          <%= note.description %>
-          <%= note.summary%>
+          <%= note.summary %> </br>
+          <pre> <%= note.description %> </pre>
         </div>
         <br/>
         <div class="right">

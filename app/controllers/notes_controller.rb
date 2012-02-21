@@ -1,9 +1,22 @@
 class NotesController < ApplicationController
   before_filter :authorized_user, :only => :destroy
+  # list of attachment kinds = {
+  TEXT_ATTACH = 1
+  LINK_ATTACH = 2
+  IMG_ATTACH  = 3
+  CODE_ATTACH = 4
+  BOOK_ATTACH = 5
+  # }
 
   # GET /notes
   # GET /notes.json
   def index
+    @note = Note.new
+	@languages = [
+      "C","Clojure","CSS","Delphi","DIFF","ERB","Groovy","HAML","HTML",
+      "Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"
+    ]
+
     @notes = Note.offset(0).limit(5)
     session[:current_page] = 0
 
@@ -41,92 +54,10 @@ class NotesController < ApplicationController
   # GET /notes/new
   # GET /notes/new.json
   def new
-    # according to kind of note to create
-    # kind = {
-    #   1 : blog, 
-    #   2 : link,
-    #   3 : image,
-    #   4 : code
-    #   5 : book
-    # };
     respond_to do |format|
       format.html
     end
   end
-
-  # params[:nickname]
-  def newblog
-    
-    @note = Note.new
-    @note.content = 'write something here'
-    @note.kind = 1
-
-    respond_to do |format|
-      if current_user.nickname != params[:nickname] 
-        format.html { redirect_to notes_path }
-      else
-        format.html { render "new" }
-      end
-    end
-  end
-
-  # params[:nickname]
-  def newimage
-    @note = Note.new
-    @note.content = 'write some comment here'
-    @note.kind = 3
-
-    respond_to do |format|
-      if current_user.nickname != params[:nickname] 
-        format.html { redirect_to notes_path }
-      else
-        format.html { render "new" }
-      end
-    end
-  end
-
-  # params[:nickname]
-  def newbook
-    @note = Note.new
-    @note.kind = 5
-
-    respond_to do |format|
-      if current_user.nickname != params[:nickname] 
-        format.html { redirect_to notes_path }
-      else
-        format.html { render "new" }
-      end
-    end
-  end
-
-  def newcode
-    @note = Note.new
-    @note.content = 'write some code here'
-    @note.kind = 4
-	@languages = ["C","Clojure","CSS","Delphi","DIFF","ERB","Groovy","HAML","HTML","Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"]
-
-    respond_to do |format|
-      if current_user.nickname != params[:nickname] 
-        format.html { redirect_to notes_path }
-      else
-        format.html { render "new" }
-			end
-		end
-	end
-
-  def newlink
-    @note = Note.new
-    @note.content = 'write something here'
-    @note.kind = 2
-
-    respond_to do |format|
-      if current_user.nickname != params[:nickname] 
-        format.html { redirect_to notes_path }
-      else
-        format.html { render "new" }
-			end
-		end
-	end
 
   # GET /notes/1/edit
   def edit
@@ -137,10 +68,10 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
-    if @note.kind==4 
-      @note.link = params[:language][:id].strip.downcase.to_sym
-    elsif @note.kind==5
-      @note.content = @note.book.url.gsub(/.*\//, '')
+    if @note.kind == CODE_ATTACH
+      # hack: insert code lang into special tag
+      @note.description = 
+        "@@#{params[:language][:id].strip.downcase.to_sym}@@\n" + @note.description
     end
 
     respond_to do |format|
