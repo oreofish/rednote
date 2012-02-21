@@ -13,9 +13,10 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
 #  nickname               :string(255)
+#  avatar                 :string(255)     default("/images/icons/00.jpeg")
 #
 
 class User < ActiveRecord::Base
