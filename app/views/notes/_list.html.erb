@@ -8,7 +8,7 @@
     </div>
 
     <% if note.kind > 0 %>
-      <%= render :partial => "attach_#{attachmentKind(note.kind)}", :locals => { :attachment => note.description } %>
+      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :attachment => note.description } %>
     <% end %>
 
     <div class="right">
