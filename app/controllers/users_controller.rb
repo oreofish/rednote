@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       @avatar = current_user.avatar
       @nickname = current_user.nickname
       @comments = current_user.comments
+
+      @comments.reverse!
       
       respond_to do |format|
           format.html 
@@ -23,27 +25,17 @@ class UsersController < ApplicationController
   def comments
       @avatar = current_user.avatar
       @nickname = current_user.nickname
-      @comments = Comment.find_by_sql("SELECT * FROM comments")
+      @comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE commentable_id IN (SELECT id FROM notes WHERE user_id = #{current_user.id}) ORDER BY created_at DESC")
       
       respond_to do |format|
           format.html 
       end
   end
 
-  def reading
+  def mytag
       @avatar = current_user.avatar
       @nickname = current_user.nickname
-      @notes = Note.find_by_sql("SELECT * FROM notes")
-      
-      respond_to do |format|
-          format.html 
-      end
-  end
-
-  def done
-      @avatar = current_user.avatar
-      @nickname = current_user.nickname
-      @notes = Note.find_by_sql("SELECT * FROM notes")
+      @notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT note_id FROM likes WHERE user_id=#{current_user.id} ) ORDER BY created_at DESC")
       
       respond_to do |format|
           format.html 

@@ -9,15 +9,13 @@
       <li><a href="/users/done">Done</a></li>
     </ul>
   </div>
-<ul class='comment'>
-  <% @comments.each do |comment| %>
-    <li>
-    <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
+  <ul class='comment'>
+    <% @comments.each do |comment| %>
+      <li>
+      <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
       <%= comment.comment %>
-			<% if(comment.user_id==current_user.id) %>
-				<%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
-			<%end%>
-    </li>
-  <% end %>
+      <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+      </li>
+    <% end %>
   </ul>
 </div>

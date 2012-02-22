@@ -118,13 +118,10 @@ textarea {
 }
 
 #main .block {
-  margin-bottom: 20px;
-  padding-top: 1px;
+  margin: 0;
+  padding: 0;
 }
 
-#main .block .inner {
-  padding: 15px 15px 15px;  
-}
 
 #main .list .block {
   margin: 15px;
@@ -144,13 +141,13 @@ textarea {
   width: 100%;
 }
 
-#user-navigation ul, #main-navigation ul, .secondary-navigation ul, #sidebar ul.navigation {
+#user-navigation ul, #main-navigation ul, .secondary-navigation ul, #sidebar ul.navigation, .inner ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-#user-navigation ul li, #main-navigation ul li, .secondary-navigation ul li {
+#user-navigation ul li, #main-navigation ul li, .secondary-navigation ul li, .inner ul li {
   float: left;  
 }
 
