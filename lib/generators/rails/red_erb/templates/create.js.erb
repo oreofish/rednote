@@ -1,0 +1,12 @@
+<%%# encoding: utf-8 %>
+
+(function() {
+<%% if @<%= singular_table_name %>.valid? %>
+  $('.content .list').prepend( "<%%= j render( :partial => 'item', :locals => { :<%= singular_table_name %> => @<%= singular_table_name %> }) %>" );
+  $('.content .list > li:first').effect('highlight', {}, 3000);
+  $('#new_<%= singular_table_name %>')[0].reset();
+<%% else %>
+   // something like flashController.doFailure('<p>创建失败</p>');
+<%% end %>
+}());
+

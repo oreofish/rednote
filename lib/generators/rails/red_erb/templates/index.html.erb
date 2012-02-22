@@ -1,0 +1,22 @@
+<%%# encoding: utf-8 %>
+
+<div class="block">
+  <div class="secondary-navigation"></div>
+  <div class="inner">
+    <div class="title">
+      <p>Listing <%= plural_table_name %></p>
+    </div>
+  
+    <%%= render "form" %>
+
+    <div class="content">
+      <ul class="list">
+      <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+      <%%= render :partial => 'item', :locals => { :<%= singular_table_name %> => <%= singular_table_name %> } %>
+      <%% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

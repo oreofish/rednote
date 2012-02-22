@@ -67,5 +67,11 @@ module Rednote
       Devise::SessionsController.layout "sign"
       Devise::RegistrationsController.layout "sign"
     end
+    
+    config.generators do |g|
+      g.scaffold_controller :red_scaffold_controller
+      g.template_engine :red_erb
+      g.stylesheets     false
+    end
   end
 end
