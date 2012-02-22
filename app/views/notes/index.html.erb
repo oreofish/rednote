@@ -3,7 +3,8 @@
 <div class="block">
   <div class="secondary-navigation"></div>
 
-  <div class="notes_main note_publish">
+  <div class="notes_main">
+    <div class="note_publish">
       <h2 class="title">wirte a note</h2>
       <div class="inner">
         <%= form_for(@note, :html => { :class => "form"}) do |f| %>
@@ -27,6 +28,7 @@
             </div> 
           </ul><!-- attachments end -->
         <% end %> <!-- form end -->
+      </div>
     </div>
 
     <div class="notes_content">

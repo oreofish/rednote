@@ -83,20 +83,20 @@ textarea {
   padding: 15px;
 }
 
-#main .notes_main .actions {
+#main .notes_main .note_publish .actions {
   float :right;
 }
 
-#main .notes_main  a {
+#main .notes_main .note_publish a {
   text-decoration: none;
   color: #7f9140;
 }
 
-#main .notes_main  a:hover {
+#main .notes_main .note_publish a:hover {
   text-decoration: underline;
 }
 
-#main .notes_main  input[type="submit"] {
+#main .notes_main .note_publish input[type="submit"] {
   border-style: solid;
   background-color: white;
 }

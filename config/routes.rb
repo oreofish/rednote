@@ -6,7 +6,7 @@ Rednote::Application.routes.draw do
   get "users/avatar"
   get "users/mycomments"
   get "users/comments"
-  get "users/mytag"
+  get "users/mytags"
 
   get "likes/create"
 

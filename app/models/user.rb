@@ -32,15 +32,15 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :likes, :dependent => :destroy
 
-  def like!(idea_id, score)
-    if Idea.exists?(idea_id)
-      idea = Idea.find(idea_id) 
+  def like!(note_id, status)
+    if Note.exists?(note_id)
+      note = Note.find(note_id) 
     else
       return nil
     end 
 
-    if idea and idea.user_id != id and score.to_i >= 0 and score.to_i <= 3
-      likes.create(:idea_id => idea_id, :score => score.to_i)
+    if note and status == false 
+      likes.create(:note_id => note_id, :status => false)
     else 
       nil
     end
