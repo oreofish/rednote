@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  resources :tasks
+
   resources :comments
 
   get "users/index"
