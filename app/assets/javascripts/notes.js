@@ -65,14 +65,15 @@ rednote.notesManager = {
         blocks['image'] =  
             '<div class="group"> \
               <label>上传图片：</label>      \
-              <input id="note_description" name="note[description]" type="file" /> \
+              <input id="note_upload" name="note[upload]" type="file" /> \
+              <input id="note_upload_cache" name="note[upload_cache]" type="hidden" /> \
             </div> \
         ';
 
         blocks['book'] =  
             '<div class="group"> \
               <label>上传书籍：</label>      \
-              <input id="note_description" name="note[description]" type="file" /> \
+              <input id="note_upload" name="note[upload]" type="file" /> \
             </div> \
         ';
 
