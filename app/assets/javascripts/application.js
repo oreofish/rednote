@@ -51,8 +51,56 @@ var commentsManager = {
     }
 };
 
+var time = {
+    updatetime: function() {
+        var $items = $('.item').has('.time');
+
+        var $now = new Date();
+        var now_year = $now.getFullYear();
+        var now_month = $now.getMonth()+1;
+        var now_day = $now.getDay(); //星期
+        var now_date = $now.getDate(); //日
+        var now_hour = $now.getHours();
+        var now_minute = $now.getMinutes();
+        var now_second = $now.getSeconds();
+
+        $items.each( function(idx, el) {
+            var $time = $(el).find('.time');
+            var $create_at = $time.attr('data').split(" ");// xxxx-xx-xx xx:xx:xx +0800
+
+            var create_year   = parseInt($create_at[0].split("-")[0]);
+            var create_month  = parseInt($create_at[0].split("-")[1]);
+            var create_date   = parseInt($create_at[0].split("-")[2]);
+            var create_hour   = parseInt($create_at[1].split(":")[0]);
+            var create_minute = parseInt($create_at[1].split(":")[1]);
+            var create_second = parseInt($create_at[1].split(":")[2]);
+
+                if (now_year == create_year && now_month == create_month && now_date == create_date) {
+                        if (now_hour == create_hour) {
+                            if (now_minute == create_minute) {
+                                var a = now_second - create_second;
+                                $time.html(a+"秒前");
+                            } else {
+                                var b = now_minute - create_minute;
+                                $time.html(b+"分钟前");
+                            }
+                        } else if (now_hour - create_hour == 1 && create_minute > now_minute  ) {
+                                $time.html(now_minute+60-create_minute+"分钟前");
+                               } else {
+                                var c = now_hour - create_hour;
+                                $time.html(c+"小时前");
+                               }
+                    } else {
+                        $time.html(create_month+"月"+create_date+"日"+create_hour+":"+create_minute);
+                    }
+        });
+    window.setTimeout("time.updatetime();",60000);
+    }
+};
+
 
 $(document).ready( function() {
     scrolltop();
     commentsManager.bindHandlers();
+    time.updatetime();
 } );

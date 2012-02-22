@@ -18,6 +18,8 @@
       <% end %>
       <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>
     </div>
+    <div class="time" data="<%= note.created_at %>">
+    </div>
     <br/>
     <div class="comments_list" style="display:none">
     </div>
