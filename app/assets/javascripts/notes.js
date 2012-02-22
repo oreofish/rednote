@@ -7,7 +7,7 @@ rednote.notesManager = {
 
         $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
 
-        blocks = {}
+        var blocks = {}
         blocks['kind'] = function divKindFor(kind) {
             var map = {
                 'text':  1,

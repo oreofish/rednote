@@ -18,6 +18,14 @@
 rednote = {}
 
 rednote.util = {
+    serverIP: function() {
+        var server = location.host.replace(/:\d*/, '');
+        if (/localhost/.test(server)) {
+            server = '127.0.0.1';
+        }
+        return server;
+    },
+
     scrollNearBottom: function() {
         var totalHeight, currentScroll, visibleHeight;
         if (document.documentElement.scrollTop)

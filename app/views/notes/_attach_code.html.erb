@@ -1,0 +1,4 @@
+<% idx = attachment.index("\n") %>
+<% lang = attachment[0, idx].sub(/@@(.*)@@/, '\1') %>
+<% src = attachment[idx, attachment.length] %>
+<%= render :inline => CodeRay.highlight(src, lang, options = {:css => :class}) %>

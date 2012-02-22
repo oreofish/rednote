@@ -1,12 +1,5 @@
 class NotesController < ApplicationController
   before_filter :authorized_user, :only => :destroy
-  # list of attachment kinds = {
-  TEXT_ATTACH = 1
-  LINK_ATTACH = 2
-  IMG_ATTACH  = 3
-  CODE_ATTACH = 4
-  BOOK_ATTACH = 5
-  # }
 
   # GET /notes
   # GET /notes.json
@@ -68,7 +61,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
-    if @note.kind == CODE_ATTACH
+    if @note.kind == attachmentKindValue(:code)
       # hack: insert code lang into special tag
       @note.description = 
         "@@#{params[:language][:id].strip.downcase.to_sym}@@\n" + @note.description

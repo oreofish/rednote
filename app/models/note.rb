@@ -16,7 +16,9 @@ class Note < ActiveRecord::Base
   validates :summary, :presence => true,
                       :length   => { :maximum => 100 }
   validates :user_id, :presence => true
-  validates :kind,    :presence => true
+  validates :kind,    :presence => true,
+                      :numericality => true,
+                      :inclusion    => { :in => 0..5 } # this can not work with sqlite3
   validates :description, :length   => { :maximum => 20000 }
 
   belongs_to :user
