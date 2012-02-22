@@ -52,55 +52,53 @@ var commentsManager = {
 };
 
 var time = {
-    updatetime: function() {
+    updateTime: function() {
         var $items = $('.item').has('.time');
 
-        var $now = new Date();
-        var now_year = $now.getFullYear();
-        var now_month = $now.getMonth()+1;
-        var now_day = $now.getDay(); //星期
-        var now_date = $now.getDate(); //日
-        var now_hour = $now.getHours();
-        var now_minute = $now.getMinutes();
-        var now_second = $now.getSeconds();
+        var getTime = function(date) {
+            return {
+                year: date.getFullYear(),
+                month: date.getMonth()+1,
+                day: date.getDay(), //星期
+                day: date.getDate(), //日
+                hour: date.getHours(),
+                minute: date.getMinutes(),
+                second: date.getSeconds(),
+            };
+        };
+        
+        var now = getTime(new Date());
 
         $items.each( function(idx, el) {
             var $time = $(el).find('.time');
-            var $create_at = $time.attr('data').split(" ");// xxxx-xx-xx xx:xx:xx +0800
-
-            var create_year   = parseInt($create_at[0].split("-")[0]);
-            var create_month  = parseInt($create_at[0].split("-")[1]);
-            var create_date   = parseInt($create_at[0].split("-")[2]);
-            var create_hour   = parseInt($create_at[1].split(":")[0]);
-            var create_minute = parseInt($create_at[1].split(":")[1]);
-            var create_second = parseInt($create_at[1].split(":")[2]);
-
-                if (now_year == create_year && now_month == create_month && now_date == create_date) {
-                        if (now_hour == create_hour) {
-                            if (now_minute == create_minute) {
-                                var a = now_second - create_second;
-                                $time.html(a+"秒前");
-                            } else {
-                                var b = now_minute - create_minute;
-                                $time.html(b+"分钟前");
-                            }
-                        } else if (now_hour - create_hour == 1 && create_minute > now_minute  ) {
-                                $time.html(now_minute+60-create_minute+"分钟前");
-                               } else {
-                                var c = now_hour - create_hour;
-                                $time.html(c+"小时前");
-                               }
+            var creation = getTime(new Date($time.attr('data')));
+            if (now.year == creation.year && now.month == creation.month && 
+                now.day == creation.day) {
+                if (now.hour == creation.hour) {
+                    if (now.minute == creation.minute) {
+                        var a = now.second - creation.second;
+                        $time.html(a+"秒前");
                     } else {
-                        $time.html(create_month+"月"+create_date+"日"+create_hour+":"+create_minute);
+                        var b = now.minute - creation.minute;
+                        $time.html(b+"分钟前");
                     }
+                } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
+                    $time.html(now_minute+60-creation.minute+"分钟前");
+                } else {
+                    var c = now.hour - creation.hour;
+                    $time.html(c+"小时前");
+                }
+            } else {
+                $time.html(creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
+            }
         });
-    window.setTimeout("time.updatetime();",60000);
+
+        setTimeout(time.updateTime, 60000);
     }
 };
-
 
 $(document).ready( function() {
     scrolltop();
     commentsManager.bindHandlers();
-    time.updatetime();
+    time.updateTime();
 } );
