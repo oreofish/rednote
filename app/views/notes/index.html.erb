@@ -12,22 +12,21 @@
             <%= f.text_area :summary, :rows => 4 %>
           </div>
 
-          <div class="actions">
-            <%= f.submit %>
-          </div>
-
           <ul class="wat-cf">
             <li><%= link_to "图片", "javascript:void(0);", :class => "image" %></li>
             <li> <%= link_to "链接", "javascript:void(0);", :class => "link" %></li>
             <li> <%= link_to "书籍", "javascript:void(0);", :class => "book" %></li>
             <li> <%= link_to "代码", "javascript:void(0);", :class => "code" %></li>
             <li> <%= link_to "文本", "javascript:void(0);", :class => "text" %></li>
-
             <br/>
             <!-- attachment_block stub for insertion of attachment elements -->
             <div id="attachment_block" style="display: none;">
             </div> 
           </ul><!-- attachments end -->
+
+          <div class="actions">
+            <%= f.submit %>
+          </div>
         <% end %> <!-- form end -->
       </div>
     </div>
