@@ -26,23 +26,47 @@ $big-font: 20px;
     }
 }
 
+@mixin radius($rad) {
+    -webkit-border-radius: $rad;
+    -moz-border-radius: $rad;
+    -o-border-radius: $rad;
+    border-radius: $rad;
+}
+
+@mixin radius-topleft($rad) {
+    -webkit-border-radius-topleft: $rad;
+    -moz-border-radius-topleft: $rad;
+    -o-border-radius-topleft: $rad;
+    border-radius-topleft: $rad;
+}
+
+@mixin radius-topright($rad) {
+    -webkit-border-radius-topright: $rad;
+    -moz-border-radius-topright: $rad;
+    -o-border-radius-topright: $rad;
+    border-radius-topright: $rad;
+}
+
 @mixin radius-box {
     display: inline-block;
     margin: 0 5px 5px 0;
     padding: 0px 10px;
     background-color: #5577aa;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
     color: white;
     text-indent: 0;
     font-size: $small-font;
+    @include radius(5px);
+}
+
+@mixin inset-shadow($value) {
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, $value);
+    -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, $value);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, $value);
 }
 
 /* -------------- start of scss -------------- */
 
-* {margin:0;padding:0}
+* { margin:0;padding:0 }
 .clear { clear: both; height: 0; }
 
 .wat-cf:after {
@@ -67,9 +91,9 @@ $big-font: 20px;
 /* End hide from IE-mac */
 
 h1, h2, h3 {
-  color: #111;
-  font-weight: normal;
-  margin: 10px 0; 
+    color: #111;
+    font-weight: normal;
+    margin: 10px 0; 
 }
 h1 { font-size: $big-font+2px; }
 h2 { font-size: $big-font; }
@@ -77,10 +101,10 @@ h3 { font-size: $middle-font+2px; }
 h4 { font-size: $middle-font; }
 
 hr {
-  background: #dddddd;
-  color: #dddddd;
-  height: 1px;
- border: 0;
+    background: #dddddd;
+    color: #dddddd;
+    height: 1px;
+    border: 0;
 }
 
 p { margin: 15px 0;}
@@ -120,6 +144,16 @@ a.notify {
     }
 }
 
+.button.green {
+    color: #E8F0DE;
+    border: solid 1px #538312;
+    background: #64991E;
+    background: -webkit-gradient(linear,left top,left bottom,from(#7DB72F),to(#4E7D0E));
+    background: -moz-linear-gradient(top,#7DB72F,#4E7D0E);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f',endColorstr='#4e7d0e');
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+}
+
 body {
     font-size: $small-font+2px;
     color: #111111;
@@ -128,11 +162,9 @@ body {
 }
 
 textarea {
-  width: 100%;
-  border: 1px solid #dddddd;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border: 1px solid #dddddd;
+    @include inset-shadow(0.1);
 }
 
 #header {
@@ -174,7 +206,7 @@ textarea {
         letter-spacing: -1px;
         line-height: 1.2em;
         color: white;
-        font-family: "Museo700", helvetica, arial, sans-serif;
+        font-family: helvetica, arial, sans-serif;
 
         a:link, a:active, a:hover, a:visited {
             color: #fff;
@@ -206,12 +238,10 @@ textarea {
 	margin-bottom: 20px;
 	padding-top: 1px;
     background-color: white;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+    @include radius(6px);
     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
     min-height: 60px;
 
     .secondary-navigation {
@@ -219,26 +249,18 @@ textarea {
         background: #e0e0e0 url("/assets/web-app-theme/themes/default/images/boxbar-background.png") top;
   		border-bottom-style: solid;
         border-bottom-width: 0px;
-        -moz-border-radius-topleft: 6px;
-        -webkit-border-top-left-radius: 6px;
-        border-top-left-radius: 6px;
-        -moz-border-radius-topright: 6px;
-        -webkit-border-top-right-radius: 6px;
-        border-top-right-radius: 6px;
+        @include radius-topleft(6px);
+        @include radius-topright(6px);
         ul {
   			list-style-type: none;
             li a {
                 color: #111;
             }
             li.first a {
-                -moz-border-radius-topleft: 6px;
-                -webkit-border-top-left-radius: 6px;
-                border-top-left-radius: 6px;
+                @include radius-topleft(6px);
             }
             li.first {
-                -moz-border-radius-topleft: 6px;
-                -webkit-border-top-left-radius: 6px;
-                border-top-left-radius: 6px;
+                @include radius-topleft(6px);
             }
             li.text {
                 padding: 10px 15px;
@@ -275,9 +297,7 @@ textarea {
 	                color:#333;
 	                padding:5px;
 	                text-align:left;
-	                -moz-border-radius:    10px;
-                    -webkit-border-radius: 10px;
-                    border-radius:         10px;
+                    @include radius(10px);
 	                -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	                -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
 	                box-shadow: 0 0 5px rgba(0,0,0,0.5);
@@ -352,9 +372,7 @@ textarea {
         background-color: #777777;
         background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0, 0, 0, 0.15)), to(rgba(0, 0, 0, 0)));
         background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
+        @include radius(6px);
         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.3);
         -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.3);
         -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(255, 255, 255, 0.3);
@@ -365,9 +383,7 @@ textarea {
         padding-right: 10px;
         color: #222222;
         background: #ffef4e;
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
+        @include radius(6px);
         box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
         -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -396,9 +412,7 @@ textarea {
         margin-bottom: 10px;
 		padding-bottom: 2px;
         padding-top: 2px;
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
+        @include radius(6px);
         text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
 
         h4 {
@@ -471,6 +485,7 @@ textarea {
 /* pagination */
 
 .pagination a, .pagination span, .pagination em {
+    @include radius(2px);
     padding: 2px 5px;
     margin-right: 5px; 
     display: block;
@@ -478,9 +493,6 @@ textarea {
     border-style: solid;
     border-width: 1px;
     border: 1px solid #c3c4ba;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
     padding: 6px;
     min-width: 15px;
     text-align: center;
@@ -594,39 +606,49 @@ input.checkbox {
     }
 
     label.label {
-        font-weight: normal;
         color: #666666;
-
-        input.text_field, .form textarea.text_area {
-            width: 100%;
-            border: 1px solid #dddddd;
-            -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        input.button {
-            background: #dddddd;
-            -moz-border-radius: 5px;
-            -webkit-border-radius: 5px;
-            border-radius: 5px;
-            border: 1px solid #c1c1c1;
-            padding: 2px 5px;
-            cursor: pointer;
-            color: #111111;
-            font-weight: bold;
-        }
-        input.button:hover {
-            border: 1px solid #666666;
-        }
-        .description {
-            font-style: italic;
-            color: #8c8c8c;
-        }
-        .navform a {
-            color: #cc0000;
-        }
+        display: block;
+        padding-bottom: 2px;  
+        font-weight: bold;
     }
 
+    input {
+        font-weight: bold;
+        padding: 3px 10px;
+        color: #E8F0DE;
+        border: solid 1px #538312;
+        background: #64991E;
+        background: -webkit-gradient(linear,left top,left bottom,from(#7DB72F),to(#4E7D0E));
+        background: -moz-linear-gradient(top,#7DB72F,#4E7D0E);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f',endColorstr='#4e7d0e');
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        @include radius(4px);
+    }
+
+    input.text_field, textarea.text_area {
+        width: 100%;
+        border: 1px solid #dddddd;
+        @include inset-shadow(0.1);
+    }
+    input.button {
+        background: #dd0;
+        @include radius(5px);
+        border: 1px solid #c1c1c1;
+        padding: 2px 5px;
+        cursor: pointer;
+        color: #111111;
+        font-weight: bold;
+    }
+    input.button:hover {
+        border: 1px solid #666666;
+    }
+    .description {
+        font-style: italic;
+        color: #8c8c8c;
+    }
+    .navform a {
+        color: #cc0000;
+    }
 
     label.label, input.text_field, textarea.text_area {
         padding: 1px 0;
@@ -643,12 +665,6 @@ input.checkbox {
 
     label.checkbox,  label.radio {
         line-height: 1.5em;
-    }
-
-    label.label {
-        display: block;
-        padding-bottom: 2px;  
-        font-weight: bold;
     }
 
     div.fieldWithErrors label.label {
@@ -733,9 +749,7 @@ ul.list {
         box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
         -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
         -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-        -moz-border-radius: 6px;
-        -webkit-border-radius: 6px;
-        border-radius: 6px;
+        @include radius(6px);
     }
     .block h2 {
         padding: 10px 15px;
@@ -743,12 +757,8 @@ ul.list {
         background: #261f1f;
         color: white;
         text-shadow: none;
-        -moz-border-radius-topleft: 6px;
-        -webkit-border-top-left-radius: 6px;
-        border-top-left-radius: 6px;
-        -moz-border-radius-topright: 6px;
-        -webkit-border-top-right-radius: 6px;
-        border-top-right-radius: 6px;
+        @include radius-topleft(6px);
+        @include radius-topright(6px);
     }
 }
 
@@ -770,9 +780,7 @@ a.button, button.button {
   background: #edeeed url("/assets/web-app-theme/themes/default/images/button-background.png") top;
   border: 1px solid #c3c4ba;
   font-weight: normal;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  @include radius(3px);
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -849,9 +857,7 @@ button.button:active, a.button:active {
 }
 
 .flash .message {
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    @include radius(3px);
     text-align: center;
     margin: 0 auto 15px;
     color: white;
