@@ -72,24 +72,28 @@ var time = {
         $items.each( function(idx, el) {
             var $time = $(el).find('.time');
             var creation = getTime(new Date($time.attr('data')));
-            if (now.year == creation.year && now.month == creation.month && 
-                now.day == creation.day) {
-                if (now.hour == creation.hour) {
-                    if (now.minute == creation.minute) {
-                        var a = now.second - creation.second;
-                        $time.html(a+"秒前");
+            if (now.year == creation.year) {
+                if (now.year == creation.year && now.month == creation.month && 
+                    now.day == creation.day) {
+                    if (now.hour == creation.hour) {
+                        if (now.minute == creation.minute) {
+                            var a = now.second - creation.second;
+                            $time.html(a+"秒前");
+                        } else {
+                            var b = now.minute - creation.minute;
+                            $time.html(b+"分钟前");
+                        }
+                    } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
+                        $time.html(now_minute+60-creation.minute+"分钟前");
                     } else {
-                        var b = now.minute - creation.minute;
-                        $time.html(b+"分钟前");
+                        var c = now.hour - creation.hour;
+                        $time.html(c+"小时前");
                     }
-                } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
-                    $time.html(now_minute+60-creation.minute+"分钟前");
                 } else {
-                    var c = now.hour - creation.hour;
-                    $time.html(c+"小时前");
+                    $time.html(creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
                 }
             } else {
-                $time.html(creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
+                $time.html(creation.year+"年"+creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
             }
         });
 
