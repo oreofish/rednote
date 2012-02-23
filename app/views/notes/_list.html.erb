@@ -1,29 +1,5 @@
+<%# encoding: utf-8 %>
+
 <% @notes.each do |note| %>
-  <li id="note<%= note.id %>" class="block inner">
-  <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
-  <div class="item">
-
-    <div class="content">
-      <%= note.summary %> 
-    </div>
-
-    <% if note.kind > 0 %>
-      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
-    <% end %>
-
-    <div class="right">
-      <% if current_user.id==note.user.id %>
-        <%= link_to 'Show', note %> |
-        <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
-      <% end %>
-      <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>|
-      <%= link_to '我想读', likes_create_path(:note_id => note.id, :status => false),:remote => true %> 
-    </div>
-    <div class="time" data="<%= note.created_at %>">
-    </div>
-    <br/>
-    <div class="comments_list" style="display:none">
-    </div>
-  </div>
-  </li>
+  <%= render :partial => 'notes/note', :locals => { :note => note } %>
 <% end %>

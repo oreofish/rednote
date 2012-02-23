@@ -69,11 +69,13 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        broadcast '/notes/new', "{ 'kind' : #{@note.kind} }"
+        broadcast '/notes/new', "{ status: true }"
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
+        format.js 
       else
+        broadcast '/notes/new', "{ status: false }"
         format.html { redirect_to notes_path, notice: 'Note creation was failed.' }
-
+        format.js 
       end
     end
   end

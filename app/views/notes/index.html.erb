@@ -7,7 +7,7 @@
     <div class="note_publish">
       <h2 class="title">wirte a note</h2>
       <div class="inner">
-        <%= form_for(@note, :html => { :class => "form", :multipart => true }) do |f| %>
+        <%= form_for(@note, :html => { :class => "form", :multipart => true, :remote => true }) do |f| %>
           <div class="input">
             <%= f.text_area :summary, :rows => 4 %>
           </div>
