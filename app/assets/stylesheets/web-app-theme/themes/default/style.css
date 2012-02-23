@@ -115,6 +115,7 @@ textarea {
 }
 #main .block .content {
   padding-top: 1px;
+  padding-bottom:10px;
 }
 #main .block .inner {
   padding: 15px 15px 15px;

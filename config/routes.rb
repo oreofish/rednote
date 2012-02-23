@@ -2,13 +2,14 @@ Rednote::Application.routes.draw do
 
   resources :comments
 
-  get "users/index"
-  get "users/avatar"
-  get "users/mycomments"
-  get "users/comments"
-  get "users/mytags"
+  get 'users/index'
+  get 'users/avatar'
+  get 'users/mycomments'
+  get 'users/comments'
+  get 'users/mytags'
 
-  get "likes/create"
+  match 'likes/create', :to => 'likes#create'
+  match 'likes/update', :to => 'likes#update'
 
   devise_for :users
   root :to => "notes#index"

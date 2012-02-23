@@ -6,10 +6,10 @@ class LikesController < ApplicationController
   # POST /likes
   # POST /likes.json
   def create
-    @like = current_user.like!(params[:note_id],params[:status])
+    @like = current_user.likes.create(:note_id => params[:note_id], :status => false)
 
     respond_to do |format|
-      if @like.save
+      if @like and @like.save!
         format.js
       else
         format.html { redirect_to root_url, :notice => :like_create_fail }
@@ -20,12 +20,11 @@ class LikesController < ApplicationController
   # PUT /likes/1
   # PUT /likes/1.json
   def update
-    @like = Like.find(params[:id])
+    @like = current_user.likes.where(:note_id => params[:note_id]).first
 
     respond_to do |format|
-      if @like.update_attributes(params[:like])
-        format.html { redirect_to @like, notice: 'Like was successfully updated.' }
-        format.json { head :no_content }
+      if @like.update_attributes(:status => true)
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @like.errors, status: :unprocessable_entity }

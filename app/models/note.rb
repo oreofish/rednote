@@ -28,9 +28,5 @@ class Note < ActiveRecord::Base
   mount_uploader :book, BookUploader
 
   has_many :likes, :dependent => :destroy
-  has_many :liked_by, :through => :likes, :source => :user
 
-  def liked_by?(user)
-    likes.find_by_user_id(user)
-  end
 end
