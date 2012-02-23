@@ -3,49 +3,50 @@
 <div class="block">
   <div class="secondary-navigation"></div>
 
-  <div class="notes_main">
-    <div class="note_publish">
-      <h2 class="title">wirte a note</h2>
-      <div class="inner">
-        <%= form_for(@note, :html => { :class => "form", :multipart => true, :remote => true }) do |f| %>
-          <div class="input">
-            <%= f.text_area :summary, :rows => 4 %>
-          </div>
+  <div class="content">
+    <div class="inner">
 
-          <div class="actions">
-            <%= f.submit %>
-          </div>
-
-          <ul class="wat-cf">
-            <li><%= link_to "图片", "javascript:void(0);", :class => "image" %></li>
-            <li> <%= link_to "链接", "javascript:void(0);", :class => "link" %></li>
-            <li> <%= link_to "书籍", "javascript:void(0);", :class => "book" %></li>
-            <li> <%= link_to "代码", "javascript:void(0);", :class => "code" %></li>
-            <li> <%= link_to "文本", "javascript:void(0);", :class => "text" %></li>
-
-            <br/>
-            <!-- attachment_block stub for insertion of attachment elements -->
-            <div id="attachment_block" style="display: none;">
-            </div> 
-          </ul><!-- attachments end -->
-        <% end %> <!-- form end -->
+      <h2 class="title">write a note</h2>
+      <%= form_for(@note, :html => { :class => "form", :multipart => true }) do |f| %>
+      <div class="input">
+        <%= f.text_area :summary, :rows => 4 %>
       </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+
+      <div id="simple-navigation">
+      <ul class="wat-cf">
+        <li><%= link_to "图片", "javascript:void(0);", :class => "image" %></li>
+        <li> <%= link_to "链接", "javascript:void(0);", :class => "link" %></li>
+        <li> <%= link_to "书籍", "javascript:void(0);", :class => "book" %></li>
+        <li> <%= link_to "代码", "javascript:void(0);", :class => "code" %></li>
+        <li> <%= link_to "文本", "javascript:void(0);", :class => "text" %></li>
+
+        <br/>
+        <!-- attachment_block stub for insertion of attachment elements -->
+        <div id="attachment_block" style="display: none;">
+        </div> 
+      </ul><!-- attachments end -->
+      </div>
+      <% end %> <!-- form end -->
+
+      <div class="notes_content">
+        <ul class="list">
+          <%= render "list" %>
+        </ul>
+
+        <!-- pager loading hinter -->
+        <div class="hidden inner" id="pager_loading">
+          <span class="pager_loading_spinner">
+          </span>
+          <span class="pager_loading_text">
+            Loading...
+          </span>
+        </div>
+      </div> <!-- notes_content -->
+
     </div>
-
-    <div class="notes_content">
-      <ul class="list">
-        <%= render "list" %>
-      </ul>
-
-      <!-- pager loading hinter -->
-      <div class="hidden inner" id="pager_loading">
-        <span class="pager_loading_spinner">
-        </span>
-        <span class="pager_loading_text">
-          Loading...
-        </span>
-      </div>
-    </div> <!-- notes_content -->
-
   </div>
 </div>

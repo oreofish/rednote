@@ -1,4 +1,12 @@
 <%# encoding: utf-8 %>
+<% @notes.each do |note| %>
+  <li id="note<%= note.id %>" class="">
+  <div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
+  <div class="item">
+
+    <div class="content">
+      <%= note.summary %> 
+    </div>
 
 <% @notes.each do |note| %>
   <%= render :partial => 'notes/note', :locals => { :note => note } %>

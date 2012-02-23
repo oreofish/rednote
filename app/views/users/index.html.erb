@@ -1,4 +1,6 @@
+
 <%= render "user_info"%>
+
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
@@ -8,7 +10,12 @@
       <li><a href="/users/mytags">mytags</a></li>
     </ul>
   </div>
-  <ul class="list">
-    <%= render "/notes/list" %>
-  </ul>
+
+  <div class="content">
+    <div class="inner">
+      <ul class="list">
+        <%= render "/notes/list" %>
+      </ul>
+    </div>
+  </div>
 </div>

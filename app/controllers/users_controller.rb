@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @comments.reverse!
       
       respond_to do |format|
-          format.html 
+          format.html
       end
   end
 
