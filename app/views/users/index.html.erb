@@ -1,20 +1,28 @@
 
-<%= render "user_info"%>
+<div class="block">
+  <div class="content">
+    <div class="inner">
+      <h2 class="title">Users#info</h2>
+      <%= link_to image_tag(@avatar, :class => "avatar"), users_avatar_path %>
+      <p><%= @nickname %></p>
+      <p>发布数: <%= @notes_size %></p>
+    </div>
+  </div>
+</div>
 
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first active"><a href="">我的发布</a></li>
-      <li><a href="/users/mycomments">我的评论</a></li>
-      <li><a href="/users/comments">我被评论</a></li>
-      <li><a href="/users/mytags">mytags</a></li>
+      <li class="first <%= 'active' if controller.action_name == 'index'%>"><a href="/users/index">我的发布</a></li>
+      <li <%= "class='active'" if controller.action_name == 'mycomments'%> ><a href="/users/mycomments">我的评论</a></li>
+      <li <%= "class='active'" if controller.action_name == 'comments'%> ><a href="/users/comments">我被评论</a></li>
+      <li <%= "class='active'" if controller.action_name == 'mytags'%> ><a href="/users/mytags">mytags</a></li>
     </ul>
   </div>
+
   <div class="content">
     <div class="inner">
-      <ul class="list">
-        <%= render "/notes/list" %>
-      </ul>
+      <%= render :partial => controller.action_name %>
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @comments.reverse!
       
       respond_to do |format|
-          format.html
+          format.html { render 'index' }
       end
   end
 
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       @comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE commentable_id IN (SELECT id FROM notes WHERE user_id = #{current_user.id}) ORDER BY created_at DESC")
       
       respond_to do |format|
-          format.html 
+          format.html { render 'index' } 
       end
   end
 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       @notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT note_id FROM likes WHERE user_id=#{current_user.id} ) ORDER BY created_at DESC")
       
       respond_to do |format|
-          format.html 
+          format.html { render 'index' }
       end
   end
 
