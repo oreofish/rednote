@@ -22,10 +22,9 @@ class Note < ActiveRecord::Base
   validates :description, :length   => { :maximum => 20000 }
 
   belongs_to :user
-  attr_accessible :summary, :description, :kind, :image_cache
+  attr_accessible :summary, :description, :kind, :upload, :upload_cache
 
-  mount_uploader :image, ImageUploader
-  mount_uploader :book, BookUploader
+  mount_uploader :upload, AttachmentUploader
 
   has_many :likes, :dependent => :destroy
 

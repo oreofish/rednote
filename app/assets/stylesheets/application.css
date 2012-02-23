@@ -31,3 +31,18 @@
     opacity:.6;
     filter:Alpha(opacity=60);
 }         
+
+#main {
+  width: 79%;
+  float: right;
+}
+
+#wrapper {
+  padding-top: 20px;
+  width: 900px;
+  margin:0 auto;
+}
+
+#box {
+    width: 500px;
+}

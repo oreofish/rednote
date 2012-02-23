@@ -1,0 +1,19 @@
+#pager_loading .pager_loading_spinner {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  background: url(/images/loading.gif) no-repeat center center;
+  float: left;
+  height: 20px;
+  width: 20px;
+}
+
+
+#pager_loading .pager_lading_text {
+  font-weight: bold;
+  float: left;
+  padding: 2px 5px 5px;
+}
+
+.hidden {
+  display: none;
+}

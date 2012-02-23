@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @comments.reverse!
       
       respond_to do |format|
-          format.html 
+          format.html
       end
   end
 
@@ -50,6 +50,22 @@ class UsersController < ApplicationController
 
       respond_to do |format|
           format.html # index.html.erb
+      end
+  end
+
+  def nickname
+      @user = current_user
+
+      respond_to do |format|
+          format.html  
+      end
+  end
+
+  def update
+      @user = current_user
+      @user.update_attributes(params[:user])
+      respond_to do |format|
+          format.html {redirect_to '/users/index'}
       end
   end
 

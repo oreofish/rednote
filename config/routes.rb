@@ -1,15 +1,18 @@
 Rednote::Application.routes.draw do
 
-  resources :comments
+  resources :tasks
 
-  get 'users/index'
-  get 'users/avatar'
-  get 'users/mycomments'
-  get 'users/comments'
-  get 'users/mytags'
+  resources :comments
 
   match 'likes/create', :to => 'likes#create'
   match 'likes/update', :to => 'likes#update'
+  get "users/index"
+  get "users/avatar"
+  get "users/mycomments"
+  get "users/comments"
+  get "users/nickname"
+  get "users/mytags"
+
 
   devise_for :users
   root :to => "notes#index"
@@ -24,6 +27,7 @@ Rednote::Application.routes.draw do
   match '/mails/interview', :to => 'mails#interview'
   match '/mails/invite', :to => 'mails#invite'
   match ':users/index' => 'users#index'
+  match ':users/avatar', :to  => 'users#update', :as => :user 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

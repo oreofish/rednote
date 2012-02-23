@@ -1,0 +1,7 @@
+<%%# encoding: utf-8 %>
+
+<%% if @idea.valid? %>
+    $('.content .list').find('<%= singular_table_name %><%%= <%= singular_table_name %>.id %>').fadeOut(1000,function(){
+      $(this).remove();
+    } );
+<%% end %>

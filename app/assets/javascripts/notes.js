@@ -65,14 +65,15 @@ rednote.notesManager = {
         blocks['image'] =  
             '<div class="group"> \
               <label>上传图片：</label>      \
-              <input id="note_description" name="note[description]" type="file" /> \
+              <input id="note_upload" name="note[upload]" type="file" /> \
+              <input id="note_upload_cache" name="note[upload_cache]" type="hidden" /> \
             </div> \
         ';
 
         blocks['book'] =  
             '<div class="group"> \
               <label>上传书籍：</label>      \
-              <input id="note_description" name="note[description]" type="file" /> \
+              <input id="note_upload" name="note[upload]" type="file" /> \
             </div> \
         ';
 
@@ -116,6 +117,7 @@ rednote.notesManager = {
                 }
             });
         });
+
     },
 
     checkAndLoadNextPage: function() {
@@ -129,8 +131,7 @@ rednote.notesManager = {
         $.ajax({
             url: '/notes/page',
             beforeSend: function() {
-                //TODO: busy waiting here
-                console.log('send load request');
+                $('#pager_loading').toggleClass('hidden');
                 $(window).unbind("scroll", rednote.notesManager.checkAndLoadNextPage);
             }, 
             success: function(data) {
@@ -144,6 +145,7 @@ rednote.notesManager = {
                 }
             },
             complete: function() {
+                $('#pager_loading').toggleClass('hidden');
                 $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
             }
         });
@@ -151,6 +153,7 @@ rednote.notesManager = {
 };
 
 $(function() {
-    rednote.notesManager.init();
+    if (location.pathname === "/" || location.pathname === "/notes")
+        rednote.notesManager.init();
 });
 
