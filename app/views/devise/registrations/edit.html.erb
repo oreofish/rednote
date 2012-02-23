@@ -1,35 +1,43 @@
-<%= render "layouts/userinfo" %>
 <%# encoding: utf-8 %>
-<div id='block-signup'>
-  <h2>修改密码</h2>
-  <div class='content'>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
+<div class="block">
+  <%= render "layouts/userinfo" %>
+  <div class="content">
+    <div class="inner">
+      <div id='block-signup'>
+        <h2>修改密码</h2>
+        <div class='content'>
 
-    <p><%= f.label '当前密码：' %>
-    <%= f.password_field :current_password %></p>
+          <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+          <%= devise_error_messages! %>
 
-    <p><%= f.label '新的密码：' %>
-    <%= f.password_field :password %></p>
+          <p><%= f.label '当前密码：' %>
+          <%= f.password_field :current_password %></p>
 
-    <p><%= f.label '确认密码：' %>
-    <%= f.password_field :password_confirmation %></p>
+          <p><%= f.label '新的密码：' %>
+          <%= f.password_field :password %></p>
+
+          <p><%= f.label '确认密码：' %>
+          <%= f.password_field :password_confirmation %></p>
 
 
-    <p>
-    <button class='button' type='submit'>
-      <%= image_tag "web-app-theme/icons/tick.png"%>修改
-    </button>
-    <div><%= link_to "进入主页", root_path %></div>
-    </p>
-    <p></p>
-    <% end %>
+          <p>
+            <button class='button' type='submit'>
+              <%= image_tag "web-app-theme/icons/tick.png"%>修改
+            </button>
+            <div><%= link_to "进入主页", root_path %></div>
+          </p>
+          <p></p>
+          <% end %>
 
-    <!--
-        <h3>Cancel my account</h3>
+          <!--
+              <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "取消", registration_path(resource_name), :confirm => "确定删除吗?", :method => :delete %>.</p>
-    -->
+          -->
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
