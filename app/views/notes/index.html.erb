@@ -5,12 +5,9 @@
 
   <div class="notes_main">
     <div class="note_publish">
-      <div class="title">
-        <p>wirte a note</p>
-      </div>
-
+      <h2 class="title">wirte a note</h2>
       <div class="inner">
-        <%= form_for(@note, :html => { :class => "form"}) do |f| %>
+        <%= form_for(@note, :html => { :class => "form", :multipart => true}) do |f| %>
           <div class="input">
             <%= f.text_area :summary, :rows => 4 %>
           </div>
@@ -19,21 +16,20 @@
             <%= f.submit %>
           </div>
 
-          <div class="attachments">
-            <%= link_to "图片", "javascript:void(0);", :class => "image" %>
-            <%= link_to "链接", "javascript:void(0);", :class => "link" %>
-            <%= link_to "书籍", "javascript:void(0);", :class => "book" %>
-            <%= link_to "代码", "javascript:void(0);", :class => "code" %>
-            <%= link_to "文本", "javascript:void(0);", :class => "text" %>
+          <ul class="wat-cf">
+            <li><%= link_to "图片", "javascript:void(0);", :class => "image" %></li>
+            <li> <%= link_to "链接", "javascript:void(0);", :class => "link" %></li>
+            <li> <%= link_to "书籍", "javascript:void(0);", :class => "book" %></li>
+            <li> <%= link_to "代码", "javascript:void(0);", :class => "code" %></li>
+            <li> <%= link_to "文本", "javascript:void(0);", :class => "text" %></li>
 
+            <br/>
             <!-- attachment_block stub for insertion of attachment elements -->
             <div id="attachment_block" style="display: none;">
             </div> 
-          </div><!-- attachments end -->
+          </ul><!-- attachments end -->
         <% end %> <!-- form end -->
-
       </div>
-
     </div>
 
     <div class="notes_content">

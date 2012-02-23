@@ -10,7 +10,7 @@ class NotesController < ApplicationController
       "Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"
     ]
 
-    @notes = Note.offset(0).limit(5)
+    @notes = Note.where('').offset(0).limit(5).reverse_order
     session[:current_page] = 0
 
     respond_to do |format|
@@ -23,7 +23,7 @@ class NotesController < ApplicationController
   def page
     session[:current_page] += 1
     currentPage = session[:current_page]
-    @notes = Note.offset(currentPage * 5).limit(5)
+    @notes = Note.offset(currentPage * 5).limit(5).reverse_order
 
     respond_to do |format|
       if @notes.count() > 0

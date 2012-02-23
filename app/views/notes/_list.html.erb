@@ -8,7 +8,7 @@
     </div>
 
     <% if note.kind > 0 %>
-      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :attachment => note.description } %>
+      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
     <% end %>
 
     <div class="right">
@@ -16,7 +16,8 @@
         <%= link_to 'Show', note %> |
         <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
       <% end %>
-      <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>
+      <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>|
+      <%= link_to '我想读', likes_create_path(:note_id => note.id, :status => false),:remote => true %> 
     </div>
     <div class="time" data="<%= note.created_at %>">
     </div>

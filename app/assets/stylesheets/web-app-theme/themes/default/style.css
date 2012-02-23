@@ -79,6 +79,9 @@ textarea {
 #header h1 a:link, #header h1 a:active, #header h1 a:hover, #header h1 a:visited {
   color: white;
 }
+#main .notes_main {
+  padding: 15px;
+}
 
 #main .notes_main .note_publish .actions {
   float :right;
@@ -115,6 +118,10 @@ textarea {
 }
 #main .block .inner {
   padding: 15px 15px 15px;
+}
+#main .inner  ul li {
+  padding-left: 10px;
+  margin-right: 0;
 }
 #main .block .content h2 {
   margin-left: 15px;

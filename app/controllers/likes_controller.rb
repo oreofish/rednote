@@ -1,38 +1,4 @@
 class LikesController < ApplicationController
-  # GET /likes
-  # GET /likes.json
-  def index
-    @likes = Like.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @likes }
-    end
-  end
-
-  # GET /likes/1
-  # GET /likes/1.json
-  def show
-    @like = Like.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @like }
-    end
-  end
-
-  # GET /likes/new
-  # GET /likes/new.json
-  def new
-    @like = Like.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @like }
-    end
-  end
-
-  # GET /likes/1/edit
   def edit
     @like = Like.find(params[:id])
   end
@@ -40,15 +6,13 @@ class LikesController < ApplicationController
   # POST /likes
   # POST /likes.json
   def create
-    @like = Like.new(params[:like])
+    @like = current_user.like!(params[:note_id],params[:status])
 
     respond_to do |format|
       if @like.save
-        format.html { redirect_to @like, notice: 'Like was successfully created.' }
-        format.json { render json: @like, status: :created, location: @like }
+        format.js
       else
-        format.html { render action: "new" }
-        format.json { render json: @like.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_url, :notice => :like_create_fail }
       end
     end
   end
