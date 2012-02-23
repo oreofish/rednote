@@ -24,8 +24,14 @@ rednote.notesManager = {
 
         blocks['text'] =  
             '<div class="block inner"> \
-              <textarea cols="40" id="note_description" name="note[description]" rows="4"> \
+              <textarea cols="40" id="note_description" name="note[description]" rows="10"> \
               </textarea> \
+              <script type="text/javascript"> \
+              if (CKEDITOR.instances["note_description"]) { \
+                  CKEDITOR.remove(CKEDITOR.instances["note_description"]); \
+              } \
+              CKEDITOR.replace("note_description", { "language": "en", "toolbar":"Easy" }); \
+              </script> \
             </div> \
         ';
 

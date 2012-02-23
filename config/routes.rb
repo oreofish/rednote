@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   resources :comments
 
   get "users/index"

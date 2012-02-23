@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ckeditor/ckeditor
 //= require rednote_utils
 //= require_tree .
 function scrolltop() {
