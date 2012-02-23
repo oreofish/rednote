@@ -35,10 +35,10 @@ def make_notes
   (0..3).each do |i|
     User.all.each do |user|
       values = [
-                nil,
+                "some text",
                 "gogo.redflag-linux.com", #link
                 "/images/icons/11.gif",#image
-                "no book", #book
+                "C\nprint(\"Hello world.\");", #code
                ]
       user.notes.create!( :summary => "value=#{values[i]} just test by #{user.nickname}",
                           :description => values[i],
