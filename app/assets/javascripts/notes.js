@@ -23,14 +23,20 @@ rednote.notesManager = {
         };
 
         blocks['text'] =  
-            '<div class="group"> \
-              <textarea cols="40" id="note_description" name="note[description]" rows="4"> \
+            '<div class="block inner"> \
+              <textarea cols="40" id="note_description" name="note[description]" rows="10"> \
               </textarea> \
+              <script type="text/javascript"> \
+              if (CKEDITOR.instances["note_description"]) { \
+                  CKEDITOR.remove(CKEDITOR.instances["note_description"]); \
+              } \
+              CKEDITOR.replace("note_description", { "language": "en", "toolbar":"Easy" }); \
+              </script> \
             </div> \
         ';
 
         blocks['code'] =  
-            '<div class="group"> \
+            '<div class="block inner"> \
               <div class="columns wat-cf"> \
                 <div class="column left"> \
                   <label for="note_代码片段：">代码片段：</label><br /> \
@@ -63,7 +69,7 @@ rednote.notesManager = {
         ';
 
         blocks['image'] =  
-            '<div class="group"> \
+            '<div class="block inner"> \
               <label>上传图片：</label>      \
               <input id="note_upload" name="note[upload]" type="file" /> \
               <input id="note_upload_cache" name="note[upload_cache]" type="hidden" /> \
@@ -71,14 +77,14 @@ rednote.notesManager = {
         ';
 
         blocks['book'] =  
-            '<div class="group"> \
+            '<div class="block inner"> \
               <label>上传书籍：</label>      \
               <input id="note_upload" name="note[upload]" type="file" /> \
             </div> \
         ';
 
         blocks['link'] =  
-            '<div class="group"> \
+            '<div class="block inner"> \
               <label>链接</label><br /> \
               <input id="note_description" name="note[description]" size="30" type="text" /> \
             </div> \
@@ -87,7 +93,7 @@ rednote.notesManager = {
         var $attach_blk = $('#main .note_publish #attachment_block');
         var last_clicked_kind = "";
 
-        $('#main .notes_main .note_publish a').each( function(idx, el) {
+        $('#main .note_publish a').each( function(idx, el) {
             $(el).bind( {
                 'click': function(ev) {
                     var kind = $(this).attr('class');

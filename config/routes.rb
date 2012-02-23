@@ -1,7 +1,7 @@
 Rednote::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
   resources :tasks
-
   resources :comments
 
   match 'likes/create', :to => 'likes#create'
