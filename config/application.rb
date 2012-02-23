@@ -65,7 +65,7 @@ module Rednote
 
 		config.to_prepare do
       Devise::SessionsController.layout "sign"
-      Devise::RegistrationsController.layout "sign"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "sign" }
     end
   end
 end

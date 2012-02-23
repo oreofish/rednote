@@ -61,4 +61,20 @@ class UsersController < ApplicationController
       end
   end
 
+  def nickname
+      @user = current_user
+
+      respond_to do |format|
+          format.html  
+      end
+  end
+
+  def update
+      @user = current_user
+      @user.update_attributes(params[:user])
+      respond_to do |format|
+          format.html {redirect_to '/users/index'}
+      end
+  end
+
 end
