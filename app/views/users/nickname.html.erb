@@ -1,12 +1,4 @@
-<div class="block">
-    <div class="secondary-navigation">
-        <ul class="wat-cf">
-            <li><%= link_to "修改昵称", users_nickname_path %></li>
-            <li><%= link_to "修改头像", users_avatar_path %></li>
-            <li><%= link_to "修改密码", edit_user_registration_path, :method => :get %></li>
-        </ul>
-    </div>
-</div>
+<%= render "layouts/userinfo" %>
 <%= form_for @user do |f| %>
     <p>
     <%= f.label "昵称：" %>
