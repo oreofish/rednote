@@ -117,6 +117,7 @@ rednote.notesManager = {
                 }
             });
         });
+
     },
 
     checkAndLoadNextPage: function() {
@@ -130,8 +131,7 @@ rednote.notesManager = {
         $.ajax({
             url: '/notes/page',
             beforeSend: function() {
-                //TODO: busy waiting here
-                console.log('send load request');
+                $('#pager_loading').toggleClass('hidden');
                 $(window).unbind("scroll", rednote.notesManager.checkAndLoadNextPage);
             }, 
             success: function(data) {
@@ -145,6 +145,7 @@ rednote.notesManager = {
                 }
             },
             complete: function() {
+                $('#pager_loading').toggleClass('hidden');
                 $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
             }
         });
@@ -152,6 +153,7 @@ rednote.notesManager = {
 };
 
 $(function() {
-    rednote.notesManager.init();
+    if (location.pathname === "/" || location.pathname === "/notes")
+        rednote.notesManager.init();
 });
 
