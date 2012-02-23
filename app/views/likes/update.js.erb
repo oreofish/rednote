@@ -1,0 +1,6 @@
+(function() {
+  var $link = $('#note<%= @like.note_id %>').find('a.tags');
+  $link.attr("href","");
+  $link.text( $link.text().replace(/已读完/g ,"ok") );
+})();
+

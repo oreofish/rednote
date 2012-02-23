@@ -1,0 +1,6 @@
+(function() {
+  var $link = $('#note<%= @like.note_id %>').find('a.tags');
+  $link.attr("href","<%= likes_update_path(:note_id => @like.note_id)%>");
+  $link.text( $link.text().replace(/我想读/g ,"已读完") );
+})();
+

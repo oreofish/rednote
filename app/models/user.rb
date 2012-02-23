@@ -31,18 +31,4 @@ class User < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :likes, :dependent => :destroy
-
-  def like!(note_id, status)
-    if Note.exists?(note_id)
-      note = Note.find(note_id) 
-    else
-      return nil
-    end 
-
-    if note and status == false 
-      likes.create(:note_id => note_id, :status => false)
-    else 
-      nil
-    end
-  end
 end

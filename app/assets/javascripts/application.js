@@ -85,7 +85,7 @@ var time = {
                             $time.html(b+"分钟前");
                         }
                     } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
-                        $time.html(now_minute+60-creation.minute+"分钟前");
+                        $time.html(now.minute+60-creation.minute+"分钟前");
                     } else {
                         var c = now.hour - creation.hour;
                         $time.html(c+"小时前");

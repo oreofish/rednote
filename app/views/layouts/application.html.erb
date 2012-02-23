@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="container">
-		<%= render "layouts/header" %>
+    <%= render "layouts/header" %>
     <div id="wrapper" class="wat-cf">
       <div class="flash">
         <% flash.each do |type, message| -%>
@@ -21,9 +21,7 @@
       <div id="main">
         <%= yield %>
         <div id="footer">
-          <div class="block">
             <p>Copyright &copy; <%= Time.now.year %> Web App.</p>
-          </div>      
         </div>
       </div>
       <div id="sidebar">

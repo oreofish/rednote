@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @comments.reverse!
       
       respond_to do |format|
-          format.html 
+          format.html
       end
   end
 
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       end
   end
 
-  def mytag
+  def mytags
       @avatar = current_user.avatar
       @nickname = current_user.nickname
       @notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT note_id FROM likes WHERE user_id=#{current_user.id} ) ORDER BY created_at DESC")

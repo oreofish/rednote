@@ -1,9 +1,11 @@
 Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-
+  resources :tasks
   resources :comments
 
+  match 'likes/create', :to => 'likes#create'
+  match 'likes/update', :to => 'likes#update'
   get "users/index"
   get "users/avatar"
   get "users/mycomments"
@@ -11,7 +13,6 @@ Rednote::Application.routes.draw do
   get "users/nickname"
   get "users/mytags"
 
-  get "likes/create"
 
   devise_for :users
   root :to => "notes#index"

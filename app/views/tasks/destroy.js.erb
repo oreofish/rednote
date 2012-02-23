@@ -1,0 +1,7 @@
+<%# encoding: utf-8 %>
+
+<% if @idea.valid? %>
+    $('.content .list').find('task<%= task.id %>').fadeOut(1000,function(){
+      $(this).remove();
+    } );
+<% end %>
