@@ -9,15 +9,14 @@
         <p>Listing tasks</p>
       </div>
       
+      <ul class="task">
+        <% @tasks.each do |task| %>
+        <%= render :partial => 'item', :locals => { :task => task } %>
+        <% end %>
+      </ul>
+
       <%= render "form" %>
-      
-      <div class="content">
-        <ul class="list">
-          <% @tasks.each do |task| %>
-          <%= render :partial => 'item', :locals => { :task => task } %>
-          <% end %>
-        </ul>
-      </div>
+
     </div>
   </div>
 </div>
