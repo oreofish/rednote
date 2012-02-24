@@ -11,14 +11,9 @@
   <div id="container">
     <%= render "layouts/header" %>
     <div id="wrapper" class="wat-cf">
-      <div class="flash">
-        <% flash.each do |type, message| -%>
-          <div class="message <%= type %>">
-            <p><%= message %></p>
-          </div>
-        <% end -%>
-      </div>
       <div id="main">
+        <div class="flash">
+        </div>
         <%= yield %>
         <div id="footer">
             <p>Copyright &copy; <%= Time.now.year %> Web App.</p>

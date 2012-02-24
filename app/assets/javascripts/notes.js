@@ -83,10 +83,10 @@ rednote.notesManager = {
             </div> \
         ';
 
-        var $attach_blk = $('#main .note_publish #attachment_block');
+        var $attach_blk = $('#attachment_block');
         var last_clicked_kind = "";
 
-        $('#main .note_publish a').each( function(idx, el) {
+        $('#note_publish a').each( function(idx, el) {
             $(el).bind( {
                 'click': function(ev) {
                     var kind = $(this).attr('class');
