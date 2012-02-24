@@ -5,7 +5,7 @@
   <%= task.parent_id %>
   <%= task.content %>
   <%= task.estimate %>
-  <%= task.deadline %>
+  <%= time_ago_in_words(task.deadline) %>
   <%= link_to 'Show', task %>
   <%= link_to 'Edit', edit_task_path(task) %>
   <%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %>

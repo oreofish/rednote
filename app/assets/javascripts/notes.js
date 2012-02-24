@@ -30,7 +30,7 @@ rednote.notesManager = {
               if (CKEDITOR.instances["note_description"]) { \
                   CKEDITOR.remove(CKEDITOR.instances["note_description"]); \
               } \
-              CKEDITOR.replace("note_description", { "language": "en", "toolbar":"Easy" }); \
+              CKEDITOR.replace("note_description", { "language":"en", "customConfig":"/ckeditor_config.js" }); \
               </script> \
             </div> \
         ';
