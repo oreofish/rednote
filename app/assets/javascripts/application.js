@@ -37,10 +37,10 @@ function scrolltop() {
 
 var commentsManager = {
     bindHandlers: function() {
-        var $items = $('.item').has('.comments_link');
+        var $items = $('#main div.inner ul.list').find('div.item');
         $items.each( function(idx, el) {
-            var $link = $(el).find('.comments_link');
-            var $list = $(el).find('.comments_list');
+            var $link = $(el).find('a.comments_link');
+            var $list = $(el).find('div.comments_list');
 
             $link.unbind('click');
             $link.bind( {

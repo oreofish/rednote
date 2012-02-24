@@ -1,5 +1,5 @@
 
-<div class="block">
+<div class="block" id="userinfo">
   <div class="content">
     <div class="inner">
       <h2 class="title">Users#info</h2>
@@ -10,13 +10,13 @@
   </div>
 </div>
 
-<div class="block">
+<div class="block" id="myself">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first <%= 'active' if controller.action_name == 'index'%>"><%= link_to "我的发布", users_index_path %></li>
-    <li <%= "class='active'" if controller.action_name == 'mycomments'%> > <%= link_to "我的评论", users_mycomments_path%></li>
-      <li <%= "class='active'" if controller.action_name == 'comments'%> ><%= link_to "我被评论", users_comments_path %></li>
-      <li <%= "class='active'" if controller.action_name == 'mytags'%> ><%= link_to "我的标记", users_mytags_path %></li>
+      <li id="secondary-index" class="first <%= 'active' if controller.action_name == 'index'%>"><%= link_to "我的发布", users_index_path, :remote => true %></li>
+      <li id="secondary-mycomments" <%= "class='active'" if controller.action_name == 'mycomments'%> > <%= link_to "我的评论", users_mycomments_path, :remote => true %></li>
+      <li id="secondary-comments" <%= "class='active'" if controller.action_name == 'comments'%> ><%= link_to "我被评论", users_comments_path, :remote => true %></li>
+      <li id="secondary-mytags" <%= "class='active'" if controller.action_name == 'mytags'%> ><%= link_to "我的标记", users_mytags_path, :remote => true %></li>
     </ul>
   </div>
 

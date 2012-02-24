@@ -1,9 +1,9 @@
 (function() {
-    var $note = $('#note<%= @note.id %>').has('a.comments_link');
-    var $link = $note.find('a.comments_link');
+    var $item = $('#note<%= @note.id %>').find('div.item');
+    var $link = $item.find('a.comments_link');
     $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
 
-    var $list = $note.find('.comments_list');
+    var $list = $item.find('div.comments_list');
     $list.html( "<%= j render( 'comment_box') %>" );
     $list.find('#comment_comment').focus();
 }());

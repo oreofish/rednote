@@ -9,9 +9,9 @@
   <div class="content">
     <div class="inner">
       <% if controller.action_name == 'edit' %>
-        <%= render "/devise/registrations/edit" %>
+        <%= yield %>
       <% else %>
-       <%= render "#{controller.action_name}" %>
+        <%= render :partial => controller.action_name %>
       <% end %>
     </div>
   </div>

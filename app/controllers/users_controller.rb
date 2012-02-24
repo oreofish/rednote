@@ -6,7 +6,8 @@ class UsersController < ApplicationController
       @notes_size = current_user.notes.size
       
       respond_to do |format|
-          format.html # index.html.erb
+          format.html
+          format.js
       end
   end
 
@@ -19,6 +20,7 @@ class UsersController < ApplicationController
       
       respond_to do |format|
           format.html { render 'index' }
+          format.js { render 'index' }
       end
   end
 
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
       
       respond_to do |format|
           format.html { render 'index' } 
+          format.js { render 'index' }
       end
   end
 
@@ -39,6 +42,7 @@ class UsersController < ApplicationController
       
       respond_to do |format|
           format.html { render 'index' }
+          format.js { render 'index' }
       end
   end
 

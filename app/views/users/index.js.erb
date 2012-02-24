@@ -1,0 +1,22 @@
+<%# encoding: utf-8 %>
+
+(function() {
+
+  var $space = $('#myself').find('div.inner');
+  $space.empty();
+  $space.append( "<%= j render :partial => controller.action_name %> " );
+
+  var link = "secondary-<%= controller.action_name %>";
+
+  $('#myself div.secondary-navigation ul.wat-cf').find('li').each(function(idx, el) { 
+      if ( $(el).attr("id") === link ) {
+        $(el).addClass('active');
+      } else {
+        $(el).removeClass('active');
+      }
+  } )
+
+  commentsManager.bindHandlers();
+  time.updateTime();
+
+})();
