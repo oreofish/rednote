@@ -61,6 +61,56 @@ rednote.util = {
     }
 };
 
+rednote.pager = function(action) {
+    var update_action = action;
+    return {
+        start: function() {
+            var that = this;
+            if (!rednote.util.isScrollVisible()) {
+                //TODO: add timeout loading of nextpage
+            }
+
+            $(window).bind("scroll", function() {
+                that.checkAndLoadNextPage();
+            });
+        },
+
+        checkAndLoadNextPage: function() {
+            if (rednote.util.scrollNearBottom()) {
+                this.refreshNextPage();
+            }
+        },
+
+        refreshNextPage: function() {
+            var that = this;
+            console.log('try refreshNextPage');
+            $.ajax({
+                url: update_action,
+                beforeSend: function() {
+                    $('#pager_loading').toggleClass('hidden');
+                    $(window).unbind("scroll");
+                }, 
+                success: function(data) {
+                    if (data.trim().length == 0)
+                        return;
+
+                    var cb = eval(data);
+                    if ( typeof cb === "function" ) {
+                        console.log('load next page');
+                        cb();
+                    }
+                },
+                complete: function() {
+                    $('#pager_loading').toggleClass('hidden');
+                    $(window).bind("scroll", function() {
+                        that.checkAndLoadNextPage();
+                    });
+                }
+            });
+        },
+    };
+};
+
 // handle flash messages and animations
 rednote.flashController = {
     doMessage: function(msg) {

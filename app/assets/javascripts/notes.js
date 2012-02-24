@@ -1,12 +1,5 @@
 rednote.notesManager = {
     init: function() {
-        var that = this;
-        if (!rednote.util.isScrollVisible()) {
-            //TODO: add timeout loading of nextpage
-        }
-
-        $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
-
         var blocks = {}
         blocks['kind'] = function divKindFor(kind) {
             var map = {
@@ -123,43 +116,16 @@ rednote.notesManager = {
                 }
             });
         });
-
     },
-
-    checkAndLoadNextPage: function() {
-        if (rednote.util.scrollNearBottom()) {
-            rednote.notesManager.refreshNextPage();
-        }
-    },
-
-    refreshNextPage: function() {
-        console.log('try refreshNextPage');
-        $.ajax({
-            url: '/notes/page',
-            beforeSend: function() {
-                $('#pager_loading').toggleClass('hidden');
-                $(window).unbind("scroll", rednote.notesManager.checkAndLoadNextPage);
-            }, 
-            success: function(data) {
-                if (data.trim().length == 0)
-                    return;
-
-                var cb = eval(data);
-                if ( typeof cb === "function" ) {
-                    console.log('load next page');
-                    cb();
-                }
-            },
-            complete: function() {
-                $('#pager_loading').toggleClass('hidden');
-                $(window).bind("scroll", rednote.notesManager.checkAndLoadNextPage);
-            }
-        });
-    }
 };
 
 $(function() {
-    if (location.pathname === "/" || location.pathname === "/notes")
-        rednote.notesManager.init();
+    rednote.notesManager.init();
+    if (location.pathname === "/" || location.pathname === "/notes") {
+        rednote.pager('/notes/page').start();
+
+    } else if (location.pathname.match(/^\/users\//)) {
+        rednote.pager('/users/page').start();
+    }
 });
 
