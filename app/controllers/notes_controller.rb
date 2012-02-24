@@ -11,7 +11,8 @@ class NotesController < ApplicationController
     ]
 
     @notes = Note.where('').offset(0).limit(5).reverse_order
-    session[:current_page] = 0
+    cookies[:limit] = 5
+    cookies[:offset] = 5 # note offset
 
     respond_to do |format|
       format.html # index.html.erb
@@ -21,9 +22,8 @@ class NotesController < ApplicationController
   # GET /notes/page
   # get next page by ajax request
   def page
-    session[:current_page] += 1
-    currentPage = session[:current_page]
-    @notes = Note.offset(currentPage * 5).limit(5).reverse_order
+    @notes = Note.offset(cookies[:offset]).limit(cookies[:limit]).reverse_order
+    cookies[:offset] = 5 + cookies[:offset].to_i
 
     respond_to do |format|
       if @notes.count() > 0
@@ -70,6 +70,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         broadcast '/notes/new', "{ status: true }"
+        cookies[:offset] = cookies[:offset].to_i + 1
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.js 
       else
@@ -105,6 +106,7 @@ class NotesController < ApplicationController
         'user' : #{current_user.nickname}
       }/
 
+    cookies[:offset] = cookies[:offset].to_i - 1
     respond_to do |format|
       format.html { redirect_to notes_url }
     end
