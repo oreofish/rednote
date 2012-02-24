@@ -22,7 +22,7 @@ class NotesController < ApplicationController
   # GET /notes/page
   # get next page by ajax request
   def page
-    @notes = Note.offset(cookies[:offset]).limit(cookies[:limit]).reverse_order
+    @notes = Note.offset(cookies[:offset].to_i).limit(cookies[:limit]).reverse_order
     cookies[:offset] = 5 + cookies[:offset].to_i
 
     respond_to do |format|
@@ -109,6 +109,7 @@ class NotesController < ApplicationController
     cookies[:offset] = cookies[:offset].to_i - 1
     respond_to do |format|
       format.html { redirect_to notes_url }
+      format.js
     end
   end
 
