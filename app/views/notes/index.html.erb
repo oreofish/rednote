@@ -6,7 +6,7 @@
   <div class="content">
     <div class="inner">
 
-      <div class="note_publish">
+      <div id="note_publish">
         <h2 class="title">write a note</h2>
         <%= form_for(@note, :html => { :class => "form", :multipart => true, :remote => true }) do |f| %>
           <div class="input">
@@ -35,7 +35,7 @@
         <% end %> <!-- form end -->
       </div>
 
-      <div class="notes_content">
+      <div id="notes_content">
         <ul class="list">
           <%= render "list" %>
         </ul>

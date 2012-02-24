@@ -14,8 +14,8 @@
 
   <div class="right">
     <% if current_user.id==note.user.id %>
-      <%= link_to 'Show', note %> |
-      <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
+      <%= link_to '详细', note %> |
+      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %> |
     <% end %>
     <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>|
       <% my_like = current_user.likes.find_by_note_id(note.id) %>

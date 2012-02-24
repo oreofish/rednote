@@ -183,18 +183,6 @@ textarea {
         margin:0 auto;
     }
 
-    .flash {
- 		position: fixed;
- 		opacity: 0.7;
-		top: 0;
-		left:	30%;
-		height: 50px;
-  		width: 40%;
-  		max-width: 80%;
- 		margin: 3px;
-		z-index: -1;
-    }
-
     h1 {
         margin: 0 auto;
 		float: left;
@@ -860,15 +848,15 @@ button.button:active, a.button:active {
     }
 }
 
-.flash .message {
-    @include radius(3px);
-    text-align: center;
-    margin: 0 auto 15px;
-    color: white;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-    .message p {
-        margin: 8px;
+.flash {
+    .message {
+      @include radius(3px);
+      text-align: center;
+      margin: auto 10px auto 35px;
+      color: white;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     }
+
     .alert, .flash .error, .flash .error-list {
         border: 1px solid #993624;
         background: #cc4831 url("/assets/web-app-theme/themes/default/images/messages/error.png") no-repeat 10px center;

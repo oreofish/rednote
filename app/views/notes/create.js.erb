@@ -2,11 +2,11 @@
 
 (function() {
   <% if @note.valid?  %>
-    $new_note = $('.note_publish #new_note');
-    $notes = $('.notes_content ul.list');
+    $new_note = $('#new_note');
+    $notes = $('#notes_content ul.list');
     $notes.prepend( "<%= j render :partial => 'notes/note', :locals => { :note => @note } %>" );
     $new_note[0].reset();
-    $('.notes_content ul.list li:first').hide().fadeIn(1000);
+    $('#notes_content').find('ul.list li:first').hide().fadeIn(1000);
   <% end %>
 }());
 
