@@ -1,0 +1,13 @@
+<%# encoding: utf-8 %>
+
+<div class="title">
+  <p>Listing tasks</p>
+</div>
+
+<ul class="tasklist">
+  <% @tasks.each do |task| %>
+  <%= render :partial => 'item', :locals => { :task => task } %>
+  <% end %>
+</ul>
+
+<%= render "form" %>

@@ -2,8 +2,8 @@
 
 (function() {
 <% if @task.valid? %>
-  $('.content .list').prepend( "<%= j render( :partial => 'item', :locals => { :task => @task }) %>" );
-  $('.content .list > li:first').effect('highlight', {}, 3000);
+  $('.content .tasklist').prepend( "<%= j render( :partial => 'item', :locals => { :task => @task }) %>" );
+  $('.content .tasklist > li:first').effect('highlight', {}, 3000);
   $('#new_task')[0].reset();
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');

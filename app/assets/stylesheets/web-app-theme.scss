@@ -678,10 +678,6 @@ ul.comment li {
   list-style-type: none;
 }
 
-ul.task {
-
-}
-
 ul.list {
     margin: 0;
     padding: 0;
@@ -724,6 +720,19 @@ ul.list {
     }
 }
 
+ul.tasklist {
+    @extend ul.list;
+    li {
+        @include radius(6px);
+	    -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	    -webkit-box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	    box-shadow:inset 0px 1px 0px 0px #dcecfb;
+	    background-color:#bddbfa;
+	    border:1px solid #84bbf3;
+        margin: 5px;
+    }
+}
+
 /* box */
 
 #box {
@@ -753,8 +762,6 @@ ul.list {
         @include radius-topright(6px);
     }
 }
-
-/*  Inspired by http://particletree.com/features/rediscovering-the-button-element */
 
 a.button:link, a.button:visited, a.button:hover, a.button:active, button.button {
     color: #222;

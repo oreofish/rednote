@@ -5,18 +5,7 @@
 
   <div class="content">
     <div class="inner">
-      <div class="title">
-        <p>Listing tasks</p>
-      </div>
-      
-      <ul class="task">
-        <% @tasks.each do |task| %>
-        <%= render :partial => 'item', :locals => { :task => task } %>
-        <% end %>
-      </ul>
-
-      <%= render "form" %>
-
+      <%= render :partial => controller.action_name %>
     </div>
   </div>
 </div>

@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<%= link_to 'Back', tasks_path %>
+
+<ul class="tasklist">
+  <%= render :partial => 'item', :locals => { :task => @task } %>
+</ul>
 
 <p>
   <b>User:</b>
@@ -27,4 +31,3 @@
 
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>

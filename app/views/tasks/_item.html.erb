@@ -1,12 +1,18 @@
 <%# encoding: utf-8 %>
 
-<li id="task<%= task.id %>">
-  <%= task.user_id %>
-  <%= task.parent_id %>
-  <%= task.content %>
-  <%= task.estimate %>
-  <%= time_ago_in_words(task.deadline) %>
-  <%= link_to 'Show', task %>
-  <%= link_to 'Edit', edit_task_path(task) %>
-  <%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %>
+<li id="task<%= task.id %>" class="inner">
+  <div class="left">icon</div>
+  <div class="item">
+    <div class="content">
+      <%= task.user_id %>
+      <%= task.parent_id %>
+      <%= task.content %>
+      <%= task.estimate %>
+      <%= time_ago_in_words(task.deadline) %>
+      <div class="right">
+        <%= link_to 'Done', task, :class => "small-button" %>
+        <%= link_to 'Show', task %>
+      </div>
+    </div>
+  </div>
 </li>
