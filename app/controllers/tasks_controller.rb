@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
     @task = Task.new
 
     respond_to do |format|
@@ -44,7 +44,7 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @tasks = Task.all
+    @tasks = current_user.tasks
     @task = Task.new(params[:task])
 
     respond_to do |format|

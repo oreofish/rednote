@@ -13,4 +13,12 @@
 #
 
 class Task < ActiveRecord::Base
+  acts_as_commentable
+  belongs_to :user
+  validates :user_id, :presence => true
+  
+  validates :content, :presence => true,
+                      :length   => { :maximum => 255 }
+
+  attr_accessible :parent_id, :content, :estimate, :deadline
 end

@@ -20,11 +20,15 @@ require 'spec_helper'
 
 describe TasksController do
 
+  before(:each) do 
+    @user = Factory(:user)
+    sign_in @user
+  end
   # This should return the minimal set of attributes required to create a valid
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    { :content => 'test content' }
   end
   
   # This should return the minimal set of values that should be in the session
@@ -36,30 +40,15 @@ describe TasksController do
 
   describe "GET index" do
     it "assigns all tasks as @tasks" do
-      task = Task.create! valid_attributes
+      task = @user.tasks.create! valid_attributes
       get :index, {}, valid_session
       assigns(:tasks).should eq([task])
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested task as @task" do
-      task = Task.create! valid_attributes
-      get :show, {:id => task.to_param}, valid_session
-      assigns(:task).should eq(task)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new task as @task" do
-      get :new, {}, valid_session
-      assigns(:task).should be_a_new(Task)
-    end
-  end
-
   describe "GET edit" do
     it "assigns the requested task as @task" do
-      task = Task.create! valid_attributes
+      task = @user.tasks.create! valid_attributes
       get :edit, {:id => task.to_param}, valid_session
       assigns(:task).should eq(task)
     end
@@ -148,14 +137,14 @@ describe TasksController do
 
   describe "DELETE destroy" do
     it "destroys the requested task" do
-      task = Task.create! valid_attributes
+      task = @user.tasks.create! valid_attributes
       expect {
         delete :destroy, {:id => task.to_param}, valid_session
       }.to change(Task, :count).by(-1)
     end
 
     it "redirects to the tasks list" do
-      task = Task.create! valid_attributes
+      task = @user.tasks.create! valid_attributes
       delete :destroy, {:id => task.to_param}, valid_session
       response.should redirect_to(tasks_url)
     end

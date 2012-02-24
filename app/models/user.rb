@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
 
   has_many :notes, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  has_many :tasks, :dependent => :destroy
   has_many :likes, :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
