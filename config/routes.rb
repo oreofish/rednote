@@ -12,6 +12,7 @@ Rednote::Application.routes.draw do
   get "users/comments"
   get "users/nickname"
   get "users/mytags"
+  get "users/crop_update"
 
 
   devise_for :users
@@ -27,6 +28,7 @@ Rednote::Application.routes.draw do
   match '/mails/interview', :to => 'mails#interview'
   match '/mails/invite', :to => 'mails#invite'
   match ':users/index' => 'users#index'
+  match ':users/crop_update' => 'users#crop_update'
   match ':users/avatar', :to  => 'users#update', :as => :user 
 
   # The priority is based upon order of creation:

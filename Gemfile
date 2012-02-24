@@ -8,12 +8,15 @@ gem 'rails', '3.2.1'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag', '1.0.0'
 gem 'carrierwave'
+gem 'carrierwave-meta'
 gem 'mysql2'
 gem 'coderay'
 gem 'cancan'
 gem 'faye'
 gem 'roadie' # send HTML mail
 gem 'acts_as_commentable'
+gem 'jcrop-rails'
+gem 'rmagick'
 
 group :development do
   gem 'rspec-rails'

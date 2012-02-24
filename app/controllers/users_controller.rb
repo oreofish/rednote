@@ -43,10 +43,12 @@ class UsersController < ApplicationController
   end
 
   def avatar
-      if params[:icon] != nil
-        current_user.avatar = params[:icon]
-        current_user.save!
-      end
+      @user = current_user
+
+      #if params[:icon] != nil
+      #  current_user.avatar = params[:icon]
+      #  current_user.save!
+      #end
 
       respond_to do |format|
           format.html # index.html.erb
@@ -69,4 +71,15 @@ class UsersController < ApplicationController
       end
   end
 
+  def crop_update
+      @user = current_user
+      @user.crop_x = params[:user]["crop_x"]
+      @user.crop_y = params[:user]["crop_y"]
+      @user.crop_h = params[:user]["crop_h"]
+      @user.crop_w = params[:user]["crop_w"]
+      @user.save!
+      redirect_to '/users/avatar'
+  end
+
 end
+

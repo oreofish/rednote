@@ -26,9 +26,30 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname, :avatar, :avatar_cache
 
   has_many :notes, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :likes, :dependent => :destroy
+
+  mount_uploader :avatar, AvatarUploader
+
+  attr_accessor :password, :crop_x, :crop_y, :crop_h, :crop_w
+  after_update :reprocess_avatar, :if => :cropping?
+
+  def cropping?
+      !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+
+  def avatar_geometry
+      img = Magick::Image::read(self.avatar.current_path).first
+      @geometry = {:width => img.columns, :height => img.rows }
+  end
+
+  private
+
+  def reprocess_avatar
+      self.avatar.recreate_versions!
+  end
+
 end

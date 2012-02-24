@@ -1,5 +1,7 @@
 <%= render "layouts/userinfo" %>
+<!--
 <h2 class="title">当前头像</h2>
+<%= image_tag(@user.avatar_url, :class => 'jcrop') if @user.avatar? %>
 <%= image_tag(current_user.avatar, :class => "avatar") %>
 <div class="block">
 	<div class="secondary-navigation"></div>
@@ -14,3 +16,27 @@
 		</div>
 	</div>
 </div>
+-->
+<%= form_for @user, :html => {:multipart => true} do |f| %>
+    <p>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+    <%= f.submit %>
+    </p>
+<% end %>
+
+
+<%= image_tag @user.avatar, :id => "cropbox", :date => @user.avatar_geometry[:width] %>
+<h3>Preview</h3>
+<div class="preview">
+    <%= image_tag @user.avatar_url(:large), :id => "preview" %>
+</div>
+<%= form_for @user, :url => { :action => "crop_update" } do |f| %>
+    <% for attribute in [:crop_x, :crop_y, :crop_h, :crop_w] %>
+        <%= f.hidden_field attribute, :id => attribute %>
+    <% end %>
+    <p><%= f.submit "Crop" %></p>
+<% end %>
+
+<%= image_tag @user.avatar_url(:thumb) %>
+<%= image_tag @user.avatar_url(:small) %>

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jcrop
 //= require rednote_utils
 //= require_tree .
 function scrolltop() {
@@ -105,4 +106,31 @@ $(document).ready( function() {
     scrolltop();
     commentsManager.bindHandlers();
     time.updateTime();
+
+        $('#cropbox').Jcrop({
+            onChange: update_crop,
+            onSelect: update_crop,
+            setSelect: [300, 200, 200, 300],
+            aspectRatio: 1
+        });
+
+    function update_crop(coords) {
+        var rx = 100/coords.w;
+        var ry = 100/coords.h;
+        var lw = $('#cropbox').width();
+        var lh = $('#cropbox').height();
+        var ratio = $('#cropbox').attr('date') / lw ;
+
+        $('#preview').css({
+            width: Math.round(rx * lw) + 'px',
+            height: Math.round(ry * lh) + 'px',
+            marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+            marginTop: '-' + Math.round(ry * coords.y) + 'px'
+        });
+        $("#crop_x").val(Math.round(coords.x * ratio));
+        $("#crop_y").val(Math.round(coords.y * ratio));
+        $("#crop_w").val(Math.round(coords.w * ratio));
+        $("#crop_h").val(Math.round(coords.h * ratio));
+    }
+
 } );

@@ -46,3 +46,9 @@
 #box {
     width: 500px;
 }
+
+.preview {
+    width:100px;
+    height:100px;
+    overflow:hidden;
+}
