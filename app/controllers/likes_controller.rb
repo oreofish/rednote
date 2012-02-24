@@ -1,8 +1,4 @@
 class LikesController < ApplicationController
-  def edit
-    @like = Like.find(params[:id])
-  end
-
   # POST /likes
   # POST /likes.json
   def create

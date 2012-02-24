@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       end
 
       respond_to do |format|
-          format.html # index.html.erb
+          format.html { render 'settings' }
       end
   end
 
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       @user = current_user
 
       respond_to do |format|
-          format.html  
+          format.html { render 'settings' }
       end
   end
 

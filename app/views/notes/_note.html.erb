@@ -22,9 +22,9 @@
       <% if not my_like %>
         <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
       <% elsif not my_like.status %>
-        <%= link_to '已读完', likes_update_path(:note_id => note.id), :remote => true, :class => "tags" %>
+        <%= link_to '已标记', likes_update_path(:note_id => note.id), :remote => true, :class => "tags" %>
       <% else %>
-        <a href="", class="tags">ok</a>
+        <%= link_to '已读完', :class => "tags"%>
       <% end %>
   </div>
   <div class="time" data="<%= note.created_at %>">

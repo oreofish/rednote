@@ -13,10 +13,10 @@
 <div class="block">
   <div class="secondary-navigation">
     <ul class="wat-cf">
-      <li class="first <%= 'active' if controller.action_name == 'index'%>"><a href="/users/index">我的发布</a></li>
-      <li <%= "class='active'" if controller.action_name == 'mycomments'%> ><a href="/users/mycomments">我的评论</a></li>
-      <li <%= "class='active'" if controller.action_name == 'comments'%> ><a href="/users/comments">我被评论</a></li>
-      <li <%= "class='active'" if controller.action_name == 'mytags'%> ><a href="/users/mytags">mytags</a></li>
+      <li class="first <%= 'active' if controller.action_name == 'index'%>"><%= link_to "我的发布", users_index_path %></li>
+    <li <%= "class='active'" if controller.action_name == 'mycomments'%> > <%= link_to "我的评论", users_mycomments_path%></li>
+      <li <%= "class='active'" if controller.action_name == 'comments'%> ><%= link_to "我被评论", users_comments_path %></li>
+      <li <%= "class='active'" if controller.action_name == 'mytags'%> ><%= link_to "我的标记", users_mytags_path %></li>
     </ul>
   </div>
 
