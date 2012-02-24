@@ -8,23 +8,23 @@
     <%= note.summary %> 
   </div>
 
-  <% if note.kind > 0 %>
+  <% if note.kind > 0 and note.description %>
     <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
   <% end %>
 
   <div class="right">
     <% if current_user.id==note.user.id %>
-      <%= link_to 'Show', note %> |
-      <%= link_to 'Destroy', note, confirm: 'Are you sure?', method: :delete %> |
+      <%= link_to '详细', note %> |
+      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %> |
     <% end %>
     <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>|
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
         <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
       <% elsif not my_like.status %>
-        <%= link_to '已读完', likes_update_path(:note_id => note.id), :remote => true, :class => "tags" %>
+        <%= link_to '已标记', likes_update_path(:note_id => note.id), :remote => true, :class => "tags" %>
       <% else %>
-        <a href="", class="tags">ok</a>
+        <%= link_to '已读完', :class => "tags"%>
       <% end %>
   </div>
   <div class="time" data="<%= note.created_at %>">

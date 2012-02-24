@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jcrop
+//= require ckeditor/ckeditor
 //= require rednote_utils
 //= require_tree .
 function scrolltop() {
@@ -37,10 +38,10 @@ function scrolltop() {
 
 var commentsManager = {
     bindHandlers: function() {
-        var $items = $('.item').has('.comments_link');
+        var $items = $('#main div.inner ul.list').find('div.item');
         $items.each( function(idx, el) {
-            var $link = $(el).find('.comments_link');
-            var $list = $(el).find('.comments_list');
+            var $link = $(el).find('a.comments_link');
+            var $list = $(el).find('div.comments_list');
 
             $link.unbind('click');
             $link.bind( {
@@ -85,7 +86,7 @@ var time = {
                             $time.html(b+"分钟前");
                         }
                     } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
-                        $time.html(now_minute+60-creation.minute+"分钟前");
+                        $time.html(now.minute+60-creation.minute+"分钟前");
                     } else {
                         var c = now.hour - creation.hour;
                         $time.html(c+"小时前");

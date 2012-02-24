@@ -61,34 +61,76 @@ rednote.util = {
     }
 };
 
+rednote.pager = function(action) {
+    var update_action = action;
+    return {
+        start: function() {
+            var that = this;
+            if (!rednote.util.isScrollVisible()) {
+                //TODO: add timeout loading of nextpage
+            }
+
+            $(window).bind("scroll", function() {
+                that.checkAndLoadNextPage();
+            });
+        },
+
+        checkAndLoadNextPage: function() {
+            if (rednote.util.scrollNearBottom()) {
+                this.refreshNextPage();
+            }
+        },
+
+        refreshNextPage: function() {
+            var that = this;
+            console.log('try refreshNextPage');
+            $.ajax({
+                url: update_action,
+                beforeSend: function() {
+                    $('#pager_loading').toggleClass('hidden');
+                    $(window).unbind("scroll");
+                }, 
+                success: function(data) {
+                    if (data.trim().length == 0)
+                        return;
+
+                    var cb = eval(data);
+                    if ( typeof cb === "function" ) {
+                        console.log('load next page');
+                        cb();
+                    }
+                },
+                complete: function() {
+                    $('#pager_loading').toggleClass('hidden');
+                    $(window).bind("scroll", function() {
+                        that.checkAndLoadNextPage();
+                    });
+                }
+            });
+        },
+    };
+};
+
 // handle flash messages and animations
 rednote.flashController = {
-    doMessage: function(msg) {
-        this.stop();
-        $('.flash').html('<div class="message notice"> '+msg+'  </div>');
-        $('.flash').css('z-index', 'auto');
-        $('.flash .message').hide().slideDown(500).delay(1000).slideUp(1000, function(){
-            $('.flash').css('z-index', '-1');
+    _message: function(style, msg) {
+        var $flash = $('div.flash');
+        $flash.stop();
+        $flash.html('<div class="' + style + '"> ' + 
+                    '<div class="message"> ' + msg + ' </div>  </div>');
+        $flash.css('z-index', 'auto');
+        $flash.hide().fadeIn(500).delay(1000).fadeOut('slow', function(){
+            $flash.css('z-index', '-1');
         });
     }, 
     doFailure: function(msg) {
-        this.stop();
-        $('.flash').html('<div class="message alert"> '+msg+'  </div>');
-        $('.flash').css('z-index', 'auto');
-        $('.flash .message').show('bounce', { times: 2 }, 1000).fadeOut('slow', function(){
-            $('.flash').css('z-index', '-1');
-        });
+        this._message("alert", msg);
     }, 
     doSuccess: function(msg) {
-        this.stop();
-        $('.flash').html('<div class="message notice"> '+msg+'  </div>');
-        $('.flash').css('z-index', 'auto');
-        $('.flash .message').fadeIn('slow').delay(1000).fadeOut('slow', function(){
-            $('.flash').css('z-index', '-1');
-        });
+        this._message("notice", msg);
     },
     stop: function() {
-        $('.flash').stop();
+        $('div.flash').stop();
     }
 };
 

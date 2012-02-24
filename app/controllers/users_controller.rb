@@ -6,7 +6,8 @@ class UsersController < ApplicationController
       @notes_size = current_user.notes.size
       
       respond_to do |format|
-          format.html # index.html.erb
+          format.html
+          format.js
       end
   end
 
@@ -18,7 +19,8 @@ class UsersController < ApplicationController
       @comments.reverse!
       
       respond_to do |format|
-          format.html
+          format.html { render 'index' }
+          format.js { render 'index' }
       end
   end
 
@@ -28,7 +30,8 @@ class UsersController < ApplicationController
       @comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE commentable_id IN (SELECT id FROM notes WHERE user_id = #{current_user.id}) ORDER BY created_at DESC")
       
       respond_to do |format|
-          format.html 
+          format.html { render 'index' } 
+          format.js { render 'index' }
       end
   end
 
@@ -38,7 +41,8 @@ class UsersController < ApplicationController
       @notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT note_id FROM likes WHERE user_id=#{current_user.id} ) ORDER BY created_at DESC")
       
       respond_to do |format|
-          format.html 
+          format.html { render 'index' }
+          format.js { render 'index' }
       end
   end
 
@@ -51,7 +55,7 @@ class UsersController < ApplicationController
       #end
 
       respond_to do |format|
-          format.html # index.html.erb
+          format.html { render 'settings' }
       end
   end
 
@@ -59,7 +63,7 @@ class UsersController < ApplicationController
       @user = current_user
 
       respond_to do |format|
-          format.html  
+          format.html { render 'settings' }
       end
   end
 

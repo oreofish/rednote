@@ -1,9 +1,0 @@
-<%= render "layouts/userinfo" %>
-<%= form_for @user do |f| %>
-    <p>
-    <%= f.label "昵称：" %>
-    <%= f.text_field :nickname, :size => 25 %>
-    <%= f.submit '确定'%>
-    </p>
-<% end %>
-

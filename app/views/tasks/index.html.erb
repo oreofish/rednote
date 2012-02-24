@@ -2,19 +2,21 @@
 
 <div class="block">
   <div class="secondary-navigation"></div>
-  <div class="inner">
-    <div class="title">
-      <p>Listing tasks</p>
-    </div>
-  
-    <%= render "form" %>
 
-    <div class="content">
-      <ul class="list">
-      <% @tasks.each do |task| %>
-      <%= render :partial => 'item', :locals => { :task => task } %>
-      <% end %>
+  <div class="content">
+    <div class="inner">
+      <div class="title">
+        <p>Listing tasks</p>
+      </div>
+      
+      <ul class="task">
+        <% @tasks.each do |task| %>
+        <%= render :partial => 'item', :locals => { :task => task } %>
+        <% end %>
       </ul>
+
+      <%= render "form" %>
+
     </div>
   </div>
 </div>

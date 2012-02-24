@@ -7,6 +7,8 @@ gem 'rails', '3.2.1'
 
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag', '1.0.0'
+gem "ckeditor", "3.7.0.rc2"
+gem "mini_magick"
 gem 'carrierwave'
 gem 'carrierwave-meta'
 gem 'mysql2'
