@@ -92,24 +92,21 @@ rednote.notesManager = {
                     var kind = $(this).attr('class');
                     var visbile = $attach_blk.css('display') !== 'none';
 
-                    console.log('last_clicked_kind: ' + last_clicked_kind 
-                                + ', kind: ' + kind);
-                    if (last_clicked_kind === "") {
+                    if (!visbile) {
                         $attach_blk.html(blocks[kind]+blocks['kind'](kind));
-                        $attach_blk.toggle('slide');
-
-                    } else if (last_clicked_kind === kind) {
-                        $attach_blk.toggle('slide');
+                        $attach_blk.slideToggle();
 
                     } else {
-                        if (visbile) {
-                            $attach_blk.toggle('slide', function() {
-                                $attach_blk.html(blocks[kind]+blocks['kind'](kind));
-                                $attach_blk.toggle('slide');
+                        if (last_clicked_kind === kind) {
+                            $attach_blk.slideToggle(function() {
+                                $attach_blk.empty();
                             });
-                        } else { 
-                            $attach_blk.html(blocks[kind]+blocks['kind'](kind));
-                            $attach_blk.toggle('slide');
+
+                        } else {
+                            $attach_blk.slideToggle(function() {
+                                $attach_blk.html(blocks[kind]+blocks['kind'](kind));
+                                $attach_blk.slideToggle();
+                            });
                         }
                     }
                     last_clicked_kind = kind;
