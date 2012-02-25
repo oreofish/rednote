@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_filter :default_avatar
+
   def index
       @avatar = current_user.avatar
       @nickname = current_user.nickname
@@ -102,6 +104,16 @@ class UsersController < ApplicationController
       @user.crop_w = params[:user]["crop_w"]
       @user.save!
       redirect_to '/users/avatar'
+  end
+
+  private
+  def default_avatar
+      @user = current_user
+
+      if @user.avatar.blank? 
+         @user.avatar = File.open('public/images/avatar.jpg')
+         @user.save
+      end
   end
 
 end
