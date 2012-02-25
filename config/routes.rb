@@ -7,6 +7,7 @@ Rednote::Application.routes.draw do
   match 'likes/create', :to => 'likes#create'
   match 'likes/update', :to => 'likes#update'
   get "users/index"
+  get "users/page"
   get "users/avatar"
   get "users/mycomments"
   get "users/comments"
