@@ -3,12 +3,11 @@
 (function() {
 
   var $space = $('#myself').find('div.inner');
-  $space.empty();
 
   <% if controller.action_name == "index" or controller.action_name == "mytags" %> 
-      $space.append( "<%= j render :partial => 'mytags' %>" ); 
+      $space.html( "<%= j render :partial => 'mytags' %>" ); 
   <% else %> 
-      $space.append( "<%= j render :partial => 'mycomments' %> " );
+      $space.html( "<%= j render :partial => 'mycomments' %> " );
   <% end %>;
 
 

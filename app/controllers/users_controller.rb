@@ -75,6 +75,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
           format.html { render 'settings' }
+          format.js { render 'devise/registrations/edit' }
       end
   end
 
@@ -83,6 +84,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
           format.html { render 'settings' }
+          format.js { render 'devise/registrations/edit' }
       end
   end
 
