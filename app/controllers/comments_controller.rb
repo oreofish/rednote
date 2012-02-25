@@ -36,13 +36,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
-    @note = @comment.commentable
     @comment.destroy
-    @comments = @note.comments if @note
-    @comment = Comment.new(:commentable_id => @note.id)
 
     respond_to do |format|
-      format.js { render "index" }
+      format.js 
     end
   end
 end

@@ -1,9 +1,9 @@
 <ul class='comment'>
   <% @comments.each do |comment| %>
-  <li>
-    <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
-    <%= comment.comment %>
-    <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
-  </li>
+    <li id="comment<%= comment.id %>">
+      <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
+      <%= comment.comment %>
+      <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+    </li>
   <% end %>
 </ul>
