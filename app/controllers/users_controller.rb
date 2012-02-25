@@ -2,13 +2,35 @@ class UsersController < ApplicationController
   def index
       @avatar = current_user.avatar
       @nickname = current_user.nickname
-      @notes = current_user.notes
-      @notes_size = current_user.notes.size
-      
+      @notes = current_user.notes.offset(0).limit(5).reverse_order
+      @notes_size = @notes.size
+
+      cookies[:limit] = 5
+      cookies[:offset] = 5 # note offset
+
       respond_to do |format|
           format.html
           format.js
       end
+  end
+
+  # GET /users/page
+  # get next page by ajax request
+  def page
+    @avatar = current_user.avatar
+    @nickname = current_user.nickname
+    @notes = current_user.notes.offset(cookies[:offset].to_i).limit(cookies[:limit]).reverse_order
+    @notes_size = @notes.size
+
+    cookies[:offset] = 5 + cookies[:offset].to_i
+
+    respond_to do |format|
+      if @notes.count() > 0
+        format.js
+      else
+        format.js { render :nothing => true }
+      end
+    end
   end
 
   def mycomments
