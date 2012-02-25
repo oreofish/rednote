@@ -21,9 +21,9 @@ function scrolltop() {
     var __backtopele = $('<div class="backToTop"></div>').appendTo($("html body"))
     .attr("title", __backtoptxt).click(function() {
         window.scroll(0, 0);
-        //$("html, body").animate({ scrollTop: 0 }, 500);
-    }),
-    __backtopfuc = function() {
+    });
+    
+    var __backtopfuc = function() {
         var st = $(document).scrollTop(),
         winh = $(window).height();
         (st > 0)? __backtopele.show() : __backtopele.hide();
@@ -38,17 +38,27 @@ function scrolltop() {
 
 var commentsManager = {
     bindHandlers: function() {
-        var $items = $('#main div.inner ul.list').find('div.item');
-        $items.each( function(idx, el) {
-            var $link = $(el).find('a.comments_link');
-            var $list = $(el).find('div.comments_list');
+        var that = this;
+        $('#main div.inner ul.list').find('div.item').each( function(idx, el) {
+            that._bindCommentHandlerHelper($(el));
+        });
+    },
 
-            $link.unbind('click');
-            $link.bind( {
-                'click': function(ev) {
-                    $list.toggle('blind');
-                }
-            });
+    // called by js response for newly created comments
+    bindCommentHandler: function(id) {
+        $note = $('#note'+id);
+        this._bindCommentHandlerHelper($note);
+    }, 
+
+    _bindCommentHandlerHelper: function(obj) {
+        var $link = obj.find('a.comments_link');
+        var $list = obj.find('div.comments_list');
+
+        $link.unbind('click');
+        $link.bind( {
+            'click': function(ev) {
+                $list.toggle('blind');
+            }
         });
     }
 };
@@ -108,12 +118,12 @@ $(document).ready( function() {
     commentsManager.bindHandlers();
     time.updateTime();
 
-        $('#cropbox').Jcrop({
-            onChange: update_crop,
-            onSelect: update_crop,
-            setSelect: [300, 200, 200, 300],
-            aspectRatio: 1
-        });
+    $('#cropbox').Jcrop({
+        onChange: update_crop,
+        onSelect: update_crop,
+        setSelect: [300, 200, 200, 300],
+        aspectRatio: 1
+    });
 
     function update_crop(coords) {
         var rx = 100/coords.w;
