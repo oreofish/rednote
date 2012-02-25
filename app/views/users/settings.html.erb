@@ -1,18 +1,13 @@
-<div class="block" id="settings">
-  <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li id='navigation-nickname' class="first <%= 'active' if controller.action_name == 'nickname'%>"><%= link_to "修改昵称", users_nickname_path, :remote => true %></li>
-      <li id='navigation-avatar' class="<%= 'active' if controller.action_name == 'avatar'%>"><%= link_to "修改头像", users_avatar_path, :remote => true %></li>
-      <li id='navigation-edit' class="<%= 'active' if controller.action_name == 'edit'%>"><%= link_to "修改密码", edit_user_registration_path, :method => :get, :remote => true %></li>
-    </ul>
-  </div>
-  <div class="content">
-    <div class="inner">
-      <% if controller.action_name == 'edit' %>
-        <%= render :partial => "devise/registrations/edit" %>
-      <% else %>
-        <%= render :partial => controller.action_name %>
-      <% end %>
-    </div>
-  </div>
+<div class="well" id="settings">
+  <ul class="nav nav-tabs">
+    <li id='navigation-nickname'class="<%= 'active' if controller.action_name == 'nickname' %>"><%= link_to "修改昵称", users_nickname_path, :remote => true %></li>
+    <li id='navigation-avatar'  class="<%= 'active' if controller.action_name == 'avatar' %>"><%= link_to "修改头像", users_avatar_path, :remote => true %></li>
+    <li id='navigation-edit'    class="<%= 'active' if controller.action_name == 'edit' %>"><%= link_to "修改密码", edit_user_registration_path, :method => :get, :remote => true %></li>
+  </ul>
+
+  <% if controller.action_name == 'edit' %>
+  <%= render :partial => "devise/registrations/edit" %>
+  <% else %>
+  <%= render :partial => controller.action_name %>
+  <% end %>
 </div>

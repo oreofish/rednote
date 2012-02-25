@@ -1,29 +1,39 @@
-<%= form_for(@task, :remote => true) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="clearfix">
+   <%= f.label :user_id, t("activerecord.attributes.task.user_id", :default => "User"), :class => :label %>
+  <div class="input">
+    <%= f.number_field :user_id, :class => 'number_field' %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :content %>:
-    <%= f.text_field :content %>
+<div class="clearfix">
+   <%= f.label :parent_id, t("activerecord.attributes.task.parent_id", :default => "Parent"), :class => :label %>
+  <div class="input">
+    <%= f.number_field :parent_id, :class => 'number_field' %>
   </div>
-  <div class="field">
-    <%= f.label :estimate %>:
-    <%= f.number_field :estimate %>
+</div>
+
+<div class="clearfix">
+   <%= f.label :content, t("activerecord.attributes.task.content", :default => "Content"), :class => :label %>
+  <div class="input">
+    <%= f.text_field :content, :class => 'text_field' %>
   </div>
-  <div class="field">
-    <%= f.label :deadline %>:
-    <%= f.datetime_select :deadline %>
+</div>
+
+<div class="clearfix">
+   <%= f.label :estimate, t("activerecord.attributes.task.estimate", :default => "Estimate"), :class => :label %>
+  <div class="input">
+    <%= f.number_field :estimate, :class => 'number_field' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+</div>
+
+<div class="clearfix">
+   <%= f.label :deadline, t("activerecord.attributes.task.deadline", :default => "Deadline"), :class => :label %>
+  <div class="input">
+    <%= f.datetime_select :deadline, :class => 'datetime_select' %>
   </div>
-<% end %>
+</div>
+<div class="form-actions">
+  <button class="btn primary" type="submit">Save</button> or
+	<%= link_to "Cancel", tasks_path %>
+</div>

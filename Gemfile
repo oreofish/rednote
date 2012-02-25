@@ -19,6 +19,7 @@ gem 'roadie' # send HTML mail
 gem 'acts_as_commentable'
 gem 'jcrop-rails'
 gem 'rmagick'
+gem 'twitter-bootstrap-rails'
 
 group :development do
   gem 'rspec-rails'

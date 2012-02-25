@@ -1,13 +1,30 @@
-<%# encoding: utf-8 %>
+<h1>Tasks</h1>
+<table class="table table-striped">
+ <thead>
+  <tr>
+    <th>ID</th>
+        <th>
+      <%= t("activerecord.attributes.task.user_id", :default => t("activerecord.labels.user_id", :default => "User_id")) %>
+    </th>
+        <th>Created at</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @tasks.each do |task| -%>
+   <tr>
+    <td><%= task.id %></td>
+        <td><%= link_to task.user_id, task_path(task) %>
+    </td>
+        <td><%= task.created_at %></td>
+    <td>
+      <%= link_to "Show", task_path(task) %>
+      <%= link_to "Edit", edit_task_path(task) %>
+      <%= link_to "Destroy", task_path(task), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+    </td>
+    </tr>
+    <% end -%>
+   </tbody>
+</table>
 
-<div class="block">
-  <div class="secondary-navigation"></div>
-
-  <div class="content">
-    <div class="inner">
-      <%= render :partial => controller.action_name %>
-    </div>
-  </div>
-</div>
-
-
+<%= link_to "New", new_task_path, :class => 'btn btn-primary' %>

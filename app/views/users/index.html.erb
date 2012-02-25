@@ -1,24 +1,18 @@
 
-<div class="block" id="userinfo">
-  <div class="content">
-    <div class="inner">
-      <h2 class="title">Users#info</h2>
-      <%= link_to image_tag(@avatar, :class => "avatar"), users_avatar_path %>
-      <p><%= @nickname %></p>
-      <p>发布数: <%= @notes_size %></p>
-    </div>
-  </div>
+<div class="well" id="userinfo">
+  <h2 class="title">Users#info</h2>
+  <%= link_to image_tag(@avatar, :class => "avatar"), users_avatar_path %>
+  <p><%= @nickname %></p>
+  <p>发布数: <%= @notes_size %></p>
 </div>
 
-<div class="block" id="myself">
-  <div class="secondary-navigation">
-    <ul class="wat-cf">
-      <li id="secondary-index" class="first <%= 'active' if controller.action_name == 'index'%>"><%= link_to "我的发布", users_index_path, :remote => true %></li>
-      <li id="secondary-mycomments" <%= "class='active'" if controller.action_name == 'mycomments'%> > <%= link_to "我的评论", users_mycomments_path, :remote => true %></li>
-      <li id="secondary-comments" <%= "class='active'" if controller.action_name == 'comments'%> ><%= link_to "我被评论", users_comments_path, :remote => true %></li>
-      <li id="secondary-mytags" <%= "class='active'" if controller.action_name == 'mytags'%> ><%= link_to "我的标记", users_mytags_path, :remote => true %></li>
-    </ul>
-  </div>
+<div class="well" id="myself">
+  <ul class="nav nav-tabs">
+    <li id="secondary-index" <%= "class='active'" if controller.action_name == 'index'%> ><%= link_to "我的发布", users_index_path, :remote => true %></li>
+    <li id="secondary-mycomments" <%= "class='active'" if controller.action_name == 'mycomments'%> > <%= link_to "我的评论", users_mycomments_path, :remote => true %></li>
+    <li id="secondary-comments" <%= "class='active'" if controller.action_name == 'comments'%> ><%= link_to "我被评论", users_comments_path, :remote => true %></li>
+    <li id="secondary-mytags" <%= "class='active'" if controller.action_name == 'mytags'%> ><%= link_to "我的标记", users_mytags_path, :remote => true %></li>
+  </ul>
 
   <div class="content">
     <div class="inner">

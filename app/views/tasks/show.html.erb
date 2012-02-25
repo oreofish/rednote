@@ -1,0 +1,21 @@
+
+<label class="label"><%= t("activerecord.attributes.task.user_id", :default => t("activerecord.labels.user_id", :default => "User")) %>:</label>
+<p><%= @task.user_id %></p>
+
+<label class="label"><%= t("activerecord.attributes.task.parent_id", :default => t("activerecord.labels.parent_id", :default => "Parent")) %>:</label>
+<p><%= @task.parent_id %></p>
+
+<label class="label"><%= t("activerecord.attributes.task.content", :default => t("activerecord.labels.content", :default => "Content")) %>:</label>
+<p><%= @task.content %></p>
+
+<label class="label"><%= t("activerecord.attributes.task.estimate", :default => t("activerecord.labels.estimate", :default => "Estimate")) %>:</label>
+<p><%= @task.estimate %></p>
+
+<label class="label"><%= t("activerecord.attributes.task.deadline", :default => t("activerecord.labels.deadline", :default => "Deadline")) %>:</label>
+<p><%= @task.deadline %></p>
+
+<div class="form-actions">
+<%= link_to "Back", tasks_path, :class => 'btn'  %>
+<%= link_to "Edit", edit_task_path(@task), :class => 'btn' %>
+<%= link_to "Delete", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
+</div>
