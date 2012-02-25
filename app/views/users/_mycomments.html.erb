@@ -3,7 +3,10 @@
     <li id="comment<%= comment.id %>">
       <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
       <%= comment.comment %>
-      <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+      <% if comment.user_id == current_user.id%>
+        <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+      <% end %>
+
     </li>
   <% end %>
 </ul>

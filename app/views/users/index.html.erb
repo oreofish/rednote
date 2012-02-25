@@ -22,7 +22,8 @@
 
   <div class="content">
     <div class="inner">
-      <%= render :partial => controller.action_name %>
+      <%= render :partial => 'mytags' if ( controller.action_name == 'index' or controller.action_name == 'mytags') %>
+      <%= render :partial => 'mycomments' if ( controller.action_name == 'comments' or controller.action_name == 'mycomments') %>
     </div>
   </div>
 </div>
