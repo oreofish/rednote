@@ -94,7 +94,7 @@ class UsersController < ApplicationController
       @user = current_user
       @user.update_attributes(params[:user])
       respond_to do |format|
-          format.html {redirect_to '/users/index'}
+          format.html {redirect_to '/users/avatar'}
       end
   end
 
@@ -104,6 +104,7 @@ class UsersController < ApplicationController
       @user.crop_y = params[:user]["crop_y"]
       @user.crop_h = params[:user]["crop_h"]
       @user.crop_w = params[:user]["crop_w"]
+      @user.avatar = @user.preview
       @user.save!
       redirect_to '/users/avatar'
   end
@@ -114,6 +115,7 @@ class UsersController < ApplicationController
 
       if @user.avatar.blank? 
          @user.avatar = File.open('public/images/avatar.jpg')
+         @user.preview = @user.avatar 
          @user.save
       end
   end
