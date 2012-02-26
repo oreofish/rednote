@@ -1,7 +1,6 @@
 Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-  resources :tasks
   resources :comments
 
   match 'likes/create', :to => 'likes#create'
@@ -33,6 +32,12 @@ Rednote::Application.routes.draw do
   match ':users/crop_update' => 'users#crop_update'
   match ':users/avatar', :to  => 'users#update', :as => :user 
 
+  resources :tasks do
+    collection do
+      get 'new_root'
+      post 'create_root'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

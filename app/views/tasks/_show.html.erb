@@ -1,33 +1,18 @@
-<%= link_to 'Back', tasks_path %>
+<%# encoding: utf-8 %>
 
-<ul class="tasklist">
-  <%= render :partial => 'item', :locals => { :task => @task } %>
-</ul>
+<%= render :partial => 'item', :locals => { :task => @task } %>
 
-<p>
-  <b>User:</b>
-  <%= @task.user_id %>
-</p>
+<% @subtasks.each do |subtask| %>
+  <%= render :partial => 'item', :locals => { :task => subtask } %>
+<% end %>
 
-<p>
-  <b>Parent:</b>
-  <%= @task.parent_id %>
-</p>
+<div class="row-fluid">
+  <%= render "form" %>
+</div>
 
-<p>
-  <b>Content:</b>
-  <%= @task.content %>
-</p>
+<div class="form-actions">
+<%= link_to "Back", tasks_path, :class => 'btn'  %>
+<%= link_to "Edit", edit_task_path(@task), :class => 'btn' %>
+<%= link_to "Delete", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
+</div>
 
-<p>
-  <b>Estimate:</b>
-  <%= @task.estimate %>
-</p>
-
-<p>
-  <b>Deadline:</b>
-  <%= @task.deadline %>
-</p>
-
-
-<%= link_to 'Edit', edit_task_path(@task) %> |

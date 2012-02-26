@@ -1,13 +1,14 @@
 <%# encoding: utf-8 %>
 
-<div class="title">
-  <p>Listing tasks</p>
+<div class="form-actions pull-right">
+<%= link_to "创建新任务", new_root_tasks_path, :class => 'btn'  %>
 </div>
 
-<ul class="tasklist">
-  <% @tasks.each do |task| %>
-  <%= render :partial => 'item', :locals => { :task => task } %>
-  <% end %>
-</ul>
+<div class="page-header">
+  <h1>Listing tasks</h2>
+</div>
 
-<%= render "form" %>
+<h2>Fluid columns</h2>
+<% @tasks.each do |task| %>
+  <%= render :partial => 'item', :locals => { :task => task } %>
+<% end %>
