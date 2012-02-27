@@ -20,7 +20,9 @@
         <ul class="pull-right nav">
           <% if user_signed_in? %>
           <li class="dropdown" id="user-menu">
-            <%= link_to "#{current_user.email}<b class=\"caret\"></b>", "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" %>
+            <%= link_to "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+              <%= current_user.email %><b class="caret"></b>
+            <% end %>
             <ul class="dropdown-menu">
               <li><%= link_to "设置", users_nickname_path %></li>
               <li class="divider"></li>
