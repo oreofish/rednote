@@ -41,7 +41,7 @@ function scrolltop() {
 var commentsManager = {
     bindHandlers: function() {
         var that = this;
-        $('#main div.inner ul.list').find('div.item').each( function(idx, el) {
+        $('#main-contents ul.list').find('div.item').each( function(idx, el) {
             that._bindCommentHandlerHelper($(el));
         });
     },
