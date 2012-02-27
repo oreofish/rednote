@@ -4,34 +4,106 @@
 
   <div id="note_publish">
     <h2 class="title">write a note</h2>
-    <%= form_for(@note, :html => { :class => "form", :multipart => true, :remote => true }) do |f| %>
-    <div class="input">
-      <%= f.text_area :summary, :rows => 4 %>
-    </div>
-
     <div class="tabbable">
       <ul class="nav nav-tabs">
-        <li><%= link_to "图片", "javascript:void(0);", :class => "image","data-toggle" => "tab" %></li>
-        <li><%= link_to "链接", "javascript:void(0);", :class => "link", "data-toggle" => "tab"  %></li>
-        <li><%= link_to "书籍", "javascript:void(0);", :class => "book", "data-toggle" => "tab"  %></li>
-        <li><%= link_to "代码", "#1", :class => "code", "data-toggle" => "tab"  %></li>
-        <li><%= link_to "文本", "#2", :class => "text", "data-toggle" => "tab"  %></li>
+        <li><%= link_to "图片", "#image", "data-toggle" =>"tab" %></li>
+        <li><%= link_to "链接", "#link", "data-toggle" => "tab"  %></li>
+        <li><%= link_to "书籍", "#book", "data-toggle" => "tab"  %></li>
+        <li><%= link_to "代码", "#code", "data-toggle" => "tab"  %></li>
+        <li><%= link_to "文本", "#text", "data-toggle" => "tab"  %></li>
       </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="1">
-          <p>I'm in Section 1.</p>
+
+      <div id="attachment_block" class="tab-content">
+        <div class="tab-pane" id="image">
+          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something" %>
+            <%= f.hidden_field :kind, :value => 3 %>
+
+            <%= f.label "上传图片：" %>
+            <%= f.file_field :upload %>
+
+            <button type="submit" class="btn btn-primary pull-right">发布</button>    
+          <% end %> 
         </div>
-        <div class="tab-pane" id="2">
-          <p>Howdy, I'm in Section 2.</p>
+
+        <div class="tab-pane" id="link">
+          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something" %>
+            <%= f.hidden_field :kind, :value => 2 %>
+
+            <label>链接</label><br />
+            <%= f.text_field :description %>
+
+            <button type="submit" class="btn btn-primary pull-right">发布</button>    
+          <% end %> 
+        </div>
+
+        <div class="tab-pane" id="book">
+          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something" %>
+            <%= f.hidden_field :kind, :value => 5 %>
+
+            <label>上传书籍：</label>  
+            <%= f.file_field :upload %>
+
+            <button type="submit" class="btn btn-primary pull-right">发布</button>    
+          <% end %> 
+        </div>
+
+        <div class="tab-pane" id="code">
+          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something" %>
+            <%= f.hidden_field :kind, :value => 4 %>
+
+            <label>代码片段：</label><br /> 
+            <%= f.text_area :description %>
+            <div class="column right"> 
+              <label class="">选择语言</label><br/> 
+              <select id="language_id" name="language[id]"><option value="C">C</option> 
+                <option value="Clojure">Clojure</option> 
+                <option value="CSS">CSS</option> 
+                <option value="Delphi">Delphi</option> 
+                <option value="DIFF">DIFF</option> 
+                <option value="ERB">ERB</option> 
+                <option value="Groovy">Groovy</option> 
+                <option value="HAML">HAML</option> 
+                <option value="HTML">HTML</option> 
+                <option value="Java">Java</option> 
+                <option value="JavaScript">JavaScript</option> 
+                <option value="JSON">JSON</option> 
+                <option value="PHP">PHP</option> 
+                <option value="Python">Python</option> 
+                <option value="Ruby">Ruby</option> 
+                <option value="SQL">SQL</option> 
+                <option value="XML">XML</option> 
+                <option value="YAML">YAML</option> 
+              </select> 
+            </div> 
+
+            <button type="submit" class="btn btn-primary pull-right">发布</button>    
+          <% end %> 
+        </div>
+
+        <div class="tab-pane" id="text">
+          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something" %>
+            <%= f.hidden_field :kind, :value => 1 %>
+
+            <%#<%= f.text_area :description %>
+            <textarea cols="40" id="note_code" name="note[description]" rows="8">
+            </textarea> 
+            <script type="text/javascript"> 
+              if (CKEDITOR.instances["note_code"]) { 
+                CKEDITOR.remove(CKEDITOR.instances["note_code"]); 
+              } 
+              CKEDITOR.replace("note_code", { "language":"en", "customConfig":"/ckeditor_config.js" }); 
+            </script> 
+
+            <button type="submit" class="btn btn-primary pull-right">发布</button>    
+          <% end %> 
         </div>
       </div>
     </div>
-
-    <!-- attachment_block stub for insertion of attachment elements -->
-    <div id="attachment_block" style="display: none;"></div> 
-
-    <button type="submit" class="btn btn-primary pull-right">发布</button>    
-    <% end %> <!-- form end -->
   </div>
 
   <div id="notes_content">
