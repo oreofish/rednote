@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 
 <li id="note<%= note.id %>" class="block inner">
-<div class="left"><%= image_tag(User.find(note.user_id).avatar, :class => "avatar") %></div>
+<div class="left"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
 <div class="item">
 
   <div class="content">
