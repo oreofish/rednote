@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 
 <div class="row-fluid grid-bar">
-  <div class="span1">icon</div>
+  <div class="span1"><%= "root" if not task.parent_id %><%= task.tasks.count %></div>
   <div class="span9">
     <%= task.user_id %>
     <%= task.parent_id %>
