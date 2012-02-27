@@ -2,22 +2,12 @@
 
 (function() {
 
-  var $space = $('#settings').find('div.inner');
+  var $space = $('#modify');
 
   <% if controller.action_name == "edit" %> 
       $space.html( "<%= j render :partial => 'edit' %>" ); 
   <% else %> 
       $space.html( "<%= j render :partial => 'users/'+controller.action_name %> " );
   <% end %>;
-
-  var link = "navigation-<%= controller.action_name %>";
-
-  $('#settings div.secondary-navigation ul.wat-cf').find('li').each(function(idx, el) { 
-    if ( $(el).attr("id") === link ) {
-      $(el).addClass('active');
-    } else {
-      $(el).removeClass('active');
-    }
-  } );
 
 })();

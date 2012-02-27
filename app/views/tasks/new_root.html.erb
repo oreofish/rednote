@@ -1,0 +1,29 @@
+<%# encoding: utf-8 %>
+
+<section id="fluidGridSystem">
+<div class="page-header">
+  <h1>创建新任务</h2>
+</div>
+
+<h2>Fluid columns</h2>
+
+<div class="row-fluid">
+<%= form_for @task, :url => create_root_tasks_path, :html => { :class => :form } do |f| -%>
+<fieldset>
+  <div class="control docs-input-sizes">
+    <%= f.text_field :content, :class => 'span12', :placeholder => "内容" %><br />
+    <%= f.number_field :estimate, :class => 'span4' %>
+    <%= f.text_field :deadline, :class => 'span4' %>
+    
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">创建</button> 或
+      <%= link_to "取消", tasks_path %>
+    </div>
+  </div>
+</fieldset>
+<% end -%>
+</div>
+
+</section>
+
+

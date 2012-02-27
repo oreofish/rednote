@@ -14,6 +14,8 @@
 
 class Task < ActiveRecord::Base
   acts_as_commentable
+  has_many :tasks, :foreign_key => "parent_id", :dependent => :destroy
+  belongs_to :task
   belongs_to :user
   validates :user_id, :presence => true
   
@@ -21,4 +23,5 @@ class Task < ActiveRecord::Base
                       :length   => { :maximum => 255 }
 
   attr_accessible :parent_id, :content, :estimate, :deadline
+  
 end

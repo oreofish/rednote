@@ -1,18 +1,16 @@
 <%# encoding: utf-8 %>
 
-<li id="task<%= task.id %>" class="inner">
-  <div class="left">icon</div>
-  <div class="item">
-    <div class="content">
-      <%= task.user_id %>
-      <%= task.parent_id %>
-      <%= task.content %>
-      <%= task.estimate %>
-      <%= time_ago_in_words(task.deadline) %>
-      <div class="right">
-        <%= link_to 'Done', task, :class => "small-button" %>
-        <%= link_to 'Show', task %>
-      </div>
-    </div>
+<div class="row-fluid grid-bar">
+  <div class="span1">icon</div>
+  <div class="span9">
+    <%= task.user_id %>
+    <%= task.parent_id %>
+    <%= task.content %>
+    <%= task.estimate %>
+    <%= time_ago_in_words(task.deadline) if task.deadline %>
   </div>
-</li>
+  <div class="span2">
+    <%= link_to 'Done', task, :class => "small-button" %>
+    <%= link_to 'Show', task %>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <ul class='comment'>
   <% @comments.each do |comment| %>
     <li id="comment<%= comment.id %>">
-      <%= image_tag(User.find(comment.user_id).avatar, :class => "avatar") %>
+      <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
       <%= comment.comment %>
       <% if comment.user_id == current_user.id%>
         <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
