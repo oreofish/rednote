@@ -24,4 +24,15 @@ class Task < ActiveRecord::Base
 
   attr_accessible :parent_id, :content, :estimate, :deadline
   
+  def parent
+    Task.find(self.parent_id)
+  end
+  
+  def parent_path
+    if self.parent_id and self.parent_id > 0
+      parent
+    else
+      '/tasks'
+    end
+  end
 end

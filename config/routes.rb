@@ -38,6 +38,7 @@ Rednote::Application.routes.draw do
     collection do
       get 'new_root'
       post 'create_root'
+      get ':tasks/done'
     end
   end
   # The priority is based upon order of creation:

@@ -8,7 +8,12 @@
   <h1>Listing tasks</h2>
 </div>
 
-<h2>Fluid columns</h2>
-<% @tasks.each do |task| %>
+<h3>管理任务</h3>
+<% @manage_tasks.each do |task| %>
+  <%= render :partial => 'item', :locals => { :task => task } %>
+<% end %>
+
+<h3>实做任务</h3>
+<% @real_tasks.each do |task| %>
   <%= render :partial => 'item', :locals => { :task => task } %>
 <% end %>

@@ -1,6 +1,22 @@
 <%# encoding: utf-8 %>
 
-<%= render :partial => 'item', :locals => { :task => @task } %>
+<div class="row-fluid grid-bar">
+  <div class="span2">
+    <%= link_to @task.parent_path, :class => 'btn' do %>
+      <i class="icon-chevron-left"></i>返回
+    <% end %>
+  </div>
+  <div class="span8">
+    <%= @task.user_id %>
+    <%= @task.parent_id %>
+    <%= @task.content %>
+    <%= @task.estimate %>
+    <%= time_ago_in_words(@task.deadline) if @task.deadline %>
+  </div>
+  <div class="span2">
+    <%= link_to '完成', @task, :class => "btn" %>
+  </div>
+</div>
 
 <% @subtasks.each do |subtask| %>
   <%= render :partial => 'item', :locals => { :task => subtask } %>
@@ -11,7 +27,6 @@
 </div>
 
 <div class="form-actions">
-<%= link_to "Back", tasks_path, :class => 'btn'  %>
 <%= link_to "Edit", edit_task_path(@task), :class => 'btn' %>
 <%= link_to "Delete", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
 </div>
