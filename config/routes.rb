@@ -9,7 +9,6 @@ Rednote::Application.routes.draw do
 
   devise_for :users
 
-  get "users"
   get "users/page"
   get "users/avatar"
   get "users/mycomments"
