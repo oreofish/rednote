@@ -7,7 +7,7 @@ jQuery ->
   $(".modal").modal()
   $("a[rel=popover]").popover()
   #$(".navbar").scrollspy() # conflict with below!!!
-  $(".nav-pills a:last").tab "show"
+  $(".nav-pills a:first").tab "show"
   $(".tooltip").tooltip()
   $(".typeahead").typeahead()
   $("a[rel=tooltip]").tooltip()
