@@ -14,17 +14,20 @@
 
   <div class="right">
     <% if current_user.id==note.user.id %>
-      <%= link_to '详细', note %> |
-      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %> |
+      <%= link_to '详细', note %>
+      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %>
     <% end %>
-    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>|
+    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
         <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
-      <% elsif not my_like.status %>
-        <%= link_to '已标记', likes_update_path(:note_id => note.id), :remote => true, :class => "tags" %>
+      <% elsif not my_like.status and controller.action_name == "mytags" %>
+        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags" %>
+        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags" %>
+      <% elsif not my_like.status and not controller.action_name == "mytags" %>
+        已标记
       <% else %>
-        <%= link_to '已读完', :class => "tags"%>
+        已读完
       <% end %>
   </div>
   <div class="time" data="<%= note.created_at %>">

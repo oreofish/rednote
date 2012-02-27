@@ -11,16 +11,6 @@
   <% end %>;
 
 
-  var link = "secondary-<%= controller.action_name %>";
-
-  $('#myself div.secondary-navigation ul.wat-cf').find('li').each(function(idx, el) { 
-    if ( $(el).attr("id") === link ) {
-      $(el).addClass('active');
-    } else {
-      $(el).removeClass('active');
-    }
-  } );
-
   commentsManager.bindHandlers();
   time.updateTime();
 

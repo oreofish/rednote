@@ -16,7 +16,7 @@ class LikesController < ApplicationController
   # PUT /likes/1
   # PUT /likes/1.json
   def update
-    @like = current_user.likes.where(:note_id => params[:note_id]).first
+    @like = Like.find(params[:id])
 
     respond_to do |format|
       if @like.update_attributes(:status => true)
@@ -35,8 +35,8 @@ class LikesController < ApplicationController
     @like.destroy
 
     respond_to do |format|
-      format.html { redirect_to likes_url }
-      format.json { head :no_content }
+      format.html { redirect_to users_url }
+      format.js
     end
   end
 end
