@@ -3,7 +3,6 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = current_user.tasks
-    @task = Task.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,22 +16,11 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     @subtasks = @task.tasks
+    @new_task = Task.new
 
     respond_to do |format|
       format.html { render 'index' }
       format.js # show.js.erb
-      format.json { render json: @task }
-    end
-  end
-
-  # GET /tasks/new
-  # GET /tasks/new.json
-  def new
-    @task = Task.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.js # new.js.erb
       format.json { render json: @task }
     end
   end
@@ -49,10 +37,11 @@ class TasksController < ApplicationController
     end
   end
   
-  # POST /tasks
-  # POST /tasks.json
+  # POST /tasks/create_root
+  # POST /tasks/create_root.json
   def create_root
     @task = Task.new(params[:task])
+    @task.parent_id = 0
     @task.user = current_user
 
     respond_to do |format|

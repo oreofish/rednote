@@ -2,13 +2,13 @@
 
 <h3>添加子任务</h3>
 
-<%= form_for @task, :url => tasks_path, :html => { :class => :form } do |f| -%>
+<%= form_for @new_task, :url => tasks_path, :html => { :class => :form } do |f| %>
 <fieldset>
   <div class="control docs-input-sizes">
     <%= f.text_field :content, :class => 'span12', :placeholder => "内容" %><br />
     <%= f.number_field :estimate, :class => 'span4' %>
     <%= f.text_field :deadline, :class => 'span4' %>
-    <%= f.hidden_field :parent_id, :value => @tasi.id %>
+    <%= f.hidden_field :parent_id, :value => @task.id %>
     
     <div class="form-actions">
       <button class="btn btn-primary pull-right" type="submit">创建子任务</button>
@@ -16,4 +16,4 @@
     </div>
   </div>
 </fieldset>
-<% end -%>
+<% end %>
