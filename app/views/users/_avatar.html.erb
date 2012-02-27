@@ -16,19 +16,19 @@
     </div>
 </div>
 -->
+<div id="preview_form">
 <%= form_for @user, :html => {:multipart => true} do |f| %>
     <p>
-    <%= f.file_field :avatar %>
-    <%= f.hidden_field :avatar_cache %>
-    <%= f.submit %>
+    <%= f.file_field :preview %>
+    <%= f.hidden_field :preview_cache %>
     </p>
 <% end %>
+</div>
 
-
-<%= image_tag @user.avatar, :id => "cropbox", :date => @user.avatar_geometry[:width] %>
+<%= image_tag @user.preview_url(:large), :id => "cropbox", :date => @user.preview_geometry[:width] %>
 <h3>Preview</h3>
 <div class="preview">
-    <%= image_tag @user.avatar_url(:large), :id => "preview" %>
+    <%= image_tag @user.preview_url(:large), :id => "preview" %>
 </div>
 <%= form_for @user, :url => { :action => "crop_update" } do |f| %>
     <% for attribute in [:crop_x, :crop_y, :crop_h, :crop_w] %>
@@ -38,4 +38,4 @@
 <% end %>
 
 <%= image_tag @user.avatar_url(:thumb) %>
-<%= image_tag @user.avatar_url(:small) %>
+<%= image_tag @user.preview_url(:small) %>

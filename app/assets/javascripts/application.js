@@ -146,4 +146,9 @@ $(document).ready( function() {
         $("#crop_h").val(Math.round(coords.h * ratio));
     }
 
+    var form = $('#preview_form').find('.edit_user');
+    $('#user_preview').bind('change',function() {
+        form.submit();
+    });
+
 } );
