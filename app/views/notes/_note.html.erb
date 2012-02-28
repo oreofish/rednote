@@ -8,7 +8,7 @@
     <%= note.summary %> 
   </div>
 
-  <% if note.kind > 0 and note.description %>
+  <% if note.kind > 0 %>
     <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
   <% end %>
 
