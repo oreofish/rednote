@@ -1,6 +1,5 @@
 <%# encoding: utf-8 %>
 <div class='block' id='block-signup'>
-  <h2>注册</h2>
   <div class='content'>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form"}) do |f| %>
@@ -8,13 +7,13 @@
 
     <div class="group wat-cf">
 			<div class="left"><%= f.label "帐号：" %></div>
-			<div class="right"><%= f.text_field :nickname, :size => 25 %>
+			<div class="right"><%= f.text_field :nickname %>
 			<span class="description">Ex. muhaha</span></div>
 		</div>
 
 		<div class="group wat-cf">
 			<div class="left"><%= f.label "邮箱：" %></div>
-			<div class="right"><%= f.email_field :email, :size => 25 %>
+			<div class="right"><%= f.email_field :email %>
       <span class='description'>Ex. test@example.com</span></div>
 		</div>
 
@@ -28,13 +27,8 @@
       <div class="left"><%= f.label '确认密码'%></div>
       <div class="right"><%= f.password_field :password_confirmation %></div>
     </div>
-    <br />
-    <div class="group wat-cf navform">
-      <button class='button' type='submit'>
-        <%= image_tag "web-app-theme/icons/key.png"%>注册
-      </button>
+    <button class='btn' type='submit'>注册</button>
     <% end %>
     <br />
     <%= render :partial => "devise/shared/links" %>
-  </div>
 </div>

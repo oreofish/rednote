@@ -19,28 +19,32 @@
         </ul>
 
         <ul class="pull-right nav">
-          <% if user_signed_in? %>
-          <li class="dropdown" id="user-menu">
-            <%= link_to "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
-              <%= current_user.email %><b class="caret"></b>
+            <% if user_signed_in? %>
+                <li class="dropdown" id="user-menu">
+                <%= link_to "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+                    <%= current_user.email %><b class="caret"></b>
+                <% end %>
+                <ul class="dropdown-menu">
+                    <li>
+                    <%= link_to users_nickname_path do %>
+                        <i class="icon-cog"></i> 设置
+                    <% end %>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                    <%= link_to destroy_user_session_path, :method => :delete do %>
+                        <i class="icon-off"></i> 退出
+                    <% end %>
+                    </li>
+                </ul>
+                </li>
+            <% else %>
+                <% if controller_name == "sessions" %>
+                    <li><%= link_to "注册", new_registration_path(resource_name) %></li>
+                <% else %>
+                    <li><%= link_to "登录", new_user_session_path %></li>
+                <% end %>
             <% end %>
-            <ul class="dropdown-menu">
-              <li>
-              <%= link_to users_nickname_path do %>
-                <i class="icon-cog"></i> 设置
-              <% end %>
-              </li>
-              <li class="divider"></li>
-              <li>
-              <%= link_to destroy_user_session_path, :method => :delete do %>
-                <i class="icon-off"></i> 退出
-              <% end %>
-              </li>
-            </ul>
-          </li>
-          <% else %>
-          <li><%= link_to "注册", new_registration_path(resource_name) %></li>
-          <% end %>
         </ul>
 
       </div><!--/.nav-collapse -->
