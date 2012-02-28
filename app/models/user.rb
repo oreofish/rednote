@@ -56,4 +56,7 @@ class User < ActiveRecord::Base
       self.preview.recreate_versions!
   end
 
+  def self.list_user_options 
+    User.select("id, nickname").map {|x| [x.id, x.nickname] }
+  end
 end

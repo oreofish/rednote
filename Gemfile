@@ -20,6 +20,7 @@ gem 'acts_as_commentable'
 gem 'jcrop-rails'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
+gem 'best_in_place'
 
 group :development do
   gem 'rspec-rails'

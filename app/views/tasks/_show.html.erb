@@ -10,26 +10,21 @@
     <%= @task.content %>
   </div>
   <div class="span2">
-    <%= link_to '完成', @task, :class => "btn" %>
+    <%= link_to "删除", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
   </div>
 </div>
 
 <div class="row-fluid">
   <div class="span2">负责人：</div>
-  <div class="span4"><%= @task.user.nickname %></div>
+  <div class="span4"><%= best_in_place @task, :user_id, type: :select, :collection => User::list_user_options %></div>
   <br />
   <div class="span2">内容：</div>
-  <div class="span4"><%= @task.content %></div>
+  <div class="span4"><%= best_in_place @task, :content, type: :textarea %></div>
   <br />
   <div class="span2">估算时间：</div>
-  <div class="span4"><%= @task.estimate %></div>
+  <div class="span4"><%= best_in_place @task, :estimate, type: :select, :collection => [[0.5,'0.5'], [1, '1'], [2, '5']] %></div>
   <br />
   <div class="span2">截止时间：</div>
-  <div class="span4"><%= time_ago_in_words(@task.deadline) if @task.deadline %></div>
-</div>
-
-<div class="form-actions">
-<%= link_to "Edit", edit_task_path(@task), :class => 'btn' %>
-<%= link_to "Delete", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
+  <div class="span4"><%= best_in_place @task, :deadline, type: :date %></div>
 </div>
 

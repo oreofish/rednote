@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user.tasks
+    @tasks = Task.all
     @task = Task.new
     @projects = Task.project_counts
     @milestones = Task.milestone_counts
@@ -45,6 +45,8 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
+    @task.update_attributes(params[:task])
+    respond_with @task
   end
 
   # POST /tasks

@@ -22,6 +22,6 @@ class Task < ActiveRecord::Base
   validates  :content, :presence => true,
                        :length   => { :maximum => 255 }
 
-  attr_accessible :content, :estimate, :deadline
+  attr_accessible :user_id, :content, :estimate, :deadline
   
 end

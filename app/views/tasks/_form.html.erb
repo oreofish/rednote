@@ -1,16 +1,10 @@
 <%# encoding: utf-8 %>
 
-<section id="fluidGridSystem">
-<div class="page-header">
-  <h2>创建新任务</h2>
+<div class="form-actions">
+  <%= form_for @task, :url => tasks_path, :html => { :class => :form } do |f| %>
+  <div class="">
+    <%= f.text_field :content, :class => 'input-xxlarge', :placeholder => "创建一个新任务" %>
+    <button class="btn btn-primary" type="submit">创建</button>
+  </div>
+  <% end %>
 </div>
-
-<div class="row-fluid">
-<%= form_for @task, :url => tasks_path, :html => { :class => :form } do |f| %>
-<div class="">
-  <%= f.text_field :content, :class => 'input-xxlarge', :placeholder => "内容" %>
-  <button class="btn btn-primary" type="submit">创建任务</button>
-</div>
-<% end %>
-</div>
-</section>
