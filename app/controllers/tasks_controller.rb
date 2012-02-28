@@ -7,7 +7,6 @@ class TasksController < ApplicationController
     @projects = Task.project_counts
     @milestones = Task.milestone_counts
 
-
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb

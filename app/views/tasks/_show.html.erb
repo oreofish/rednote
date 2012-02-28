@@ -2,15 +2,25 @@
 
 <div class="page-header">
   <h3>Projects</h3>
-  <% @projects.each do |project| %>
-    <%= link_to project.name, { :action => :project, :project => project.name, :controller => '/home'} %>
-  <% end %>
+  <div class="btn-group" data-toggle="buttons-radio">
+    <% @projects.each do |project| %>
+      <%= link_to project.name, "#", :class => 'btn' %>
+    <% end %>
+  </div>
+
 </div>
 
 <div class="page-header">
   <h3>Milestones</h3>
-  <% @milestones.each do |milestone| %>
-    <%= link_to milestone.name, { :action => :milestone, :milestone => milestone.name, :controller => '/home'} %>
+  <div class="btn-group" data-toggle="buttons-radio">
+    <% @milestones.each do |milestone| %>
+      <%= link_to milestone.name, "#", :class => 'btn' %>
+    <% end %>
+  </div>
+
+  <%= form_tag :action => :add_tag do %>
+    <%= text_field :content, :class => 'input-large', :placeholder => "创建一个新里程碑" %>
+    <button class="btn btn-mini" type="submit">创建</button>
   <% end %>
 </div>
 
