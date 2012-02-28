@@ -19,7 +19,9 @@
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 0 %>
-            <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              <i class="icon-upload"></i> 发布
+            </button>    
           <% end %> 
         </div>
 
@@ -41,7 +43,9 @@
                 </div>
               </div>
 
-              <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+              <button type="submit" class="btn btn-large btn-primary pull-right">
+                <i class="icon-upload"></i> 发布
+              </button>    
             </fieldset>
           <% end %> 
         </div>
@@ -58,7 +62,9 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              <i class="icon-upload"></i> 发布
+            </button>    
           <% end %> 
         </div>
 
@@ -70,7 +76,9 @@
             <label>上传书籍：</label>  
             <%= f.file_field :upload %>
 
-            <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              <i class="icon-upload"></i> 发布
+            </button>    
           <% end %> 
         </div>
 
@@ -82,7 +90,7 @@
             <div class="control-group">
               <label class="control-label">代码片段</label>
               <div class="controls">
-                <%= f.text_area :description, :rows => 4, :class => "span8" %>
+                <%= f.text_area :description, :rows => 8, :class => "span8" %>
               </div>
             </div>
 
@@ -111,7 +119,9 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              <i class="icon-upload"></i> 发布
+            </button>    
           <% end %> 
         </div>
 
@@ -130,7 +140,9 @@
               CKEDITOR.replace("note_code", { "language":"en", "customConfig":"/ckeditor_config.js" }); 
             </script> 
 
-            <button type="submit" class="btn btn-large btn-primary pull-right">发布</button>    
+            <button type="submit" class="btn btn-large btn-primary pull-right">
+              <i class="icon-upload"></i> 发布
+            </button>    
           <% end %> 
         </div>
       </div>
@@ -138,7 +150,7 @@
   </div>
 
   <div id="notes_content">
-    <ul class="list">
+    <ul class="list unstyled">
       <%= render "list" %>
     </ul>
 

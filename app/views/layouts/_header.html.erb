@@ -25,9 +25,17 @@
               <%= current_user.email %><b class="caret"></b>
             <% end %>
             <ul class="dropdown-menu">
-              <li><%= link_to "设置", users_nickname_path %></li>
+              <li>
+              <%= link_to users_nickname_path do %>
+                <i class="icon-cog"></i> 设置
+              <% end %>
+              </li>
               <li class="divider"></li>
-              <li><%= link_to "退出", destroy_user_session_path, :method => :delete %></li>
+              <li>
+              <%= link_to destroy_user_session_path, :method => :delete do %>
+                <i class="icon-off"></i> 退出
+              <% end %>
+              </li>
             </ul>
           </li>
           <% else %>
