@@ -16,7 +16,7 @@
       </ul>
 
       <div id="attachment_block" class="tab-content row-fluid">
-        <div class="tab-pane fade" id="message">
+        <div class="tab-pane fade in" id="message">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 0 %>
@@ -26,7 +26,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane fade" id="image">
+        <div class="tab-pane fade in" id="image">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <fieldset>
               <div class="control-group">
@@ -51,7 +51,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane fade" id="link">
+        <div class="tab-pane fade in" id="link">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 2 %>
@@ -69,7 +69,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane fade" id="book">
+        <div class="tab-pane fade in" id="book">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 5 %>
@@ -83,7 +83,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane fade" id="code">
+        <div class="tab-pane fade in" id="code">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 4 %>
@@ -126,7 +126,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane fade" id="text">
+        <div class="tab-pane fade in" id="text">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 1 %>
