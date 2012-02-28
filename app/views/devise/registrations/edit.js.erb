@@ -9,5 +9,7 @@
   <% else %> 
       $space.html( "<%= j render :partial => 'users/'+controller.action_name %> " );
   <% end %>;
+   
+  jcrop.crop();
 
 })();

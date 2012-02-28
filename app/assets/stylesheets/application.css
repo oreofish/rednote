@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jcrop
  *= require twitter/bootstrap
  *= require_tree .
  */
@@ -71,3 +72,8 @@ div.flash {
     border-bottom: 1px solid whiteSmoke;
     box-shadow: 0 0 8px rgba(0,0,0,.7);
 }
+
+.jcrop img {
+    max-width: none;
+}
+
