@@ -14,25 +14,13 @@
 
 class Task < ActiveRecord::Base
   acts_as_commentable
-  has_many :tasks, :foreign_key => "parent_id", :dependent => :destroy
+  acts_as_taggable_on :tags
   belongs_to :task
   belongs_to :user
-  validates :user_id, :presence => true
-  
-  validates :content, :presence => true,
-                      :length   => { :maximum => 255 }
+  validates  :user_id, :presence => true
+  validates  :content, :presence => true,
+                       :length   => { :maximum => 255 }
 
-  attr_accessible :parent_id, :content, :estimate, :deadline
+  attr_accessible :content, :estimate, :deadline
   
-  def parent
-    Task.find(self.parent_id)
-  end
-  
-  def parent_path
-    if self.parent_id and self.parent_id > 0
-      parent
-    else
-      '/tasks'
-    end
-  end
 end

@@ -26,6 +26,7 @@ group :development do
   gem 'annotate'
   gem 'faker'
   gem 'web-app-theme'
+  gem 'acts-as-taggable-on'
 end
 
 group :test do
