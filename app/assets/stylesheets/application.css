@@ -39,16 +39,6 @@
   float: right;
 }
 
-div.flash {
-  position: fixed;
-  top: 10px;
-  opacity: 0.9;
-  z-index: -1;
-  margin: auto;
-  left: 50%;
-  width: auto;
-}
-
 #wrapper {
   padding-top: 20px;
   width: 900px;
@@ -76,4 +66,3 @@ div.flash {
 .jcrop img {
     max-width: none;
 }
-

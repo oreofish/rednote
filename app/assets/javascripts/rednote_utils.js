@@ -113,31 +113,29 @@ rednote.pager = function(action) {
 
 // handle flash messages and animations
 rednote.flashController = {
-    _message: function(style, msg) {
+    _message: function(style, title, msg) {
         var $flash = $('div.flash');
-        $flash.stop();
-        $flash.html('<div class="' + style + '"> ' + 
-                    '<div class="message"> ' + msg + ' </div>  </div>');
-        $flash.css('z-index', 'auto');
-        $flash.hide().fadeIn(500).delay(1000).fadeOut('slow', function(){
-            $flash.css('z-index', '-1');
-        });
+        var templ = '<div class="alert alert-block ' + style + 'fade in">' +
+            '<a class="close" data-dismiss="alert" href="#">×</a>' +
+            '<h4 class="alert-heading">' + title + '</h4>' +
+            '<p> ' + msg + '</p>' + '</div>';
+        $flash.append(templ); 
     }, 
-    doFailure: function(msg) {
-        this._message("alert", msg);
+    doFailure: function(title, msg) {
+        this._message("alert-error", title, msg);
     }, 
-    doSuccess: function(msg) {
-        this._message("notice", msg);
+    doSuccess: function(title, msg) {
+        this._message("alert-success", title, msg);
     },
-    stop: function() {
-        $('div.flash').stop();
+    doInfo: function(title, msg) {
+        this._message("alert-info", title, msg);
     }
 };
 
 rednote.logger = {
     record: function(msg) {
         console.log(msg);
-        rednote.flashController.doSuccess("<b>有更新，刷新显示</b>" );
+        rednote.flashController.doInfo(msg['channel'], msg['data'] );
     }
 };
 
