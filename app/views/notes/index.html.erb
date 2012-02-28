@@ -74,7 +74,7 @@
             <%= f.hidden_field :kind, :value => 4 %>
 
             <label>代码片段：</label><br /> 
-            <%= f.text_area :description %>
+            <%= f.text_area :description, :rows => 4, :class => "span8" %>
             <div class="column right"> 
               <label class="">选择语言</label><br/> 
               <select id="language_id" name="language[id]"><option value="C">C</option> 
