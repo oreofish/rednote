@@ -1,5 +1,19 @@
 <%# encoding: utf-8 %>
 
+<div class="page-header">
+  <h3>Projects</h3>
+  <% @projects.each do |project| %>
+    <%= link_to project.name, { :action => :project, :project => project.name, :controller => '/home'} %>
+  <% end %>
+</div>
+
+<div class="page-header">
+  <h3>Milestones</h3>
+  <% @milestones.each do |milestone| %>
+    <%= link_to milestone.name, { :action => :milestone, :milestone => milestone.name, :controller => '/home'} %>
+  <% end %>
+</div>
+
 <div class="row-fluid grid-bar">
   <div class="span2">
     <%= link_to tasks_path, :class => 'btn' do %>

@@ -19,6 +19,8 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
+    @projects = Task.top_projects
+    @milestones = Task.top_milestones
 
     respond_to do |format|
       format.html { render 'index' }
