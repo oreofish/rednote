@@ -2,7 +2,8 @@
 
 <div class="well">
 
-  <div id="note_publish" class="well">
+  <div class="row">
+  <div id="note_publish" class="well span8">
     <legend class="title">写一条笔记</legend>
     <div class="tabbable">
       <ul class="nav nav-pills">
@@ -15,7 +16,7 @@
       </ul>
 
       <div id="attachment_block" class="tab-content row-fluid">
-        <div class="tab-pane" id="message">
+        <div class="tab-pane fade" id="message">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 0 %>
@@ -25,7 +26,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane" id="image">
+        <div class="tab-pane fade" id="image">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <fieldset>
               <div class="control-group">
@@ -50,7 +51,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane" id="link">
+        <div class="tab-pane fade" id="link">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 2 %>
@@ -68,7 +69,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane" id="book">
+        <div class="tab-pane fade" id="book">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 5 %>
@@ -82,7 +83,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane" id="code">
+        <div class="tab-pane fade" id="code">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 4 %>
@@ -125,7 +126,7 @@
           <% end %> 
         </div>
 
-        <div class="tab-pane" id="text">
+        <div class="tab-pane fade" id="text">
           <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 1 %>
@@ -148,11 +149,14 @@
       </div>
     </div>
   </div>
+</div>
 
-  <div id="notes_content">
-    <ul class="list unstyled">
-      <%= render "list" %>
-    </ul>
+  <div id="notes_content" class="row">
+    <div class="well span8">
+      <ul class="list unstyled">
+        <%= render "list" %>
+      </ul>
+    </div>
 
     <!-- pager loading hinter -->
     <div class="hidden inner" id="pager_loading">

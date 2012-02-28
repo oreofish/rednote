@@ -12,7 +12,7 @@
     <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
   <% end %>
 
-  <div class="right">
+  <div class="pull-right">
     <% if current_user.id==note.user.id %>
       <%= link_to '详细', note %>
       <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %>
@@ -33,7 +33,7 @@
   <div class="time" data="<%= note.created_at %>">
   </div>
   <br/>
-  <div class="comments_list" style="display:none">
+  <div class="comments_list well" style="display:none">
   </div>
 </div>
 </li>
