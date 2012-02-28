@@ -1,20 +1,19 @@
 <%# encoding: utf-8 %>
 
-<div class="row-fluid grid-bar">
+<div class="row-fluid alert alert-info">
   <div class="span1">
-    <%= link_to '#', 'data-loading-text' => 'Loading', :id => "task#{task.id}", :class => "label" do %>
+    <%= link_to task, 'data-loading-text' => 'Loading', :id => "task#{task.id}", :class => "label" do %>
     <i class="icon-ok"></i>
     <% end %>
   </div>
-  <div class="span9">
+  <div class="span10">
     <%= task.user_id %>
     <%= task.content %>
     <%= task.estimate %>
     <%= time_ago_in_words(task.deadline) if task.deadline %>
   </div>
-  <div class="span2">
-    <%= link_to 'Done', task, :class => "btn btn-mini" %>
-    <%= link_to task, :class => "label" do %>
+  <div class="span1">
+    <%= link_to task, :class => "" do %>
       详细<i class="icon-chevron-right"></i>
     <% end %>
   </div>

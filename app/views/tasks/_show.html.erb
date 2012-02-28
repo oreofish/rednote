@@ -7,10 +7,7 @@
     <% end %>
   </div>
   <div class="span8">
-    <%= @task.user_id %>
     <%= @task.content %>
-    <%= @task.estimate %>
-    <%= time_ago_in_words(@task.deadline) if @task.deadline %>
   </div>
   <div class="span2">
     <%= link_to '完成', @task, :class => "btn" %>
@@ -18,7 +15,17 @@
 </div>
 
 <div class="row-fluid">
-  <%= render "form" %>
+  <div class="span2">负责人：</div>
+  <div class="span4"><%= @task.user.nickname %></div>
+  <br />
+  <div class="span2">内容：</div>
+  <div class="span4"><%= @task.content %></div>
+  <br />
+  <div class="span2">估算时间：</div>
+  <div class="span4"><%= @task.estimate %></div>
+  <br />
+  <div class="span2">截止时间：</div>
+  <div class="span4"><%= time_ago_in_words(@task.deadline) if @task.deadline %></div>
 </div>
 
 <div class="form-actions">
