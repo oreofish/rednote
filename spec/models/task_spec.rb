@@ -4,7 +4,6 @@
 #
 #  id         :integer(4)      not null, primary key
 #  user_id    :integer(4)
-#  parent_id  :integer(4)
 #  content    :string(255)
 #  estimate   :integer(4)
 #  deadline   :datetime

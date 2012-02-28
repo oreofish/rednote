@@ -35,8 +35,6 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
-      get 'new_root'
-      post 'create_root'
       get ':tasks/done'
     end
   end

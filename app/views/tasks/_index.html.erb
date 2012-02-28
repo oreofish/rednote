@@ -1,19 +1,24 @@
 <%# encoding: utf-8 %>
 
-<div class="form-actions pull-right">
-<%= link_to "创建新任务", new_root_tasks_path, :class => 'btn'  %>
+<div class="page-header">
+  <h3>Projects</h3>
+  <% tag_cloud( @projects, %w(css1 css2 css3 css4)) do |project, css_class| %>
+    <%= link_to project.name, { :action => :project, :project => project.name, :controller => '/home'},
+                :class => css_class %>
+  <% end %>
 </div>
 
 <div class="page-header">
-  <h1>Listing tasks</h2>
+  <h3>Milestones</h3>
+  <% tag_cloud( @milestones, %w(css1 css2 css3 css4)) do |milestone, css_class| %>
+    <%= link_to milestone.name, { :action => :milestone, :milestone => milestone.name, :controller => '/home'},
+                :class => css_class %>
+  <% end %>
 </div>
 
-<h3>管理任务</h3>
-<% @manage_tasks.each do |task| %>
+<h3>任务</h3>
+<% @tasks.each do |task| %>
   <%= render :partial => 'item', :locals => { :task => task } %>
 <% end %>
 
-<h3>实做任务</h3>
-<% @real_tasks.each do |task| %>
-  <%= render :partial => 'item', :locals => { :task => task } %>
-<% end %>
+<%= render 'form' %>

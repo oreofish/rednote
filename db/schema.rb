@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226112454) do
+ActiveRecord::Schema.define(:version => 20120228091511) do
+
+  create_table "add_status_to_tasks", :force => true do |t|
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -59,9 +65,25 @@ ActiveRecord::Schema.define(:version => 20120226112454) do
     t.string   "upload"
   end
 
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       :limit => 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "parent_id"
     t.string   "content"
     t.integer  "estimate"
     t.datetime "deadline"
@@ -70,8 +92,8 @@ ActiveRecord::Schema.define(:version => 20120226112454) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "",                      :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",                      :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -83,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20120226112454) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "nickname"
-    t.string   "avatar",                                :default => "/images/icons/00.jpeg"
+    t.string   "avatar"
     t.string   "preview"
   end
 

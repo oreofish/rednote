@@ -2,13 +2,12 @@
 
 <div class="row-fluid grid-bar">
   <div class="span2">
-    <%= link_to @task.parent_path, :class => 'btn' do %>
+    <%= link_to tasks_path, :class => 'btn' do %>
       <i class="icon-chevron-left"></i>返回
     <% end %>
   </div>
   <div class="span8">
     <%= @task.user_id %>
-    <%= @task.parent_id %>
     <%= @task.content %>
     <%= @task.estimate %>
     <%= time_ago_in_words(@task.deadline) if @task.deadline %>
@@ -17,10 +16,6 @@
     <%= link_to '完成', @task, :class => "btn" %>
   </div>
 </div>
-
-<% @subtasks.each do |subtask| %>
-  <%= render :partial => 'item', :locals => { :task => subtask } %>
-<% end %>
 
 <div class="row-fluid">
   <%= render "form" %>

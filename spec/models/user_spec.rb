@@ -4,7 +4,7 @@
 #
 #  id                     :integer(4)      not null, primary key
 #  email                  :string(255)     default(""), not null
-#  encrypted_password     :string(128)     default(""), not null
+#  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -16,7 +16,8 @@
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
 #  nickname               :string(255)
-#  avatar                 :string(255)     default("/images/icons/00.jpeg")
+#  avatar                 :string(255)
+#  preview                :string(255)
 #
 
 require 'spec_helper'
