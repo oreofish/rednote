@@ -9,7 +9,13 @@
   </div>
 
   <% if note.kind > 0 %>
-    <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+    <button class="btn btn-info btn-mini" data-toggle="collapse" href="#attach_collapse<%= note.id %>"> 
+      展开 <i class='icon-chevron-down'></i>
+    </button>
+    <div id="attach_collapse<%= note.id %>" class="collapse in">
+      <br/>
+      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+    </div>
   <% end %>
 
   <div class="pull-right">
