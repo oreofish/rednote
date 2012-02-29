@@ -2,15 +2,24 @@
   <% @comments.each do |comment| %>
     <div id="comment<%= comment.id %>" >
       <div data-toggle="collapse" data-target="#note_link_commentid<%=comment.id%>" data-parent="#comment_list">
-      <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
-      <%= comment.comment %>
-      <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
-    </div>
+        <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
+        <%= comment.comment %>
+        <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+      </div>
 
-    <div id="note_link_commentid<%=comment.id%>" class="collapse" >
-      <% note = Note.find(comment.commentable_id)%>
-      <%= render :partial => 'notes/note', :locals => { :note => note } %>
+      <div id="note_link_commentid<%=comment.id%>" class="collapse" >
+        <% note = Note.find(comment.commentable_id)%>
+        <li id="note<%= note.id %>">
+        <div class="left"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
+        <div class="item">
+
+          <div class="content">
+            <%= note.summary %> 
+          </div>
+          <div class="time" data="<%= note.created_at %>"></div>
+        </div>
+        </li>
+      </div>
     </div>
-  </div>
   <% end %>
 </div>

@@ -1,6 +1,10 @@
 (function() {
   var $mynote = $('#note<%= @like.note_id %>');
-  $mynote.find('a.tags').remove();
-  $mynote.find('a.comments_link').after("已读完");
+  $mynote.find('a.tags').first().remove();
+
+  var $mytag = $mynote.find('a.tags');
+  $mytag.text ( $mytag.text().replace(/读完？/g,"已读完") );
+  $mytag.addClass("disabled");
+  $mytag.attr("href","");
 })();
 

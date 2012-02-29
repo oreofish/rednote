@@ -1,4 +1,7 @@
 (function() {
-   $('#note<%= @like.note_id %>').find('a.tags').replaceWith("已标记");
+  var $mytag = $('#note<%= @like.note_id %>').find('a.tags');
+  $mytag.text ( $mytag.text().replace(/我想读/g,"已标记") );
+  $mytag.addClass("disabled");
+  $mytag.attr("href","");
 })();
 

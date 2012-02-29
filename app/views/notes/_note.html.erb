@@ -31,9 +31,9 @@
         <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
         <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
       <% elsif not my_like.status and not controller.action_name == "mytags" %>
-        已标记
+        <%= link_to '已标记', "",:class => "btn disabled", :remote => true %>
       <% else %>
-        已读完
+        <%= link_to '已读完', "",:class => "disabled btn", :remote => true %>
       <% end %>
   </div>
   <div class="time" data="<%= note.created_at %>">
