@@ -2,7 +2,7 @@
 
 (function() {
 
-  var $space = $('#myself').find('div.inner');
+  var $space = $('#myself').find('div.mycontent');
 
   <% if controller.action_name == "index" or controller.action_name == "mytags" %> 
       $space.html( "<%= j render :partial => 'mytags' %>" ); 

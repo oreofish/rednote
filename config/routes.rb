@@ -12,7 +12,6 @@ Rednote::Application.routes.draw do
   get "users/page"
   get "users/avatar"
   get "users/mycomments"
-  get "users/comments"
   get "users/nickname"
   get "users/mytags"
   get "users/crop_update"

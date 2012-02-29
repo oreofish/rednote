@@ -1,12 +1,16 @@
-<ul class='comment'>
+<div id='comment_list'>
   <% @comments.each do |comment| %>
-    <li id="comment<%= comment.id %>">
+    <div id="comment<%= comment.id %>" >
+      <div data-toggle="collapse" data-target="#note_link_commentid<%=comment.id%>" data-parent="#comment_list">
       <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
       <%= comment.comment %>
-      <% if comment.user_id == current_user.id%>
-        <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
-      <% end %>
+      <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
+    </div>
 
-    </li>
+    <div id="note_link_commentid<%=comment.id%>" class="collapse" >
+      <% note = Note.find(comment.commentable_id)%>
+      <%= render :partial => 'notes/note', :locals => { :note => note } %>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>

@@ -45,16 +45,6 @@ class UsersController < ApplicationController
       end
   end
 
-  def comments
-      @avatar = current_user.avatar
-      @nickname = current_user.nickname
-      @comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE commentable_id IN (SELECT id FROM notes WHERE user_id = #{current_user.id}) ORDER BY created_at DESC")
-      
-      respond_to do |format|
-          format.html { render 'index' } 
-          format.js { render 'index' }
-      end
-  end
 
   def mytags
       @avatar = current_user.avatar

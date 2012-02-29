@@ -150,12 +150,19 @@ function setup_faye(){
         //eval(data);
     });
 
+    client.subscribe("/comments/*",function(data){
+        //eval(data);
+    });
     // faye 
     var Slot = {
         incoming: function(message, callback) {
             switch( message['channel'] ) {
                 case "/notes/new":
                 case "/notes/destroy":
+                    rednote.logger.record(message);
+                    break;
+                case "/comments/new":
+                case "/comments/destroy":
                     rednote.logger.record(message);
                     break;
             }
