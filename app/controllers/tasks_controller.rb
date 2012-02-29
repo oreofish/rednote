@@ -72,7 +72,7 @@ class TasksController < ApplicationController
       end
     end
   end
-  
+
   def new_milestone
     @new_task = current_user.tasks.new(:content => "新里程碑建立")
     @new_task.milestone_list = params[:milestone][:name]
@@ -83,6 +83,38 @@ class TasksController < ApplicationController
         format.json { head :no_content }
       else
         format.html { redirect_to tasks_path, notice: 'Milestone was failed to create.' }
+        format.js # new_milestone.js.erb
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def set_project
+    @task = Task.find(params[:project][:id])
+    @task.project_list = params[:project][:name]
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Project was successfully set.' }
+        format.js # new_milestone.js.erb
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @task, notice: 'Project was failed to set.' }
+        format.js # new_milestone.js.erb
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def set_milestone
+    @task = Task.find(params[:milestone][:id])
+    @task.milestone_list = params[:milestone][:name]
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Milestone was successfully set.' }
+        format.js # new_milestone.js.erb
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @task, notice: 'Milestone was failed to set.' }
         format.js # new_milestone.js.erb
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
