@@ -89,34 +89,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def set_project
-    @task = Task.find(params[:project][:id])
+  def set_tag
+    @task = Task.find(params[:task][:id])
     @task.project_list = params[:project][:name]
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Project was successfully set.' }
-        format.js # new_milestone.js.erb
-        format.json { head :no_content }
-      else
-        format.html { redirect_to @task, notice: 'Project was failed to set.' }
-        format.js # new_milestone.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  
-  def set_milestone
-    @task = Task.find(params[:milestone][:id])
     @task.milestone_list = params[:milestone][:name]
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Milestone was successfully set.' }
-        format.js # new_milestone.js.erb
-        format.json { head :no_content }
+        format.html { redirect_to @task, notice: 'Project was successfully update.' }
+        format.js
       else
-        format.html { redirect_to @task, notice: 'Milestone was failed to set.' }
-        format.js # new_milestone.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.html { redirect_to @task, notice: 'Project was failed to update.' }
+        format.js
       end
     end
   end
@@ -132,16 +115,18 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @tasks = current_user.tasks
-    @task = Task.new(params[:id])
+    @task = Task.new(:content => params[:task][:content])
+    @task.project_list = params[:project][:name]
+    @task.milestone_list = params[:milestone][:name]
     @task.user = current_user
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task.parent }
+        format.html { redirect_to tasks_path }
         format.js # create.js.erb
         format.json { render json: @task, status: :created, location: @task }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.js # create.js.erb
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end

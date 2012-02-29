@@ -3,7 +3,7 @@
 <div class="row-fluid grid-bar">
   <div class="span2">
     <%= link_to tasks_path, :class => 'btn' do %>
-      <i class="icon-chevron-left"></i>返回
+      <i class="icon-chevron-left"></i>返回列表
     <% end %>
   </div>
   <div class="span8">
@@ -35,17 +35,12 @@
 </div>
 
 <div class="form-actions">
-  <%= form_tag set_project_tasks_path, :class => :form do %>
-  所属项目：
-  <%= hidden_field :project, :id, :value => @task.id %>
-  <%= collection_select :project, :name,  @projects, :name, :name %>
-  <button class="btn" type="submit">修改</button>
-  <% end %>
-  
-  <%= form_tag set_milestone_tasks_path, :class => :form do %>
-  里程碑：
-  <%= hidden_field :milestone, :id, :value => @task.id %>
-  <%= collection_select :milestone, :name,  @milestones, :name, :name %>
-  <button class="btn" type="submit">修改</button>
+  <%= form_tag set_tag_tasks_path, :class => :form do %>
+    <%= hidden_field :task, :id, :value => @task.id %>
+    所属项目：
+    <%= collection_select :project, :name,  @projects, :name, :name %>
+    里程碑：
+    <%= collection_select :milestone, :name,  @milestones, :name, :name %>
+    <button class="btn" type="submit">修改</button>
   <% end %>
 </div>

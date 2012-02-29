@@ -38,8 +38,7 @@ Rednote::Application.routes.draw do
       get  ':tasks/done'
       post 'new_project'
       post 'new_milestone'
-      post 'set_project'
-      post 'set_milestone'
+      post 'set_tag'
     end
   end
   # The priority is based upon order of creation:
