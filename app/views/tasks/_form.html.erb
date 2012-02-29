@@ -3,8 +3,8 @@
 <div class="form-actions">
   <%= form_for @task, :url => tasks_path, :html => { :class => :form } do |f| %>
   <div class="">
-    <%= f.text_field :content, :class => 'input-xxlarge', :placeholder => "创建一个新任务" %>
-    <button class="btn btn-primary" type="submit">创建</button>
+    <%= f.text_field :content, :class => 'input-xxlarge', :placeholder => "任务描述" %>
+    <button class="btn btn-primary" type="submit">添加任务</button>
   </div>
   <% end %>
 </div>
