@@ -21,6 +21,7 @@ gem 'jcrop-rails'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
 gem 'best_in_place'
+gem "simple_form"
 
 group :development do
   gem 'rspec-rails'
