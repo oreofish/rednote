@@ -13,3 +13,32 @@
     text-decoration: underline;
     color: #0078B6;
 }
+
+@mixin radius($rad) {
+    -webkit-border-radius: $rad;
+    -moz-border-radius: $rad;
+    -o-border-radius: $rad;
+    border-radius: $rad;
+}
+
+@mixin block($size) {
+	margin: $size 0;
+	padding: $size 0;
+    background-color: #ccf;
+    @include radius(6px);
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.xingblock-small {
+    @include block(5px);
+}
+
+.xingblock-middle {
+    @include block(10px);
+}
+
+.xingblock-large {
+    @include block(20px);
+}
