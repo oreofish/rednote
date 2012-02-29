@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require spin
+//= require jquery-spin
 //= require twitter/bootstrap
 //= require jcrop
 //= require ckeditor/ckeditor

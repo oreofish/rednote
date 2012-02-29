@@ -87,7 +87,7 @@ rednote.pager = function(action) {
             $.ajax({
                 url: update_action,
                 beforeSend: function() {
-                    $('#pager_loading').toggleClass('hidden');
+                    $('#pager_loading').spin(rednote.spin.defaultOpts);
                     $(window).unbind("scroll");
                 }, 
                 success: function(data) {
@@ -101,7 +101,10 @@ rednote.pager = function(action) {
                     }
                 },
                 complete: function() {
-                    $('#pager_loading').toggleClass('hidden');
+                    setTimeout(function() {
+                        $('#pager_loading').spin(false);
+                    }, 600);
+
                     $(window).bind("scroll", function() {
                         that.checkAndLoadNextPage();
                     });
@@ -129,6 +132,39 @@ rednote.flashController = {
     },
     doInfo: function(title, msg) {
         this._message("alert-info", title, msg);
+    }
+};
+
+rednote.spin = {
+    defaultOpts: {
+        lines: 12, // The number of lines to draw
+        length: 4, // The length of each line
+        width: 4, // The line thickness
+        radius: 8, // The radius of the inner circle
+        color: '#000', // #rgb or #rrggbb
+        speed: 0.8, // Rounds per second
+        trail: 57, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: true, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+    },
+
+    spinning: function(tabs, target) {
+        console.log('spinning');
+        var that = this;
+        tabs.on({
+            'show': function() {
+                target.spin(that.defaultOpts);
+            },
+            'shown': function() {
+                setTimeout( function() {
+                    target.spin(false);
+                }, 600 );
+            }
+        });
     }
 };
 

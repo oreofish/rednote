@@ -1,5 +1,4 @@
 $(function() {
-
     if (location.pathname === "/" || location.pathname === "/notes") {
         rednote.pager('/notes/page').start();
 
@@ -15,9 +14,10 @@ $(function() {
             }
         });
 
-    } else if (location.pathname.match(/^\/users\//)) {
+    } else if (location.pathname.match(/^\/users/)) {
         rednote.pager('/users/page').start();
+        $('ul.nav-tabs a:first').tab('show');
+        rednote.spin.spinning($('ul.nav-tabs'), $('#tabspin'));
     }
-
 });
 

@@ -2,7 +2,6 @@ jQuery ->
   $(".alert-message").alert()
   #$(".tabs").button()
   $(".carousel").carousel()
-  #$(".collapse").collapse() # this is not needed for collapse to work
   $(".dropdown-toggle").dropdown()
   $(".modal").modal()
   $("a[rel=popover]").popover()
