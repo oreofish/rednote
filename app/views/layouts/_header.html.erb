@@ -12,9 +12,15 @@
       <div class="container nav-collapse">
         <ul class="nav">
           <% if user_signed_in? %>
-          <li class="active"><%= link_to "首页", notes_path %></li>
-          <li><%= link_to "我的主页", users_path %></li>
-          <li><%= link_to "我的任务", tasks_path %></li>
+            <li class='<%= "active" if controller_name == "notes" %>'>
+            <%= link_to "首页", notes_path %>
+            </li>
+            <li class='<%= "active" if controller_name == "users" %>'>
+            <%= link_to "我的主页", users_path %>
+            </li>
+            <li class='<%= "active" if controller_name == "tasks" %>'>
+            <%= link_to "我的任务", tasks_path %>
+            </li>
           <% end %>
         </ul>
 
