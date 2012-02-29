@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120228091511) do
+ActiveRecord::Schema.define(:version => 20120229132231) do
 
   create_table "add_status_to_tasks", :force => true do |t|
     t.integer  "status"
@@ -87,8 +87,9 @@ ActiveRecord::Schema.define(:version => 20120228091511) do
     t.string   "content"
     t.integer  "estimate"
     t.datetime "deadline"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "assigned_to"
   end
 
   create_table "users", :force => true do |t|

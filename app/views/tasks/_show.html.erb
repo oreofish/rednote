@@ -21,8 +21,11 @@
   <div class="span2">里程碑：</div>
   <div class="span4"><%= @task.milestone_list[0] %></div>
   <br />
+  <div class="span2">创建人：</div>
+  <div class="span4"><%= @task.user.nickname %></div>
+  <br />
   <div class="span2">负责人：</div>
-  <div class="span4"><%= best_in_place @task, :user_id, type: :select, :collection => User::list_user_options %></div>
+  <div class="span4"><%= best_in_place @task, :assigned_to, type: :select, :collection => User::list_user_options %></div>
   <br />
   <div class="span2">内容：</div>
   <div class="span4"><%= best_in_place @task, :content, type: :textarea %></div>

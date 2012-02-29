@@ -2,13 +2,14 @@
 #
 # Table name: tasks
 #
-#  id         :integer(4)      not null, primary key
-#  user_id    :integer(4)
-#  content    :string(255)
-#  estimate   :integer(4)
-#  deadline   :datetime
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id          :integer(4)      not null, primary key
+#  user_id     :integer(4)
+#  content     :string(255)
+#  estimate    :integer(4)
+#  deadline    :datetime
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#  assigned_to :integer(4)
 #
 
 class Task < ActiveRecord::Base
@@ -22,6 +23,6 @@ class Task < ActiveRecord::Base
   validates  :content, :presence => true,
                        :length   => { :maximum => 255 }
 
-  attr_accessible :user_id, :content, :estimate, :deadline
+  attr_accessible :assigned_to, :content, :estimate, :deadline
   
 end
