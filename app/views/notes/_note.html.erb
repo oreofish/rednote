@@ -9,21 +9,27 @@
   </div>
 
   <% if note.kind > 0 %>
-    <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+    <button class="btn btn-info" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>"> 
+      展开 <i class='icon-chevron-down'></i>
+    </button>
+    <br/>
+    <div id="attach_collapse<%= note.id %>" class="collapse">
+      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+    </div>
   <% end %>
 
-  <div class="pull-right">
+  <div class="pull-right btn-group">
     <% if current_user.id==note.user.id %>
-      <%= link_to '详细', note %>
-      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true %>
+      <%= link_to '详细', note, :class => 'btn' %>
+      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => 'btn' %>
     <% end %>
-    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "comments_link" %>
+    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "btn comments_link" %>
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
-        <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
+        <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags btn" %> 
       <% elsif not my_like.status and controller.action_name == "mytags" %>
-        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags" %>
-        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags" %>
+        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
+        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
       <% elsif not my_like.status and not controller.action_name == "mytags" %>
         已标记
       <% else %>
