@@ -7,6 +7,8 @@
         <% @notes.each do |note| %>
           commentsManager.bindCommentHandler(<%= note.id %>);
         <% end %>
+
+        rednote.updateNoteTime();
       }, 100 );
     <% end %>
 });

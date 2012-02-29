@@ -168,6 +168,13 @@ rednote.spin = {
     }
 };
 
+rednote.updateNoteTime = function() {
+    $('ul.list').find('.time').updateNoteTime();
+    setTimeout(function() {
+        rednote.updateNoteTime();
+    }, 60000);
+};
+
 rednote.logger = {
     record: function(msg) {
         console.log(msg);
