@@ -31,16 +31,12 @@
 
       <%= render "layouts/header" %>
       <div class="container">
-          <div class="content">
-              <div class="row">
-                  <div class="span2.5 offset4">
+                  <div class="span4 offset4">
                       <%= yield %>
                       <footer>
                       <p>Copyright &copy; <%= Time.now.year %> Web App.</p>
                       </footer>
                   </div>
-              </div>
-          </div>
       </div> <!-- /container -->
   </body>
 </html>
