@@ -1,23 +1,21 @@
 <%# encoding: utf-8 %>
 
-<li class="">
-  <div class="<%= task_css(task, "row-fluid") %>">
-    <div class="span2">
-      <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
-      <%= task_sign(task).html_safe %>
-      <% end %>
-    </div>
-    
-    <div class="span9">
-      <%= task.user_id %>
-      <%= task.content %>
-      <%= task.estimate %>
-      <%= time_ago_in_words(task.deadline) if task.deadline %>
-    </div>
-    <div class="span1">
-      <%= link_to task, :class => "label" do %>
-      <i class="icon-chevron-right"></i>
-      <% end %>
-    </div>
+<div class="<%= task_css(task, "row-fluid") %>">
+  <div class="span2">
+    <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
+    <%= task_sign(task).html_safe %>
+    <% end %>
   </div>
-</li>
+
+  <div class="span9">
+    <%= task.user_id %>
+    <%= task.content %>
+    <%= task.estimate %>
+    <%= time_ago_in_words(task.deadline) if task.deadline %>
+  </div>
+  <div class="span1">
+    <%= link_to task, :class => "label" do %>
+    <i class="icon-chevron-right"></i>
+    <% end %>
+  </div>
+</div>

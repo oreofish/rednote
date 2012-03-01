@@ -24,24 +24,18 @@
 
 <% coming_tasks, recent_tasks, past_tasks = three_type_tasks(@tasks) %>
 
-<ul id="" class="unstyled">
 <% coming_tasks.each do |task| %>
   <%= render :partial => 'item', :locals => { :task => task } %>
 <% end %>
-</ul>
 
 <div class="recent">
-  <ul id="sortable" class="ui-sortable unstyled">
   <% recent_tasks.each do |task| %>
     <%= render :partial => 'item', :locals => { :task => task } %>
   <% end %>
-  </ul>
 </div>
 
-<ul id="" class="unstyled">
 <% past_tasks.each do |task| %>
   <%= render :partial => 'item', :locals => { :task => task } %>
 <% end %>
-</ul>
 
 <%= render 'form' %>
