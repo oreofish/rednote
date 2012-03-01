@@ -1,0 +1,22 @@
+(function() {
+
+        var $nickname = $('#nickname_input');
+        var $input = $('#user_nickname');
+        var $label = $('#nickname_waring');
+
+        if($input.val() === "") {
+            $nickname.removeClass("success");
+            $nickname.addClass("error");
+            $label.text("不能为空"); 
+        }else {
+            <% if @user == [] %>
+                $nickname.removeClass("error");
+                $nickname.addClass("success");
+                $label.text("可以注册");
+            <% else %>
+                $nickname.removeClass("success");
+                $nickname.addClass("error");
+                $label.text("<%= j @name+"已经存在" %>"); 
+            <% end %> 
+        }
+})();

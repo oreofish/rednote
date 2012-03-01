@@ -1,34 +1,33 @@
 <%# encoding: utf-8 %>
 <div class='block' id='block-signup'>
-  <div class='content'>
+    <div class='content'>
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form"}) do |f| %>
+            <%= devise_error_messages! %>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form"}) do |f| %>
-    <%= devise_error_messages! %>
+            <div id="nickname_input" class="control-group">
+                <%= f.label "帐号：" %>
+                <%= f.text_field :nickname %>
+                <span id="nickname_waring" class="help-inline">Ex. muhaha</span>
+            </div>
 
-    <div class="group wat-cf">
-			<div class="left"><%= f.label "帐号：" %></div>
-			<div class="right"><%= f.text_field :nickname %>
-			<span class="description">Ex. muhaha</span></div>
-		</div>
+            <div class="group wat-cf">
+                <%= f.label "邮箱：" %>
+                <%= f.email_field :email %>
+                <span class='description'>Ex. test@example.com</span>
+            </div>
 
-		<div class="group wat-cf">
-			<div class="left"><%= f.label "邮箱：" %></div>
-			<div class="right"><%= f.email_field :email %>
-      <span class='description'>Ex. test@example.com</span></div>
-		</div>
+            <div class="group wat-cf">
+                <%= f.label "密码：" %>
+                <%= f.password_field :password %>
+                <span class='description'>至少6个字符</span>
+            </div>
 
-    <div class="group wat-cf">
-			<div class="left"><%= f.label "密码：" %></div>
-      <div class="right"><%= f.password_field :password %>
-      <span class='description'>至少6个字符</span></div>
+            <div class="group wat-cf">
+                <%= f.label '确认密码'%>
+                <%= f.password_field :password_confirmation %>
+            </div>
+            <button class='btn' type='submit'>注册</button>
+        <% end %>
+        <%= render :partial => "devise/shared/links" %>
     </div>
-
-    <div class="group wat-cf">
-      <div class="left"><%= f.label '确认密码'%></div>
-      <div class="right"><%= f.password_field :password_confirmation %></div>
-    </div>
-    <button class='btn' type='submit'>注册</button>
-    <% end %>
-    <br />
-    <%= render :partial => "devise/shared/links" %>
 </div>
