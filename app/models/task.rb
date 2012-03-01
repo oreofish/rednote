@@ -12,6 +12,7 @@
 #  assigned_to :integer(4)
 #  start_at    :datetime
 #  finish_at   :datetime
+#  status      :integer(4)      default(0)
 #
 
 class Task < ActiveRecord::Base
@@ -27,4 +28,8 @@ class Task < ActiveRecord::Base
 
   attr_accessible :assigned_to, :content, :estimate, :deadline
   
+  TODO = 0
+  DOING = 1
+  DONE = 2
+  CANCEL = 3
 end

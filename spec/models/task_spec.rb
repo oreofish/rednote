@@ -12,6 +12,7 @@
 #  assigned_to :integer(4)
 #  start_at    :datetime
 #  finish_at   :datetime
+#  status      :integer(4)      default(0)
 #
 
 require 'spec_helper'
