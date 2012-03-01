@@ -10,6 +10,8 @@
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
 #  assigned_to :integer(4)
+#  start_at    :datetime
+#  finish_at   :datetime
 #
 
 require 'spec_helper'
