@@ -1,44 +1,19 @@
 <%# encoding: utf-8 %>
 
-<div class="navbar">
-  <div class="navbar-inner">
-    <div class="container" style="width: auto;">
-      <ul class="nav">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-      </ul>
-      <ul class="nav pull-right">
-        <li><%= link_to 'Done', task, :class => "btn-mini" %></li>
-        <li class="divider-vertical"></li>
-        <li>
-          <%= link_to task, :class => "" do %>
-          详细<i class="icon-chevron-right"></i>
-          <% end %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="row-fluid grid-bar">
+<div class="row-fluid xingblock-middle">
   <div class="span1">
-    <%= link_to '#', 'data-loading-text' => 'Loading', :id => "task#{task.id}", :class => "label" do %>
+    <%= link_to task, 'data-loading-text' => 'Loading', :id => "task#{task.id}", :class => "" do %>
     <i class="icon-ok"></i>
     <% end %>
   </div>
-  <div class="span9">
+  <div class="span10">
     <%= task.user_id %>
-    <%= task.parent_id %>
     <%= task.content %>
     <%= task.estimate %>
     <%= time_ago_in_words(task.deadline) if task.deadline %>
   </div>
-  <div class="span2">
-    <%= link_to 'Done', task, :class => "btn btn-mini" %>
-    <%= link_to task, :class => "label" do %>
+  <div class="span1">
+    <%= link_to task, :class => "" do %>
       详细<i class="icon-chevron-right"></i>
     <% end %>
   </div>

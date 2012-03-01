@@ -20,12 +20,15 @@ gem 'acts_as_commentable'
 gem 'jcrop-rails'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
+gem 'best_in_place'
+gem "simple_form"
 
 group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
   gem 'web-app-theme'
+  gem 'acts-as-taggable-on'
 end
 
 group :test do

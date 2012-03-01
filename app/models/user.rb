@@ -4,7 +4,7 @@
 #
 #  id                     :integer(4)      not null, primary key
 #  email                  :string(255)     default(""), not null
-#  encrypted_password     :string(128)     default(""), not null
+#  encrypted_password     :string(255)     default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -16,7 +16,8 @@
 #  created_at             :datetime        not null
 #  updated_at             :datetime        not null
 #  nickname               :string(255)
-#  avatar                 :string(255)     default("/images/icons/00.jpeg")
+#  avatar                 :string(255)
+#  preview                :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -25,6 +26,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  acts_as_tagger
+  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname, 
                   :avatar, :avatar_cache, :preview, :preview_cache
@@ -55,4 +58,7 @@ class User < ActiveRecord::Base
       self.preview.recreate_versions!
   end
 
+  def self.list_user_options 
+    User.select("id, nickname").map {|x| [x.id, x.nickname] }
+  end
 end

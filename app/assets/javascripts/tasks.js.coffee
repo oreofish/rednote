@@ -4,3 +4,4 @@
 
 jQuery ->
   $('#task_deadline').datepicker()
+  $('.best_in_place').best_in_place()

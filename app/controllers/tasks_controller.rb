@@ -1,17 +1,25 @@
+# encoding: utf-8
+
 class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    all_tasks = current_user.tasks
-    @manage_tasks = Array.new
-    @real_tasks = Array.new
-    all_tasks.each do |task|
-      if task.parent_id == 0
-        @manage_tasks << task
-      else
-        @real_tasks << task
-      end
-    end
+    @all_projects = Task.project_counts.collect{ |it| it.name }.join(',')
+    @all_milestones = Task.milestone_counts.collect{ |it| it.name }.join(',')
+    @current_project = params[:project] || @all_projects
+    @current_milestone = params[:milestone] || @all_milestones
+
+    @task = Task.new
+    @projects = Task.project_counts
+    @milestones = Task.milestone_counts
+    
+    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+                 .tagged_with(@current_milestone.split(','), :on => :milestones, :any => true)
+    
+    @project_class = Array.new
+    @projects.each { |project| @project_class << ( project.name == @current_project ? 'btn active' : 'btn') }
+    @milestone_class = Array.new
+    @milestones.each { |milestone| @milestone_class << ( milestone.name == @current_milestone ? 'btn active' : 'btn') }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,8 +32,8 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
-    @subtasks = @task.tasks
-    @new_task = Task.new
+    @projects = Task.top_projects
+    @milestones = Task.top_milestones
 
     respond_to do |format|
       format.html { render 'index' }
@@ -48,56 +56,77 @@ class TasksController < ApplicationController
       end
     end
   end
-  
-  # GET /tasks/new_root
-  # GET /tasks/new_root.json
-  def new_root
-    @task = Task.new
 
+  def new_project
+    @new_task = current_user.tasks.new(:content => "新项目建立")
+    @new_task.project_list = params[:project][:name]
     respond_to do |format|
-      format.html # new_root.html.erb
-      format.js # new_root.js.erb
-      format.json { render json: @task }
-    end
-  end
-  
-  # POST /tasks/create_root
-  # POST /tasks/create_root.json
-  def create_root
-    @task = Task.new(params[:task])
-    @task.parent_id = 0
-    @task.user = current_user
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to tasks_path }
-        format.json { render json: @task, status: :created, location: @task }
+      if @new_task.save
+        format.html { redirect_to tasks_path, notice: 'Project was successfully created.' }
+        format.js # new_project.js.erb
+        format.json { head :no_content }
       else
-        format.html { render action: "new_root" }
+        format.html { redirect_to tasks_path, notice: 'Project was failed to create.' }
+        format.js # new_project.js.erb
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
 
+  def new_milestone
+    @new_task = current_user.tasks.new(:content => "新里程碑建立")
+    @new_task.milestone_list = params[:milestone][:name]
+    respond_to do |format|
+      if @new_task.save
+        format.html { redirect_to tasks_path, notice: 'Milestone was successfully created.' }
+        format.js # new_milestone.js.erb
+        format.json { head :no_content }
+      else
+        format.html { redirect_to tasks_path, notice: 'Milestone was failed to create.' }
+        format.js # new_milestone.js.erb
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def set_tag
+    @task = Task.find(params[:task][:id])
+    @task.project_list = params[:project][:name]
+    @task.milestone_list = params[:milestone][:name]
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Project was successfully update.' }
+        format.js
+      else
+        format.html { redirect_to @task, notice: 'Project was failed to update.' }
+        format.js
+      end
+    end
+  end
+  
   # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
+    @task.update_attributes(params[:task])
+    respond_with @task
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
     @tasks = current_user.tasks
-    @task = Task.new(params[:task])
+    @task = Task.new(:content => params[:task][:content])
+    @task.project_list = params[:project][:name]
+    @task.milestone_list = params[:milestone][:name]
     @task.user = current_user
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task.parent }
+        format.html { redirect_to tasks_path }
         format.js # create.js.erb
         format.json { render json: @task, status: :created, location: @task }
       else
-        format.html { render action: "new" }
+        format.html { render action: "index" }
         format.js # create.js.erb
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
