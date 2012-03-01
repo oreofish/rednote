@@ -3,10 +3,10 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @note = Note.find(params[:note_id])
-    @note.touch if @note.user_id == current_user.id
-
-    @like = current_user.likes.find_by_note_id(@note.id)
-    @like.touch if not @like.nil?
+    if @note.user_id == current_user.id
+      @note.message = 0
+      @note.save
+    end
 
     @comment = Comment.new(:commentable_id => @note.id)
     @comments = @note.comments
@@ -26,13 +26,16 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        broadcast '/comments/new', "{ status: true }"
+        if not @note.user_id == @comment.user_id
+          broadcast "/comments/new/#{@note.user_id}", "{ note_id: #{@note.id} }"
+          @note.message += 1 
+          @note.save
+        end
          @comments = @note.comments
          @comment = Comment.new(:commentable_id => @note.id)
         format.js { render "index" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
-        broadcast '/comments/new', "{ status: false }"
         format.js { render "index" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end

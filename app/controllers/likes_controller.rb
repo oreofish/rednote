@@ -8,8 +8,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like and @like.save!
-        create_comment!(note_id, comment_content).save!
-        broadcast '/comments/new', "{ status: true }"
+        create_comment!(note_id, comment_content)
         format.js
       else
         format.html { redirect_to root_url, :notice => :like_create_fail }
@@ -26,8 +25,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.update_attributes(:status => true)
-        create_comment!(note_id, comment_content).save!
-        broadcast '/comments/new', "{ status: true }"
+        create_comment!(note_id, comment_content)
         format.js
       else
         format.html { render action: "edit" }
@@ -43,8 +41,7 @@ class LikesController < ApplicationController
     note_id = @like.note_id
     comment_content = "i have disabled marking the note"
     @like.destroy
-    create_comment!(note_id, comment_content).save!
-    broadcast '/comments/new', "{ status: true }"
+    create_comment!(note_id, comment_content)
 
     respond_to do |format|
       format.html { redirect_to users_url }
@@ -57,7 +54,12 @@ class LikesController < ApplicationController
     @note = Note.find(note_id);
     @comment = @note.comments.create(:comment => "#{comment_content}" )
     @comment.user_id = current_user.id
-    return @comment
-  end
+    @comment.save
 
+    if not @note.user_id == current_user.id
+      broadcast "/comments/new/#{@note.user_id}", "{ note_id:#{@note.id} }"
+      @note.message += 1
+      @note.save
+    end
+  end
 end

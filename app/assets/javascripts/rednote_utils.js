@@ -136,8 +136,21 @@ rednote.logger = {
     record: function(msg) {
         console.log(msg);
         rednote.flashController.doInfo(msg['channel'], msg['data'] );
+    },
+
+    updateinfo: function(msg) {
+        console.log(msg);
+        var $info = $('#update_info');
+        var num=$info.text().match(/\d+/);
+        
+        num=Number(num)+1;
+        $info.text( $info.text().replace(/(\d+)/,num) );
+
+        var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
+        $note.find('div.item').addClass("label-info");
     }
-};
+}
+
 
 function setup_faye(){
     var server = location.host.replace(/:\d*/, '');
@@ -150,7 +163,7 @@ function setup_faye(){
         //eval(data);
     });
 
-    client.subscribe("/comments/*",function(data){
+    client.subscribe("/comments/new/"+document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length),function(data){
         //eval(data);
     });
     // faye 
@@ -161,9 +174,8 @@ function setup_faye(){
                 case "/notes/destroy":
                     rednote.logger.record(message);
                     break;
-                case "/comments/new":
-                case "/comments/destroy":
-                    rednote.logger.record(message);
+                case "/comments/new/"+document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length):
+                    rednote.logger.updateinfo(message);
                     break;
             }
             callback(message);

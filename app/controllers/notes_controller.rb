@@ -13,6 +13,8 @@ class NotesController < ApplicationController
     @notes = Note.where('').offset(0).limit(5).reverse_order
     cookies[:limit] = 5
     cookies[:offset] = 5 # note offset
+    cookies[:current_user_id] = current_user.id
+
 
     respond_to do |format|
       format.html # index.html.erb
