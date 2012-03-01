@@ -1,0 +1,15 @@
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset.scss";
+@import "compass/layout.scss";
+ 
+@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
+ 
+#header {
+  background: #999999;
+  height: 72px; }
+ 
+#footer {
+  background: #cccccc; }

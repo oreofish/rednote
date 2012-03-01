@@ -50,6 +50,7 @@ GEM
       activesupport (>= 3.0)
       carrierwave (>= 0.5.7)
       mime-types
+    chunky_png (1.2.5)
     ckeditor (3.7.0.rc2)
       mime-types (~> 1.17.2)
       orm_adapter (~> 0.0.6)
@@ -63,6 +64,12 @@ GEM
     coffee-script-source (1.2.0)
     commonjs (0.2.0)
       therubyracer (~> 0.9.9)
+    compass (0.12.rc.1)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.0.rc.3)
+      compass (~> 0.12.rc.0)
     cookiejar (0.3.0)
     css_parser (1.2.6)
       addressable
@@ -99,6 +106,7 @@ GEM
       json (>= 1.0)
       rack (>= 1.0)
       thin (~> 1.2)
+    fssm (0.2.8.1)
     gravatar_image_tag (1.0.0)
     hike (1.2.1)
     hiredis (0.3.2)
@@ -231,6 +239,7 @@ DEPENDENCIES
   ckeditor (= 3.7.0.rc2)
   coderay
   coffee-rails
+  compass-rails
   devise
   execjs
   factory_girl_rails (= 1.0)
