@@ -274,4 +274,9 @@ function update_crop(coords) {
 $(function(){
     setup_faye();
     jcrop.crop();
+
+    var $item = $('#user_nickname');
+    $item.focusout(function() {
+        $.get("/users/search",{nickname:$item.val()})
+    });
 });
