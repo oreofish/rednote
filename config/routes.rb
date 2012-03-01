@@ -37,7 +37,7 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
-      get  ':tasks/done'
+      get  'set_status'
       post 'new_project'
       post 'set_tag'
     end

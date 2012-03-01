@@ -35,17 +35,27 @@ class TasksController < ApplicationController
     end
   end
 
-  def done
+  def set_status
     @task = Task.find(params[:id])
+    status = @task.status + 1
+    if @task.status == Task::DONE
+      status = Task::DOING
+    end
+
+    case status
+      when Task::DOING then @task.touch(:start_at)
+      when Task::DONE  then @task.touch(:finish_at)
+    end
+    
+    @task.status = status
+    
     respond_to do |format|
-      if @task.update_attributes(:status => 1)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.js # done.js.erb
-        format.json { head :no_content }
+      if @task.save
+        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        format.js
       else
-        format.html { render action: "edit" }
-        format.js # done.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.html { redirect_to tasks_path, notice: 'Task was failed to updated.' }
+        format.js
       end
     end
   end
@@ -94,6 +104,7 @@ class TasksController < ApplicationController
     @task = Task.new(:content => params[:task][:content])
     @task.project_list = params[:project][:name]
     @task.user = current_user
+    @task.status = Task::TODO
 
     respond_to do |format|
       if @task.save
