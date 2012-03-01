@@ -16,137 +16,90 @@
       </ul>
 
       <div id="attachment_block" class="tab-content row-fluid">
-        <div class="tab-pane fade in active" id="message">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-            <%= f.hidden_field :kind, :value => 0 %>
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
-          <% end %> 
-        </div>
+        <% attaches = ["message", "text", "link", "image", "code", "book" ] %>
+        <% attaches.each_index do |idx| %>
+          <div class="tab-pane fade <%= 'in active' if attaches[idx] == 'message' %>" id="<%= attaches[idx] %>">
+            <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+              <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么", :class => "span12" %>
 
-        <div class="tab-pane fade" id="image">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <fieldset>
-              <div class="control-group">
-                <%#<label class="control-label"></label>%>
-                <div class="controls">
-                  <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-                  <%= f.hidden_field :kind, :value => 3 %>
+              <%= f.hidden_field :kind, :value => idx %>
+              <% case attaches[idx] %>
+              <% when "message" %>
+                <!-- stub --> 
+              <% when "image" %>
+                <div class="control-group">
+                  <%= f.label "上传图片：", :class=>"control-label", :for => "note_upload" %>
+                  <div class="controls">
+                    <%= f.file_field :upload, :class=>"input-file" %>
+                  </div>
                 </div>
-              </div>
 
-              <div class="control-group">
-                <%= f.label "上传图片：", :class=>"control-label", :for => "note_upload" %>
-                <div class="controls">
-                  <%= f.file_field :upload, :class=>"input-file" %>
+              <% when "link" %>
+                <div class="control-group">
+                  <%= f.label "链接：", :class=>"control-label", :for => "note_description" %>
+                  <div class="controls">
+                    <%= f.text_field :description, :class => "span6" %>
+                  </div>
                 </div>
-              </div>
+
+              <% when "book" %>
+                <label>上传书籍：</label>  
+                <%= f.file_field :upload %>
+
+              <% when "code" %>
+                <div class="control-group">
+                  <label class="control-label">代码片段</label>
+                  <div class="controls">
+                    <%= f.text_area :description, :rows => 8, :class => "span8" %>
+                  </div>
+                </div>
+
+                <div class="control-group"> 
+                  <label class="control-label">选择语言</label>
+                  <div class="controls">
+                    <select id="language_id" name="language[id]"><option value="C">C</option> 
+                      <option value="Clojure">Clojure</option> 
+                      <option value="CSS">CSS</option> 
+                      <option value="Delphi">Delphi</option> 
+                      <option value="DIFF">DIFF</option> 
+                      <option value="ERB">ERB</option> 
+                      <option value="Groovy">Groovy</option> 
+                      <option value="HAML">HAML</option> 
+                      <option value="HTML">HTML</option> 
+                      <option value="Java">Java</option> 
+                      <option value="JavaScript">JavaScript</option> 
+                      <option value="JSON">JSON</option> 
+                      <option value="PHP">PHP</option> 
+                      <option value="Python">Python</option> 
+                      <option value="Ruby">Ruby</option> 
+                      <option value="SQL">SQL</option> 
+                      <option value="XML">XML</option> 
+                      <option value="YAML">YAML</option> 
+                    </select> 
+                  </div>
+                </div>
+
+              <% when "text" %>
+                <%#<%= f.text_area :description %>
+                <textarea cols="40" id="note_code" name="note[description]" rows="8">
+                </textarea> 
+                <script type="text/javascript"> 
+                  if (CKEDITOR.instances["note_code"]) { 
+                    CKEDITOR.remove(CKEDITOR.instances["note_code"]); 
+                  } 
+                  CKEDITOR.replace("note_code", { "language":"en", "customConfig":"/ckeditor_config.js" }); 
+                </script> 
+
+              <% end %> <%# case end %>
 
               <button type="submit" class="btn btn-large btn-primary pull-right">
                 <i class="icon-upload"></i> 发布
               </button>    
-            </fieldset>
-          <% end %> 
-        </div>
-
-        <div class="tab-pane fade" id="link">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-            <%= f.hidden_field :kind, :value => 2 %>
-
-            <div class="control-group">
-              <%= f.label "链接：", :class=>"control-label", :for => "note_description" %>
-              <div class="controls">
-                <%= f.text_field :description, :class => "span6" %>
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
-          <% end %> 
-        </div>
-
-        <div class="tab-pane fade" id="book">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-            <%= f.hidden_field :kind, :value => 5 %>
-
-            <label>上传书籍：</label>  
-            <%= f.file_field :upload %>
-
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
-          <% end %> 
-        </div>
-
-        <div class="tab-pane fade" id="code">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-            <%= f.hidden_field :kind, :value => 4 %>
-
-            <div class="control-group">
-              <label class="control-label">代码片段</label>
-              <div class="controls">
-                <%= f.text_area :description, :rows => 8, :class => "span8" %>
-              </div>
-            </div>
-
-            <div class="control-group"> 
-              <label class="control-label">选择语言</label>
-              <div class="controls">
-                <select id="language_id" name="language[id]"><option value="C">C</option> 
-                  <option value="Clojure">Clojure</option> 
-                  <option value="CSS">CSS</option> 
-                  <option value="Delphi">Delphi</option> 
-                  <option value="DIFF">DIFF</option> 
-                  <option value="ERB">ERB</option> 
-                  <option value="Groovy">Groovy</option> 
-                  <option value="HAML">HAML</option> 
-                  <option value="HTML">HTML</option> 
-                  <option value="Java">Java</option> 
-                  <option value="JavaScript">JavaScript</option> 
-                  <option value="JSON">JSON</option> 
-                  <option value="PHP">PHP</option> 
-                  <option value="Python">Python</option> 
-                  <option value="Ruby">Ruby</option> 
-                  <option value="SQL">SQL</option> 
-                  <option value="XML">XML</option> 
-                  <option value="YAML">YAML</option> 
-                </select> 
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
-          <% end %> 
-        </div>
-
-        <div class="tab-pane fade" id="text">
-          <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-            <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
-            <%= f.hidden_field :kind, :value => 1 %>
-
-            <%#<%= f.text_area :description %>
-            <textarea cols="40" id="note_code" name="note[description]" rows="8">
-            </textarea> 
-            <script type="text/javascript"> 
-              if (CKEDITOR.instances["note_code"]) { 
-                CKEDITOR.remove(CKEDITOR.instances["note_code"]); 
-              } 
-              CKEDITOR.replace("note_code", { "language":"en", "customConfig":"/ckeditor_config.js" }); 
-            </script> 
-
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
-          <% end %> 
-        </div>
-      </div>
+            <% end %>  <%# form_for end %>
+          </div>
+      <% end %> <%# each end %>
+      
+      </div> <%# attachment_block end %>
     </div>
   </div>
   </div>

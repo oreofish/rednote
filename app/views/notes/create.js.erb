@@ -2,10 +2,19 @@
 
 (function() {
   <% if @note.valid?  %>
-    $new_note = $('#new_note');
-    $notes = $('#notes_content ul.list');
+    var $new_note = $('#new_note');
+    var $notes = $('#notes_content ul.list');
+    var id;
+
     $notes.prepend( "<%= j render :partial => 'notes/note', :locals => { :note => @note } %>" );
-    $new_note[0].reset();
+
+    id = "<%= attachmentKind(@note.kind) %>";
+    $('#'+id).find('#new_note')[0].reset();
+    if (id === "text") {
+      if (CKEDITOR.instances["note_code"]) {
+        CKEDITOR.instances["note_code"].setData('');
+      }
+    }
     $('#notes_content').find('ul.list li:first').hide().fadeIn(1000);
     rednote.updateNoteTime();
   <% end %>
