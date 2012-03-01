@@ -87,7 +87,7 @@ rednote.pager = function(action) {
             $.ajax({
                 url: update_action,
                 beforeSend: function() {
-                    $('#pager_loading').toggleClass('hidden');
+                    $('#pager_loading').spin(rednote.spin.defaultOpts);
                     $(window).unbind("scroll");
                 }, 
                 success: function(data) {
@@ -101,7 +101,10 @@ rednote.pager = function(action) {
                     }
                 },
                 complete: function() {
-                    $('#pager_loading').toggleClass('hidden');
+                    setTimeout(function() {
+                        $('#pager_loading').spin(false);
+                    }, 600);
+
                     $(window).bind("scroll", function() {
                         that.checkAndLoadNextPage();
                     });
@@ -132,6 +135,46 @@ rednote.flashController = {
     }
 };
 
+rednote.spin = {
+    defaultOpts: {
+        lines: 12, // The number of lines to draw
+        length: 4, // The length of each line
+        width: 4, // The line thickness
+        radius: 8, // The radius of the inner circle
+        color: '#000', // #rgb or #rrggbb
+        speed: 0.8, // Rounds per second
+        trail: 57, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: true, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+    },
+
+    spinning: function(tabs, target) {
+        console.log('spinning');
+        var that = this;
+        tabs.on({
+            'show': function() {
+                target.spin(that.defaultOpts);
+            },
+            'shown': function() {
+                setTimeout( function() {
+                    target.spin(false);
+                }, 600 );
+            }
+        });
+    }
+};
+
+rednote.updateNoteTime = function() {
+    $('ul.list').find('.time').updateNoteTime();
+    setTimeout(function() {
+        rednote.updateNoteTime();
+    }, 60000);
+};
+
 rednote.logger = {
     record: function(msg) {
         console.log(msg);
@@ -158,12 +201,15 @@ function setup_faye(){
         server = '127.0.0.1';
     }
     var client = new Faye.Client('http://'+server+':9292/faye');
+    var strs = document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length);
+    var str = strs.substring(0,strs.indexOf(";"));
+    
 
     client.subscribe("/notes/*",function(data){
         //eval(data);
     });
 
-    client.subscribe("/comments/new/"+document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length),function(data){
+    client.subscribe("/comments/new/"+str,function(data){
         //eval(data);
     });
     // faye 
@@ -174,7 +220,7 @@ function setup_faye(){
                 case "/notes/destroy":
                     rednote.logger.record(message);
                     break;
-                case "/comments/new/"+document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length):
+                case "/comments/new/"+str:
                     rednote.logger.updateinfo(message);
                     break;
             }
@@ -193,25 +239,32 @@ jcrop = {
     crop: function() { $('#cropbox').Jcrop({
         onChange: update_crop,
         onSelect: update_crop,
-        setSelect: [300, 200, 200, 300],
+        setSelect: [0, 0, 100, 100],
         aspectRatio: 1
     });
     }
 };
 
-function update_crop(coords) {
-    var rx = 100/coords.w;
-    var ry = 100/coords.h;
+function preview(el,size,coords){
+    var rx = size/coords.w;
+    var ry = size/coords.h;
     var lw = $('#cropbox').width();
     var lh = $('#cropbox').height();
-    var ratio = $('#cropbox').attr('date') / lw ;
 
-    $('#preview').css({
+    el.css({
         width: Math.round(rx * lw) + 'px',
         height: Math.round(ry * lh) + 'px',
         marginLeft: '-' + Math.round(rx * coords.x) + 'px',
         marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
+}
+
+function update_crop(coords) {
+    var lw = $('#cropbox').width();
+    var ratio = $('#cropbox').attr('date') / lw ;
+
+    preview($('#preview1'),180,coords); 
+    preview($('#preview2'),48,coords); 
     $("#crop_x").val(Math.round(coords.x * ratio));
     $("#crop_y").val(Math.round(coords.y * ratio));
     $("#crop_w").val(Math.round(coords.w * ratio));

@@ -7,6 +7,7 @@
     $notes.prepend( "<%= j render :partial => 'notes/note', :locals => { :note => @note } %>" );
     $new_note[0].reset();
     $('#notes_content').find('ul.list li:first').hide().fadeIn(1000);
+    rednote.updateNoteTime();
   <% end %>
 }());
 

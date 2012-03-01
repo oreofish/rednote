@@ -6,8 +6,9 @@
       setTimeout( function() {
         <% @notes.each do |note| %>
           commentsManager.bindCommentHandler(<%= note.id %>);
-          $('#attach_collapse<%= note.id %>').collapse();
         <% end %>
+
+        rednote.updateNoteTime();
       }, 100 );
     <% end %>
 });

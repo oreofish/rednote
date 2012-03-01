@@ -1,19 +1,28 @@
 <%# encoding: utf-8 %>
 
-<div class="form-actions pull-right">
-<%= link_to "创建新任务", new_root_tasks_path, :class => 'btn'  %>
+<div class="form-actions">
+  <div class="row-fluid">
+    <h3 class="span3">项目</h3>
+    <div class="btn-group span6" data-toggle="buttons-radio">
+      <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
+      <%= link_to "全部", tasks_path(:project => @all_projects), :class => css_class %>
+      <% 0.upto(@projects.count - 1) do |i| %>
+      <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
+      <% end %>
+    </div>
+
+    <div class="span3">
+      <%= form_tag new_project_tasks_path, :class => :form do %>
+      <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
+      <button class="btn" type="submit">新建</button>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<div class="page-header">
-  <h1>Listing tasks</h2>
-</div>
-
-<h3>管理任务</h3>
-<% @manage_tasks.each do |task| %>
+<h3>任务</h3>
+<% @tasks.each do |task| %>
   <%= render :partial => 'item', :locals => { :task => task } %>
 <% end %>
 
-<h3>实做任务</h3>
-<% @real_tasks.each do |task| %>
-  <%= render :partial => 'item', :locals => { :task => task } %>
-<% end %>
+<%= render 'form' %>

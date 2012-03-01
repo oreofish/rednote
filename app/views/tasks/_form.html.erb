@@ -1,19 +1,10 @@
 <%# encoding: utf-8 %>
 
-<h3>添加子任务</h3>
-
-<%= form_for @new_task, :url => tasks_path, :html => { :class => :form } do |f| %>
-<fieldset>
-  <div class="control docs-input-sizes">
-    <%= f.text_field :content, :class => 'span12', :placeholder => "内容" %><br />
-    <%= f.number_field :estimate, :class => 'span4' %>
-    <%= f.text_field :deadline, :class => 'span4' %>
-    <%= f.hidden_field :parent_id, :value => @task.id %>
-    
-    <div class="form-actions">
-      <button class="btn btn-primary pull-right" type="submit">添加子任务</button>
-      <br />
-    </div>
-  </div>
-</fieldset>
-<% end %>
+<div class="form-actions">
+  <%= form_tag tasks_path, :class => :form do %>
+    <%= text_field :task, :content, :class => 'input-xxlarge', :placeholder => "任务描述" %>
+    <br />
+    所属项目： <%= collection_select :project, :name,  @projects, :name, :name %>
+    <button class="btn btn-primary" type="submit">添加任务</button>
+  <% end %>
+</div>

@@ -21,13 +21,17 @@ def make_users
                 'shen',
               ]
   password = "abc123"
-  
+
+  avatar = File.open('public/images/avatar.jpg')
+
   (0..3).each do |i|
-    User.create!(:nickname => nicknames[i],
-                 :email => emails[i],
-                 :password => password,
-                 :password_confirmation => password
-                 )
+      User.create!(:nickname => nicknames[i],
+                   :email => emails[i],
+                   :avatar => avatar,
+                   :preview => avatar,
+                   :password => password,
+                   :password_confirmation => password
+                  )
   end
 end
 

@@ -2,7 +2,7 @@
 
 <li id="note<%= note.id %>" class="">
 <div class="left"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
-<div class="item">
+<div class="item <%= 'label-info' if current_user.id == note.user_id and not note.message == 0 %>">
 
   <div class="content">
     <%= note.summary %> 

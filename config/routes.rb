@@ -19,8 +19,6 @@ Rednote::Application.routes.draw do
   match ':users/crop_update' => 'users#crop_update'
   match ':users/avatar', :to  => 'users#update', :as => :user 
 
-
-
   root :to => "notes#index"
 
   resources :notes do
@@ -35,9 +33,9 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
-      get 'new_root'
-      post 'create_root'
-      get ':tasks/done'
+      get  ':tasks/done'
+      post 'new_project'
+      post 'set_tag'
     end
   end
   # The priority is based upon order of creation:

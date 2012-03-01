@@ -13,10 +13,15 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require spin
+//= require jquery-spin
 //= require twitter/bootstrap
 //= require jcrop
+//= require jquery-notetime
 //= require ckeditor/ckeditor
 //= require rednote_utils
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";
@@ -65,58 +70,9 @@ var commentsManager = {
     }
 };
 
-var time = {
-    updateTime: function() {
-        var $items = $('.item').has('.time');
-
-        var getTime = function(date) {
-            return {
-                year: date.getFullYear(),
-                month: date.getMonth()+1,
-                day: date.getDay(), //星期
-                day: date.getDate(), //日
-                hour: date.getHours(),
-                minute: date.getMinutes(),
-                second: date.getSeconds(),
-            };
-        };
-        
-        var now = getTime(new Date());
-
-        $items.each( function(idx, el) {
-            var $time = $(el).find('.time');
-            var creation = getTime(new Date($time.attr('data')));
-            if (now.year == creation.year) {
-                if (now.year == creation.year && now.month == creation.month && 
-                    now.day == creation.day) {
-                    if (now.hour == creation.hour) {
-                        if (now.minute == creation.minute) {
-                            var a = now.second - creation.second;
-                            $time.html(a+"秒前");
-                        } else {
-                            var b = now.minute - creation.minute;
-                            $time.html(b+"分钟前");
-                        }
-                    } else if (now.hour - creation.hour == 1 && creation.minute > now.minute  ) {
-                        $time.html(now.minute+60-creation.minute+"分钟前");
-                    } else {
-                        var c = now.hour - creation.hour;
-                        $time.html(c+"小时前");
-                    }
-                } else {
-                    $time.html(creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
-                }
-            } else {
-                $time.html(creation.year+"年"+creation.month+"月"+creation.day+"日"+creation.hour+":"+creation.minute);
-            }
-        });
-
-        setTimeout(time.updateTime, 60000);
-    }
-};
-
 $(document).ready( function() {
     scrolltop();
     commentsManager.bindHandlers();
-    time.updateTime();
+
+    rednote.updateNoteTime();
 } );

@@ -2,32 +2,43 @@
 
 <div class="row-fluid grid-bar">
   <div class="span2">
-    <%= link_to @task.parent_path, :class => 'btn' do %>
-      <i class="icon-chevron-left"></i>返回
+    <%= link_to tasks_path, :class => 'btn' do %>
+      <i class="icon-chevron-left"></i>返回列表
     <% end %>
   </div>
   <div class="span8">
-    <%= @task.user_id %>
-    <%= @task.parent_id %>
     <%= @task.content %>
-    <%= @task.estimate %>
-    <%= time_ago_in_words(@task.deadline) if @task.deadline %>
   </div>
   <div class="span2">
-    <%= link_to '完成', @task, :class => "btn" %>
+    <%= link_to "删除", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
   </div>
 </div>
 
-<% @subtasks.each do |subtask| %>
-  <%= render :partial => 'item', :locals => { :task => subtask } %>
-<% end %>
-
 <div class="row-fluid">
-  <%= render "form" %>
+  <div class="span2">项目：</div>
+  <div class="span4"><%= @task.project_list[0] %></div>
+  <br />
+  <div class="span2">创建人：</div>
+  <div class="span4"><%= @task.user.nickname %></div>
+  <br />
+  <div class="span2">负责人：</div>
+  <div class="span4 inplace"><%= best_in_place @task, :assigned_to, type: :select, :collection => User::list_user_options %></div>
+  <br />
+  <div class="span2">内容：</div>
+  <div class="span4 inplace"><%= best_in_place @task, :content, type: :textarea %></div>
+  <br />
+  <div class="span2">估算时间：</div>
+  <div class="span4 inplace"><%= best_in_place @task, :estimate, type: :select, :collection => [[0.5,'0.5'], [1, '1'], [2, '5']] %>天</div>
+  <br />
+  <div class="span2">截止时间：</div>
+  <div class="span4 inplace"><%= best_in_place @task, :deadline, type: :date %></div>
 </div>
 
 <div class="form-actions">
-<%= link_to "Edit", edit_task_path(@task), :class => 'btn' %>
-<%= link_to "Delete", task_path(@task), :method => "delete", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}", :class => 'btn' %>
+  <%= form_tag set_tag_tasks_path, :class => :form do %>
+    <%= hidden_field :task, :id, :value => @task.id %>
+    所属项目：
+    <%= collection_select :project, :name,  @projects, :name, :name %>
+    <button class="btn" type="submit">修改</button>
+  <% end %>
 </div>
-
