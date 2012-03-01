@@ -1,11 +1,14 @@
 Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
+  match 'comments/dono', :to => 'comments#dono'
   resources :comments
 
   match 'likes/create', :to => 'likes#create'
   match 'likes/update', :to => 'likes#update'
   match 'likes/destroy', :to => 'likes#destroy'
+
+
 
   devise_for :users
 

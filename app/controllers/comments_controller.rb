@@ -52,4 +52,13 @@ class CommentsController < ApplicationController
       format.js 
     end
   end
+  
+  def dono
+    @note_id = params[:note_id]
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
 end
