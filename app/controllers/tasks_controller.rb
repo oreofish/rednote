@@ -10,11 +10,10 @@ class TasksController < ApplicationController
     @task = Task.new
     @projects = Task.project_counts
     
-    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    
     @project_class = Array.new
     @projects.each { |project| @project_class << ( project.name == @current_project ? 'btn active' : 'btn') }
 
+    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb
@@ -42,12 +41,25 @@ class TasksController < ApplicationController
       status = Task::DOING
     end
 
-    case status
-      when Task::DOING then @task.touch(:start_at)
-      when Task::DONE  then @task.touch(:finish_at)
-    end
-    
     @task.status = status
+    
+    # set start_at and finish_at
+    case status
+    when Task::DOING
+      @task.finish_at = nil # reset finish_at
+      last_done_task = Task.find(:first, :order => "finish_at DESC")
+      if last_done_task
+        if last_done_task.finish_at.to_datetime.cweek != Date.today.cweek
+          @task.start_at = Date.beginning_of_week
+        else
+          @task.start_at = last_done_task.finish_at
+        end
+      else
+        @task.start_at = Date.beginning_of_week
+      end
+    when Task::DONE
+      @task.touch(:finish_at)
+    end
     
     respond_to do |format|
       if @task.save

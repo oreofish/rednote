@@ -1,6 +1,23 @@
 module TasksHelper
   include ActsAsTaggableOn::TagsHelper
   
+  def three_type_tasks(tasks)
+    coming_tasks = Array.new
+    recent_tasks = Array.new
+    past_tasks = Array.new
+    current_week = Date.today.cweek
+    
+    tasks.each do |task|
+      case task.status
+      when Task::BACKLOG then coming_tasks << task
+      when Task::TODO then recent_tasks << task
+      when Task::DOING then recent_tasks << task
+      when Task::DONE then past_tasks << task
+      end
+    end
+    return coming_tasks, recent_tasks, past_tasks
+  end
+  
   def task_css(task, addon)
     status_class = ['task-backlog', 'task-todo', 'task-doing', 'task-done', 'task-cancel']
     time_css = ['task-past', 'task-recent', 'task-coming']
