@@ -18,9 +18,6 @@
   <div class="span2">项目：</div>
   <div class="span4"><%= @task.project_list[0] %></div>
   <br />
-  <div class="span2">里程碑：</div>
-  <div class="span4"><%= @task.milestone_list[0] %></div>
-  <br />
   <div class="span2">创建人：</div>
   <div class="span4"><%= @task.user.nickname %></div>
   <br />
@@ -42,8 +39,6 @@
     <%= hidden_field :task, :id, :value => @task.id %>
     所属项目：
     <%= collection_select :project, :name,  @projects, :name, :name %>
-    里程碑：
-    <%= collection_select :milestone, :name,  @milestones, :name, :name %>
     <button class="btn" type="submit">修改</button>
   <% end %>
 </div>

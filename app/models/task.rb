@@ -15,7 +15,7 @@
 class Task < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable
-  acts_as_taggable_on :projects, :milestones
+  acts_as_taggable_on :projects
   
   belongs_to :task
   belongs_to :user

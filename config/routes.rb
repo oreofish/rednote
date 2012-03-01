@@ -19,8 +19,6 @@ Rednote::Application.routes.draw do
   match ':users/crop_update' => 'users#crop_update'
   match ':users/avatar', :to  => 'users#update', :as => :user 
 
-
-
   root :to => "notes#index"
 
   resources :notes do
@@ -37,7 +35,6 @@ Rednote::Application.routes.draw do
     collection do
       get  ':tasks/done'
       post 'new_project'
-      post 'new_milestone'
       post 'set_tag'
     end
   end

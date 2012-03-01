@@ -5,32 +5,15 @@
     <h3 class="span3">项目</h3>
     <div class="btn-group span6" data-toggle="buttons-radio">
       <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
-      <%= link_to "全部", tasks_path(:project => @all_projects, :milestone => @current_milestone), :class => css_class %>
+      <%= link_to "全部", tasks_path(:project => @all_projects), :class => css_class %>
       <% 0.upto(@projects.count - 1) do |i| %>
-      <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name, :milestone => @current_milestone), :class => @project_class[i] %>
+      <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
       <% end %>
     </div>
 
     <div class="span3">
       <%= form_tag new_project_tasks_path, :class => :form do %>
       <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
-      <button class="btn" type="submit">新建</button>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row-fluid">
-    <h3 class="span3">里程碑</h3>
-    <div class="btn-group span6" data-toggle="buttons-radio">
-      <% css_class = ( @current_milestone.index(',') ? 'btn active' : 'btn' ) %>
-      <%= link_to "全部", tasks_path(:project => @current_project, :milestone => @all_milestones), :class => css_class %>
-      <% 0.upto(@milestones.count - 1) do |i| %>
-      <%= link_to "#{@milestones[i].name}(#{@milestones[i].count})", tasks_path(:project => @current_project, :milestone => @milestones[i].name), :class => @milestone_class[i] %>
-      <% end %>
-    </div>
-    <div class="span3">
-      <%= form_tag new_milestone_tasks_path, :class => :form do %>
-      <%= text_field :milestone, :name, :class => 'input-small', :placeholder => "里程碑名称" %>
       <button class="btn" type="submit">新建</button>
       <% end %>
     </div>

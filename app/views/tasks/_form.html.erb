@@ -5,7 +5,6 @@
     <%= text_field :task, :content, :class => 'input-xxlarge', :placeholder => "任务描述" %>
     <br />
     所属项目： <%= collection_select :project, :name,  @projects, :name, :name %>
-    里程碑：   <%= collection_select :milestone, :name,  @milestones, :name, :name %>
     <button class="btn btn-primary" type="submit">添加任务</button>
   <% end %>
 </div>
