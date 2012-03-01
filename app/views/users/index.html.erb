@@ -3,7 +3,7 @@
   <h2 class="title"> 
     <%= @user.nickname %>
   </h2>
-  <%= link_to image_tag(@avatar, :class => "avatar"), users_avatar_path %>
+  <%= link_to image_tag(current_user.avatar_url(:thumb)), users_avatar_path %>
   <p><%= @nickname %></p>
   <p>发布数: <%= @notes_size %></p>
 </div>
