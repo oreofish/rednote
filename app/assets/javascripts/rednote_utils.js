@@ -188,6 +188,7 @@ rednote.logger = {
         
         num=Number(num)+1;
         $info.text( $info.text().replace(/(\d+)/,num) );
+        $info.attr("style","");
 
         var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
         $note.find('div.item').addClass("label-info");
@@ -203,7 +204,9 @@ function setup_faye(){
     var client = new Faye.Client('http://'+server+':9292/faye');
     var strs = document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length);
     var str = strs.substring(0,strs.indexOf(";"));
-    
+    if ( strs.indexOf(";") == -1 ) {
+        str = strs;
+    }
 
     client.subscribe("/notes/*",function(data){
         //eval(data);
