@@ -49,13 +49,13 @@ class TasksController < ApplicationController
       @task.finish_at = nil # reset finish_at
       last_done_task = Task.find(:first, :order => "finish_at DESC")
       if last_done_task
-        if last_done_task.finish_at.to_datetime.cweek != Date.today.cweek
-          @task.start_at = Date.beginning_of_week
+        if last_done_task.finish_at.nil? or last_done_task.finish_at.to_datetime.cweek != Date.today.cweek
+          @task.start_at = Date.today.beginning_of_week
         else
           @task.start_at = last_done_task.finish_at
         end
       else
-        @task.start_at = Date.beginning_of_week
+        @task.start_at = Date.today.beginning_of_week
       end
     when Task::DONE
       @task.touch(:finish_at)
