@@ -1,5 +1,9 @@
 Rednote::Application.routes.draw do
 
+
+  resources :debits
+  resources :books
+
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'
   resources :comments

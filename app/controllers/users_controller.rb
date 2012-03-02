@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   end
 
   def search_nickname
-      @name = params[:nickname]
+      @name = params[:val]
       @user_by_nickname = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{@name}'")
 
       if @user_by_nickname.size == 0  
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def search_email
-      @email = params[:email]
+      @email = params[:val]
       @user_by_email = User.find_by_sql("SELECT users.* FROM users WHERE email='#{@email}'")
 
       if @user_by_email.size == 0

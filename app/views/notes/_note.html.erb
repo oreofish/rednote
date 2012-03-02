@@ -1,16 +1,16 @@
 <%# encoding: utf-8 %>
 
-<li id="note<%= note.id %>" class="">
-<div class="left"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
-<div class="item <%= 'label-info' if current_user.id == note.user_id and not note.message == 0 %>">
+<li id="note<%= note.id %>" class="row-fluid">
+<div class="span1"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
+<div class="span11 item">
 
   <div class="content">
     <%= note.summary %> 
   </div>
 
   <% if note.kind > 0 %>
-    <button class="btn btn-info" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>"> 
-      展开 <i class='icon-chevron-down'></i>
+    <button class="btn-mini" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>"> 
+      <i class='icon-chevron-down'></i>
     </button>
     <br/>
     <div id="attach_collapse<%= note.id %>" class="collapse">
@@ -23,7 +23,9 @@
       <%= link_to '详细', note, :class => 'btn' %>
       <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => 'btn' %>
     <% end %>
-    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => "btn comments_link" %>
+    
+    <% (current_user.id == note.user_id and not note.message == 0)? myclass="btn comments_link btn-warning" : myclass="btn comments_link"%>
+    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
         <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags btn" %> 
@@ -42,6 +44,6 @@
   <div class="comments_list well" style="display:none">
   </div>
 </div>
-<hr>
 </li>
+<hr>
 

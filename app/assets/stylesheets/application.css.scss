@@ -14,6 +14,10 @@
  *= require_tree .
  */
 
+body {
+    background: #c4c4c4 url("/assets/web-app-theme/themes/default/images/bgd.jpg");
+    font-family: helvetica, arial, sans-serif;
+}
 
 .backToTop {
     display: none;
