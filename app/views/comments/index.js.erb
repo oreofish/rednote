@@ -2,6 +2,7 @@
     var $item = $('#note<%= @note.id %>').find('div.item');
     var $link = $item.find('a.comments_link');
     $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
+    $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
 
     var $list = $item.find('div.comments_list');
     $list.html( "<%= j render( 'comment_box') %>" );
@@ -11,6 +12,11 @@
     <% if @note.user_id == current_user.id  %>
       $item.removeClass("label-info");
       $num = $('#update_info');
-      $num.text( $num.text().replace(/\d+/, <%= current_user.notes.sum("message") %>) );
+      var new_num = <%= current_user.notes.sum("message")%>;
+      $num.text( $num.text().replace(/\d+/, new_num) );
+      if( Number(new_num) === 0 ) {
+        $num.attr("style","display:none;");
+      }
+
     <%end%>
 }());

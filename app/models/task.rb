@@ -26,10 +26,13 @@ class Task < ActiveRecord::Base
   validates  :content, :presence => true,
                        :length   => { :maximum => 255 }
 
-  attr_accessible :assigned_to, :content, :estimate, :deadline
+  attr_accessible :assigned_to, :content, :estimate, :deadline,
+                  :status, :start_at, :finish_at
   
-  TODO = 0
-  DOING = 1
-  DONE = 2
-  CANCEL = 3
+  default_scope order(:status, :updated_at)
+  
+  BACKLOG = 0
+  TODO = 1
+  DOING = 2
+  DONE = 3
 end

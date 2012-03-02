@@ -188,6 +188,7 @@ rednote.logger = {
         
         num=Number(num)+1;
         $info.text( $info.text().replace(/(\d+)/,num) );
+        $info.attr("style","");
 
         var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
         $note.find('div.item').addClass("label-info");
@@ -203,7 +204,9 @@ function setup_faye(){
     var client = new Faye.Client('http://'+server+':9292/faye');
     var strs = document.cookie.substring(document.cookie.indexOf("current_user_id=")+16,document.cookie.length);
     var str = strs.substring(0,strs.indexOf(";"));
-    
+    if ( strs.indexOf(";") == -1 ) {
+        str = strs;
+    }
 
     client.subscribe("/notes/*",function(data){
         //eval(data);
@@ -271,7 +274,57 @@ function update_crop(coords) {
     $("#crop_h").val(Math.round(coords.h * ratio));
 };
 
+function waring() {
+    var box_nickname = $('#nickname_input');
+    var input_nickname = $('#user_nickname');
+    var label_nickname = $('#nickname_waring');
+    var box_email = $('#email_input');
+    var input_email = $('#user_email');
+    var label_email = $('#email_waring');
+
+    input_nickname.focusout(function() {
+        if(input_nickname.val() === "") {
+            box_nickname.removeClass("success");
+            box_nickname.addClass("error");
+            label_nickname.text("不能为空"); 
+        }else {
+            $.get("/users/search_nickname",{nickname:input_nickname.val()},function(bool){
+                if (bool === "ture") {
+                    box_nickname.removeClass("error");
+                    box_nickname.addClass("success");
+                    label_nickname.text("可以注册");
+                } else {
+                    box_nickname.removeClass("success");
+                    box_nickname.addClass("error");
+                    label_nickname.text("用户已经存在"); 
+                }
+            })
+        }
+    });
+
+    input_email.focusout(function() {
+        if(input_email.val() === "") {
+            box_email.removeClass("success");
+            box_email.addClass("error");
+            label_email.text("不能为空"); 
+        }else {
+            $.get("/users/search_email",{ email:input_email.val()},function(bool){
+                if (bool === "ture") {
+                    box_email.removeClass("error");
+                    box_email.addClass("success");
+                    label_email.text("可以注册");
+                } else {
+                    box_email.removeClass("success");
+                    box_email.addClass("error");
+                    label_email.text("用户已经存在"); 
+                }
+            })
+        }
+    });
+};
+
 $(function(){
     setup_faye();
     jcrop.crop();
+    waring();
 });

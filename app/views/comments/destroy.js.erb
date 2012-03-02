@@ -1,3 +1,10 @@
 <% if @comment.valid? %>
     $('#main-contents').find('#comment<%= @comment.id%>').remove();
+    
+    var $item = $('#note<%= @comment.commentable_id %>').find('div.item');
+    var $link = $item.find('a.comments_link');
+    var num = $link.text().match(/\d+/);
+    num = Number(num)-1;
+    $link.text( $link.text().replace(/\d+/, num) );
+
 <% end %>

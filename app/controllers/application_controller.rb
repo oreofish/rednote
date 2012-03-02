@@ -2,7 +2,7 @@ require 'socket'
 require "net/http"
 
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:search_nickname, :search_email]
   protect_from_forgery
   helper_method :local_ip 
   helper_method :broadcast

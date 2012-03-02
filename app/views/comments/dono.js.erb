@@ -1,0 +1,7 @@
+(function() {
+  var $item = $('#note<%= @note_id %>').find('div.item');
+    var $link = $item.find('a.comments_link');
+    $link.attr("href","<%= comments_path(:note_id => @note_id)%>");
+
+    
+}());

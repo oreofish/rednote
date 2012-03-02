@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_filter :default_avatar
+    before_filter :default_avatar, :except => [:search_nickname, :search_email]
 
   def index
       @avatar = current_user.avatar
@@ -97,6 +97,28 @@ class UsersController < ApplicationController
       @user.avatar = @user.preview
       @user.save!
       redirect_to '/users/avatar'
+  end
+
+  def search_nickname
+      @name = params[:nickname]
+      @user_by_nickname = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{@name}'")
+
+      if @user_by_nickname.size == 0  
+        render :inline => "ture" 
+      else 
+        render :inline => "false" 
+      end
+  end
+
+  def search_email
+      @email = params[:email]
+      @user_by_email = User.find_by_sql("SELECT users.* FROM users WHERE email='#{@email}'")
+
+      if @user_by_email.size == 0
+        render :inline => "ture" 
+      else 
+        render :inline => "false" 
+      end
   end
 
   private

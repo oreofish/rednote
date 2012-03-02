@@ -13,6 +13,8 @@
  *= require twitter/bootstrap
  *= require_tree .
  */
+
+
 .backToTop {
     display: none;
     width:50px;
@@ -22,7 +24,7 @@
     background: #666 url(/images/backtotop.gif) center center no-repeat;
     background-color:#666 ;
     color:#fff;
-    font-size:$small-font;
+    font-size:12px;
     text-align:center;
     position:fixed;
     _position:absolute;

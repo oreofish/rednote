@@ -10,11 +10,10 @@ class TasksController < ApplicationController
     @task = Task.new
     @projects = Task.project_counts
     
-    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    
     @project_class = Array.new
     @projects.each { |project| @project_class << ( project.name == @current_project ? 'btn active' : 'btn') }
 
+    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb
@@ -35,17 +34,40 @@ class TasksController < ApplicationController
     end
   end
 
-  def done
+  def set_status
     @task = Task.find(params[:id])
-    respond_to do |format|
-      if @task.update_attributes(:status => 1)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.js # done.js.erb
-        format.json { head :no_content }
+    status = @task.status + 1
+    if @task.status == Task::DONE
+      status = Task::DOING
+    end
+
+    @task.status = status
+    
+    # set start_at and finish_at
+    case status
+    when Task::DOING
+      @task.finish_at = nil # reset finish_at
+      last_done_task = Task.find(:first, :order => "finish_at DESC")
+      if last_done_task
+        if last_done_task.finish_at.nil? or last_done_task.finish_at.to_datetime.cweek != Date.today.cweek
+          @task.start_at = Date.today.beginning_of_week
+        else
+          @task.start_at = last_done_task.finish_at
+        end
       else
-        format.html { render action: "edit" }
-        format.js # done.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        @task.start_at = Date.today.beginning_of_week
+      end
+    when Task::DONE
+      @task.touch(:finish_at)
+    end
+    
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        format.js
+      else
+        format.html { redirect_to tasks_path, notice: 'Task was failed to updated.' }
+        format.js
       end
     end
   end
@@ -94,6 +116,7 @@ class TasksController < ApplicationController
     @task = Task.new(:content => params[:task][:content])
     @task.project_list = params[:project][:name]
     @task.user = current_user
+    @task.status = Task::TODO
 
     respond_to do |format|
       if @task.save

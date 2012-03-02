@@ -20,6 +20,7 @@ gem 'acts_as_commentable'
 gem 'jcrop-rails'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
+#gem 'compass_twitter_bootstrap'
 gem 'best_in_place'
 gem "simple_form"
 
@@ -56,6 +57,7 @@ gem 'execjs'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'compass-rails'
   gem 'uglifier'
 end
 

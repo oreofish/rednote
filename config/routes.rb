@@ -1,14 +1,19 @@
 Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
+  match 'comments/dono', :to => 'comments#dono'
   resources :comments
 
   match 'likes/create', :to => 'likes#create'
   match 'likes/update', :to => 'likes#update'
   match 'likes/destroy', :to => 'likes#destroy'
 
+
+
   devise_for :users
 
+  get "users/search_nickname"
+  get "users/search_email"
   get "users/page"
   get "users/avatar"
   get "users/mycomments"
@@ -33,7 +38,7 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
-      get  ':tasks/done'
+      get  'set_status'
       post 'new_project'
       post 'set_tag'
     end

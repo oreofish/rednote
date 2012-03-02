@@ -20,9 +20,51 @@
   </div>
 </div>
 
-<h3>任务</h3>
-<% @tasks.each do |task| %>
-  <%= render :partial => 'item', :locals => { :task => task } %>
+
+<% coming_tasks, recent_tasks, past_tasks = three_type_tasks(@tasks) %>
+
+<h3>待办任务</h3>
+<ul>
+<% coming_tasks.each do |task| %>
+  <li class="<%= task_css(task, "stretch-small-container") %>">
+  <div id="stretch-full">
+    <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
+      <%= task_sign(task).html_safe %>
+    <% end %>
+    
+    <%= task.content %>
+    <%= link_to task, :class => "label" do %>
+      <i class="icon-chevron-right"></i>
+    <% end %>
+  </div>
+  </li>
 <% end %>
+</ul>
+
+<h3>本周任务</h3>
+<ul>
+  <% recent_tasks.each do |task| %>
+    <%= render :partial => 'item', :locals => { :task => task } %>
+  <% end %>
+</ul>
+
+<h3>已完成任务</h3>
+<ul>
+<% past_tasks.each do |task| %>
+  <li class="<%= task_css(task, "stretch-small-container") %>">
+  <div id="stretch-full">
+    <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
+      <%= task_sign(task).html_safe %>
+    <% end %>
+    
+    <%= task.content %>
+    <%= link_to task, :class => "label" do %>
+      <i class="icon-chevron-right"></i>
+    <% end %>
+  </div>
+  </li>
+<% end %>
+</ul>
 
 <%= render 'form' %>
+
