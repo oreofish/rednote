@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Book:</b>
+  <%= @debit.book_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @debit.user_id %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @debit.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_debit_path(@debit) %> |
+<%= link_to 'Back', debits_path %>

@@ -27,6 +27,9 @@
             <li class='<%= "active" if controller_name == "tasks" %>'>
             <%= link_to "我的任务", tasks_path %>
             </li>
+            <li class='<%= "active" if controller_name == "index" %>'>
+            <%= link_to "我reading", books_path %>
+            </li>
           <% end %>
         </ul>
 
