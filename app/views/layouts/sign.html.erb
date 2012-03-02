@@ -30,13 +30,15 @@
   <body>
 
       <%= render "layouts/header" %>
-      <div class="container">
-                  <div class="span4 offset4">
-                      <%= yield %>
-                      <footer>
-                      <p>Copyright &copy; <%= Time.now.year %> Web App.</p>
-                      </footer>
-                  </div>
-      </div> <!-- /container -->
+      <div class="well span4 offset4">
+          <div class="container">
+              <div class="span4">
+                  <%= yield %>
+                  <footer>
+                  <p>Copyright &copy; <%= Time.now.year %> Web App.</p>
+                  </footer>
+              </div>
+          </div> <!-- /container -->
+      </div> 
   </body>
 </html>
