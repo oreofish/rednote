@@ -274,53 +274,37 @@ function update_crop(coords) {
     $("#crop_h").val(Math.round(coords.h * ratio));
 };
 
+function judge(box,value) {
+    var input = box.find('input');
+    var span = box.find('span');
+
+    input.focusout(function() {
+        if(input.val() === "") {
+            box.removeClass("success");
+            box.addClass("error");
+            span.text("不能为空"); 
+        } else {
+            $.get("/users/search_"+value,{val:input.val()},function(bool){
+                if (bool === "ture") {
+                    box.removeClass("error");
+                    box.addClass("success");
+                    span.text("可以注册");
+                } else {
+                    box.removeClass("success");
+                    box.addClass("error");
+                    span.text("用户已经存在"); 
+                }
+            })
+        }
+    });
+};
+
 function waring() {
     var box_nickname = $('#nickname_input');
-    var input_nickname = $('#user_nickname');
-    var label_nickname = $('#nickname_waring');
     var box_email = $('#email_input');
-    var input_email = $('#user_email');
-    var label_email = $('#email_waring');
 
-    input_nickname.focusout(function() {
-        if(input_nickname.val() === "") {
-            box_nickname.removeClass("success");
-            box_nickname.addClass("error");
-            label_nickname.text("不能为空"); 
-        }else {
-            $.get("/users/search_nickname",{nickname:input_nickname.val()},function(bool){
-                if (bool === "ture") {
-                    box_nickname.removeClass("error");
-                    box_nickname.addClass("success");
-                    label_nickname.text("可以注册");
-                } else {
-                    box_nickname.removeClass("success");
-                    box_nickname.addClass("error");
-                    label_nickname.text("用户已经存在"); 
-                }
-            })
-        }
-    });
-
-    input_email.focusout(function() {
-        if(input_email.val() === "") {
-            box_email.removeClass("success");
-            box_email.addClass("error");
-            label_email.text("不能为空"); 
-        }else {
-            $.get("/users/search_email",{ email:input_email.val()},function(bool){
-                if (bool === "ture") {
-                    box_email.removeClass("error");
-                    box_email.addClass("success");
-                    label_email.text("可以注册");
-                } else {
-                    box_email.removeClass("success");
-                    box_email.addClass("error");
-                    label_email.text("用户已经存在"); 
-                }
-            })
-        }
-    });
+    judge(box_nickname,"nickname");
+    judge(box_email,"email");
 };
 
 $(function(){
