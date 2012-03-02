@@ -34,12 +34,11 @@
     <div class="container">
       <div class="content">
         <div class="row">
-          <div class="span9" id="main-contents">
-            <%= yield %>
-          </div>
-          <div class="span1">&nbsp;</div>
-          <div class="span3">
+          <div class="span5">
             <%= render "layouts/sidebar" %>
+          </div>
+          <div class="span7" id="main-contents">
+            <%= yield %>
           </div>
         </div>
       </div>

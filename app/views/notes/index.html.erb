@@ -1,8 +1,7 @@
 <%# encoding: utf-8 %>
 
-  <div class="row">
-  <div id="note_publish" class="well">
-    <legend class="title">写一条笔记</legend>
+<div class="well">
+  <div id="note_publish">
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><%= link_to "消息", "#message", "data-toggle" => "tab", "data-target" => "#message"%></li>
@@ -24,7 +23,7 @@
 
               <% case attaches[idx] %>
               <% when "message" %>
-                <!-- stub --> 
+                写一条笔记
               <% when "image" %>
                 上传图片：<%= f.file_field :upload, :class=>"input-file" %>
 
@@ -70,7 +69,7 @@
 
               <% end %> <%# case end %>
 
-              <button type="submit" class="btn btn-large btn-primary pull-right">
+              <button type="submit" class="btn btn-primary pull-right">
                 发布
               </button>    
 
@@ -81,11 +80,9 @@
       </div> <%# attachment_block end %>
     </div>
   </div>
-  </div>
 
   <div class="flash"></div>
-  <div id="notes_content" class="row">
-    <div class="well">
+  <div id="notes_content">
       <ul class="list unstyled">
         <%= render "list" %>
       </ul>
@@ -93,7 +90,7 @@
       <!-- pager loading hinter -->
       <div class="inner" id="pager_loading">
       </div>
-    </div>
 
   </div> <!-- notes_content -->
+</div>
 

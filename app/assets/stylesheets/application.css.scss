@@ -10,14 +10,9 @@
  *
  *= require_self
  *= require jcrop
- *= require twitter/bootstrap
  *= require_tree .
+ *= require twitter/bootstrap
  */
-
-body {
-    background: #c4c4c4 url("/assets/web-app-theme/themes/default/images/bgd.jpg");
-    font-family: helvetica, arial, sans-serif;
-}
 
 .backToTop {
     display: none;
@@ -39,41 +34,6 @@ body {
     opacity:.6;
     filter:Alpha(opacity=60);
 }         
-
-#main {
-  width: 79%;
-  float: right;
-}
-
-#wrapper {
-  padding-top: 20px;
-  width: 900px;
-  margin:0 auto;
-}
-
-#box {
-    width: 500px;
-}
-
-.preview1 {
-    width:180px;
-    height:180px;
-    overflow:hidden;
-}
-
-.preview2 {
-    width:48px;
-    height:48px;
-    overflow:hidden;
-}
-
-.navbar-fixed-top{
-    background: #800;
-    background: -moz-linear-gradient(bottom,#800,#400);
-    background: -webkit-linear-gradient(bottom,#800,#400);
-    border-bottom: 1px solid whiteSmoke;
-    box-shadow: 0 0 8px rgba(0,0,0,.7);
-}
 
 .jcrop img {
     max-width: none;

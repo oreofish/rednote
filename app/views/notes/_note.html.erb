@@ -1,5 +1,6 @@
 <%# encoding: utf-8 %>
 
+<hr>
 <li id="note<%= note.id %>" class="row-fluid">
 <div class="span1"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
 <div class="span11 item">
@@ -9,33 +10,31 @@
   </div>
 
   <% if note.kind > 0 %>
-    <button class="btn-mini" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>"> 
-      <i class='icon-chevron-down'></i>
-    </button>
+    <a href="javascript:void(null)" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
     <br/>
     <div id="attach_collapse<%= note.id %>" class="collapse">
       <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
     </div>
   <% end %>
 
-  <div class="pull-right btn-group">
+  <div class="pull-right">
     <% if current_user.id==note.user.id %>
-      <%= link_to '详细', note, :class => 'btn' %>
-      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => 'btn' %>
+      <%= link_to '详细', note, :class => '' %>
+      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
     <% end %>
     
-    <% (current_user.id == note.user_id and not note.message == 0)? myclass="btn comments_link btn-warning" : myclass="btn comments_link"%>
+    <% (current_user.id == note.user_id and not note.message == 0)? myclass="label comments_link label-warning" : myclass="comments_link"%>
     <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
-        <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags btn" %> 
+        <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
       <% elsif not my_like.status and controller.action_name == "mytags" %>
-        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
-        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags btn" %>
+        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags" %>
+        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags" %>
       <% elsif not my_like.status and not controller.action_name == "mytags" %>
-        <%= link_to '已标记', "",:class => "btn disabled", :remote => true %>
+        已标记
       <% else %>
-        <%= link_to '已读完', "",:class => "disabled btn", :remote => true %>
+        已读完
       <% end %>
   </div>
   <div class="time" data="<%= note.created_at %>">
@@ -45,5 +44,4 @@
   </div>
 </div>
 </li>
-<hr>
 
