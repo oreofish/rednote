@@ -10,7 +10,7 @@
     
 
     <% if @note.user_id == current_user.id  %>
-      $item.removeClass("label-info");
+      $link.removeClass("btn-warning");
       $num = $('#update_info');
       var new_num = <%= current_user.notes.sum("message")%>;
       $num.text( $num.text().replace(/\d+/, new_num) );
