@@ -1,9 +1,7 @@
 <%# encoding: utf-8 %>
 
-<div class="well">
-
   <div class="row">
-  <div id="note_publish" class="well span8">
+  <div id="note_publish" class="well">
     <legend class="title">写一条笔记</legend>
     <div class="tabbable">
       <ul class="nav nav-pills">
@@ -37,16 +35,15 @@
                 </div>
               </div>
 
-              <div class="control-group">
-                <%= f.label "上传图片：", :class=>"control-label", :for => "note_upload" %>
-                <div class="controls">
-                  <%= f.file_field :upload, :class=>"input-file" %>
-                </div>
-              </div>
-
               <button type="submit" class="btn btn-large btn-primary pull-right">
                 <i class="icon-upload"></i> 发布
               </button>    
+
+              <div class="control-group">
+                <div class="controls">
+                  上传图片：<%= f.file_field :upload, :class=>"input-file" %>
+                </div>
+              </div>
             </fieldset>
           <% end %> 
         </div>
@@ -56,16 +53,15 @@
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 2 %>
 
-            <div class="control-group">
-              <%= f.label "链接：", :class=>"control-label", :for => "note_description" %>
-              <div class="controls">
-                <%= f.text_field :description, :class => "span6" %>
-              </div>
-            </div>
-
             <button type="submit" class="btn btn-large btn-primary pull-right">
               <i class="icon-upload"></i> 发布
             </button>    
+
+            <div class="control-group">
+              <div class="controls">
+                链接：<%= f.text_field :description, :class => "input-xxlarge" %>
+              </div>
+            </div>
           <% end %> 
         </div>
 
@@ -74,12 +70,15 @@
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 5 %>
 
-            <label>上传书籍：</label>  
-            <%= f.file_field :upload %>
-
             <button type="submit" class="btn btn-large btn-primary pull-right">
               <i class="icon-upload"></i> 发布
             </button>    
+
+            <div class="control-group">
+              <div class="controls">
+                上传书籍：<%= f.file_field :upload %>
+              </div>
+            </div>
           <% end %> 
         </div>
 
@@ -89,16 +88,13 @@
             <%= f.hidden_field :kind, :value => 4 %>
 
             <div class="control-group">
-              <label class="control-label">代码片段</label>
               <div class="controls">
-                <%= f.text_area :description, :rows => 8, :class => "span8" %>
+                <%= f.text_area :description, :rows => 8, :class => "span12", :placeholder => "粘贴代码片段"%>
               </div>
-            </div>
-
-            <div class="control-group"> 
-              <label class="control-label">选择语言</label>
               <div class="controls">
-                <select id="language_id" name="language[id]"><option value="C">C</option> 
+                选择语言
+                <select id="language_id" name="language[id]">
+                  <option value="C">C</option> 
                   <option value="Clojure">Clojure</option> 
                   <option value="CSS">CSS</option> 
                   <option value="Delphi">Delphi</option> 
@@ -117,12 +113,12 @@
                   <option value="XML">XML</option> 
                   <option value="YAML">YAML</option> 
                 </select> 
+                <button type="submit" class="btn btn-large btn-primary pull-right">
+                  <i class="icon-upload"></i> 发布
+                </button>    
               </div>
             </div>
 
-            <button type="submit" class="btn btn-large btn-primary pull-right">
-              <i class="icon-upload"></i> 发布
-            </button>    
           <% end %> 
         </div>
 
@@ -131,9 +127,7 @@
             <%= f.text_area :summary, :rows => 4, "placeholder" => "Write something", :class => "span12" %>
             <%= f.hidden_field :kind, :value => 1 %>
 
-            <%#<%= f.text_area :description %>
-            <textarea cols="40" id="note_code" name="note[description]" rows="8">
-            </textarea> 
+            <textarea id="note_code" name="note[description]" rows="6", class="span12"></textarea> 
             <script type="text/javascript"> 
               if (CKEDITOR.instances["note_code"]) { 
                 CKEDITOR.remove(CKEDITOR.instances["note_code"]); 
@@ -153,7 +147,7 @@
 
   <div class="flash"></div>
   <div id="notes_content" class="row">
-    <div class="well span8">
+    <div class="well">
       <ul class="list unstyled">
         <%= render "list" %>
       </ul>
@@ -165,4 +159,3 @@
 
   </div> <!-- notes_content -->
 
-</div>
