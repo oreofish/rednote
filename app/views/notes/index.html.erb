@@ -4,13 +4,13 @@
   <div id="note_publish" class="well">
     <legend class="title">写一条笔记</legend>
     <div class="tabbable">
-      <ul class="nav nav-pills">
-        <li><%= link_to "消息", "#message", "data-toggle" => "pill", "data-target" => "#message"%></li>
-        <li><%= link_to "图片", "#image",   "data-toggle" => "pill", "data-target" => "#image"%></li>
-        <li><%= link_to "链接", "#link",    "data-toggle" => "pill", "data-target" => "#link"%></li>
-        <li><%= link_to "书籍", "#book",    "data-toggle" => "pill", "data-target" => "#book"%></li>
-        <li><%= link_to "代码", "#code",    "data-toggle" => "pill", "data-target" => "#code"%></li>
-        <li><%= link_to "文本", "#text",    "data-toggle" => "pill", "data-target" => "#text"%></li>
+      <ul class="nav nav-tabs">
+        <li class="active"><%= link_to "消息", "#message", "data-toggle" => "tab", "data-target" => "#message"%></li>
+        <li><%= link_to "图片", "#image",   "data-toggle" => "tab", "data-target" => "#image"%></li>
+        <li><%= link_to "链接", "#link",    "data-toggle" => "tab", "data-target" => "#link"%></li>
+        <li><%= link_to "书籍", "#book",    "data-toggle" => "tab", "data-target" => "#book"%></li>
+        <li><%= link_to "代码", "#code",    "data-toggle" => "tab", "data-target" => "#code"%></li>
+        <li><%= link_to "文本", "#text",    "data-toggle" => "tab", "data-target" => "#text"%></li>
       </ul>
 
       <div id="attachment_block" class="tab-content row-fluid">
