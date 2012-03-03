@@ -1,19 +1,19 @@
 <%# encoding: utf-8 %>
 
-  <li class="<%= task_css(task, "stretch-long-container") %>">
-    <div id="stretch-full">
-      <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
-      <%= task_sign(task).html_safe %>
-      <% end %>
-    
-      <%= task.user_id %>
-      <%= task.content %>
-      <%= task.estimate %>
-      <%= time_ago_in_words(task.deadline) if task.deadline %>
-      <%= link_to task, :class => "label" do %>
-      <i class="icon-chevron-right"></i>
-      <% end %>
-aa<br />
-bb
-    </div>
-  </li>
+<li class="<%= task_css(task, css) %>">
+<div id="stretch-full">
+  <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "top-left" do %>
+    <%= task_sign(task).html_safe %>
+  <% end %>
+  
+  <span class="lt-check big-checkbox" title="Click to mark it done"></span>
+  <%= task.content %>
+  <%= task.user_id if showall == true %>
+  <%= task.estimate if showall == true %>
+  <%= time_ago_in_words(task.deadline) if task.deadline and showall == true %>
+
+  <%= link_to task, :class => "bottom-right" do %>
+    <i class="icon-chevron-right"></i>
+  <% end %>
+</div>
+</li>

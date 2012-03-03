@@ -1,3 +1,10 @@
+@import "compass/reset.scss";
+@import "compass/layout.scss";
+@import "compass/layout/stretching";
+@import "compass/utilities";
+@import "compass/css3";
+ 
+
 .purr {
     position: fixed;
     top: 30px;
@@ -14,23 +21,10 @@
     color: #0078B6;
 }
 
-@mixin radius($rad) {
-    -webkit-border-radius: $rad;
-    -moz-border-radius: $rad;
-    -o-border-radius: $rad;
-    border-radius: $rad;
-}
-
-@mixin shadow {
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-}
-
 @mixin block($size) {
-	margin: $size 0;
+	margin: 10px 5px;
 	padding: $size 0;
-    @include radius(5px);
+    @include border-radius(3px);
 }
 
 .task-backlog {
@@ -59,7 +53,7 @@
 
 .task-recent {
     @include block(15px);
-    @include shadow;
+    @include box-shadow(grey 1px 1px 3px);
 }
 
 .task-coming {
@@ -77,4 +71,64 @@
     border: 1px solid white;
 }
 
+
+/*---------------------------------------------------------------------------------------------*/
+ 
+@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
+ 
+#header {
+  background: #999999;
+  height: 72px; }
+ 
+#footer {
+  background: #cccccc; }
+
+
+
+.stretch-container {
+  border: 1px solid #999999;
+  height: 50px;
+  position: relative;
+  @include inline-block; }
+
+.stretch-small-container {
+  border: 1px solid #999999;
+  width: 45%;
+  height: 24px;
+  position: relative;
+  @include inline-block; }
+
+.stretch-long-container {
+  border: 1px solid white;
+  width: 100%;
+  height: 20px;
+  position: relative;
+  @include inline-block; }
+ 
+.stretched {
+  $stretch-color: #eff;
+  display: block;
+  font-size: 14px;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  vertical-align: middle;
+  padding: 0.5em; }
+ 
+#stretch-full {
+  @extend .stretched;
+  @include stretch; }
+ 
+#stretch-offset {
+  @extend .stretched;
+  @include stretch(1em, 1em, 1em, 1em); }
+ 
+#stretch-x {
+  @extend .stretched;
+  @include stretch-x; }
+ 
+#stretch-y {
+  @extend .stretched;
+  @include stretch-y; }
+
+/*---------------------------------------------------------------------------------------------*/
 	

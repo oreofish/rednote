@@ -1,22 +1,21 @@
 <%# encoding: utf-8 %>
 
-<div class="form-actions">
-  <div class="row-fluid">
-    <h3 class="span3">项目</h3>
-    <div class="btn-group span6" data-toggle="buttons-radio">
-      <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
-      <%= link_to "全部", tasks_path(:project => @all_projects), :class => css_class %>
-      <% 0.upto(@projects.count - 1) do |i| %>
-      <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
-      <% end %>
-    </div>
+<div class="pull-right">
+  <%= form_tag new_project_tasks_path, :class => :form do %>
+  <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
+  <button class="btn" type="submit">新建</button>
+  <% end %>
+</div>
 
-    <div class="span3">
-      <%= form_tag new_project_tasks_path, :class => :form do %>
-      <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
-      <button class="btn" type="submit">新建</button>
-      <% end %>
-    </div>
+<h3>项目</h3>
+
+<div class="form-actions">
+  <div class="btn-group" data-toggle="buttons-radio">
+    <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
+    <%= link_to "全部项目", tasks_path(:project => @all_projects), :class => css_class %>
+    <% 0.upto(@projects.count - 1) do |i| %>
+    <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
+    <% end %>
   </div>
 </div>
 
@@ -26,43 +25,21 @@
 <h3>待办任务</h3>
 <ul>
 <% coming_tasks.each do |task| %>
-  <li class="<%= task_css(task, "stretch-small-container") %>">
-  <div id="stretch-full">
-    <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
-      <%= task_sign(task).html_safe %>
-    <% end %>
-    
-    <%= task.content %>
-    <%= link_to task, :class => "label" do %>
-      <i class="icon-chevron-right"></i>
-    <% end %>
-  </div>
-  </li>
+    <%= render :partial => 'item', :locals => { :task => task, :css => 'stretch-small-container', :showall => false } %>
 <% end %>
 </ul>
 
 <h3>本周任务</h3>
 <ul>
   <% recent_tasks.each do |task| %>
-    <%= render :partial => 'item', :locals => { :task => task } %>
+    <%= render :partial => 'item', :locals => { :task => task, :css => 'stretch-long-container p0', :showall => true } %>
   <% end %>
 </ul>
 
 <h3>已完成任务</h3>
 <ul>
 <% past_tasks.each do |task| %>
-  <li class="<%= task_css(task, "stretch-small-container") %>">
-  <div id="stretch-full">
-    <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
-      <%= task_sign(task).html_safe %>
-    <% end %>
-    
-    <%= task.content %>
-    <%= link_to task, :class => "label" do %>
-      <i class="icon-chevron-right"></i>
-    <% end %>
-  </div>
-  </li>
+    <%= render :partial => 'item', :locals => { :task => task, :css => 'stretch-small-container p1', :showall => false } %>
 <% end %>
 </ul>
 

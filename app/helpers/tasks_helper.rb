@@ -10,9 +10,14 @@ module TasksHelper
     tasks.each do |task|
       case task.status
       when Task::BACKLOG then coming_tasks << task
-      when Task::TODO then recent_tasks << task
-      when Task::DOING then recent_tasks << task
-      when Task::DONE then past_tasks << task
+      when Task::DONE then 
+        if task.finish_at.nil? or task.finish_at.to_datetime.cweek < current_week
+          past_tasks << task
+        else
+          recent_tasks << task
+        end
+      else
+        recent_tasks << task
       end
     end
     return coming_tasks, recent_tasks, past_tasks
@@ -28,12 +33,10 @@ module TasksHelper
                when Task::TODO then 1
                when Task::DOING then 1
                when Task::DONE
-                 if task.finish_at.nil?
-                   1
-                 elsif task.finish_at.to_datetime.cweek == current_week
-                   1
-                 else
+                 if task.finish_at.nil? or task.finish_at.to_datetime.cweek < current_week
                    0
+                 else
+                   1
                  end
                else 0
                end
@@ -46,7 +49,7 @@ module TasksHelper
       when Task::BACKLOG
       "<i class='icon-chevron-down'></i>"
       when Task::TODO
-      "<i class='icon-time'></i>"
+      "<i class='icon-chevron-down'></i>"
       when Task::DOING
       "<i class='icon-screenshot'></i>"
       when Task::DONE

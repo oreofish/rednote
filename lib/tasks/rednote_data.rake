@@ -5,6 +5,7 @@ namespace :db do
     make_users
     make_notes
     make_comments
+    make_tasks
   end
 
 end
@@ -60,5 +61,35 @@ def make_comments
                              :commentable_id => note.id
                              )
     end
+  end
+end
+
+def make_tasks
+  users = User.all
+  users[0..1].each do |user|
+    task = user.tasks.create( :content => "recent task", :status => 0)
+    task.project_list = 'big project'
+    task.save
+    task = user.tasks.create( :content => "recent task", :status => 1)
+    task.project_list = 'small project'
+    task.save
+  end
+  users[2..3].each do |user|
+    task = user.tasks.create( :content => "recent task", :status => 2)
+    task.project_list = 'big project'
+    task.save
+    task = user.tasks.create( :content => "recent task", :status => 3)
+    task.project_list = 'small project'
+    task.save
+  end
+  users[2..3].each do |user|
+    task = user.tasks.create( :content => "recent task", :status => 3,
+                       :start_at => Date.today.prev_week, :finish_at => Date.today.prev_week)
+    task.project_list = 'big project'
+    task.save
+    task = user.tasks.create( :content => "recent task", :status => 3,
+                       :start_at => Date.today.prev_week, :finish_at => Date.today.prev_week)
+    task.project_list = 'small project'
+    task.save
   end
 end
