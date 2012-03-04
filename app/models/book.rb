@@ -1,6 +1,7 @@
 class Book < ActiveRecord::Base
   validates :title, :presence => true
   validates :url, :presence => true
+  validates :cover, :presence => true
 
   attr_accessible :title, :url, :cover
 
