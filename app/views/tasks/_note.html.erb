@@ -1,0 +1,17 @@
+<%# encoding: utf-8 %>
+
+<li class="<%= task_css(task, "stretch-note-container #{css}") %>">
+<div id="stretch-full">
+  <%= task.content %>
+  <%= task.user.nickname %>
+  <%= time_ago_in_words(task.deadline) if task.deadline %>
+
+  <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "bottom-left" do %>
+    <%= task_sign(task).html_safe %>
+  <% end %>
+  
+  <%= link_to task, :class => "bottom-right" do %>
+    <i class="icon-chevron-right"></i>
+  <% end %>
+</div>
+</li>

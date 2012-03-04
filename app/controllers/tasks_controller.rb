@@ -36,15 +36,14 @@ class TasksController < ApplicationController
 
   def set_status
     @task = Task.find(params[:id])
-    status = @task.status + 1
-    if @task.status == Task::DONE
-      status = Task::DOING
-    end
-
-    @task.status = status
+    
+    #update status of task
+    @oldstatus = @task.status
+    @task.status += 1
+    @task.status = Task::DOING if @oldstatus == Task::DONE
     
     # set start_at and finish_at
-    case status
+    case @task.status
     when Task::DOING
       @task.finish_at = nil # reset finish_at
       last_done_task = Task.find(:first, :order => "finish_at DESC")
