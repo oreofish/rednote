@@ -25,7 +25,7 @@ class BooksController < ApplicationController
                         list = {"book" => book, "display" => "want_wait"}
                     end
                 elsif @user_debit.size == 1 #in list
-                    if @book_debit.first == @debit # is the first one
+                    if @book_debit.first == @user_debit[0] # is the first one
                         list = {"book" => book, "display" => "borrow"}
                     elsif
                         list = {"book" => book, "display" => "waiting"}
