@@ -1,31 +1,35 @@
-<h1>Listing books</h1>
+<div class="well">
+  <div class="row-fluid">
+    <div class="span6">
+      <h1> 目前库存图书: <%= @books.size %> </h1>
+    </div>
+    <div class="pull-right"> 
+      <%= link_to '添加新书', new_book_path %>
+    </div>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    <br/>
+    <br/>
+    <% @arrs.each do |arr| %>
+      <div class="well">
+        <div class="span4"><%= arr["book"].title %></div>
 
-  <%= @arrs.size %>
-  <%= @books.size %>
-  <% @arrs.each do |arr| %>
-      <tr>
-          <td><%= arr["book"].title %></td>
+        <div class="span6">
           <% if arr["display"] == "borrow" %>
-              <td><%= link_to '借', books_borrow_path(:book_id => arr["book"].id), :method => :post %></td>
+            <%= link_to '借', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
           <% elsif arr["display"] == "want_wait" %>
-              <td><%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %></td>
+            <%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %>
           <% elsif arr["display"] == "waiting" %>
-              <td>排队中</td>
+            <label class="btn btn-info disabled">排队中</label>
           <% elsif arr["display"] == "reading" %>
-              <td>正在阅读</td>
+            <label class="btn btn-success disabled">正在阅读</label>
           <% end %>
-      </tr>
-  <% end %>
-</table>
+        </div>
 
-<br />
+        <br/>
+        <hr/>
+      </div>
+    <% end %>
 
-<%= link_to 'New Book', new_book_path %>
+  </div>
+</div>
+
