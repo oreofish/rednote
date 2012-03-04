@@ -5,6 +5,7 @@ Rednote::Application.routes.draw do
   resources :books
   get "books/wait"
   match 'books/borrow', :to => 'books#borrow'
+  match 'books/unwaiting', :to => 'books#unwaiting'
 
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'

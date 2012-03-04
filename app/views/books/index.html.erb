@@ -20,6 +20,7 @@
             <%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %>
           <% elsif arr["display"] == "waiting" %>
             <label class="btn btn-info disabled">排队中</label>
+            <%= link_to '取消排队', books_unwaiting_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
           <% elsif arr["display"] == "reading" %>
             <label class="btn btn-success disabled">正在阅读</label>
           <% end %>

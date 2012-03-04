@@ -44,13 +44,25 @@ class BooksController < ApplicationController
 
     def borrow
         @book = Book.find(params[:book_id])
-        @book.user_id = current_user.id
-        @book.status = 'reading'
-        @book.save!
-        @user_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE user_id=#{current_user.id} and book_id=#{@book.id}")[0]
-        if @user_debit != nil
-        @user_debit.destroy
+        if @book.status == "keep"
+            @book.user_id = current_user.id
+            @book.status = 'reading'
+            @book.save!
+            @user_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE user_id=#{current_user.id} and book_id=#{@book.id}")[0]
+            if @user_debit != nil
+                @user_debit.destroy
+            end
         end
+
+        respond_to do |format|
+            format.html { redirect_to books_path }
+        end
+    end
+
+    def unwaiting
+        @book = Book.find(params[:book_id])
+        @user_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE user_id=#{current_user.id} and book_id=#{@book.id}")[0]
+        @user_debit.destroy
 
         respond_to do |format|
             format.html { redirect_to books_path }
