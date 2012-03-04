@@ -28,11 +28,12 @@ class DebitsController < ApplicationController
   # GET /debits/new.json
   def new
     @debit = Debit.new
+    @debit.book_id = params[:book_id]
+    @debit.user_id = current_user.id
+    @debit.save!
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.js # new.js.erb
-      format.json { render json: @debit }
+        format.html { redirect_to books_path }
     end
   end
 

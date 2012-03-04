@@ -3,6 +3,8 @@ Rednote::Application.routes.draw do
 
   resources :debits
   resources :books
+  get "books/wait"
+  match 'books/borrow', :to => 'books#borrow'
 
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'

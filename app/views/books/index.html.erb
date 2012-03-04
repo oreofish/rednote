@@ -8,14 +8,22 @@
     <th></th>
   </tr>
 
-<% @books.each do |book| %>
-  <tr>
-    <td><%= book.title %></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <%= @arrs.size %>
+  <%= @books.size %>
+  <% @arrs.each do |arr| %>
+      <tr>
+          <td><%= arr["book"].title %></td>
+          <% if arr["display"] == "borrow" %>
+              <td><%= link_to '借', books_borrow_path(:book_id => arr["book"].id), :method => :post %></td>
+          <% elsif arr["display"] == "want_wait" %>
+              <td><%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %></td>
+          <% elsif arr["display"] == "waiting" %>
+              <td>排队中</td>
+          <% elsif arr["display"] == "reading" %>
+              <td>正在阅读</td>
+          <% end %>
+      </tr>
+  <% end %>
 </table>
 
 <br />
