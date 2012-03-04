@@ -1,36 +1,53 @@
 <div class="well">
-  <div class="row-fluid">
+  <div class="row">
     <div class="span6">
       <h1> 目前库存图书: <%= @books.size %> </h1>
     </div>
     <div class="pull-right"> 
       <%= link_to '添加新书', new_book_path %>
     </div>
+  </div>
 
-    <br/>
-    <br/>
+  <br/>
+  <br/>
+
+  <div class="row">
     <% @arrs.each do |arr| %>
-      <div class="well">
-        <div class="span4"><%= arr["book"].title %></div>
-
-        <div class="span6">
-          <% if arr["display"] == "borrow" %>
-            <%= link_to '借', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
-          <% elsif arr["display"] == "want_wait" %>
-            <%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %>
-          <% elsif arr["display"] == "waiting" %>
-            <label class="btn btn-info disabled">排队中</label>
-            <%= link_to '取消排队', books_unwaiting_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
-          <% elsif arr["display"] == "reading" %>
-            <label class="btn btn-success disabled">正在阅读</label>
-          <% end %>
+      <div class="span6">
+        <div class="span2">
+          <div class="thumbnail">
+            <% if not arr["book"].cover.nil? %>
+              <%= image_tag "#{arr['book'].cover}" %>
+            <% end %>
+          </div>
         </div>
 
-        <br/>
+        <div class="span3">
+          <h2> <%= arr["book"].title %> </h2>
+        </div>
+
+        <div class="span3">
+          <%= link_to "豆瓣", "#{arr['book'].url}" %>
+        </div>
+      </div>
+
+      <div class="span2">
+        <% if arr["display"] == "borrow" %>
+          <%= link_to '借', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
+        <% elsif arr["display"] == "want_wait" %>
+          <%= link_to '排队', new_debit_path(:book_id => arr["book"].id) %>
+        <% elsif arr["display"] == "waiting" %>
+          <label class="btn btn-info disabled">排队中</label>
+          <%= link_to '取消排队', books_unwaiting_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
+        <% elsif arr["display"] == "reading" %>
+          <label class="btn btn-success disabled">正在阅读</label>
+        <% end %>
+      </div>
+
+      <div class="span8">
         <hr/>
       </div>
     <% end %>
-
   </div>
 </div>
 

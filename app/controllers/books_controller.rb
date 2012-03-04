@@ -87,7 +87,7 @@ class BooksController < ApplicationController
 
         respond_to do |format|
             if @book.save
-                format.html { redirect_to @book, notice: 'Debit was successfully created.' }
+                format.html { redirect_to books_path, notice: 'Debit was successfully created.' }
                 format.js # create.js.erb
                 format.json { render json: @book, status: :created, location: @book}
             else

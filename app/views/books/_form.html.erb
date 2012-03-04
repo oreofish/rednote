@@ -1,11 +1,31 @@
-<%= simple_form_for(@book) do |f| %>
-  <%= f.error_notification %>
+<%= form_for(@book, :html => {:multipart => true, :class => "form-horizontal well"} ) do |f| %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label "书名", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, :class => "input-xlarge" %>
+      </div>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-  </div>
+    <div class="control-group">
+      <%= f.label "豆瓣链接", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :url, :class => "input-xlarge", :placeholder => "http://books.douban.com/" %>
+      </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label "封面图片", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :cover, :class => "input-xlarge", :placeholder => "http://" %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        <i class="icon-upload"></i> 发布
+      </button>    
+      <%= link_to '返回书库', books_path, :class => "btn" %>
+    </div>
+  </fieldset>
 <% end %>
