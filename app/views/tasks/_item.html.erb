@@ -1,19 +1,13 @@
 <%# encoding: utf-8 %>
 
-  <li class="<%= task_css(task, "stretch-long-container") %>">
-    <div id="stretch-full">
-      <%= link_to set_status_tasks_path(:id => task.id), :id => "task#{task.id}", :class => "label" do %>
-      <%= task_sign(task).html_safe %>
-      <% end %>
-    
-      <%= task.user_id %>
-      <%= task.content %>
-      <%= task.estimate %>
-      <%= time_ago_in_words(task.deadline) if task.deadline %>
-      <%= link_to task, :class => "label" do %>
-      <i class="icon-chevron-right"></i>
-      <% end %>
-aa<br />
-bb
-    </div>
-  </li>
+<li class="<%= task_css(task, "task-recent") %>" id="task<%= task.id %>">
+  <%= link_to '', set_status_tasks_path(:id => task), :class => "lt-check big-checkbox", :remote => true %>
+  <%= task.content %><br />
+  负责人：<%= User.find(task.assigned_to).nickname if task.assigned_to %>,
+  预估时间：<%= task.estimate %>,
+  <%= time_ago_in_words(task.deadline) if task.deadline %>
+
+  <%= link_to task, :class => "bottom-right" do %>
+    <i class="icon-chevron-right"></i>
+  <% end %>
+</li>

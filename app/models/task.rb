@@ -31,8 +31,11 @@ class Task < ActiveRecord::Base
   
   default_scope order(:status, :updated_at)
   
-  BACKLOG = 0
-  TODO = 1
-  DOING = 2
-  DONE = 3
+  TODO = 0
+  DOING = 1
+  DONE = 2
+  HIGHEST = 3 # reserve
+  HIGH = 4 # reserve
+  CANCELED = 5 # reserve
+  MERGED = 6 # reserve
 end

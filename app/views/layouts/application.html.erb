@@ -12,6 +12,12 @@
 
     <!-- Le styles -->
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <script type="text/javascript">
+      CONFIG = {
+        "user": "<%= current_user.nickname %>"
+      };
+    </script>
+
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "http://" + local_ip + ":9292/faye.js" %>
     <style>
@@ -34,11 +40,10 @@
     <div class="container">
       <div class="content">
         <div class="row">
-          <div class="span9" id="main-contents">
+          <div class="span8" id="main-contents">
             <%= yield %>
           </div>
-          <div class="span1">&nbsp;</div>
-          <div class="span3">
+          <div class="span4">
             <%= render "layouts/sidebar" %>
           </div>
         </div>

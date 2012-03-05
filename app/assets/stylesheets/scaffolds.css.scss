@@ -5,12 +5,17 @@
   Special styles for presenting Bootstrap's documentation and examples
 */
 
-
 /* Body and structure
 -------------------------------------------------- */
 body {
+    background: #c4c4c4 url("/assets/web-app-theme/themes/default/images/bgd.jpg");
+    font-family: helvetica, arial, sans-serif;
+    font-size: 14px;
 }
 
+label,input,button,select,textarea {
+  font-size: 12px;
+}
 
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */
@@ -517,7 +522,7 @@ form.well {
 
 /* Tighten up spacing */
 .well hr {
-  margin: 18px 0;
+  margin: 10px 0;
 }
 
 /* Fake the :focus state to demo it */

@@ -96,7 +96,7 @@ class UsersController < ApplicationController
       @user.crop_w = params[:user]["crop_w"]
       @user.avatar = @user.preview
       @user.save!
-      redirect_to '/users/avatar'
+      redirect_to '/users'
   end
 
   def search_nickname

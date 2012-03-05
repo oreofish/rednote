@@ -1,3 +1,10 @@
+@import "compass/reset.scss";
+@import "compass/layout.scss";
+@import "compass/layout/stretching";
+@import "compass/utilities";
+@import "compass/css3";
+ 
+
 .purr {
     position: fixed;
     top: 30px;
@@ -14,23 +21,10 @@
     color: #0078B6;
 }
 
-@mixin radius($rad) {
-    -webkit-border-radius: $rad;
-    -moz-border-radius: $rad;
-    -o-border-radius: $rad;
-    border-radius: $rad;
-}
-
-@mixin shadow {
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.3);
-}
-
 @mixin block($size) {
-	margin: $size 0;
+	margin: 10px 5px;
 	padding: $size 0;
-    @include radius(5px);
+    position: relative;
 }
 
 .task-backlog {
@@ -55,11 +49,13 @@
 
 .task-past {
     @include block(5px);
+    @include border-radius(3px);
 }
 
 .task-recent {
-    @include block(15px);
-    @include shadow;
+    @include block(10px);
+    @include border-radius(3px);
+    @include box-shadow(grey 1px 1px 3px);
 }
 
 .task-coming {
@@ -77,4 +73,134 @@
     border: 1px solid white;
 }
 
+
+/*---------------------------------------------------------------------------------------------*/
+ 
+@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
+ 
+#header {
+  background: #999999;
+  height: 72px; }
+ 
+#footer {
+  background: #cccccc; }
+
+
+
+.stretch-container {
+  border: 1px solid #999999;
+  height: 50px;
+  position: relative;
+  @include inline-block; }
+
+.stretch-note-container {
+  width: 30%;
+  height: 40px;
+  position: relative;
+  font-size: 11px;
+  background: #ffa;
+  @include box-shadow(grey 1px 1px 3px);
+  @include inline-block; }
+
+.stretch-long-container {
+  border: 1px solid white;
+  width: 100%;
+  height: 20px;
+  font-size: 14px;
+  position: relative;
+  @include inline-block; }
+ 
+.stretched {
+  $stretch-color: #eff;
+  display: block;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  vertical-align: middle;
+  padding: 0.5em; }
+ 
+#stretch-full {
+  @extend .stretched;
+  @include stretch; }
+ 
+#stretch-offset {
+  @extend .stretched;
+  @include stretch(1em, 1em, 1em, 1em); }
+ 
+#stretch-x {
+  @extend .stretched;
+  @include stretch-x; }
+ 
+#stretch-y {
+  @extend .stretched;
+  @include stretch-y; }
+
+/*---------------------------------------------------------------------------------------------*/
 	
+
+.navbar-fixed-top{
+    background: #800;
+    background: -moz-linear-gradient(bottom,#800,#400);
+    background: -webkit-linear-gradient(bottom,#800,#400);
+    border-bottom: 1px solid whiteSmoke;
+    box-shadow: 0 0 8px rgba(0,0,0,.7);
+}
+
+
+/* corners of block
+-------------------------------------------------- */
+@mixin corner {
+    position: absolute;
+    z-index: 1;
+}
+
+.top-left {
+    @include corner;
+    left: -1px;
+    top: -3px;
+}
+
+.top-left:hover {
+    background: #aaa;
+}
+
+.top-right {
+    @include corner;
+    right: -2px;
+    top: -3px;
+}
+
+.bottom-left {
+    @include corner;
+    left: 0px;
+    bottom: 0px;
+}
+
+.bottom-right {
+    @include corner;
+    right: 0px;
+    bottom: 0px;
+}
+
+
+/* Big checkbox
+-------------------------------------------------- */
+.big-checkbox {
+    background: url("/images/checkbox-icons.png") no-repeat 0 0;
+    cursor: pointer;
+}
+
+.lt-check {
+    display: block;
+    float: left;
+    height: 25px;
+    width: 25px;
+}
+
+.status3 .lt-check{background-position:-39px -1px;}
+.status4 .lt-check{background-position:-80px -1px;}
+.status1 .lt-check{background-position:2px -1px;}
+.status0 .lt-check{background-position:-120px -1px;}
+.status2 .lt-check{background-position:-188px -1px;}
+.status5 .lt-check{background-position:-159px -1px;}
+.status6 .lt-check{background-position:-280px -1px;}
+

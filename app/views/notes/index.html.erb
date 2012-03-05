@@ -1,8 +1,7 @@
 <%# encoding: utf-8 %>
 
-  <div class="row">
-  <div id="note_publish" class="well">
-    <legend class="title">写一条笔记</legend>
+<div class="well">
+  <div id="note_publish">
     <div class="tabbable">
       <ul class="nav nav-tabs">
         <li class="active"><%= link_to "消息", "#message", "data-toggle" => "tab", "data-target" => "#message"%></li>
@@ -18,64 +17,46 @@
         <% attaches.each_index do |idx| %>
           <div class="tab-pane fade <%= 'in active' if attaches[idx] == 'message' %>" id="<%= attaches[idx] %>">
             <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-              <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么", :class => "span12" %>
+              <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
 
               <%= f.hidden_field :kind, :value => idx %>
+
               <% case attaches[idx] %>
               <% when "message" %>
-                <!-- stub --> 
+                写一条笔记
               <% when "image" %>
-                <div class="control-group">
-                  <%= f.label "上传图片：", :class=>"control-label", :for => "note_upload" %>
-                  <div class="controls">
-                    <%= f.file_field :upload, :class=>"input-file" %>
-                  </div>
-                </div>
+                上传图片：<%= f.file_field :upload, :class=>"input-file" %>
 
               <% when "link" %>
-                <div class="control-group">
-                  <%= f.label "链接：", :class=>"control-label", :for => "note_description" %>
-                  <div class="controls">
-                    <%= f.text_field :description, :class => "span6" %>
-                  </div>
-                </div>
+                链接：<%= f.text_field :description, :class => "span9" %>
 
               <% when "book" %>
-                <label>上传书籍：</label>  
-                <%= f.file_field :upload %>
+                上传书籍：<%= f.file_field :upload %>
 
               <% when "code" %>
-                <div class="control-group">
-                  <label class="control-label">代码片段</label>
-                  <div class="controls">
-                    <%= f.text_area :description, :rows => 8, :class => "span8" %>
-                  </div>
-                </div>
+                <%= f.text_area :description, :rows => 6, :class => "span12", :placeholder => "粘贴代码片段" %>
 
-                <div class="control-group"> 
-                  <label class="control-label">选择语言</label>
-                  <div class="controls">
-                    <select id="language_id" name="language[id]"><option value="C">C</option> 
-                      <option value="Clojure">Clojure</option> 
-                      <option value="CSS">CSS</option> 
-                      <option value="Delphi">Delphi</option> 
-                      <option value="DIFF">DIFF</option> 
-                      <option value="ERB">ERB</option> 
-                      <option value="Groovy">Groovy</option> 
-                      <option value="HAML">HAML</option> 
-                      <option value="HTML">HTML</option> 
-                      <option value="Java">Java</option> 
-                      <option value="JavaScript">JavaScript</option> 
-                      <option value="JSON">JSON</option> 
-                      <option value="PHP">PHP</option> 
-                      <option value="Python">Python</option> 
-                      <option value="Ruby">Ruby</option> 
-                      <option value="SQL">SQL</option> 
-                      <option value="XML">XML</option> 
-                      <option value="YAML">YAML</option> 
-                    </select> 
-                  </div>
-                </div>
+                选择语言
+                <select id="language_id" name="language[id]">
+                  <option value="C">C</option> 
+                  <option value="Clojure">Clojure</option> 
+                  <option value="CSS">CSS</option> 
+                  <option value="Delphi">Delphi</option> 
+                  <option value="DIFF">DIFF</option> 
+                  <option value="ERB">ERB</option> 
+                  <option value="Groovy">Groovy</option> 
+                  <option value="HAML">HAML</option> 
+                  <option value="HTML">HTML</option> 
+                  <option value="Java">Java</option> 
+                  <option value="JavaScript">JavaScript</option> 
+                  <option value="JSON">JSON</option> 
+                  <option value="PHP">PHP</option> 
+                  <option value="Python">Python</option> 
+                  <option value="Ruby">Ruby</option> 
+                  <option value="SQL">SQL</option> 
+                  <option value="XML">XML</option> 
+                  <option value="YAML">YAML</option> 
+                </select> 
 
               <% when "text" %>
                 <textarea id="note_code" name="note[description]" rows="6", class="span12"></textarea> 
@@ -88,9 +69,10 @@
 
               <% end %> <%# case end %>
 
-              <button type="submit" class="btn btn-large btn-primary pull-right">
-                <i class="icon-upload"></i> 发布
+              <button type="submit" class="btn btn-primary pull-right">
+                发布
               </button>    
+
             <% end %>  <%# form_for end %>
           </div>
       <% end %> <%# each end %>
@@ -98,11 +80,9 @@
       </div> <%# attachment_block end %>
     </div>
   </div>
-  </div>
 
   <div class="flash"></div>
-  <div id="notes_content" class="row">
-    <div class="well">
+  <div id="notes_content">
       <ul class="list unstyled">
         <%= render "list" %>
       </ul>
@@ -110,7 +90,7 @@
       <!-- pager loading hinter -->
       <div class="inner" id="pager_loading">
       </div>
-    </div>
 
   </div> <!-- notes_content -->
+</div>
 

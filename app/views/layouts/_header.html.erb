@@ -7,7 +7,8 @@
         <span class="i-bar"></span>
       </a>
 
-      <%= link_to 'Red Note', notes_path, :class => "brand" %>
+      <% @highlight = (local_ip == '172.16.82.163' ? 'color: #f33' : '' ) %>
+      <%= link_to 'Red Note', notes_path, :class => "brand", :style => @highlight %>
 
       <div class="container nav-collapse">
         <ul class="nav">
