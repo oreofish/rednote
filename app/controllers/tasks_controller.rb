@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class TasksController < ApplicationController
+  before_filter :authorized_user, :only => :destroy
+
   # GET /tasks
   # GET /tasks.json
   def index
@@ -14,6 +16,7 @@ class TasksController < ApplicationController
     @projects.each { |project| @project_class << ( project.name == @current_project ? 'btn active' : 'btn') }
 
     @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb
@@ -160,4 +163,11 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def authorized_user
+    task = current_user.tasks.find_by_id(params[:id])
+    redirect_to root_path if task.nil?
+  end
+  
 end
