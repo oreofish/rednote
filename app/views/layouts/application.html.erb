@@ -12,6 +12,12 @@
 
     <!-- Le styles -->
     <%= stylesheet_link_tag    "application", :media => "all" %>
+    <script type="text/javascript">
+      CONFIG = {
+        "user": "<%= current_user.nickname %>"
+      };
+    </script>
+
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "http://" + local_ip + ":9292/faye.js" %>
     <style>

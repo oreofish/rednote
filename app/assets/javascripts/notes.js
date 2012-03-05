@@ -4,9 +4,9 @@ $(function() {
 
         $('ul.nav-pills').on('show', function (e) {
             console.log('change' + e.target.toString());
-            var nowtab = e.target // activated tab
+            var nowtab = e.target; // activated tab
             var id = $(nowtab).attr('href').substr(1);
-            $('#'+id).find('.new_note')[0].reset();
+            $('#'+id).find('#new_note')[0].reset();
             if (id === "text") {
                 if (CKEDITOR.instances["note_code"]) {
                     CKEDITOR.instances["note_code"].setData('');

@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 
 (function() {
-  $('#note<%= @note.id%> ').fadeOut(1000, function(){
+  $('#note<%= @note.id%> ').fadeOut('fast', function(){
     $(this).remove();
   } );
 }());
