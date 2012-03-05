@@ -71,10 +71,12 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        broadcast '/notes/new', %Q{
-          nickname : #{current_user.nickname}, 
-          status: true 
-        }
+        broadcast '/notes/new', %Q/
+          {
+            nickname: "#{current_user.nickname}", 
+            status: true 
+          }/
+
         cookies[:offset] = cookies[:offset].to_i + 1
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.js 
@@ -107,8 +109,7 @@ class NotesController < ApplicationController
     @note.destroy
     broadcast '/notes/destroy', %Q/
       { 
-        'kind' : #{@note.kind},
-        'user' : #{current_user.nickname}
+        "nickname" : "#{current_user.nickname}"
       }/
 
     cookies[:offset] = cookies[:offset].to_i - 1

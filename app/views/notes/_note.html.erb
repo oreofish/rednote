@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 
-<hr>
 <li id="note<%= note.id %>" class="row-fluid">
+<hr>
 <div class="span1">
   <%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %>
 </div>
@@ -44,7 +44,6 @@
   <br/>
   <div class="comments_list well" style="display:none">
   </div>
-  <hr>
 </div>
 </li>
 

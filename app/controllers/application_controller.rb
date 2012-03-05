@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     if @kindsList.nil?
       # list of attachment kinds 
       @kindsList = [
-        :empty, # stub, no used
+        :message,
         :text,
         :link,
         :image,
@@ -59,6 +59,7 @@ class ApplicationController < ActionController::Base
     if @kindsMap.nil?
       # list of attachment kinds 
       @kindsMap = {
+        :message => 0,
         :text => 1,
         :link => 2,
         :image => 3,

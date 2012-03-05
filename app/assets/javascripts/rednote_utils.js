@@ -177,16 +177,25 @@ rednote.updateNoteTime = function() {
 };
 
 rednote.logger = {
-    record: function(msg) {
+    notifyCreate: function(msg) {
         console.log(msg);
-        var data = eval("("+msg['data']+")");
+        var data = eval("("+msg+")");
         if (data.status === true) {
-            if (CONFIG.user === data.nickname) {
-                rednote.flashController.doSuccess("有新笔记");
+            if (CONFIG.user !== data.nickname) {
+                rednote.flashController.doSuccess("有新笔记，请刷新显示");
             }
 
         } else {
             rednote.flashController.doFailure("新建笔记失败");
+        }
+    },
+
+    notifyDestroy: function(msg) {
+        console.log(msg);
+        var data = eval("("+msg+")");
+        console.log(data.nickname);
+        if (CONFIG.user !== data.nickname) {
+            rednote.flashController.doSuccess("有笔记被删除，请刷新");
         }
     },
 
@@ -229,8 +238,11 @@ function setup_faye(){
         incoming: function(message, callback) {
             switch( message['channel'] ) {
                 case "/notes/new":
+                    rednote.logger.notifyCreate(message['data']);
+                    break;
+
                 case "/notes/destroy":
-                    rednote.logger.record(message);
+                    rednote.logger.notifyDestroy(message['data']);
                     break;
 
                 case "/comments/new/"+str:
