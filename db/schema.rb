@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.integer  "user_id"
     t.text     "summary"
     t.integer  "kind",        :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "description"
     t.string   "upload"
     t.integer  "message",     :default => 0
@@ -113,13 +113,13 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "nickname"
     t.string   "avatar"
     t.string   "preview"

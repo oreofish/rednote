@@ -47,7 +47,6 @@ describe TasksController do
       task.save
       
       get :index, {}, valid_session
-      assigns(:aaa).should eq('aaa')
       assigns(:current_project).should eq('proj1')
       assigns(:current_project).should eq('proj1')
       assigns(:tasks).should eq([task])
