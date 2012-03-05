@@ -117,11 +117,12 @@ rednote.pager = function(action) {
 // handle flash messages and animations
 rednote.flashController = {
     _message: function(style, title, msg) {
+        title = title || "通知";
+        msg = msg || "";
         var $flash = $('div.flash');
         var templ = '<div class="alert alert-block ' + style + 'fade in">' +
             '<a class="close" data-dismiss="alert" href="#">×</a>' +
-            '<h4 class="alert-heading">' + title + '</h4>' +
-            '<p> ' + msg + '</p>' + '</div>';
+            '<strong>' + title + '</strong>' + msg + '</div>';
         $flash.append(templ); 
     }, 
     doFailure: function(title, msg) {
@@ -178,7 +179,15 @@ rednote.updateNoteTime = function() {
 rednote.logger = {
     record: function(msg) {
         console.log(msg);
-        rednote.flashController.doInfo(msg['channel'], msg['data'] );
+        var data = eval("("+msg['data']+")");
+        if (data.status === true) {
+            if (CONFIG.user === data.nickname) {
+                rednote.flashController.doSuccess("有新笔记");
+            }
+
+        } else {
+            rednote.flashController.doFailure("新建笔记失败");
+        }
     },
 
     updateinfo: function(msg) {
@@ -223,6 +232,7 @@ function setup_faye(){
                 case "/notes/destroy":
                     rednote.logger.record(message);
                     break;
+
                 case "/comments/new/"+str:
                     rednote.logger.updateinfo(message);
                     break;
