@@ -1,7 +1,12 @@
 Rednote::Application.routes.draw do
 
 
-  resources :projects
+  resources :projects do
+    collection do
+      get 'baseinfo'
+      get 'knowledgebase'
+    end
+  end
 
   resources :debits
   resources :books
