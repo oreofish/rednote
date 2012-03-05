@@ -29,7 +29,6 @@ group :development do
   gem 'annotate'
   gem 'faker'
   gem 'web-app-theme'
-  gem 'acts-as-taggable-on'
 end
 
 group :test do
@@ -43,6 +42,7 @@ group :test do
     gem 'autotest-growl'
   end
   gem 'factory_girl_rails', '1.0'
+  gem 'acts-as-taggable-on'
 end
 
 gem 'will_paginate'
