@@ -1,39 +1,8 @@
 <%# encoding: utf-8 %>
 
-<div class='well'>
-  <section id="fluidGridSystem">
-    <div class="pull-right">
-      <%= form_tag new_project_tasks_path, :class => :form do %>
-      <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
-      <button class="btn" type="submit">新建</button>
-      <% end %>
-    </div>
-
-    <h3>项目</h3>
-
-    <div class="form-actions">
-      <div class="btn-group" data-toggle="buttons-radio">
-        <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
-        <%= link_to "全部项目", tasks_path(:project => @all_projects), :class => css_class %>
-        <% 0.upto(@projects.count - 1) do |i| %>
-        <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
-        <% end %>
-      </div>
-    </div>
-
-
-    <div class="well" id="myself">
-      <div id="tasktab">
-        <ul class="nav nav-tabs">
-          <li class='active'><%= link_to "基本信息", '#', :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-          <li><%= link_to "任务进度", '#', :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-          <li><%= link_to "相关知识", '#', :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-        </ul>
-      </div>
-
-      <div id="taskcontent">
-        <%= render @page %>
-      </div>
-    </div>
-  </section>
-</div>
+<section id="fluidGridSystem">
+  <h3>任务</h3>
+  <% @tasks.each do |task| %>
+    <%= render 'note' %>
+  <% end %>
+</section>

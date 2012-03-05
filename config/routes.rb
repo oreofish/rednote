@@ -1,6 +1,8 @@
 Rednote::Application.routes.draw do
 
 
+  resources :projects
+
   resources :debits
   resources :books
   get "books/wait"
@@ -46,7 +48,6 @@ Rednote::Application.routes.draw do
   resources :tasks do
     collection do
       get  'set_status'
-      post 'new_project'
       post 'set_tag'
     end
   end
