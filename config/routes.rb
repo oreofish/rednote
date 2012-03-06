@@ -3,7 +3,6 @@ Rednote::Application.routes.draw do
 
   resources :projects do
     collection do
-      get 'baseinfo'
       get 'knowledgebase'
     end
   end
@@ -52,6 +51,7 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
+      get 'history'
       get  'set_status'
       post 'set_tag'
     end

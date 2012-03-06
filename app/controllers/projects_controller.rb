@@ -26,11 +26,11 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def baseinfo
+  def history
     #mock
     respond_to do |format|
-      format.html # baseinfo.html.erb
-      format.js # baseinfo.js.erb
+      format.html # history.html.erb
+      format.js # history.js.erb
       format.json { render json: @project }
     end
   end

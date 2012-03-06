@@ -17,14 +17,14 @@
     <div class="" id="myself">
       <div id="projecttab">
         <ul class="nav nav-tabs">
-          <li class='active'><%= link_to "基本信息", baseinfo_projects_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+          <li class='active'><%= link_to "相关知识", knowledgebase_projects_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
           <li><%= link_to "任务进度", tasks_path(:project => @project_name), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-          <li><%= link_to "相关知识", knowledgebase_projects_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+          <li><%= link_to "回顾", history_tasks_path(:project => @project_name), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
         </ul>
       </div>
 
       <div id="projectcontent">
-        <%= render 'baseinfo' %>
+        <%= render 'knowledgebase' %>
       </div>
     </div>
   </section>
