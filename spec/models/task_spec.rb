@@ -36,9 +36,9 @@ describe Task do
       @user.tasks.create!(@attr)
     end
     
-    it "should create without content" do 
+    it "should not create without content" do 
       no_content_task = @user.tasks.new(@attr.merge(:content => ""))
-      no_content_task.should be_valid
+      no_content_task.should_not be_valid
     end
     
     it "should create with long content" do 

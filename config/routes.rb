@@ -1,6 +1,12 @@
 Rednote::Application.routes.draw do
 
 
+  resources :projects do
+    collection do
+      get 'knowledgebase'
+    end
+  end
+
   resources :debits
   match 'debits/unwaiting', :to => 'debits#unwaiting'
   resources :books
@@ -45,8 +51,8 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     collection do
+      get 'history'
       get  'set_status'
-      post 'new_project'
       post 'set_tag'
     end
   end

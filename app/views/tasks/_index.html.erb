@@ -1,47 +1,14 @@
 <%# encoding: utf-8 %>
 
-<div class="pull-right">
-  <%= form_tag new_project_tasks_path, :class => :form do %>
-  <%= text_field :project, :name, :class => 'input-small', :placeholder => "项目名称" %>
-  <button class="btn" type="submit">新建</button>
+<section id="fluidGridSystem">
+  <h3>人员</h3>
+  <% User.all.each do |user| %>
+    <%= image_tag(user.avatar_url(:small), :class => "avatar") %>
+    <%= user.nickname %>
   <% end %>
-</div>
 
-<h3>项目</h3>
-
-<div class="form-actions">
-  <div class="btn-group" data-toggle="buttons-radio">
-    <% css_class = ( @current_project.index(',') ? 'btn active' : 'btn' ) %>
-    <%= link_to "全部项目", tasks_path(:project => @all_projects), :class => css_class %>
-    <% 0.upto(@projects.count - 1) do |i| %>
-    <%= link_to "#{@projects[i].name}(#{@projects[i].count})", tasks_path(:project => @projects[i].name), :class => @project_class[i] %>
-    <% end %>
-  </div>
-</div>
-
-
-<% coming_tasks, recent_tasks, past_tasks = three_type_tasks(@tasks) %>
-
-<h3>待办任务(<%= coming_tasks.count %>)</h3>
-<ul class="unstyled">
-<% coming_tasks.each do |task| %>
-    <%= render :partial => 'note', :locals => { :task => task, :css => 'task-coming' } %>
-<% end %>
-</ul>
-
-<ul class="unstyled">
-<h3>本周任务(<%= recent_tasks.count %>)</h3>
-  <% recent_tasks.each do |task| %>
-    <%= render :partial => 'item', :locals => { :task => task } %>
+  <h3>任务</h3>
+  <% @tasks.each do |task| %>
+    <%= render :partial => 'note', :locals => { :task => task } %>
   <% end %>
-</ul>
-
-<h3>已完成任务(<%= past_tasks.count %>)</h3>
-<ul class="unstyled">
-<% past_tasks.each do |task| %>
-    <%= render :partial => 'note', :locals => { :task => task, :css => 'task-past' } %>
-<% end %>
-</ul>
-
-<%= render 'form' %>
-
+</section>

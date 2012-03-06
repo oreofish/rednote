@@ -28,7 +28,9 @@ describe TasksController do
   # Task. As you add validations to Task, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { :content => 'test content' }
+    { :content => 'test content',
+      :estimate => 1
+    }
   end
   
   # This should return the minimal set of values that should be in the session
@@ -41,7 +43,12 @@ describe TasksController do
   describe "GET index" do
     it "assigns all tasks as @tasks" do
       task = @user.tasks.create! valid_attributes
+      task.project_list = 'proj1'
+      task.save
+      
       get :index, {}, valid_session
+      assigns(:current_project).should eq('proj1')
+      assigns(:current_project).should eq('proj1')
       assigns(:tasks).should eq([task])
     end
   end
@@ -49,6 +56,9 @@ describe TasksController do
   describe "GET edit" do
     it "assigns the requested task as @task" do
       task = @user.tasks.create! valid_attributes
+      task.project_list = 'proj1'
+      task.save
+
       get :edit, {:id => task.to_param}, valid_session
       assigns(:task).should eq(task)
     end
@@ -70,7 +80,7 @@ describe TasksController do
 
       it "redirects to the created task" do
         post :create, {:task => valid_attributes}, valid_session
-        response.should redirect_to(Task.last)
+        response.should redirect_to(tasks_path)
       end
     end
 
@@ -86,7 +96,7 @@ describe TasksController do
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
         post :create, {:task => {}}, valid_session
-        response.should render_template("new")
+        response.should render_template("index")
       end
     end
   end
@@ -94,7 +104,7 @@ describe TasksController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested task" do
-        task = Task.create! valid_attributes
+        task = @user.tasks.create! valid_attributes
         # Assuming there are no other tasks in the database, this
         # specifies that the Task created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -104,13 +114,13 @@ describe TasksController do
       end
 
       it "assigns the requested task as @task" do
-        task = Task.create! valid_attributes
+        task = @user.tasks.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
         assigns(:task).should eq(task)
       end
 
       it "redirects to the task" do
-        task = Task.create! valid_attributes
+        task = @user.tasks.create! valid_attributes
         put :update, {:id => task.to_param, :task => valid_attributes}, valid_session
         response.should redirect_to(task)
       end
@@ -118,7 +128,7 @@ describe TasksController do
 
     describe "with invalid params" do
       it "assigns the task as @task" do
-        task = Task.create! valid_attributes
+        task = @user.tasks.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
         put :update, {:id => task.to_param, :task => {}}, valid_session
@@ -126,7 +136,7 @@ describe TasksController do
       end
 
       it "re-renders the 'edit' template" do
-        task = Task.create! valid_attributes
+        task = @user.tasks.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Task.any_instance.stub(:save).and_return(false)
         put :update, {:id => task.to_param, :task => {}}, valid_session

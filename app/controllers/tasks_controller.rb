@@ -1,22 +1,48 @@
 # encoding: utf-8
 
 class TasksController < ApplicationController
+  before_filter :authorized_user, :only => :destroy
+
   # GET /tasks
   # GET /tasks.json
   def index
-    @all_projects = Task.project_counts.collect{ |it| it.name }.join(',')
-    @current_project = params[:project] || @all_projects
-
+    @current_project = params[:project]
     @task = Task.new
-    @projects = Task.project_counts
-    
-    @project_class = Array.new
-    @projects.each { |project| @project_class << ( project.name == @current_project ? 'btn active' : 'btn') }
+    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    @tasks = Array.new
+    @old_tasks = Array.new
+    all_tasks.each do |task|
+      if task.assigned_to == nil and task.status == Task::TODO
+        @tasks << task
+      elsif task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
+        @old_tasks << task
+      end
+    end
 
-    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb
+      format.json { render json: @tasks }
+    end
+  end
+
+  def history
+    @current_project = params[:project]
+    @task = Task.new
+    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    @tasks = Array.new
+    @old_tasks = Array.new
+    all_tasks.each do |task|
+      if task.assigned_to == nil and task.status == Task::TODO
+        @tasks << task
+      elsif task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
+        @old_tasks << task
+      end
+    end
+
+    respond_to do |format|
+      format.html # history.html.erb
+      format.js # history.js.erb
       format.json { render json: @tasks }
     end
   end
@@ -67,22 +93,6 @@ class TasksController < ApplicationController
       else
         format.html { redirect_to tasks_path, notice: 'Task was failed to updated.' }
         format.js
-      end
-    end
-  end
-
-  def new_project
-    @new_task = current_user.tasks.new(:content => "新项目建立")
-    @new_task.project_list = params[:project][:name]
-    respond_to do |format|
-      if @new_task.save
-        format.html { redirect_to tasks_path, notice: 'Project was successfully created.' }
-        format.js # new_project.js.erb
-        format.json { head :no_content }
-      else
-        format.html { redirect_to tasks_path, notice: 'Project was failed to create.' }
-        format.js # new_project.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -160,4 +170,11 @@ class TasksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def authorized_user
+    task = current_user.tasks.find_by_id(params[:id])
+    redirect_to root_path if task.nil?
+  end
+  
 end

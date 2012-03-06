@@ -1,5 +1,7 @@
 <%# encoding: utf-8 %>
 
+<div class='well'>
+  <section id="fluidGridSystem">
 <div class="row-fluid grid-bar">
   <div class="span2">
     <%= link_to tasks_path, :class => 'btn' do %>
@@ -41,4 +43,6 @@
     <%= collection_select :project, :name,  @projects, :name, :name %>
     <button class="btn" type="submit">修改</button>
   <% end %>
+</div>
+</section>
 </div>
