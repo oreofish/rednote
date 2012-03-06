@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
-    t.string   "avatar"
+    t.string   "avatar",                                :default => "/images/icons/00.jpeg"
     t.string   "preview"
   end
 

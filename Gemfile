@@ -29,10 +29,13 @@ group :development do
   gem 'annotate'
   gem 'faker'
   gem 'acts-as-taggable-on'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :test do
   gem 'rspec'
+  #gem 'webrat'
   gem 'spork'
   gem 'autotest'
   gem 'autotest-rails-pure'
@@ -42,6 +45,10 @@ group :test do
   end
   gem 'factory_girl_rails', '1.0'
   gem 'acts-as-taggable-on'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'capybara-webkit'
+  gem 'launchy'
 end
 
 gem 'will_paginate'

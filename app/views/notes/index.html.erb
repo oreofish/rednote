@@ -15,7 +15,7 @@
       <div id="attachment_block" class="tab-content row-fluid">
         <% attaches = ["message", "text", "link", "image", "code", "book" ] %>
         <% attaches.each_index do |idx| %>
-          <div class="tab-pane fade <%= 'in active' if attaches[idx] == 'message' %>" id="<%= attaches[idx] %>">
+          <div class="tab-pane fade<%= ' active in' if attaches[idx] == 'message' %>" id="<%= attaches[idx] %>">
             <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
               <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
 

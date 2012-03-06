@@ -2,6 +2,7 @@
 Factory.define :user do |user|
   user.nickname              "zhou"
   user.email                 "hzj@redflag-linux.com"
+  user.nickname              "hzj"
   user.password              "foobar"
   user.password_confirmation "foobar"
 end
