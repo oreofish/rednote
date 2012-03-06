@@ -53,34 +53,26 @@ describe "Notes" do
   end
 
   describe "When creating note", :js => true do
-    it "should create message note and appear in the list", :js => true do
-      #current_path.should == "/"
-      within(:css, 'div#message') do
-        fill_in "note_summary", :with => "short message @@"
-        click_button "发布"
-      end
-
-      current_path.should == "/"
-      within(:css, 'div#notes_content') do
-        first('li').should have_content('short message @@')
-      end
-    end
-
-    it "should reset boxes after creating note", :js => true do
+    before :each do
       within(:css, 'div#message') do
         fill_in "note_summary", :with => "msg@"
         click_button "发布"
+      end
+    end
+
+    it "should create message note and appear in the list" do
+      within(:css, 'div#notes_content') do
+        first('li').should have_content('msg@')
+      end
+    end
+
+    it "should reset boxes after creating note" do
+      within(:css, 'div#message') do
         find('#note_summary').text.should eq('')
       end
     end
 
-
     it "should disappear after delete the note" do
-      within(:css, 'div#message') do
-        fill_in "note_summary", :with => "msg@@"
-        click_button "发布"
-      end
-
       within(:css, 'div#notes_content') do
         first('li').all('a').each do |a|
           if a['data-method'] == "delete"
@@ -97,6 +89,84 @@ describe "Notes" do
         find('div#notes_content').should have_no_selector('li')
       end
     end
-  end
+
+  end # describe
+
+  describe "Create image note", :js => true do
+    before :each do
+      within(:css, "div#note_publish") do
+        all('a').each do |a|
+          if a[:href] == '#image'
+            a.click
+          end
+        end
+      end 
+    end
+
+    it "should create image note and appear in the list" do
+      within(:css, 'div#image') do
+        fill_in "note_summary", :with => "image@"
+        attach_file 'note_upload', "public/images/avatar.jpg"
+        click_button "发布"
+      end
+
+      within(:css, 'div#notes_content') do
+        first('li').should have_content('image@')
+        first('li').should have_selector('div#attach_collapse1')
+        first('li').should have_selector('img')
+      end
+    end
+
+    it "should fail without image" do
+      within(:css, 'div#image') do
+        fill_in "note_summary", :with => "image@@"
+        click_button "发布"
+      end
+
+      within(:css, "div[class='flash']") do
+        find("div")[:class].should eq('alert alert-block alert-error fade in')
+      end      
+    end
+  end # describe
+
+  describe "notes list", :js => true do
+    before :each do
+      within(:css, 'div#message') do
+        fill_in "note_summary", :with => "msg@"
+        click_button "发布"
+      end
+
+      find('div#notes_content').should have_selector('li')
+
+      within(:css, 'div#message') do
+        fill_in "note_summary", :with => "msg@@"
+        click_button "发布"
+      end
+
+    end
+
+    it "should exist" do
+      find('div#notes_content').should have_selector('li', :count => 2)
+    end
+
+    it "should response to comments_link" do
+      within(:css, "div#notes_content") do
+        [1,2].each do |id|
+          find("li#note#{id}").find('a[class="comments_link"]')[:href].should eq("/comments?note_id=#{id}")
+        end
+      end
+    end
+
+    it "should display comments when comments_link clicked" do
+      within(:css, "div#notes_content") do
+        within(:css, "li#note1") do
+          find('div.comments_list').should_not be_visible
+          find('a[class="comments_link"]').click
+          find('div.comments_list').should be_visible
+        end
+      end
+    end
+  end # describe
+
 end
 

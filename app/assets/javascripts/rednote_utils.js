@@ -120,7 +120,7 @@ rednote.flashController = {
         title = title || "通知";
         msg = msg || "";
         var $flash = $('div.flash');
-        var templ = '<div class="alert alert-block ' + style + 'fade in">' +
+        var templ = '<div class="alert alert-block ' + style + ' fade in">' +
             '<a class="close" data-dismiss="alert" href="#">×</a>' +
             '<strong>' + title + '</strong>' + msg + '</div>';
         $flash.append(templ); 
