@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authorized_user, :only => [:destroy]
+
   # GET /comments
   # GET /comments.json
   def index
@@ -61,4 +63,8 @@ class CommentsController < ApplicationController
     end
   end
 
+  def authorized_user
+    comment = current_user.comments.find_by_id(params[:id])
+    redirect_to root_url if comment.nil?
+  end
 end

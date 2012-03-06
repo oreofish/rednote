@@ -19,85 +19,65 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe LikesController do
+  render_views
+
+  before(:each) do
+    @user = Factory(:user)
+    sign_in @user
+    @user2 = Factory(:user, :email => Factory.next(:email))
+
+    @note = Factory(:note, :user => @user)
+    @note2 = Factory(:note, :user => @user2)
+    @attr = { 
+      :user_id => @user.id,
+      :note_id => @note2.id,
+      :status => false
+    }
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Like. As you add validations to Like, be sure to
   # update the return value of this method accordingly.
-  def valid_attributes
-    {}
-  end
   
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # LikesController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
-  describe "GET index" do
-    it "assigns all likes as @likes" do
-      like = Like.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:likes).should eq([like])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested like as @like" do
-      like = Like.create! valid_attributes
-      get :show, {:id => like.to_param}, valid_session
-      assigns(:like).should eq(like)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new like as @like" do
-      get :new, {}, valid_session
-      assigns(:like).should be_a_new(Like)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested like as @like" do
-      like = Like.create! valid_attributes
-      get :edit, {:id => like.to_param}, valid_session
-      assigns(:like).should eq(like)
-    end
-  end
-
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Like" do
         expect {
-          post :create, {:like => valid_attributes}, valid_session
+          xhr :post, :create, :note_id => @note.id
         }.to change(Like, :count).by(1)
       end
 
+      it "creates a new comments when creating a new like" do
+        xhr :post, :create, :note_id => @note.id
+        assigns(:like).save
+        change(Comment, :count).by(1)
+      end
+
+      it "add the message when creating a new like with other user" do
+        xhr :post, :create, :note_id => @note2.id
+        assigns(:like).save
+        change(@note2, :message).by(1)
+      end
+
+      it "should not add the message when creating a new like with owner" do
+        xhr :post, :create, :note_id => @note.id
+        assigns(:like).save
+        change(@note, :message).by(0)
+      end
+
       it "assigns a newly created like as @like" do
-        post :create, {:like => valid_attributes}, valid_session
+        xhr :post, :create, :note_id => @note.id
         assigns(:like).should be_a(Like)
+        assigns(:like).status.should eq(false)
         assigns(:like).should be_persisted
       end
 
-      it "redirects to the created like" do
-        post :create, {:like => valid_attributes}, valid_session
-        response.should redirect_to(Like.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved like as @like" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Like.any_instance.stub(:save).and_return(false)
-        post :create, {:like => {}}, valid_session
-        assigns(:like).should be_a_new(Like)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Like.any_instance.stub(:save).and_return(false)
-        post :create, {:like => {}}, valid_session
-        response.should render_template("new")
+      it "redirects to the create" do
+        xhr :put, :create, {:note_id => @note.id}
+        response.should render_template("create")
       end
     end
   end
@@ -105,59 +85,47 @@ describe LikesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested like" do
-        like = Like.create! valid_attributes
-        # Assuming there are no other likes in the database, this
-        # specifies that the Like created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Like.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => like.to_param, :like => {'these' => 'params'}}, valid_session
+        like = Like.create! @attr
+        xhr :put, :update, {:id => like.id}
+        assigns(:like).status.should eq(true)
       end
 
-      it "assigns the requested like as @like" do
-        like = Like.create! valid_attributes
-        put :update, {:id => like.to_param, :like => valid_attributes}, valid_session
-        assigns(:like).should eq(like)
+      it "redirects to the update" do
+        like = Like.create! @attr
+        xhr :put, :update, {:id => like.to_param}
+        response.should render_template("update")
       end
 
-      it "redirects to the like" do
-        like = Like.create! valid_attributes
-        put :update, {:id => like.to_param, :like => valid_attributes}, valid_session
-        response.should redirect_to(like)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the like as @like" do
-        like = Like.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Like.any_instance.stub(:save).and_return(false)
-        put :update, {:id => like.to_param, :like => {}}, valid_session
-        assigns(:like).should eq(like)
-      end
-
-      it "re-renders the 'edit' template" do
-        like = Like.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Like.any_instance.stub(:save).and_return(false)
-        put :update, {:id => like.to_param, :like => {}}, valid_session
-        response.should render_template("edit")
+      it "redirects to the root_url when you are the wrong user " do
+        like = Like.create! @attr
+        sign_out @user
+        sign_in @user2
+        xhr :put, :update, {:id => like.to_param}
+        response.should redirect_to(root_url)
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested like" do
-      like = Like.create! valid_attributes
+      like = Like.create! @attr
       expect {
-        delete :destroy, {:id => like.to_param}, valid_session
+        xhr :delete, :destroy, {:id => like.id}
       }.to change(Like, :count).by(-1)
     end
 
     it "redirects to the likes list" do
-      like = Like.create! valid_attributes
-      delete :destroy, {:id => like.to_param}, valid_session
-      response.should redirect_to(likes_url)
+      like = Like.create! @attr
+      xhr :delete, :destroy, {:id => like.id}
+      response.should render_template("destroy")
+    end
+
+    it "redirects to the root_url when you are the wrong user " do
+      like = Like.create! @attr
+      sign_out @user
+      sign_in @user2
+      xhr :put, :destroy, {:id => like.to_param}
+      response.should redirect_to(root_url)
     end
   end
 

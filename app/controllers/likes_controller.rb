@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_filter :authorized_user, :only => [:destroy, :update]
   # POST /likes
   # POST /likes.json
   def create
@@ -61,5 +62,10 @@ class LikesController < ApplicationController
       @note.message += 1
       @note.save
     end
+  end
+
+  def authorized_user
+    like = current_user.likes.find_by_id(params[:id])
+    redirect_to root_url if like.nil?
   end
 end

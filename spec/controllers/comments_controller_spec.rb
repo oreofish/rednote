@@ -25,7 +25,10 @@ describe CommentsController do
     @user = Factory(:user)
     sign_in @user
     
+    @user2 = Factory(:user, :email => Factory.next(:email))
+    @note2 = Factory(:note, :user => @user2)
     @note = Factory(:note, :user => @user)
+    @note3 = Factory(:note, :user => @user, :message => 1)
   end
   
   # This should return the minimal set of attributes required to create a valid
@@ -41,16 +44,24 @@ describe CommentsController do
   describe "GET index" do
     it "assigns all comments as @comments" do
       comment = @user.comments.create! valid_attributes
-      comment.commentable = @note
+      comment.commentable = @note2
       comment.save
-      xhr :get, :index, :note_id => @note.id
+      xhr :get, :index, :note_id => @note2.id
       assigns(:comments).should eq([comment])
+    end
+
+    it "make the note.message to 0 when assigning all comments of the note with the owner" do
+      comment = @user2.comments.create! valid_attributes
+      comment.commentable = @note3
+      comment.save
+      xhr :get, :index, :note_id => @note3.id
+      change(@note3, :message).to(0)
     end
   end
 
   describe "POST create" do
     before(:each) do
-      @comment_arg = { :commentable_id => @note.id, :comment => valid_attributes }
+      @comment_arg = { :commentable_id => @note2.id, :comment => valid_attributes }
     end
     
     describe "with valid params" do
@@ -64,13 +75,27 @@ describe CommentsController do
         xhr :post, :create, :comment => @comment_arg
         assigns(:comment).should be_a(Comment)
       end
+
+      it "add note.message when creating a new comment with other" do
+        xhr :post, :create, :comment => @comment_arg
+        assigns(:comment).save
+        change(@note2, :message).by(1)
+      end
+
+      it "shoule not add note.message when creating a new comment with owner" do
+        sign_out @user
+        sign_in @user2
+        xhr :post, :create, :comment => @comment_arg
+        assigns(:comment).save
+        change(@note2, :message).by(0)
+      end
     end
   end
 
   describe "DELETE destroy" do
     before(:each) do
       @comment = @user.comments.create! valid_attributes
-      @comment.commentable = @note
+      @comment.commentable = @note2
       @comment.save
     end
     
@@ -82,7 +107,7 @@ describe CommentsController do
 
     it "re-render to the comment index" do
       xhr :delete, :destroy, :id => @comment.id
-      response.should render_template("index")
+      response.should render_template("destroy")
     end
     
     it "redirects to the root_path with wrong user" do

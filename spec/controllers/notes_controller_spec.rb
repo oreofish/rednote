@@ -54,7 +54,7 @@ describe NotesController do
     describe "index" do
       it "assigns @notes contains notes" do
         get :index
-        assigns(:notes).should eq([@note1, @note2])
+        assigns(:notes).should eq([@note2, @note1])
       end
 
     end

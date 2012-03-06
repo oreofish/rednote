@@ -7,6 +7,7 @@ end
 
 Factory.define :note do |note|
   note.summary              "foobar content"
+  note.message              0
   note.kind                 1
   note.description          "foobar title"
   note.association          :user

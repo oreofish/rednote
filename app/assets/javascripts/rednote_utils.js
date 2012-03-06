@@ -209,7 +209,7 @@ rednote.logger = {
         $info.attr("style","");
 
         var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
-        $note.find('a.comments_link').addClass("btn-warning");
+        $note.find('a.comments_link').addClass("label-warning");
     }
 }
 
