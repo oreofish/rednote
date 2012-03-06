@@ -2,15 +2,16 @@
 
 class TasksController < ApplicationController
   before_filter :authorized_user, :only => :destroy
-
+  respond_to :js, :html
+  
   # GET /tasks
   # GET /tasks.json
   def index
     @current_project = params[:project]
     @task = Task.new
-    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    @all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @tasks = Array.new
-    all_tasks.each do |task|
+    @all_tasks.each do |task|
       @tasks << task if task.assigned_to == nil and task.status == Task::TODO
     end
 
@@ -44,7 +45,7 @@ class TasksController < ApplicationController
     @projects = Task.top_projects
 
     respond_to do |format|
-      format.html { render 'index' }
+      format.html { render 'show' }
       format.js # show.js.erb
       format.json { render json: @task }
     end

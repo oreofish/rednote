@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "nickname"
-    t.string   "avatar",                                :default => "/images/icons/00.jpeg"
+    t.string   "avatar"
     t.string   "preview"
   end
 

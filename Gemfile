@@ -23,12 +23,12 @@ gem 'twitter-bootstrap-rails'
 #gem 'compass_twitter_bootstrap'
 gem 'best_in_place'
 gem "simple_form"
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'acts-as-taggable-on'
   gem 'capybara'
   gem 'launchy'
 end
@@ -44,7 +44,6 @@ group :test do
     gem 'autotest-growl'
   end
   gem 'factory_girl_rails', '1.0'
-  gem 'acts-as-taggable-on'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'capybara-webkit'
