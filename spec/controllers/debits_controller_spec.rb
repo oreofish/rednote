@@ -20,11 +20,21 @@ require 'spec_helper'
 
 describe DebitsController do
 
+  before(:each) do
+    @user = Factory(:user)
+    sign_in @user
+    @book = Factory(:book)
+  end
+
+
   # This should return the minimal set of attributes required to create a valid
   # Debit. As you add validations to Debit, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+        :user_id => @user.id,
+        :book_id => @book.id
+    }
   end
   
   # This should return the minimal set of values that should be in the session
@@ -34,131 +44,30 @@ describe DebitsController do
     {}
   end
 
-  describe "GET index" do
-    it "assigns all debits as @debits" do
-      debit = Debit.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:debits).should eq([debit])
-    end
-  end
-
-  describe "GET show" do
-    it "assigns the requested debit as @debit" do
-      debit = Debit.create! valid_attributes
-      get :show, {:id => debit.to_param}, valid_session
-      assigns(:debit).should eq(debit)
-    end
-  end
-
   describe "GET new" do
-    it "assigns a new debit as @debit" do
-      get :new, {}, valid_session
-      assigns(:debit).should be_a_new(Debit)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested debit as @debit" do
-      debit = Debit.create! valid_attributes
-      get :edit, {:id => debit.to_param}, valid_session
-      assigns(:debit).should eq(debit)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
       it "creates a new Debit" do
         expect {
-          post :create, {:debit => valid_attributes}, valid_session
+          get :new, {:book_id => @book.id}
         }.to change(Debit, :count).by(1)
       end
-
-      it "assigns a newly created debit as @debit" do
-        post :create, {:debit => valid_attributes}, valid_session
-        assigns(:debit).should be_a(Debit)
-        assigns(:debit).should be_persisted
-      end
-
-      it "redirects to the created debit" do
-        post :create, {:debit => valid_attributes}, valid_session
-        response.should redirect_to(Debit.last)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved debit as @debit" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Debit.any_instance.stub(:save).and_return(false)
-        post :create, {:debit => {}}, valid_session
-        assigns(:debit).should be_a_new(Debit)
-      end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Debit.any_instance.stub(:save).and_return(false)
-        post :create, {:debit => {}}, valid_session
-        response.should render_template("new")
-      end
-    end
-  end
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested debit" do
-        debit = Debit.create! valid_attributes
-        # Assuming there are no other debits in the database, this
-        # specifies that the Debit created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Debit.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => debit.to_param, :debit => {'these' => 'params'}}, valid_session
-      end
-
-      it "assigns the requested debit as @debit" do
-        debit = Debit.create! valid_attributes
-        put :update, {:id => debit.to_param, :debit => valid_attributes}, valid_session
-        assigns(:debit).should eq(debit)
-      end
-
-      it "redirects to the debit" do
-        debit = Debit.create! valid_attributes
-        put :update, {:id => debit.to_param, :debit => valid_attributes}, valid_session
-        response.should redirect_to(debit)
-      end
-    end
-
-    describe "with invalid params" do
-      it "assigns the debit as @debit" do
-        debit = Debit.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Debit.any_instance.stub(:save).and_return(false)
-        put :update, {:id => debit.to_param, :debit => {}}, valid_session
-        assigns(:debit).should eq(debit)
-      end
-
-      it "re-renders the 'edit' template" do
-        debit = Debit.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Debit.any_instance.stub(:save).and_return(false)
-        put :update, {:id => debit.to_param, :debit => {}}, valid_session
-        response.should render_template("edit")
-      end
-    end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested debit" do
       debit = Debit.create! valid_attributes
       expect {
-        delete :destroy, {:id => debit.to_param}, valid_session
+        delete :destroy, {:id => debit.to_param}
       }.to change(Debit, :count).by(-1)
     end
+  end
 
-    it "redirects to the debits list" do
-      debit = Debit.create! valid_attributes
-      delete :destroy, {:id => debit.to_param}, valid_session
-      response.should redirect_to(debits_url)
-    end
+  describe "POST unwaiting" do
+      it "remove debit" do
+          debit = Debit.create! valid_attributes
+          expect {
+          post :unwaiting, {:book_id => @book.to_param}
+          }.to change(Debit, :count).by(-1)
+      end
   end
 
 end
