@@ -1,9 +1,10 @@
 <%# encoding: utf-8 %>
 
-<li id="note<%= note.id %>" class="row-fluid">
 <hr>
+<li id="note<%= note.id %>" class="row-fluid">
+<% note_user = User.find(note.user_id) %>
 <div class="span1">
-  <%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %>
+  <%= image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}") -%>
 </div>
 <div class="span11 item">
 
@@ -20,7 +21,7 @@
   <% end %>
 
   <div class="pull-right">
-    <% if current_user.id==note.user.id %>
+    <% if current_user.id==note_user.id %>
       <%= link_to '详细', note, :class => '' %>
       <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
     <% end %>
