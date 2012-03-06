@@ -8,10 +8,10 @@ Rednote::Application.routes.draw do
   end
 
   resources :debits
+  match 'debits/unwaiting', :to => 'debits#unwaiting'
   resources :books
   get "books/wait"
   match 'books/borrow', :to => 'books#borrow'
-  match 'books/unwaiting', :to => 'books#unwaiting'
 
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'

@@ -1,5 +1,5 @@
 class Debit < ActiveRecord::Base
-  validates :user_id, :presence => true, :uniqueness => { :scope => :book_id }
+  validates :user_id, :presence => true, :uniqueness => true
   validates :book_id, :presence => true
   
   attr_accessible :book_id, :user_id, :status

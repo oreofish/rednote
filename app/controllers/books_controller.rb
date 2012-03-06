@@ -61,16 +61,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def unwaiting
-    @book = Book.find(params[:book_id])
-    @relevance_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE user_id=#{current_user.id} and book_id=#{@book.id}")[0]
-    @relevance_debit.destroy
-
-    respond_to do |format|
-      format.html { redirect_to books_path }
-    end
-  end
-
   # GET /debits/new
   # GET /debits/new.json
   def new
@@ -100,8 +90,6 @@ class BooksController < ApplicationController
       end
     end
   end
-
-
 
   # GET /books/1
   # GET /books/1.json
