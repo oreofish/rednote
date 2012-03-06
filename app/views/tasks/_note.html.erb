@@ -5,7 +5,11 @@
   <%= task.content %><br />
   估计时间：<%= task.estimate %>
 
-  <%= link_to task, :class => "bottom-right" do %>
+  <div id="edittask<%= task.id %>" class="modal hide fade" style="display: none; ">
+    <h3>Modal Heading</h3>
+  </div>
+
+  <%= link_to task, :class => "bottom-right", 'data-toggle'=>"modal" do %>
     <i class="icon-edit"></i>
   <% end %>
 </div>
