@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project_name = params[:name]
+    @project_name = params[:id]
     @projects = Task.project_counts
 
     respond_to do |format|

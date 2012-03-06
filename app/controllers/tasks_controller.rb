@@ -9,9 +9,9 @@ class TasksController < ApplicationController
   def index
     @current_project = params[:project]
     @task = Task.new
-    @all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @tasks = Array.new
-    @all_tasks.each do |task|
+    all_tasks.each do |task|
       @tasks << task if task.assigned_to == nil and task.status == Task::TODO
     end
 

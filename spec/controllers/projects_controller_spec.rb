@@ -27,6 +27,7 @@ describe ProjectsController do
     @task1.save
     @task2 = Factory(:task, :user => @user, :content => Factory.next(:content))
     @task2.project_list = 'proj2'
+    @task2.status = Task::DONE
     @task2.save
     sign_in @user
   end
@@ -56,9 +57,21 @@ describe ProjectsController do
   describe "GET show" do
     it "assigns the requested project as @project" do
       projects = Task.project_counts
-      get :show, {:name => 'proj1'}
+      get :show, {:id => 'proj1'}
       assigns(:projects).should eq(projects)
       assigns(:project_name).should eq('proj1')
+    end
+  end
+
+  describe "GET history" do
+    it "assigns the requested tasks are DONE tasks" do
+      pending "add some examples to (or delete) #{__FILE__}"
+    end
+  end
+
+  describe "GET knowledgebase" do
+    it "assigns the requested knowledgebase of the project" do
+      pending "add some examples to (or delete) #{__FILE__}"
     end
   end
 
