@@ -1,0 +1,7 @@
+<%# encoding: utf-8 %>
+
+(function() {
+  $('#task<%= @task.id %>').hide();
+  $('#user<%= @user.id %>')
+      .replaceWith("<%= j render :partial => 'users/smallinfo', :locals => { :user => @user } %>");
+}());

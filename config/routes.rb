@@ -54,6 +54,7 @@ Rednote::Application.routes.draw do
       get 'history'
       get  'set_status'
       post 'set_tag'
+      get 'assign'
     end
   end
   # The priority is based upon order of creation:
