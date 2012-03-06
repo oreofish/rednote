@@ -12,7 +12,7 @@
   </div>
 
   <% if note.kind > 0 %>
-    <a href="javascript:void(null)" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
+    <a href="javascript:void()" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
     <br/>
     <div id="attach_collapse<%= note.id %>" class="collapse">
       <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
