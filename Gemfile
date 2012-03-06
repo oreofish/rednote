@@ -25,15 +25,13 @@ gem 'best_in_place'
 gem "simple_form"
 gem 'acts-as-taggable-on'
 
-group :development do
+group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
   gem 'capybara'
   gem 'launchy'
-end
 
-group :test do
   gem 'rspec'
   #gem 'webrat'
   gem 'spork'
@@ -48,6 +46,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara-webkit'
   gem 'launchy'
+  gem 'simplecov-rcov'
 end
 
 gem 'will_paginate'
