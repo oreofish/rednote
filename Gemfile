@@ -28,13 +28,11 @@ group :development do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'web-app-theme'
   gem 'acts-as-taggable-on'
 end
 
 group :test do
   gem 'rspec'
-  gem 'webrat'
   gem 'spork'
   gem 'autotest'
   gem 'autotest-rails-pure'
