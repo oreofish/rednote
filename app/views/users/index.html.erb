@@ -4,15 +4,14 @@
     <%= @user.nickname %>
   </h2>
   <%= link_to image_tag(current_user.avatar_url(:thumb)), users_nickname_path %>
-  <p><%= @nickname %></p>
   <p>发布数: <%= @notes_size %></p>
 </div>
 
 <div class="well" id="myself">
   <div id="tabspin">
   <ul class="nav nav-tabs">
-    <li><%= link_to "我的发布", users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-    <li> <%= link_to "我的评论", users_mycomments_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li class='active'><%= link_to "我的发布", users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li><%= link_to "我的评论", users_mycomments_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
     <li><%= link_to "我的标记", users_mytags_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
   </ul>
   </div>

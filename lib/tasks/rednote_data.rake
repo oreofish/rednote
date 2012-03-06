@@ -58,7 +58,8 @@ def make_comments
     notes = Note.all
     notes.each do |note|
       user.comments.create!( :comment => "comment note_id=#{note.id} by #{user.nickname}",
-                             :commentable_id => note.id
+                             :commentable_id => note.id,
+                             :commentable_type => "Note"
                              )
     end
   end

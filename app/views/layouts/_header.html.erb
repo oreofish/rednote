@@ -25,11 +25,11 @@
             <% end %>
             <%= link_to "我的主页", users_path %>
             </li>
-            <li class='<%= "active" if controller_name == "tasks" %>'>
-            <%= link_to "我的任务", tasks_path %>
+            <li class='<%= "active" if controller_name == "projects" %>'>
+              <%= link_to "任务", projects_path %>
             </li>
             <li class='<%= "active" if controller_name == "index" %>'>
-            <%= link_to "图书借阅", books_path %>
+              <%= link_to "图书借阅", books_path %>
             </li>
           <% end %>
         </ul>
