@@ -2,10 +2,11 @@
 
 <section id="fluidGridSystem">
   <h3>人员</h3>
+  <div id="userlist">
   <% User.all.each do |user| %>
-    <%= image_tag(user.avatar_url(:small), :class => "avatar") %>
-    <%= user.nickname %>
+    <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
   <% end %>
+  </div>
 
   <h3>任务</h3>
   <div id="tasklist">

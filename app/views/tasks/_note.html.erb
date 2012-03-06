@@ -1,6 +1,6 @@
 <%# encoding: utf-8 %>
 
-<li class="<%= task_css(task, "stretch-note-container") %>">
+<div class="<%= task_css(task, "stretch-note-container") %>">
 <div id="stretch-full">
   <%= task.content %>
   <%= task.user.nickname %>
@@ -10,4 +10,4 @@
     <i class="icon-edit"></i>
   <% end %>
 </div>
-</li>
+</div>

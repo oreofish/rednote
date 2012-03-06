@@ -5,7 +5,6 @@ class UsersController < ApplicationController
       @avatar = current_user.avatar
       @nickname = current_user.nickname
       @notes = current_user.notes.offset(0).limit(5).reverse_order
-      @notes_size = current_user.notes.size
 
       cookies[:limit] = 5
       cookies[:offset] = 5 # note offset
