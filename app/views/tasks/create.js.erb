@@ -2,9 +2,9 @@
 
 (function() {
 <% if @task.valid? %>
-  $('.content .tasklist').prepend( "<%= j render( :partial => 'item', :locals => { :task => @task }) %>" );
-  $('.content .tasklist > li:first').effect('highlight', {}, 3000);
-  $('#new_task')[0].reset();
+  $('#tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task }) %>" );
+  $('#tasklist').effect('highlight', {}, 3000);
+  $('#task_content')[0].value = '';
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');
 <% end %>

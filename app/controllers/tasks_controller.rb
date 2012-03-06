@@ -10,13 +10,8 @@ class TasksController < ApplicationController
     @task = Task.new
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @tasks = Array.new
-    @old_tasks = Array.new
     all_tasks.each do |task|
-      if task.assigned_to == nil and task.status == Task::TODO
-        @tasks << task
-      elsif task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
-        @old_tasks << task
-      end
+      @tasks << task if task.assigned_to == nil and task.status == Task::TODO
     end
 
     respond_to do |format|
@@ -30,14 +25,9 @@ class TasksController < ApplicationController
     @current_project = params[:project]
     @task = Task.new
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @tasks = Array.new
     @old_tasks = Array.new
     all_tasks.each do |task|
-      if task.assigned_to == nil and task.status == Task::TODO
-        @tasks << task
-      elsif task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
-        @old_tasks << task
-      end
+      @old_tasks << task if task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
     end
 
     respond_to do |format|
@@ -122,14 +112,13 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @tasks = current_user.tasks
-    @task = Task.new(:content => params[:task][:content])
+    @task = current_user.tasks.new(:content => params[:task][:content])
     @task.project_list = params[:project][:name]
-    @task.user = current_user
     @task.status = Task::TODO
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path }
+        format.html { redirect_to project_path(params[:project][:name]) }
         format.js # create.js.erb
         format.json { render json: @task, status: :created, location: @task }
       else
