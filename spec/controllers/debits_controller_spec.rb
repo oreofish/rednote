@@ -50,6 +50,10 @@ describe DebitsController do
           get :new, {:book_id => @book.id}
         }.to change(Debit, :count).by(1)
       end
+
+      it "should not debit when you are reading a book" do
+      end
+
   end
 
   describe "DELETE destroy" do

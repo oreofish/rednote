@@ -43,40 +43,130 @@ describe BooksController do
       get :index 
       assigns(:books).should eq([book])
     end
+
+    it "should display 'reading' when you are reading the book" do
+      book1 = Book.create! valid_attributes
+      book1.status = "reading"
+      book1.save
+      get :index
+      assigns(:bookstatuslist)[0]["display"].should eq("reading")
+    end
+
+    it "should display '' with other books when you are reading one " do
+      book1 = Book.create! valid_attributes
+      book1.status = "reading"
+      book1.save
+      book2 = Book.create! valid_attributes
+      get :index
+      assigns(:bookstatuslist)[1]["display"].should eq("")
+    end
+
+    #it "can not in the queue for another book when you waiting one" do
+    it "should display '' for another book when you waiting one" do
+      book1 = Factory(:book)
+      book2 = Factory(:book, :user_id => Factory.next(:user_id))
+      debit1 = Debit.create!(:user_id => @user.id, :book_id => book1.id)
+      get :index
+      assigns(:bookstatuslist)[1]["display"].should eq("")
+    end
+
+    #it "can not in the queue for another book when you are reading one" do
+    it "should display '' for another book when you are reading one" do
+      book1 = Factory(:book)
+      book1.status = "reading"
+      book1.save
+      book2 = Factory(:book, :user_id => Factory.next(:user_id))
+      get :index
+      assigns(:bookstatuslist)[1]["display"].should eq("")
+    end
+
+    it "should display 'waiting' when you are in the queue for the book what is readed by someone" do
+      another_user = Factory(:user, :email => Factory.next(:email),
+                             :nickname => Factory.next(:nickname))
+      book1 = Book.create! valid_attributes.merge(:user_id => another_user.id)
+      book1.status = "reading"
+      book1.save
+      debit1 = Debit.create!(:user_id => @user.id, :book_id => book1.id)
+      get :index
+      assigns(:bookstatuslist)[0]["display"].should eq("waiting")
+    end
+
+    it "should display 'borrow' when you are the first of the queue for the book what is keep" do
+      book1 = Factory(:book)
+      debit1 = Debit.create!(:user_id => @user.id, :book_id => book1.id)
+      get :index
+      assigns(:bookstatuslist)[0]["display"].should eq("borrow")
+    end
+
+    it "should display '' with other books when you are in the queue for one book" do
+      book1 = Factory(:book)
+      book2 = Factory(:book)
+      debit1 = Debit.create!(:user_id => @user.id, :book_id => book1.id)
+      get :index
+      assigns(:bookstatuslist)[1]["display"].should eq("")
+    end
+
+    it "should display 'want_wait' when the book is readed by someone and you have nothing action" do
+      another_user = Factory(:user, :email => Factory.next(:email),
+                             :nickname => Factory.next(:nickname))
+      book1 = Book.create! valid_attributes.merge(:user_id => another_user.id)
+      book1.status = "reading"
+      book1.save
+      get :index
+      assigns(:bookstatuslist)[0]["display"].should eq("want_wait")
+
+    end
+
+    it "should display 'borrow' when the book's status is keep and you have nothing action" do
+      book1 = Factory(:book)
+      get :index
+      assigns(:bookstatuslist)[0]["display"].should eq("borrow")
+    end
+
   end
 
   describe "get borrow" do
     it "can borrow (set status form keep to reading)" do
-        @book = Factory(:book)
-        get :borrow, {:book_id => @book.id}
-        assigns(:book).status.should eq("reading")
+      @book = Factory(:book)
+      get :borrow, {:book_id => @book.id}
+      assigns(:book).status.should eq("reading")
+    end
+
+    it "can not borrow another book when reading a book" do
+      book1 = Book.create! valid_attributes
+      book1.status = "reading"
+      book1.save
+      book2 = Book.create! valid_attributes
+      get :borrow, {:book_id => book2.id}
+      assigns(:book).status.should_not eq("reading")
+    end
+
+  end
+
+  describe "GET new" do
+    it "assigns a new book as @book" do
+      get :new
+      assigns(:book).should be_a_new(Book)
     end
   end
 
- describe "GET new" do
-   it "assigns a new book as @book" do
-     get :new
-     assigns(:book).should be_a_new(Book)
-   end
- end
-
  describe "POST create" do
-     it "creates a new Book" do
-       expect {
-         post :create, {:book => valid_attributes}
-       }.to change(Book, :count).by(1)
-     end
-
-     it "assigns a newly created book as @book" do
+   it "creates a new Book" do
+     expect {
        post :create, {:book => valid_attributes}
-       assigns(:book).should be_a(Book)
-       assigns(:book).should be_persisted
-     end
+     }.to change(Book, :count).by(1)
+   end
 
-     it "redirects to the created book" do
-       post :create, {:book => valid_attributes}
-       response.should redirect_to(books_path)
-     end
+   it "assigns a newly created book as @book" do
+     post :create, {:book => valid_attributes}
+     assigns(:book).should be_a(Book)
+     assigns(:book).should be_persisted
+   end
+
+   it "redirects to the created book" do
+     post :create, {:book => valid_attributes}
+     response.should redirect_to(books_path)
+   end
  end
 
 end

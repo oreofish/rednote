@@ -23,6 +23,10 @@ Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
 
+Factory.sequence :nickname do |n|
+  "nickname#{n}"
+end
+
 Factory.sequence :summary do |n|
   "summary#{n}"
 end
@@ -36,4 +40,8 @@ Factory.define :book do |book|
   book.url                   "www.baidu.com"
   book.cover                 "foobar"
   book.user_id               1
+end
+
+Factory.sequence :user_id do |n|
+    n
 end

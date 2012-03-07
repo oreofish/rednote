@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
       @avatar = @user.avatar
       @nickname = @user.nickname
+      @notes_size = @user.notes.size
       @notes = @user.notes.offset(0).limit(cookies[:limit]).reverse_order
 
       respond_to do |format|

@@ -1,5 +1,5 @@
 <%# encoding: utf-8 %>
-<li id="note<%= note.id %>" >
+<div id="note<%= note.id %>">
 <hr>
 <div class="row-fluid">
 <% note_user = User.find(note.user_id) %>
@@ -47,5 +47,4 @@
   </div>
 </div>
 </div>
-</li>
 
