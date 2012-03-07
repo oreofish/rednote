@@ -377,9 +377,29 @@ function waring() {
     judge(box_email,"email");
 };
 
+function updatetimeprogress() {
+    var $item = $('#timeprogress');
+    var $bar = $item.find('.bar');
+
+    var time = new Date();
+    var day = time.getDay();
+    var hour = time.getHours();
+    var minuter = time.getMinutes();
+
+    if (1 <= day && day <= 5 ) {
+        var numerator = (day-1)*24*60 + hour*60 + minuter; 
+        var denominator = 5*24*60;
+        var value = numerator / denominator  * 100;
+    }
+
+    $bar.css('width',value+'%');
+
+};
+
 $(function(){
     rednote.flashController.setup();
     setup_faye();
     jcrop.crop();
     waring();
+    updatetimeprogress();
 });
