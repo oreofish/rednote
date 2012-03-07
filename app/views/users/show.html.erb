@@ -6,9 +6,10 @@
 <div class="well" id="myself">
   <div id="tabspin">
   <ul class="nav nav-tabs">
-    <li class='active'><%= link_to "我的发布", user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-    <li><%= link_to "我的评论", mycomments_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-    <li><%= link_to "我的标记", mytags_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <% (@user.id == current_user.id) ? nickname = "我":nickname = "#{@user.nickname}"%>
+    <li class='active'><%= link_to "#{nickname}的发布", user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li><%= link_to "#{nickname}的评论", mycomments_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li><%= link_to "#{nickname}的标记", mytags_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
   </ul>
   </div>
 
