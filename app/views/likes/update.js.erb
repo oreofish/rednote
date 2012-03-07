@@ -1,6 +1,6 @@
 (function() {
- // var $mynote = $('#note<%= @like.note_id %>');
- // $mynote.find('a.tags').first().remove();
+  var $mynote = $('#note<%= @like.note_id %>');
+  $mynote.find('a.tags').first().remove();
 
  $mynote.find('a.tags').replaceWith("已读完");
  // $mytag.text ( $mytag.text().replace(/读完？/g,"已读完") );
