@@ -10,11 +10,10 @@ class NotesController < ApplicationController
       "Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"
     ]
 
-    @notes = Note.where('').offset(0).limit(5).reverse_order
-    cookies[:limit] = 5
-    cookies[:offset] = 5 # note offset
+    cookies[:limit] = 20
+    cookies[:offset] = 20 # note offset
     cookies[:current_user_id] = current_user.id
-
+    @notes = Note.where('').offset(0).limit(cookies[:limit]).reverse_order
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +24,7 @@ class NotesController < ApplicationController
   # get next page by ajax request
   def page
     @notes = Note.offset(cookies[:offset].to_i).limit(cookies[:limit]).reverse_order
-    cookies[:offset] = 5 + cookies[:offset].to_i
+    cookies[:offset] = @notes.size + cookies[:offset].to_i
 
     respond_to do |format|
       if @notes.count() > 0

@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   def show
       @user = User.find(params[:id])
 
+      cookies[:limit] = 20
+      cookies[:offset] = 20 # note offset
+
       @avatar = @user.avatar
       @nickname = @user.nickname
-      @notes = @user.notes.offset(0).limit(5).reverse_order
-
-      cookies[:limit] = 5
-      cookies[:offset] = 5 # note offset
+      @notes = @user.notes.offset(0).limit(cookies[:limit]).reverse_order
 
       respond_to do |format|
           format.html
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     @notes = @user.notes.offset(cookies[:offset].to_i).limit(cookies[:limit]).reverse_order
-    cookies[:offset] = 5 + cookies[:offset].to_i
+    cookies[:offset] = @notes.size + cookies[:offset].to_i
 
     respond_to do |format|
       if @notes.count() > 0
