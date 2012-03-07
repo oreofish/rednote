@@ -1,50 +1,52 @@
 <%# encoding: utf-8 %>
 <div id="note<%= note.id %>">
-<hr>
-<div class="row-fluid">
-<% note_user = User.find(note.user_id) %>
-<div class="span1">
-  <%=link_to image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}"), user_path(note_user), :method => :get -%>
-</div>
-<div class="span11 item">
-
-  <div class="content">
-    <%= note.summary %> 
-  </div>
-
-  <% if note.kind > 0 %>
-    <a href="javascript:void()" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
-    <br/>
-    <div id="attach_collapse<%= note.id %>" class="collapse">
-      <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+  <hr>
+  <div class="row-fluid">
+    <% note_user = User.find(note.user_id) %>
+    <div class="span1">
+      <%=link_to image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}"), user_path(note_user), :method => :get -%>
     </div>
-  <% end %>
 
-  <div class="pull-right">
-    <% if current_user.id==note_user.id %>
-      <%= link_to '详细', note, :class => '' %>
-      <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
-    <% end %>
-    
-    <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning" : myclass="comments_link"%>
-    <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
-      <% my_like = current_user.likes.find_by_note_id(note.id) %>
-      <% if not my_like %>
-        <%= link_to '我想读', likes_path(:note_id => note.id),:method => :post, :remote => true, :class => "tags" %> 
-      <% elsif not my_like.status and controller.action_name == "mytags" %>
-        <%= link_to '取消标记', like_path(my_like), :method => :delete, :remote => true, :class => "tags" %>
-        <%= link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags" %>
-      <% elsif not my_like.status and not controller.action_name == "mytags" %>
-        已标记
-      <% else %>
-        已读完
+    <div class="span11 item">
+
+      <div class="content">
+        <%= note.summary %> 
+      </div>
+
+      <% if note.kind > 0 %>
+        <a href="javascript:void()" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
+        <br/>
+        <div id="attach_collapse<%= note.id %>" class="collapse">
+          <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+        </div>
       <% end %>
-  </div>
-  <div class="time" data="<%= note.created_at %>">
-  </div>
-  <br/>
-  <div class="comments_list well" style="display:none">
-  </div>
-</div>
+
+      <div class="pull-right">
+        <% if current_user.id==note_user.id %>
+          <%= link_to '详细', note, :class => '' %>
+          <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
+        <% end %>
+
+        <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning" : myclass="comments_link"%>
+        <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
+        <% my_like = current_user.likes.find_by_note_id(note.id) %>
+        <% if not my_like %>
+          <%= link_to '我想读', likes_path(:note_id => note.id),:method => :post, :remote => true, :class => "tags" %> 
+        <% elsif not my_like.status and controller.action_name == "mytags" %>
+          <%= link_to '取消标记', like_path(my_like), :method => :delete, :remote => true, :class => "tags" %>
+          <%= link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags" %>
+        <% elsif not my_like.status and not controller.action_name == "mytags" %>
+          已标记
+        <% else %>
+          已读完
+        <% end %>
+      </div>
+      <div class="time" data="<%= note.created_at %>">
+      </div>
+      <br/>
+      <div class="comments_list well" style="display:none">
+      </div>
+    </div> <!-- span11 -->
+  </div> <!-- div.row-fluid -->
 </div>
 

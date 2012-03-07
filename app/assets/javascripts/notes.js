@@ -2,8 +2,7 @@ $(function() {
     if (location.pathname === "/" || location.pathname === "/notes") {
         rednote.pager('/notes/page').start();
 
-        $('ul.nav-pills').on('show', function (e) {
-            console.log('change' + e.target.toString());
+        $('ul.nav-tabs').on('show', function (e) {
             var nowtab = e.target; // activated tab
             var id = $(nowtab).attr('href').substr(1);
             $('#'+id).find('#new_note')[0].reset();
@@ -11,6 +10,12 @@ $(function() {
                 if (CKEDITOR.instances["note_code"]) {
                     CKEDITOR.instances["note_code"].setData('');
                 }
+            }
+        });
+
+        $('#note_publish').on('keypress', '#note_summary', function(e) {
+            if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
+                $(this).parent('form').find(':submit').trigger('click');
             }
         });
 
