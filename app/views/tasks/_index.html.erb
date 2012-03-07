@@ -3,7 +3,7 @@
 <script>
 $(function() {
   // draggable task item in _note.html.erb
-  $( ".taskitem" ).on('mouseover',function(){
+  $( ".taskitem" ).live('mouseover',function(){
     $(this).draggable({
       distance: 20,
       revert: true,
@@ -35,7 +35,7 @@ $(function() {
   });
 
   // modal task view in _note.html.erb
-  $('.taskeditview').on('show', function () {
+  $('.taskeditview').live('show', function () {
     console.log($(this).attr("id"));
     var url = "/tasks/" + $(this).attr("taskid")
     $.get(url, {}, function (data, textStatus){

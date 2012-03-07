@@ -85,7 +85,13 @@
 #footer {
   background: #cccccc; }
 
+input, textarea, select, .uneditable-input {
+    width: 100%;
+}
 
+.task-view {
+  font-size: 14px;
+}
 
 .stretch-small-container {
   width: 150px;

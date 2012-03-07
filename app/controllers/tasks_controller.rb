@@ -150,12 +150,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update_attributes(params[:task])
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.js # update.js.erb
-        format.json { head :no_content }
+        format.json { respond_with_bip(@task) }
       else
         format.html { render action: "edit" }
-        format.js # update.js.erb
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@task) }
       end
     end
   end
