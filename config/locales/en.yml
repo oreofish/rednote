@@ -2,4 +2,23 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      template:
+        header:
+          one: '一个'
+
+      messages:
+        blank: '不能为空'
+        presence: '必须存在'
+
+      models:
+        note:
+          attributes:
+            upload:
+              blank: '请添加上传数据'
+            description:
+              blank: '请填写附加信息'
+            summary:
+              blank: '至少写点什么'
+

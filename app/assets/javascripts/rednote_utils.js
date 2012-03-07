@@ -231,7 +231,7 @@ rednote.logger = {
         } else {
             for (attr in data.errors) {
                 if (typeof attr !== "function") {
-                    log += attr.toString() + " " + data.errors[attr];
+                    log += " " + data.errors[attr];
                 }
             }
             rednote.flashController.doFailure("新建笔记失败", log);
