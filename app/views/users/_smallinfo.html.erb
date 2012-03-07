@@ -2,6 +2,7 @@
 
 <div id="user<%= user.id %>" class="stretch-small-container useritem">
   <div id="stretch-full">
+    <div>
     <div class ="pull-left">
       <%= link_to image_tag(user.avatar_url(:small)), users_nickname_path %>
     </div>
@@ -10,6 +11,12 @@
       发布数: <%= user.notes.count %><br />
       <% tasks = Task.find_all_by_assigned_to(user.id) %>
       任务数: <%= tasks.count if tasks %>
+    </div>
+    </div>
+
+    <div class="progress">
+      <div class="bar" style="width: 100%;">
+      </div>
     </div>
   </div>
 </div>

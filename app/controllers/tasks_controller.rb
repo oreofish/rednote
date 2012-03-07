@@ -45,7 +45,6 @@ class TasksController < ApplicationController
     @projects = Task.top_projects
 
     respond_to do |format|
-      format.html { render 'show' }
       format.js # show.js.erb
       format.json { render json: @task }
     end

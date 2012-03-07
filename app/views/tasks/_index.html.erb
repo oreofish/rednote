@@ -2,12 +2,19 @@
 
 <script>
 $(function() {
+  // draggable task item in _note.html.erb
   $( ".taskitem" ).draggable({
     distance: 20,
     revert: true,
     opacity: 0.7,
+    cursor: "move",
+    cursorAt: { top: 20, left: 20 },
+    helper: function( event ) {
+      return $( "<img src='/images/todo-note.jpg'>" );
+    }
   });
 
+  // droppable user item in _smallinfo.html.erb
   $( ".useritem" ).droppable({
     activeClass: "ui-state-default",
     hoverClass:  "ui-state-hover",
@@ -24,6 +31,16 @@ $(function() {
       });
     }
   });
+
+  // modal task view in _note.html.erb
+  $('.taskeditview').on('show', function () {
+    console.log($(this).attr("id"));
+    var url = "/tasks/" + $(this).attr("taskid")
+    $.get(url, {}, function (data, textStatus){
+      this;
+      eval(data);
+    });
+  })
 });
 </script>
 

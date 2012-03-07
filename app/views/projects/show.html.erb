@@ -2,17 +2,14 @@
 
 <div class='well'>
   <section id="fluidGridSystem">
-    <h3>项目</h3>
-
-    <div class="form-actions">
-      <div class="btn-group" data-toggle="buttons-radio">
-        <% @projects.each do |project| %>
-          <% css_class = ( @project_name == project.name ? 'btn active' : 'btn' ) %>
-          <%= link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class %>
-        <% end %>
-      </div>
+    <div class="btn-group" data-toggle="buttons-radio">
+      <% @projects.each do |project| %>
+      <% css_class = ( @project_name == project.name ? 'btn active' : 'btn' ) %>
+      <%= link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class %>
+      <% end %>
     </div>
 
+    <hr>
 
     <div class="" id="myself">
       <div id="projecttab">
