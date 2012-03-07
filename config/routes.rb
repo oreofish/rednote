@@ -23,6 +23,7 @@ Rednote::Application.routes.draw do
   resources :users, :only => [:show] do
     member do
       get 'mytags'
+      get 'mytasks'
       get 'mycomments'
       get 'page'
     end

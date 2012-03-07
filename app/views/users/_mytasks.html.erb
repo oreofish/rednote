@@ -1,0 +1,6 @@
+<h3>任务</h3>
+<div id="tasklist">
+  <% @tasks.each do |task| %>
+  <%= render :partial => 'tasks/note', :locals => { :task => task } %>
+  <% end %>
+</div>
