@@ -37,6 +37,8 @@
 
     <%= render "layouts/header" %>
 
+    <% content_for :sidebar, render(:partial => "#{controller_name}/sidebar") -%>
+
     <div class="container">
       <div class="row">
       <% if controller_name == "projects" %>
@@ -48,7 +50,7 @@
           <%= yield %>
         </div>
         <div id='sidebar' class="span4">
-          <%= render "layouts/sidebar" %>
+          <%= yield :sidebar %>
         </div>
       <% end %>
       </div>
