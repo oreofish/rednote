@@ -1,6 +1,0 @@
-<%# encoding: utf-8 %>
-
-<li class="task-recent <%= task_css(task) %>" id="task<%= task.id %>">
-  <%= link_to '', set_status_tasks_path(:id => task), :class => "lt-check big-checkbox", :remote => true %>
-  <%= task.content %>
-</li>

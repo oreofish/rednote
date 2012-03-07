@@ -24,6 +24,7 @@ gem 'twitter-bootstrap-rails'
 gem 'best_in_place'
 gem "simple_form"
 gem 'acts-as-taggable-on'
+gem 'haml'
 
 group :development, :test do
   gem 'rspec-rails'

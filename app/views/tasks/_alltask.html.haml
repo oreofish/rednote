@@ -1,0 +1,27 @@
+- # encoding: utf-8
+
+
+- coming_tasks, recent_tasks, past_tasks = three_type_tasks(@tasks)
+
+%h3 待办任务(
+= coming_tasks.count
+)
+%ul.unstyled
+- coming_tasks.each do |task|
+  = render :partial => 'note', :locals => { :task => task, :css => 'task-coming' }
+
+%ul.unstyled
+%h3 本周任务(
+= recent_tasks.count
+)
+  - recent_tasks.each do |task|
+    = render :partial => 'item', :locals => { :task => task }
+
+%h3 已完成任务(
+= past_tasks.count
+)
+%ul.unstyled
+= past_tasks.each do |task|
+    = render :partial => 'note', :locals => { :task => task, :css => 'task-past' }
+= render 'form' %>
+

@@ -1,0 +1,19 @@
+- # encoding: utf-8
+
+.well
+  %section#fluidGridSystem
+    .row
+      .btn-group.span11{ "data-toggle" => "buttons-radio" }
+        - @projects.each do |project|
+          - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
+          = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
+  %hr
+  #myself
+    #projecttab
+      %ul.nav.nav-tabs
+        %li.active= link_to "相关知识", knowledgebase_projects_path, :remote => true, "data-toggle" => "tab", "data-target" => "#"
+        %li= link_to "任务进度", tasks_path(:project => @project_name), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+        %li= link_to "回顾", history_tasks_path(:project => @project_name), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+    
+    #projectcontent
+      = render 'knowledgebase'
