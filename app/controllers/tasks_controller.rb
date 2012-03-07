@@ -101,6 +101,19 @@ class TasksController < ApplicationController
       end
     end
   end
+
+  def assign
+    @task = Task.find(params[:taskid].sub('task', ''))
+    userid = params[:userid].sub('user', '').to_i
+    @user = User.find(userid)
+    respond_to do |format|
+      if @task.update_attributes(:assigned_to => userid)
+        format.js
+      else
+        format.js
+      end
+    end
+  end
   
   # GET /tasks/1/edit
   def edit

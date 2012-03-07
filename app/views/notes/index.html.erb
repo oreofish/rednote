@@ -81,7 +81,15 @@
     </div>
   </div>
 
-  <div class="flash"></div>
+  <div id="flash_content">
+    <a class="more label" href="#" data-toggle="collapse" data-target="#notifications">
+      更多通知
+      <b class="caret"></b>
+    </a>
+    <div id="notifications" class="flash collapse">
+    </div>
+  </div>
+
   <div id="notes_content">
       <ul class="list unstyled">
         <%= render "list" %>

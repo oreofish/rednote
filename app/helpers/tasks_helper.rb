@@ -29,11 +29,11 @@ module TasksHelper
     return coming_tasks, recent_tasks, past_tasks
   end
   
-  def task_css(task, addon)
+  def task_css(task)
     status_class = ['task-todo', 'task-doing', 'task-done',
                     'task-highest', 'task-high', 'task-canceled', 'task-merged']
     current_week = Date.today.cweek
-    "#{addon} #{status_class[task.status]} status#{task.status}"
+    "#{status_class[task.status]} status#{task.status}"
   end
   
   def task_sign(task)
