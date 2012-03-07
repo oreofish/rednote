@@ -90,6 +90,13 @@ describe "Notes" do
       end
     end
 
+    it "should display comments when comments_link clicked" do
+      within(:css, "li#note1") do
+        find('a[class="comments_link"]').click
+        find('div.comments_list').should be_visible
+      end
+    end
+
   end # describe
 
   describe "Create image note", :js => true do

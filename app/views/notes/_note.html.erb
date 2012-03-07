@@ -1,9 +1,10 @@
 <%# encoding: utf-8 %>
-
-<li id="note<%= note.id %>" class="row-fluid">
+<li id="note<%= note.id %>" >
 <hr>
+<div class="row-fluid">
+<% note_user = User.find(note.user_id) %>
 <div class="span1">
-  <%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %>
+  <%=link_to image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}"), user_path(note_user), :method => :get -%>
 </div>
 <div class="span11 item">
 
@@ -12,7 +13,7 @@
   </div>
 
   <% if note.kind > 0 %>
-    <a href="javascript:void(null)" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
+    <a href="javascript:void()" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
     <br/>
     <div id="attach_collapse<%= note.id %>" class="collapse">
       <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
@@ -20,19 +21,19 @@
   <% end %>
 
   <div class="pull-right">
-    <% if current_user.id==note.user.id %>
+    <% if current_user.id==note_user.id %>
       <%= link_to '详细', note, :class => '' %>
       <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
     <% end %>
     
-    <% (current_user.id == note.user_id and not note.message == 0)? myclass="label comments_link label-warning" : myclass="comments_link"%>
+    <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning" : myclass="comments_link"%>
     <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
       <% my_like = current_user.likes.find_by_note_id(note.id) %>
       <% if not my_like %>
-        <%= link_to '我想读', likes_create_path(:note_id => note.id),:remote => true, :class => "tags" %> 
+        <%= link_to '我想读', likes_path(:note_id => note.id),:method => :post, :remote => true, :class => "tags" %> 
       <% elsif not my_like.status and controller.action_name == "mytags" %>
-        <%= link_to '取消标记', likes_destroy_path(:id => my_like.id), :remote => true, :class => "tags" %>
-        <%= link_to '读完？', likes_update_path(:id => my_like.id), :remote => true, :class => "tags" %>
+        <%= link_to '取消标记', like_path(my_like), :method => :delete, :remote => true, :class => "tags" %>
+        <%= link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags" %>
       <% elsif not my_like.status and not controller.action_name == "mytags" %>
         已标记
       <% else %>
@@ -44,6 +45,7 @@
   <br/>
   <div class="comments_list well" style="display:none">
   </div>
+</div>
 </div>
 </li>
 

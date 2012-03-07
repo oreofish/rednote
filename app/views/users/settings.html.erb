@@ -1,8 +1,8 @@
 <div class="well" id="settings">
     <div id="tabspin">
         <ul class="nav nav-tabs">
-           <li><%= link_to "修改昵称", users_nickname_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
-           <li><%= link_to "修改头像", users_avatar_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+           <li><%= link_to "修改昵称", nickname_users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+           <li><%= link_to "修改头像", avatar_users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
            <li><%= link_to "修改密码", edit_user_registration_path, :method => :get, :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
         </ul>
     </div>

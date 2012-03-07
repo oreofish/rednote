@@ -1,0 +1,20 @@
+
+<div class="well" id="userinfo">
+  <%= render 'userinfo' %>
+</div>
+
+<div class="well" id="myself">
+  <div id="tabspin">
+  <ul class="nav nav-tabs">
+    <% (@user.id == current_user.id) ? nickname = "我":nickname = "#{@user.nickname}"%>
+    <li class='active'><%= link_to "#{nickname}的发布", user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li><%= link_to "#{nickname}的评论", mycomments_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li><%= link_to "#{nickname}的标记", mytags_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+  </ul>
+  </div>
+
+  <div class="mycontent">
+    <%= render :partial => 'mytags' if ( controller.action_name == 'show' or controller.action_name == 'mytags') %>
+    <%= render :partial => 'mycomments' if ( controller.action_name == 'mycomments') %>
+  </div>
+</div>

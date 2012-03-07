@@ -10,7 +10,7 @@
 </div>
 -->
 <div id="preview_form">
-<%= form_for @user, :html => {:multipart => true} do |f| %>
+  <%= form_for current_user, :html => {:multipart => true}, :url => { :action => 'avatar_update'} do |f| %>
     <p>
     <%= f.file_field :preview %>
     <%= f.hidden_field :preview_cache %>
@@ -22,22 +22,22 @@
 <div class="jcrop">
     <div class="row">
         <div class="span4">
-            <%= image_tag @user.preview_url(:large), :id => "cropbox", :date => @user.preview_geometry[:width] %>
+            <%= image_tag current_user.preview_url(:large), :id => "cropbox", :date => current_user.preview_geometry[:width] %>
         </div>
         <div class="span3">
             <div class="preview1">
-                <%= image_tag @user.preview_url(:large), :id => "preview1" %>
+                <%= image_tag current_user.preview_url(:large), :id => "preview1" %>
             </div>
             大尺寸图像180x180像素
         </div>
         <div class="span1 offset1">
             <div class="preview2">
-                <%= image_tag @user.preview_url(:large), :id => "preview2" %>
+                <%= image_tag current_user.preview_url(:large), :id => "preview2" %>
             </div>
             小尺寸图48x48像素
         </div>
     </div>
-    <%= form_for @user, :url => { :action => "crop_update" } do |f| %>
+    <%= form_for current_user, :url => { :action => "crop_update" } do |f| %>
         <% for attribute in [:crop_x, :crop_y, :crop_h, :crop_w] %>
             <%= f.hidden_field attribute, :id => attribute %>
         <% end %>

@@ -19,11 +19,11 @@
             <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
             <% noticenum = current_user.notes.sum("message")%>
             <% if noticenum == 0 %>
-              <%= link_to "#{noticenum}", users_path, :id => "update_info", :style => "display:none" %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
             <% else %>
-              <%= link_to "#{noticenum}", users_path, :id => "update_info" %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
             <% end %>
-            <%= link_to "我的主页", users_path %>
+            <%= link_to "我的主页", user_path(current_user), :method => :get %>
             </li>
             <li class='<%= "active" if controller_name == "projects" %>'>
               <%= link_to "项目", projects_path %>
@@ -42,7 +42,7 @@
                 <% end %>
                 <ul class="dropdown-menu">
                     <li>
-                    <%= link_to users_nickname_path do %>
+                    <%= link_to nickname_users_path do %>
                         <i class="icon-cog"></i> 设置
                     <% end %>
                     </li>

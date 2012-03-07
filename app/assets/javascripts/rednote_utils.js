@@ -116,6 +116,8 @@ rednote.pager = function(action) {
 
 // handle flash messages and animations
 rednote.flashController = {
+    notifyCount: 0,
+
     _message: function(style, title, msg) {
         title = title || "通知";
         msg = msg || "";
@@ -123,8 +125,47 @@ rednote.flashController = {
         var templ = '<div class="alert alert-block ' + style + ' fade in">' +
             '<a class="close" data-dismiss="alert" href="#">×</a>' +
             '<strong>' + title + '</strong>' + msg + '</div>';
-        $flash.append(templ); 
+        if (!this.notifyCount) {
+            $(templ).insertBefore($('#flash_content').find('a.more'));
+        } else {
+            $flash.append(templ); 
+        }
     }, 
+    setup: function() {
+        // setup toggle monitor
+        var that = this;
+        var $ctx = $('#flash_content');
+        $ctx.find('a.more').hide();
+
+        $ctx.bind({
+            'DOMNodeInserted': function() {
+                console.log('DOMNodeInserted');
+                that.notifyCount++;
+                if (that.notifyCount < 2) {
+                    that.hideMore();
+                } else {
+                    that.showMore();
+                }
+            },
+            'DOMNodeRemoved': function() {
+                that.notifyCount--;
+                if (that.notifyCount < 2) {
+                    that.hideMore();
+                } else {
+                    that.showMore();
+                }
+            }
+        });
+
+    }, 
+    showMore: function() {
+        var $ctx = $('#flash_content');
+        $ctx.find('a.more').fadeIn('fast');
+    },
+    hideMore: function() {
+        var $ctx = $('#flash_content');
+        $ctx.find('a.more').fadeOut('fast');
+    },
     doFailure: function(title, msg) {
         this._message("alert-error", title, msg);
     }, 
@@ -180,13 +221,20 @@ rednote.logger = {
     notifyCreate: function(msg) {
         console.log(msg);
         var data = eval("("+msg+")");
+        var log = " ";
+
         if (data.status === true) {
             if (CONFIG.user !== data.nickname) {
                 rednote.flashController.doSuccess("有新笔记，请刷新显示");
             }
 
         } else {
-            rednote.flashController.doFailure("新建笔记失败");
+            for (attr in data.errors) {
+                if (typeof attr !== "function") {
+                    log += attr.toString() + " " + data.errors[attr];
+                }
+            }
+            rednote.flashController.doFailure("新建笔记失败", log);
         }
     },
 
@@ -330,6 +378,7 @@ function waring() {
 };
 
 $(function(){
+    rednote.flashController.setup();
     setup_faye();
     jcrop.crop();
     waring();
