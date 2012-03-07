@@ -16,15 +16,11 @@
             <li class='<%= "active" if controller_name == "notes" %>'>
             <%= link_to "首页", notes_path %>
             </li>
-            <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
-            <% noticenum = current_user.notes.sum("message")%>
-            <% if noticenum == 0 %>
-              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
-            <% else %>
-              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
-            <% end %>
-            <%= link_to "我的主页", user_path(current_user), :method => :get %>
+
+            <li class='<%= "active" if controller_name == "index" %>'>
+              <%= link_to "借书", books_path %>
             </li>
+
             <li class='<%= "active" if controller_name == "projects" %>'>
                 <li class="dropdown" id="project-menu">
                 <%= link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
@@ -44,13 +40,20 @@
                 </ul>
                 </li>
             </li>
-            <li class='<%= "active" if controller_name == "index" %>'>
-              <%= link_to "图书借阅", books_path %>
-            </li>
           <% end %>
         </ul>
 
         <ul class="pull-right nav">
+            <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
+            <% noticenum = current_user.notes.sum("message")%>
+            <% if noticenum == 0 %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
+            <% else %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
+            <% end %>
+            <%= link_to "个人空间", user_path(current_user), :method => :get %>
+            </li>
+
             <% if user_signed_in? %>
                 <li class="dropdown" id="user-menu">
                 <%= link_to "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
