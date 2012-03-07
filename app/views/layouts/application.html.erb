@@ -38,15 +38,19 @@
     <%= render "layouts/header" %>
 
     <div class="container">
-      <div class="content">
-        <div class="row">
-          <div id="main-contents" class="span9">
-            <%= yield %>
-          </div>
-          <div id='sidebar' class="span3">
-            <%= render "layouts/sidebar" %>
-          </div>
+      <div class="row">
+      <% if controller_name == "projects" %>
+        <div id="main-contents" class="span12">
+          <%= yield %>
         </div>
+      <% else %>
+        <div id="main-contents" class="span8">
+          <%= yield %>
+        </div>
+        <div id='sidebar' class="span4">
+          <%= render "layouts/sidebar" %>
+        </div>
+      <% end %>
       </div>
 
       <footer>

@@ -4,18 +4,20 @@
   <div id="stretch-full">
     <div>
     <div class ="pull-left">
-      <%= link_to image_tag(user.avatar_url(:small)), users_nickname_path %>
+      <%= link_to image_tag(user.avatar_url(:small)), nickname_users_path %>
     </div>
     <div class ="">
       <%= user.nickname%><br />
-      发布数: <%= user.notes.count %><br />
       <% tasks = Task.find_all_by_assigned_to(user.id) %>
-      任务数: <%= tasks.count if tasks %>
+      <% total = 0 %>
+      <% tasks.each {|task| total += task.estimate.to_i } %>
+      任务数: <%= tasks.count if tasks %><br />
+      本周时点: <%= total %>
     </div>
     </div>
 
     <div class="progress">
-      <div class="bar" style="width: 100%;">
+      <div class="bar" style="width: <%= 100.0*total/5 %>%;">
       </div>
     </div>
   </div>

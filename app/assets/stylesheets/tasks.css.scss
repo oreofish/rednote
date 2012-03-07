@@ -27,16 +27,12 @@
     position: relative;
 }
 
-.task-backlog {
-    background-color: #eee;
-}
-
 .task-todo {
-    background-color: #ccf;
+    background-color: #bbdaf7;
 }
 
 .task-doing {
-    background-color: #aaf;
+    background-color: #84bcf3;
 }
 
 .task-done {
@@ -94,10 +90,10 @@ input, textarea, select, .uneditable-input {
 }
 
 .stretch-small-container {
-  width: 150px;
+  width: 200px;
   border: 1px solid #999999;
   height: 84px;
-  margin: 3px;
+  margin: 6px;
   position: relative;
   font-size: 11px;
   @include box-shadow(grey 1px 1px 3px);
