@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: books
+#
+#  id         :integer(4)      not null, primary key
+#  title      :string(255)
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  status     :string(255)     default("keep")
+#  user_id    :integer(4)
+#  url        :string(255)
+#  cover      :string(255)
+#
+
 require 'spec_helper'
 
 describe Book do

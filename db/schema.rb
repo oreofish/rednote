@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.integer  "user_id"
     t.text     "summary"
     t.integer  "kind",        :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.text     "description"
     t.string   "upload"
     t.integer  "message",     :default => 0
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.integer  "estimate"
+    t.float    "estimate"
     t.datetime "deadline"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20120304080220) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "nickname"
     t.string   "avatar"
     t.string   "preview"
