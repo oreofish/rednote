@@ -1,11 +1,40 @@
 <%# encoding: utf-8 %>
 
+<script>
+$(function() {
+  $( ".taskitem" ).draggable({
+    distance: 20,
+    revert: true,
+    opacity: 0.7,
+  });
+
+  $( ".useritem" ).droppable({
+    activeClass: "ui-state-default",
+    hoverClass:  "ui-state-hover",
+    tolerance: 'pointer',
+    drop: function( event, ui ) {
+      $( this )
+      .addClass( "ui-state-highlight" )
+      .find("p").html(ui.draggable.attr("id"));
+      console.log('assign task to user');
+
+      $.get("/tasks/assign", {taskid: ui.draggable.attr("id"), userid: $(this).attr("id") }, function (data, textStatus){
+        this;
+        eval(data);
+      });
+    }
+  });
+});
+</script>
+
+
 <section id="fluidGridSystem">
   <h3>人员</h3>
+  <div id="userlist">
   <% User.all.each do |user| %>
-    <%= image_tag(user.avatar_url(:small), :class => "avatar") %>
-    <%= user.nickname %>
+    <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
   <% end %>
+  </div>
 
   <h3>任务</h3>
   <div id="tasklist">
