@@ -19,9 +19,9 @@
             <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
             <% noticenum = current_user.notes.sum("message")%>
             <% if noticenum == 0 %>
-              <%= link_to "#{noticenum}", users_path, :id => "update_info", :style => "display:none" %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
             <% else %>
-              <%= link_to "#{noticenum}", users_path, :id => "update_info" %>
+              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
             <% end %>
             <%= link_to "我的主页", user_path(current_user), :method => :get %>
             </li>
