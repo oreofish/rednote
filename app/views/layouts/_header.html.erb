@@ -26,7 +26,23 @@
             <%= link_to "我的主页", user_path(current_user), :method => :get %>
             </li>
             <li class='<%= "active" if controller_name == "projects" %>'>
-              <%= link_to "项目", projects_path %>
+                <li class="dropdown" id="project-menu">
+                <%= link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+                  项目<b class="caret"></b>
+                <% end %>
+                <ul class="dropdown-menu">
+                    <li>
+                    <% Task.project_counts.each do |project| %>
+                      <%= link_to "#{project.name}(#{project.count})", project_path(project.name) %>
+                    <% end %>
+                    <li class="divider"></li>
+                    <li>
+                    <%= link_to projects_path do %>
+                        <i class="icon-edit"></i>修改
+                    <% end %>
+                    </li>
+                </ul>
+                </li>
             </li>
             <li class='<%= "active" if controller_name == "index" %>'>
               <%= link_to "图书借阅", books_path %>
