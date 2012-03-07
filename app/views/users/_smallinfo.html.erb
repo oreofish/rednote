@@ -1,0 +1,11 @@
+<div class="stretch-small-container">
+  <div id="stretch-full">
+    <div class ="pull-left">
+      <%= link_to image_tag(user.avatar_url(:small)), users_nickname_path %>
+    </div>
+    <div class ="">
+      <p><%= user.nickname%></p>
+      <p>发布数: <%= user.notes.count %></p>
+    </div>
+  </div>
+</div>

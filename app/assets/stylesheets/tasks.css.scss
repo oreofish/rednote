@@ -87,15 +87,20 @@
 
 
 
-.stretch-container {
+.stretch-small-container {
+  width: 150px;
   border: 1px solid #999999;
-  height: 50px;
+  height: 60px;
+  margin: 6px;
   position: relative;
+  font-size: 11px;
+  @include box-shadow(grey 1px 1px 3px);
   @include inline-block; }
 
 .stretch-note-container {
-  width: 30%;
-  height: 40px;
+  width: 47%;
+  min-height: 100px;
+  margin: 6px;
   position: relative;
   font-size: 11px;
   background: #ffa;

@@ -1,13 +1,13 @@
 <%# encoding: utf-8 %>
 
-<li class="<%= task_css(task, "stretch-note-container") %>">
+<div class="<%= task_css(task, "stretch-note-container") %>">
 <div id="stretch-full">
   <%= task.content %>
   <%= task.user.nickname %>
   <%= time_ago_in_words(task.deadline) if task.deadline %>
 
   <%= link_to task, :class => "bottom-right" do %>
-    <i class="icon-chevron-right"></i>
+    <i class="icon-edit"></i>
   <% end %>
 </div>
-</li>
+</div>

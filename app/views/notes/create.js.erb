@@ -15,6 +15,7 @@
       }
     }
     $('#notes_content').find('ul.list li:first').hide().fadeIn(1000);
+    commentsManager.bindCommentHandler(<%= @note.id %>);
     rednote.updateNoteTime();
   <% end %>
 }());

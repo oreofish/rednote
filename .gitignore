@@ -22,3 +22,6 @@ config/database.yml
 
 # Ignore public
 public/uploads
+
+# coverage test
+coverage

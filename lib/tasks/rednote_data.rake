@@ -68,7 +68,7 @@ end
 def make_tasks
   users = User.all
   users[0..1].each do |user|
-    task = user.tasks.create( content: "recent task", status: 0, assigned_to: user.id)
+    task = user.tasks.create( content: "recent task", status: 0)
     task.project_list = 'big project'
     task.save
     task = user.tasks.create( content: "recent task", status: 0, assigned_to: user.id)
@@ -76,8 +76,8 @@ def make_tasks
     task.save
   end
   users[2..3].each do |user|
-    task = user.tasks.create( :content => "recent task", :status => 1,
-                              assigned_to: user.id)
+    task = user.tasks.create( :content => "recent task", :status => 1)
+                              
     task.project_list = 'big project'
     task.save
     task = user.tasks.create( :content => "recent task", :status => 1,
@@ -88,8 +88,7 @@ def make_tasks
   users[2..3].each do |user|
     task = user.tasks.create( :content => "recent task", :status => 2,
                               :start_at => Date.today.prev_week,
-                              :finish_at => Date.today.prev_week,
-                              assigned_to: user.id)
+                              :finish_at => Date.today.prev_week)
     task.project_list = 'big project'
     task.save
     task = user.tasks.create( :content => "recent task", :status => 2,
