@@ -44,17 +44,17 @@
         </ul>
 
         <ul class="pull-right nav">
-            <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
-            <% noticenum = current_user.notes.sum("message")%>
-            <% if noticenum == 0 %>
-              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
-            <% else %>
-              <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
-            <% end %>
-            <%= link_to "个人空间", user_path(current_user), :method => :get %>
-            </li>
-
             <% if user_signed_in? %>
+                <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
+                <% noticenum = current_user.notes.sum("message")%>
+                <% if noticenum == 0 %>
+                  <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
+                <% else %>
+                  <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
+                <% end %>
+                <%= link_to "个人空间", user_path(current_user), :method => :get %>
+                </li>
+
                 <li class="dropdown" id="user-menu">
                 <%= link_to "#user-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
                     <%= current_user.email %><b class="caret"></b>
