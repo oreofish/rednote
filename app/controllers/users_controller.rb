@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     before_filter :default_avatar, :except => [:search_nickname, :search_email]
+    before_filter :all_users, :except => [:search_nickname, :search_email]
 
   def show
       @user = User.find(params[:id])
@@ -133,6 +134,10 @@ class UsersController < ApplicationController
          @user.preview = @user.avatar 
          @user.save
       end
+  end
+
+  def all_users
+    @users = User.all
   end
 
 end

@@ -1,5 +1,8 @@
 <div class="well">
   <h3>同事</h3>
+  <% @users.each do |user| %>
+    <p><%= link_to user.nickname, user_path(user), :method => :get %></p>
+  <% end %>
 
 </div>
 
