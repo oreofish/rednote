@@ -3,7 +3,8 @@
 <ul class='comment unstyled'>
   <% @comments.each do |comment| %>
     <li id="comment<%= comment.id %>">
-    <%= image_tag(User.find(comment.user_id).avatar_url(:small), :height => "30", :width => "30") %>
+    <% user = User.find(comment.user_id) %>
+    <%= link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), user_path(user), :title => "#{user.nickname}"%>
     <%= comment.comment %>
     <% if(comment.user_id==current_user.id) %>
       <%= link_to 'x', comment, :confirm => '你确认删除？', :method => :delete, :class => 'small-button', :remote => true %>
