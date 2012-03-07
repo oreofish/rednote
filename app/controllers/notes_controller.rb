@@ -63,7 +63,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
-    if @note.kind == attachmentKindValue(:code)
+    if @note.kind == attachmentKindValue(:code) and not @note.description.empty?
       # hack: insert code lang into special tag
       @note.description = 
         "@@#{params[:language][:id].strip.downcase.to_sym}@@\n" + @note.description
@@ -81,7 +81,11 @@ class NotesController < ApplicationController
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.js 
       else
-        broadcast '/notes/new', "{ status: false }"
+        broadcast '/notes/new', %Q/
+          {
+            status: false,
+            errors: #{@note.errors.to_json}
+          }/
         format.html { redirect_to notes_path, notice: 'Note creation was failed.' }
         format.js 
       end

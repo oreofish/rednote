@@ -221,13 +221,20 @@ rednote.logger = {
     notifyCreate: function(msg) {
         console.log(msg);
         var data = eval("("+msg+")");
+        var log = " ";
+
         if (data.status === true) {
             if (CONFIG.user !== data.nickname) {
                 rednote.flashController.doSuccess("有新笔记，请刷新显示");
             }
 
         } else {
-            rednote.flashController.doFailure("新建笔记失败");
+            for (attr in data.errors) {
+                if (typeof attr !== "function") {
+                    log += attr.toString() + " " + data.errors[attr];
+                }
+            }
+            rednote.flashController.doFailure("新建笔记失败", log);
         }
     },
 
