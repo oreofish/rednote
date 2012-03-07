@@ -3,15 +3,17 @@
 <script>
 $(function() {
   // draggable task item in _note.html.erb
-  $( ".taskitem" ).draggable({
-    distance: 20,
-    revert: true,
-    opacity: 0.7,
-    cursor: "move",
-    cursorAt: { top: 20, left: 20 },
-    helper: function( event ) {
-      return $( "<img src='/images/todo-note.jpg'>" );
-    }
+  $( ".taskitem" ).on('mouseover',function(){
+    $(this).draggable({
+      distance: 20,
+      revert: true,
+      opacity: 0.7,
+      cursor: "move",
+      cursorAt: { top: 20, left: 20 },
+      helper: function( event ) {
+        return $( "<img src='/images/todo-note.jpg'>" );
+      }
+    });
   });
 
   // droppable user item in _smallinfo.html.erb
