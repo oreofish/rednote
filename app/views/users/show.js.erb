@@ -4,7 +4,7 @@
 
   var $space = $('#myself').find('div.mycontent');
 
-  <% if controller.action_name == "index" or controller.action_name == "mytags" %> 
+  <% if controller.action_name == "show" or controller.action_name == "mytags" %> 
       $space.html( "<%= j render :partial => 'mytags' %>" ); 
   <% else %> 
       $space.html( "<%= j render :partial => 'mycomments' %> " );

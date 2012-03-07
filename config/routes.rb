@@ -15,27 +15,30 @@ Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'
-  resources :comments
-
-  match 'likes/create', :to => 'likes#create'
-  match 'likes/update', :to => 'likes#update'
-  match 'likes/destroy', :to => 'likes#destroy'
-
+  resources :comments, :only => [:new, :index, :create, :destroy]
+  resources :likes, :only => [:create, :update, :destroy]
 
 
   devise_for :users
+  resources :users, :only => [:show] do
+    member do
+      get 'mytags'
+      get 'mycomments'
+      get 'page'
+    end
 
-  get "users/search_nickname"
-  get "users/search_email"
-  get "users/page"
-  get "users/avatar"
-  get "users/mycomments"
-  get "users/nickname"
-  get "users/mytags"
-  get "users/crop_update"
-  match '/users', :to => 'users#index'
-  match ':users/crop_update' => 'users#crop_update'
-  match ':users/avatar', :to  => 'users#update', :as => :user 
+    collection do
+      get 'nickname'
+      match 'avatar'
+      match 'avatar_update'
+      get 'search_nickname'
+      get 'search_email'
+      match 'crop_update'
+    end
+  end
+
+  #get "users/mycomments"
+  #get "users/mytags"
 
   root :to => "notes#index"
 

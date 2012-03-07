@@ -23,7 +23,7 @@
             <% else %>
               <%= link_to "#{noticenum}", users_path, :id => "update_info" %>
             <% end %>
-            <%= link_to "我的主页", users_path %>
+            <%= link_to "我的主页", user_path(current_user), :method => :get %>
             </li>
             <li class='<%= "active" if controller_name == "projects" %>'>
               <%= link_to "任务", projects_path %>
@@ -42,7 +42,7 @@
                 <% end %>
                 <ul class="dropdown-menu">
                     <li>
-                    <%= link_to users_nickname_path do %>
+                    <%= link_to nickname_users_path do %>
                         <i class="icon-cog"></i> 设置
                     <% end %>
                     </li>

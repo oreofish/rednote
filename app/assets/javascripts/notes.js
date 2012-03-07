@@ -15,7 +15,8 @@ $(function() {
         });
 
     } else if (location.pathname.match(/^\/users/)) {
-        rednote.pager('/users/page').start();
+        var user_id=location.pathname.match(/\d+/g);
+        rednote.pager('/users/'+user_id+'/page').start();
         $('ul.nav-tabs a:first').tab('show');
         rednote.spin.spinning($('ul.nav-tabs'), $('#tabspin'));
     }
