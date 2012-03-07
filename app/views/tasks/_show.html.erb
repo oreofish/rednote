@@ -1,0 +1,55 @@
+<%# encoding: utf-8 %>
+
+<table class="task-view">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><h4>项目：</h4></td>
+      <td><%= @task.project_list[0] %></div></td>
+    </tr>
+    <tr>
+      <td><h4>创建人：</h4></td>
+      <td><%= @task.user.nickname %></div></td>
+    </tr>
+<!--
+    <tr>
+      <td><h4>负责人：</h4></td>
+      <td><div class="inplace"><%= best_in_place @task, :assigned_to, type: :select, :collection => User::list_user_options %></div></td>
+    </tr>
+-->
+    <tr>
+      <td><h4>内容：</h4></td>
+      <td><div class="inplace"><%= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消' %></div></td>
+    </tr>
+    <tr>
+      <td><h4>估算时间：</h4></td>
+      <td><div class="inplace"><%= best_in_place @task, :estimate, type: :select, :collection => [[0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3.5, '3.5']] %>天</div></td>
+    </tr>
+    <tr>
+      <td><h4>截止时间：</h4></td>
+      <td><div class="inplace"><%= best_in_place @task, :deadline, type: :date %></div></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="form-actions">
+  <%= form_tag set_tag_tasks_path, :class => :form do %>
+    <%= hidden_field :task, :id, :value => @task.id %>
+    所属项目：
+    <%= collection_select :project, :name,  @projects, :name, :name %>
+    <button class="btn" type="submit">修改</button>
+  <% end %>
+</div>

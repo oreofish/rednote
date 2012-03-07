@@ -1,0 +1,9 @@
+<%# encoding: utf-8 %>
+
+(function() {
+  $('#edittask<%= @task.id %>').find('.modal-body').html( "<%= j render( 'show' ) %>" );
+
+  setTimeout( function() {
+    $('.best_in_place').best_in_place();
+  }, 100 );
+}());
