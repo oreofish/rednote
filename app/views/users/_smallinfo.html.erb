@@ -9,8 +9,8 @@
     <div class ="">
       <%= user.nickname %><br />
       <% tasks = Task.find_all_by_assigned_to(user.id) %>
-      <% total = 0 %>
-      <% tasks.each {|task| total += task.estimate.to_i } %>
+      <% total = 0.0 %>
+      <% tasks.each {|task| total += task.estimate.to_f } %>
       任务数: <%= tasks.count if tasks %><br />
       本周时点: <%= total %>
     </div>

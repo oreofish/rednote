@@ -5,8 +5,8 @@
   <% totalpoint = 0 %>
   <% donepoint = 0 %>
   <% Task.find_all_by_assigned_to(current_user.id).each do |task| %>
-    <% donepoint += task.estimate.to_i if task.status == Task::DONE %>
-    <% totalpoint += task.estimate.to_i %>
+    <% donepoint += task.estimate.to_f if task.status == Task::DONE %>
+    <% totalpoint += task.estimate.to_f %>
     <%= render :partial => 'tasks/item', :locals => { :task => task } %>
   <% end %>
   </ul>

@@ -1,7 +1,11 @@
 <%# encoding: utf-8 %>
 
 (function() {
+<% if @user %>
   $('#task<%= @task.id %>').hide();
   $('#user<%= @user.id %>')
       .replaceWith("<%= j render :partial => 'users/smallinfo', :locals => { :user => @user } %>");
+<% else %>
+  alert('请先为任务估算时间，再分配责任人。');
+<% end %>
 }());
