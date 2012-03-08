@@ -10,6 +10,7 @@
 #  updated_at  :datetime        not null
 #  description :text
 #  upload      :string(255)
+#  message     :integer(4)      default(0)
 #
 
 class Note < ActiveRecord::Base

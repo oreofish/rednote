@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :user_id
       t.integer :parent_id
       t.string :content
-      t.integer :estimate
+      t.float  :estimate
       t.timestamp :deadline
 
       t.timestamps

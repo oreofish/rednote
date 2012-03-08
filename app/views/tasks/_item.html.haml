@@ -1,0 +1,5 @@
+- # encoding: utf-8
+
+%li.task-recent{:id => "task#{task.id}", :class => "task_css(task)"}
+  = link_to '', set_status_tasks_path(:id => task), :class => "lt-check big-checkbox", :remote => true
+  = task.content

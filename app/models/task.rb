@@ -5,7 +5,7 @@
 #  id          :integer(4)      not null, primary key
 #  user_id     :integer(4)
 #  content     :string(255)
-#  estimate    :integer(4)
+#  estimate    :float
 #  deadline    :datetime
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
