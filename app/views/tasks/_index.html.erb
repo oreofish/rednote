@@ -2,19 +2,6 @@
 
 <script>
 $(function() {
-  // draggable task item in _note.html.erb
-  $( ".taskitem" ).live('mouseover',function(){
-    $(this).draggable({
-      distance: 20,
-      revert: true,
-      opacity: 0.7,
-      cursor: "move",
-      cursorAt: { top: 20, left: 20 },
-      helper: function( event ) {
-        return $( "<img src='/images/todo-note.jpg'>" );
-      }
-    });
-  });
 
   // droppable user item in _smallinfo.html.erb
   $( ".useritem" ).droppable({
@@ -22,27 +9,14 @@ $(function() {
     hoverClass:  "ui-state-hover",
     tolerance: 'pointer',
     drop: function( event, ui ) {
-      $( this )
-      .addClass( "ui-state-highlight" )
-      .find("p").html(ui.draggable.attr("id"));
+      $( this ).addClass( "ui-state-highlight" ).find("p").html(ui.draggable.attr("id"));
       console.log('assign task to user');
-
       $.get("/tasks/assign", {taskid: ui.draggable.attr("id"), userid: $(this).attr("id") }, function (data, textStatus){
         this;
         eval(data);
       });
     }
   });
-
-  // modal task view in _note.html.erb
-  $('.taskeditview').live('show', function () {
-    console.log($(this).attr("id"));
-    var url = "/tasks/" + $(this).attr("taskid")
-    $.get(url, {}, function (data, textStatus){
-      this;
-      eval(data);
-    });
-  })
 });
 </script>
 

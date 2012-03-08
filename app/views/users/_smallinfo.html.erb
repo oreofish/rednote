@@ -4,10 +4,10 @@
   <div id="stretch-full">
     <div>
     <div class ="pull-left">
-      <%= link_to image_tag(user.avatar_url(:small)), nickname_users_path %>
+      <%= link_to image_tag(user.avatar_url(:small)), user_path(user.id) %>
     </div>
     <div class ="">
-      <%= user.nickname%><br />
+      <%= user.nickname %><br />
       <% tasks = Task.find_all_by_assigned_to(user.id) %>
       <% total = 0 %>
       <% tasks.each {|task| total += task.estimate.to_i } %>

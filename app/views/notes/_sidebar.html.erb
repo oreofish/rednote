@@ -2,19 +2,24 @@
   <h3>本周任务</h3>
 
   <ul class='unstyled'>
+  <% totalpoint = 0 %>
+  <% donepoint = 0 %>
   <% Task.find_all_by_assigned_to(current_user.id).each do |task| %>
+    <% donepoint = task.estimate if task.status == Task::DONE %>
+    <% totalpoint = task.estimate %>
     <%= render :partial => 'tasks/item', :locals => { :task => task } %>
   <% end %>
   </ul>
 
   <div>时间进度</div>
   <div id="timeprogress" class="progress progress-info progress-striped">
-    <div class="bar" style="width: 10%;">
+    <div class="bar" style="width: 1%;">
     </div>
   </div>
+
   <div>任务进度</div>
   <div id="taskprogress" class="progress progress-striped">
-    <div class="bar" style="width: 20%;">
+    <div class="bar" style="width: <%= totalpoint == nil ? 1 : 100.0*donepoint/totalpoint %>%;">
     </div>
   </div>
 
