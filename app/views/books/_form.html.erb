@@ -3,7 +3,21 @@
     <div class="control-group">
       <%= f.label "书名", :class => "control-label" %>
       <div class="controls">
-        <%= f.text_field :title, :class => "input-xlarge" %>
+        <%= f.text_field :title, :class => "input" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label "副标题", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :subtitle, :class => "input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label "作者", :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :author, :class => "input" %>
       </div>
     </div>
 
@@ -21,11 +35,11 @@
       </div>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions pull-right">
+    <a class="btn" href="<%= books_path %>">返回书库</a>
       <button type="submit" class="btn btn-primary">
         <i class="icon-upload"></i> 发布
       </button>    
-      <%= link_to '返回书库', books_path, :class => "btn" %>
     </div>
   </fieldset>
 <% end %>

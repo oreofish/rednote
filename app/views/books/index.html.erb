@@ -1,6 +1,6 @@
 <div class="well">
-  <div class="row">
-    <div class="span6">
+  <div class="row-fluid">
+    <div class="span9">
       <h1> 目前库存图书: <%= @books.size %> </h1>
     </div>
     <div class="pull-right"> 
@@ -11,10 +11,10 @@
   <br/>
   <br/>
 
-  <div class="row">
+  <div class="row-fluid">
     <% @bookstatuslist.each do |arr| %>
-      <div class="span6">
-        <div class="span2">
+      <div class="span9">
+        <div class="span4">
           <div class="thumbnail">
             <% if not arr["book"].cover.nil? %>
               <%= image_tag "#{arr['book'].cover}" %>
@@ -22,16 +22,24 @@
           </div>
         </div>
 
-        <div class="span3">
+        <div class="span5">
           <h2> <%= arr["book"].title %> </h2>
         </div>
 
-        <div class="span3">
-          <%= link_to "豆瓣", "#{arr['book'].url}" %>
+        <div class="span5">
+          <h3> <%= arr["book"].subtitle %> </h3>
+        </div>
+
+        <div class="span5">
+          <h4> <%= arr["book"].author %> </h4>
+        </div>
+
+        <div class="span4">
+          <%= link_to "豆瓣链接", "#{arr['book'].url}" %>
         </div>
       </div>
 
-      <div class="span2">
+      <div class="span3">
         <% if arr["display"] == "borrow" %>
           <%= link_to '借阅此书', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
         <% elsif arr["display"] == "want_wait" %>
@@ -44,7 +52,7 @@
         <% end %>
       </div>
 
-      <div class="span8">
+      <div class="span7">
         <hr/>
       </div>
     <% end %>

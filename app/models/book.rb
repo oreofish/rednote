@@ -18,7 +18,7 @@ class Book < ActiveRecord::Base
   validates :cover, :presence => true
   validates :user_id, :presence => true
 
-  attr_accessible :title, :url, :cover, :user_id
+  attr_accessible :title, :url, :cover, :user_id, :subtitle, :author
 
   has_many :debits, :dependent => :destroy 
   belongs_to :user

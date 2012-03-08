@@ -261,7 +261,6 @@ rednote.logger = {
     }
 }
 
-
 function setup_faye(){
     var server = location.host.replace(/:\d*/, '');
     if (/localhost/.test(server)) {
