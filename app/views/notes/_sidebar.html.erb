@@ -5,8 +5,8 @@
   <% totalpoint = 0 %>
   <% donepoint = 0 %>
   <% Task.find_all_by_assigned_to(current_user.id).each do |task| %>
-    <% donepoint = task.estimate if task.status == Task::DONE %>
-    <% totalpoint = task.estimate %>
+    <% donepoint += task.estimate.to_i if task.status == Task::DONE %>
+    <% totalpoint += task.estimate.to_i %>
     <%= render :partial => 'tasks/item', :locals => { :task => task } %>
   <% end %>
   </ul>
@@ -23,6 +23,10 @@
     </div>
   </div>
 
+  <%= link_to mytasks_user_path(current_user), :class => "btn pull-right" do %>
+    <i class="icon-edit"></i>调整任务
+  <% end %>
+  <br />
 </div>
 </div>
 
