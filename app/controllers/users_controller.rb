@@ -55,7 +55,8 @@ class UsersController < ApplicationController
     @avatar = @user.avatar
     @nickname = @user.nickname
     
-    @tasks = @user.tasks
+    @mytasks = @user.tasks
+    @assigned_to_me_tasks = Task.find_all_by_assigned_to(@user.id)
 
     respond_to do |format|
       format.html { render 'show' }
@@ -76,7 +77,6 @@ class UsersController < ApplicationController
   end
 
   def avatar
-
       respond_to do |format|
           format.html { render 'settings' }
           format.js { render 'devise/registrations/edit' }
@@ -93,7 +93,6 @@ class UsersController < ApplicationController
   end
 
   def avatar_update
-
         current_user.preview = params[:user]["preview"]
         current_user.preview_cache = params[:user]["preview_cache"]
         current_user.save!

@@ -1,5 +1,24 @@
-<div id="tasklist">
-  <% @tasks.each do |task| %>
-  <%= render :partial => 'tasks/note', :locals => { :task => task } %>
-  <% end %>
+<div class="tabbable" style="margin-bottom: 9px;">
+  <ul class="nav nav-pills">
+    <li class="active"><%= link_to "负责的任务", "#assigned_to_me", "data-toggle" => "tab" %></li>
+    <li><%= link_to "创建的任务", "#created_by_me", "data-toggle" => "tab" %></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="assigned_to_me">
+      <div id="tasklist">
+        <% @assigned_to_me_tasks.each do |task| %>
+        <%= render :partial => 'tasks/note', :locals => { :task => task } %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="created_by_me">
+      <div id="tasklist">
+        <% @mytasks.each do |task| %>
+        <%= render :partial => 'tasks/note', :locals => { :task => task } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+

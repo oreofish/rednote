@@ -1,5 +1,8 @@
 - # encoding: utf-8
 
+- if current_user == @task.user
+  = link_to "删除任务", @task, :confirm => "确定删除吗?", :method => :delete, :class => "pull-right btn"
+
 %table.task-view
   %tbody
     %tr
