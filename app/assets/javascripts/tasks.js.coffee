@@ -28,3 +28,5 @@ jQuery ->
       }
     )
   )
+
+  $('#taskprogresslink').click()
