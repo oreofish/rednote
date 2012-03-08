@@ -10,10 +10,12 @@
     <div class="span11 item">
 
       <div class="content">
-        <%= note.summary %> 
+        <span style="word-wrap: break-word;"> <%= note.summary %>  </span>
       </div>
 
-      <% if note.kind > 0 %>
+      <% if note.kind == attachmentKindValue(:image) %>
+        <%= render :partial => "notes/attach_#{attachmentKind(note.kind)}", :locals => { :note => note} %>
+      <% elsif note.kind > 0 %>
         <a href="javascript:void()" data-toggle="collapse" data-target="#attach_collapse<%= note.id %>">展开</a>
         <br/>
         <div id="attach_collapse<%= note.id %>" class="collapse">
