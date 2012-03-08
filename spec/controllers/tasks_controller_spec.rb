@@ -49,7 +49,6 @@ describe TasksController do
       get :index, {:project => 'proj1'}
       assigns(:current_project).should eq('proj1')
       assigns(:task).should be_a(Task)
-      assigns(:all_tasks).should eq([task])
     end
   end
 
@@ -146,6 +145,10 @@ describe TasksController do
   end
 
   describe "DELETE destroy" do
+    before(:each) do
+      request.env["HTTP_REFERER"] = tasks_url
+    end
+    
     it "destroys the requested task" do
       task = @user.tasks.create! valid_attributes
       expect {
