@@ -397,6 +397,7 @@ function updatetimeprogress() {
     }
 
     $bar.css('width',value+'%');
+    setTimeout(updatetimeprogress,60000);
 
 };
 
