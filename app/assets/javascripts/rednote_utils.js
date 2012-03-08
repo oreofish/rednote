@@ -385,10 +385,14 @@ function updatetimeprogress() {
     var day = time.getDay();
     var hour = time.getHours();
     var minuter = time.getMinutes();
+    var workhour = 8;
 
     if (1 <= day && day <= 5 ) {
-        var numerator = (day-1)*24*60 + hour*60 + minuter; 
-        var denominator = 5*24*60;
+        var numerator = (day-1) * workhour * 60;
+        if (hour - 9 >= 0) {
+            numerator += (hour-9) * 60 + minuter;
+        }
+        var denominator = 5 * workhour * 60;
         var value = numerator / denominator  * 100;
     }
 
