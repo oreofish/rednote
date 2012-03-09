@@ -8,30 +8,31 @@ class BooksController < ApplicationController
     @reading_book = Book.find_by_sql("SELECT books.* FROM books WHERE user_id=#{current_user.id} and status='reading' ")
 
     @books.each do |book|
+    @owner = User.find_by_sql("SELECT users.* FROM users WHERE id=#{book.user_id}")[0].nickname
       if @reading_book.size == 0
         @book_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE book_id=#{book.id} ORDER BY created_at ASC")
         if @user_debit.size == 0
           if book.status == "keep" && @book_debit.size == 0
-            bookstatus = {"book" => book, "display" => "borrow"}
+            bookstatus = {"book" => book, "display" => "borrow", "owner" => @owner}
           else
-            bookstatus = {"book" => book, "display" => "want_wait"}
+            bookstatus = {"book" => book, "display" => "want_wait", "owner" => @owner}
           end
         elsif @user_debit.size == 1
           if @user_debit[0].book_id == book.id 
             if @book_debit.first.user_id == current_user.id && book.status == "keep"
-              bookstatus = {"book" => book, "display" => "borrow"}
+              bookstatus = {"book" => book, "display" => "borrow", "owner" => @owner}
             else
-              bookstatus = {"book" => book, "display" => "waiting"}
+              bookstatus = {"book" => book, "display" => "waiting", "owner" => @owner}
             end
           else
-            bookstatus = {"book" => book, "display" => ""}
+            bookstatus = {"book" => book, "display" => "", "owner" => @owner}
           end
         end
       elsif @reading_book.size == 1
         if @reading_book[0].id == book.id
-          bookstatus = {"book" => book, "display" => "reading"}
+          bookstatus = {"book" => book, "display" => "reading", "owner" => @owner}
         else
-          bookstatus = {"book" => book, "display" => ""}
+          bookstatus = {"book" => book, "display" => "", "owner" => @owner}
         end
       end
       @bookstatuslist.push(bookstatus)
