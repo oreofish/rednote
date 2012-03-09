@@ -10,6 +10,8 @@
 #  user_id    :integer(4)
 #  url        :string(255)
 #  cover      :string(255)
+#  subtitle   :string(255)
+#  author     :string(255)
 #
 
 require 'spec_helper'

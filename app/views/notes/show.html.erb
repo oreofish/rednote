@@ -10,16 +10,5 @@
   <%= @note.summary %>
 </p>
 
-<p>
-  <b>Description:</b>
-  <%= @note.description %>
-</p>
-
-<p>
-  <b>kind:</b>
-  <%= @note.kind %>
-</p>
-
-
 <%= link_to 'Edit', edit_note_path(@note) %> |
 <%= link_to 'Back', notes_path %>

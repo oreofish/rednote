@@ -5,10 +5,6 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @note = Note.new
-	@languages = [
-      "C","Clojure","CSS","Delphi","DIFF","ERB","Groovy","HAML","HTML",
-      "Java","JavaScript","JSON","PHP","Python","Ruby","SQL","XML","YAML"
-    ]
 
     cookies[:limit] = 20
     cookies[:offset] = 20 # note offset
@@ -62,11 +58,6 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
-    if @note.kind == attachmentKindValue(:code) and not @note.description.empty?
-      # hack: insert code lang into special tag
-      @note.description = 
-        "@@#{params[:language][:id].strip.downcase.to_sym}@@\n" + @note.description
-    end
 
     respond_to do |format|
       if @note.save

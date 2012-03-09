@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @new_task = current_user.tasks.new(:content => "新项目建立")
+    @new_task = current_user.tasks.new(:content => "新项目建立", :status => Task::DONE)
     @new_task.project_list = params[:project][:name]
 
     respond_to do |format|

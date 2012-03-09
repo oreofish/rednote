@@ -1,4 +1,0 @@
-<% idx = note.description.index("\n") %>
-<% lang = note.description[0, idx].sub(/@@(.*)@@/, '\1') %>
-<% src = note.description[idx, note.description.length] %>
-<%= render :inline => CodeRay.highlight(src, lang, options = {:css => :class}) %>

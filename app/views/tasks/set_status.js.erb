@@ -6,7 +6,7 @@
   <% cssdo = ['task-todo', 'task-doing', 'task-done'] %>
   $('#task<%= @task.id %>').removeClass("<%= cssstatus[@oldstatus] %>").addClass("<%= cssstatus[@task.status] %>")
   $('#task<%= @task.id %>').removeClass("<%= cssdo[@oldstatus] %>").addClass("<%= cssdo[@task.status] %>")
-  $('#task<%= @task.id %>').effect('highlight', {}, 1000);
+  $('#task<%= @task.id %>').effect('highlight', {}, 100);
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');
 <% end %>
