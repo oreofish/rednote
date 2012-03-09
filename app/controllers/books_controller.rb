@@ -3,14 +3,21 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @bookstatuslist= Array.new()
+    @user_list_for_one_book= Array.new()
     @books = Book.all
     @user_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE user_id=#{current_user.id}")
     @reading_book = Book.find_by_sql("SELECT books.* FROM books WHERE user_id=#{current_user.id} and status='reading' ")
 
     @books.each do |book|
-    @owner = User.find_by_sql("SELECT users.* FROM users WHERE id=#{book.user_id}")[0].nickname
+      @owner = User.find_by_sql("SELECT users.* FROM users WHERE id=#{book.user_id}")[0].nickname
+      @book_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE book_id=#{book.id} ORDER BY created_at ASC")
+      @book_debit.each do |debit|
+        user_debit_for_one_book = User.find_by_sql("SELECT users.* FROM users WHERE id=#{debit.user_id}")[0].nickname
+        @user_list_for_one_book.push(user_debit_for_one_book)
+      end
+
+
       if @reading_book.size == 0
-        @book_debit = Debit.find_by_sql("SELECT debits.* FROM debits WHERE book_id=#{book.id} ORDER BY created_at ASC")
         if @user_debit.size == 0
           if book.status == "keep" && @book_debit.size == 0
             bookstatus = {"book" => book, "display" => "borrow", "owner" => @owner}

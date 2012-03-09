@@ -45,6 +45,10 @@
         <p>此书正在被<%= arr["owner"] %>阅读</p>
       <% end %>
 
+      <% @user_list_for_one_book.each do |arr| %>
+        <p><%= arr %></p>
+      <% end %>
+
       <div class="span3">
         <% if arr["display"] == "borrow" %>
           <%= link_to '借阅此书', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
