@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308091433) do
+ActiveRecord::Schema.define(:version => 20120309072117) do
+
+  create_table "attachements", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "note_id"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -71,12 +79,19 @@ ActiveRecord::Schema.define(:version => 20120308091433) do
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
     t.text     "summary"
-    t.integer  "kind",        :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-    t.text     "description"
-    t.string   "upload"
-    t.integer  "message",     :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "message",    :default => 0
+  end
+
+  create_table "projects", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "summary"
+    t.datetime "start_at"
+    t.datetime "finish_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|

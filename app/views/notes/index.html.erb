@@ -4,82 +4,16 @@
   <div id="note_publish">
     <div class="pull-right" id="input_hint">
     </div>
-    <div class="tabbable">
-      <ul class="nav nav-tabs">
-        <li class="active"><%= link_to "消息", "#message", "data-toggle" => "tab", "data-target" => "#message"%></li>
-        <li><%= link_to "图片", "#image",   "data-toggle" => "tab", "data-target" => "#image"%></li>
-        <li><%= link_to "链接", "#link",    "data-toggle" => "tab", "data-target" => "#link"%></li>
-        <li><%= link_to "书籍", "#book",    "data-toggle" => "tab", "data-target" => "#book"%></li>
-        <li><%= link_to "代码", "#code",    "data-toggle" => "tab", "data-target" => "#code"%></li>
-        <li><%= link_to "文本", "#text",    "data-toggle" => "tab", "data-target" => "#text"%></li>
-      </ul>
 
-      <div id="attachment_block" class="tab-content row-fluid">
-        <% attaches = ["message", "text", "link", "image", "code", "book" ] %>
-        <% attaches.each_index do |idx| %>
-          <div class="tab-pane fade<%= ' active in' if attaches[idx] == 'message' %>" id="<%= attaches[idx] %>">
-            <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-              <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
-
-              <%= f.hidden_field :kind, :value => idx %>
-
-              <% case attaches[idx] %>
-              <% when "message" %>
-                写一条笔记
-              <% when "image" %>
-                上传图片：<%= f.file_field :upload, :class=>"input-file" %>
-
-              <% when "link" %>
-                链接：<%= f.text_field :description, :class => "span9" %>
-
-              <% when "book" %>
-                上传书籍：<%= f.file_field :upload %>
-
-              <% when "code" %>
-                <%= f.text_area :description, :rows => 6, :class => "span12", :placeholder => "粘贴代码片段" %>
-
-                选择语言
-                <select id="language_id" name="language[id]">
-                  <option value="C">C</option> 
-                  <option value="Clojure">Clojure</option> 
-                  <option value="CSS">CSS</option> 
-                  <option value="Delphi">Delphi</option> 
-                  <option value="DIFF">DIFF</option> 
-                  <option value="ERB">ERB</option> 
-                  <option value="Groovy">Groovy</option> 
-                  <option value="HAML">HAML</option> 
-                  <option value="HTML">HTML</option> 
-                  <option value="Java">Java</option> 
-                  <option value="JavaScript">JavaScript</option> 
-                  <option value="JSON">JSON</option> 
-                  <option value="PHP">PHP</option> 
-                  <option value="Python">Python</option> 
-                  <option value="Ruby">Ruby</option> 
-                  <option value="SQL">SQL</option> 
-                  <option value="XML">XML</option> 
-                  <option value="YAML">YAML</option> 
-                </select> 
-
-              <% when "text" %>
-                <textarea id="note_code" name="note[description]" rows="6", class="span12"></textarea> 
-                <script type="text/javascript"> 
-                  if (CKEDITOR.instances["note_code"]) { 
-                    CKEDITOR.remove(CKEDITOR.instances["note_code"]); 
-                  } 
-                  CKEDITOR.replace("note_code", { "language":"en", "customConfig":"/ckeditor_config.js" }); 
-                </script> 
-
-              <% end %> <%# case end %>
-
-              <button type="submit" class="btn btn-primary pull-right">
-                发布
-              </button>    
-
-            <% end %>  <%# form_for end %>
-          </div>
-      <% end %> <%# each end %>
-      
-      </div> <%# attachment_block end %>
+    <div class="row-fluid">
+      <div class="span12">
+        <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
+        <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
+        <button type="submit" class="btn btn-primary pull-right">
+        发布
+        </button>    
+        <% end %>  <%# form_for end %>
+      </div>
     </div>
   </div>
 
@@ -93,14 +27,13 @@
   </div>
 
   <div id="notes_content">
-      <ul class="list unstyled">
-        <%= render "list" %>
-      </ul>
+    <ul class="list unstyled">
+      <%= render "list" %>
+    </ul>
 
-      <!-- pager loading hinter -->
-      <div class="inner" id="pager_loading">
-      </div>
+    <!-- pager loading hinter -->
+    <div class="inner" id="pager_loading">
+    </div>
 
   </div> <!-- notes_content -->
 </div>
-

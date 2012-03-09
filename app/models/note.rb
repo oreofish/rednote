@@ -15,25 +15,12 @@
 
 class Note < ActiveRecord::Base
   acts_as_commentable
+  belongs_to :user
+  has_many :likes, :dependent => :destroy
+  has_many :attachements, :dependent => :destroy
+
   validates :summary, :presence => true,
                       :length   => { :maximum => 500 }
   validates :user_id, :presence => true
-  validates :kind,    :presence => true,
-                      :numericality => true,
-                      :inclusion    => { :in => 0..5 } # this can not work with sqlite3
-  validates :description, :length   => { :maximum => 20000 }
-  validates :description, :presence => true, 
-    :if => Proc.new { |attr| [1, 2, 4].include?(attr.kind) }
-                
-  validates :upload,    :presence => true,
-    :if => Proc.new { |attr| [3, 5].include?(attr.kind) }
-    
-
-  belongs_to :user
-  attr_accessible :summary, :description, :kind, :upload, :upload_cache
-
-  mount_uploader :upload, AttachmentUploader
-
-  has_many :likes, :dependent => :destroy
-
+  attr_accessible :summary
 end
