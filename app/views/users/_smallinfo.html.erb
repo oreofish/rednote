@@ -1,8 +1,7 @@
 <%# encoding: utf-8 %>
 
-<div id="user<%= user.id %>" class="stretch-small-container useritem">
-  <div id="stretch-full">
-    <div>
+<div id="user<%= user.id %>" class="red-avatar useritem">
+  <div>
     <div class ="pull-left">
       <%= link_to image_tag(user.avatar_url(:small)), mytasks_user_path(user.id) %>
     </div>
@@ -14,11 +13,10 @@
       任务数: <%= tasks.count if tasks %><br />
       本周时点: <%= total %>
     </div>
-    </div>
+  </div>
 
-    <div class="progress">
-      <div class="bar" style="width: <%= 100.0*total/5 %>%;">
-      </div>
+  <div class="progress">
+    <div class="bar" style="width: <%= 100.0*total/5 %>%;">
     </div>
   </div>
 </div>

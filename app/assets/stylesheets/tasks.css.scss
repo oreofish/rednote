@@ -22,7 +22,7 @@
 
 @mixin block($size) {
 	margin: 10px 5px;
-	padding: $size 0;
+	padding: $size;
     position: relative;
 }
 
@@ -74,18 +74,6 @@
     border: 1px solid white;
 }
 
-
-/*---------------------------------------------------------------------------------------------*/
- 
-@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
- 
-#header {
-  background: #999999;
-  height: 72px; }
- 
-#footer {
-  background: #cccccc; }
-
 input, textarea, select, .uneditable-input {
     width: 100%;
 }
@@ -94,7 +82,7 @@ input, textarea, select, .uneditable-input {
   font-size: 14px;
 }
 
-.stretch-small-container {
+.red-avatar {
   width: 200px;
   border: 1px solid #999999;
   height: 84px;
@@ -102,18 +90,33 @@ input, textarea, select, .uneditable-input {
   position: relative;
   font-size: 11px;
   @include box-shadow(grey 1px 1px 3px);
-  @include inline-block; }
+  @include inline-block;
+  @include block(5px);
+}
 
-.stretch-note-container {
-  width: 47%;
+.red-note {
+  width: 32%;
   min-height: 100px;
-  margin: 6px;
+  margin: 5px;
   position: relative;
-  font-size: 11px;
+  font-size: 14px;
   @include box-shadow(grey 1px 1px 3px);
-  @include inline-block; }
+  @include inline-block;
+}
 
-.stretch-long-container {
+/*---------------------------------------------------------------------------------------*/
+
+@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
+
+#header {
+  background: #999999;
+  height: 72px; }
+
+#footer {
+  background: #cccccc; }
+
+.stretch-container {
+  width: 200px;
   border: 1px solid white;
   width: 100%;
   height: 20px;

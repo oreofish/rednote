@@ -21,21 +21,18 @@ $(function() {
 </script>
 
 
-<section id="fluidGridSystem">
-  <h3>人员</h3>
-  <div id="userlist">
+<h3>人员</h3>
+<div id="userlist">
   <% User.all.each do |user| %>
-    <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
+  <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
   <% end %>
-  </div>
+</div>
 
-  <h3>任务</h3>
-  <div id="tasklist">
-    <% @tasks.each do |task| %>
-      <%= render :partial => 'note', :locals => { :task => task } %>
-    <% end %>
-  </div>
+<h3>任务</h3>
+<div id="tasklist">
+  <% @tasks.each do |task| %>
+  <%= render :partial => 'note', :locals => { :task => task } %>
+  <% end %>
+</div>
 
-  <%= render 'form' %>
-
-</section>
+<%= render 'form' %>

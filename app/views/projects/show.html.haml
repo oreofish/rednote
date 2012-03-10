@@ -1,12 +1,11 @@
 - # encoding: utf-8
 
 .well
-  %section#fluidGridSystem
-    .row
-      .btn-group.span11{ "data-toggle" => "buttons-radio" }
-        - @projects.each do |project|
-          - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
-          = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
+  .row
+    .btn-group.span12{ "data-toggle" => "buttons-radio" }
+      - @projects.each do |project|
+        - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
+        = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
   %hr
   #myself
     #projecttab
