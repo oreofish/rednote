@@ -37,17 +37,29 @@
         <div class="span4">
           <%= link_to "豆瓣链接", "#{arr['book'].url}" %>
         </div>
+
+        <div class="span4">
+          <% if arr["book"].status == "keep" %>
+            <p>此书正在被<%= arr["owner"] %>保管</p>
+          <% elsif arr["book"].status == "reading" %>
+            <p>此书正在被<%= arr["owner"] %>阅读</p>
+          <% end %>
+        </div>
+
+        <div class="span5">
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">排队者
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <% @user_list_for_one_book.each do |arr| %>
+                <p><%= arr %></p>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
 
-      <% if arr["book"].status == "keep" %>
-        <p>此书正在被<%= arr["owner"] %>保管</p>
-      <% elsif arr["book"].status == "reading" %>
-        <p>此书正在被<%= arr["owner"] %>阅读</p>
-      <% end %>
-
-      <% @user_list_for_one_book.each do |arr| %>
-        <p><%= arr %></p>
-      <% end %>
 
       <div class="span3">
         <% if arr["display"] == "borrow" %>
