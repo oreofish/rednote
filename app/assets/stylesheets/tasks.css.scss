@@ -54,9 +54,9 @@
 }
 
 .task-recent {
-    @include block(10px);
+    @include block(5px);
     @include border-radius(3px);
-    @include box-shadow(grey 1px 1px 3px);
+    @include box-shadow(grey 1px 1px 1px);
 }
 
 .task-coming {
