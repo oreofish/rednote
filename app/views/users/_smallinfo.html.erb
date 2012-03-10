@@ -7,10 +7,15 @@
   <% total = 0.0 %>
   <% tasks.each {|task| total += task.estimate.to_f } %>
   任务数: <%= tasks.count if tasks %><br />
-  本周时点: <%= total %>
-  
-  <div class="progress">
-    <div class="bar" style="width: <%= 100.0*total/5 %>%;">
+  承担任务: 
+  <div class="progress small-progress">
+    <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %>
+    </div>
+  </div>
+
+  完成任务: 
+  <div class="progress small-progress">
+    <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %>
     </div>
   </div>
 </div>
