@@ -21,7 +21,7 @@
 }
 
 @mixin block($size) {
-	margin: 10px 5px;
+	margin: 5px 5px;
 	padding: $size;
     position: relative;
 }
@@ -74,10 +74,6 @@
     border: 1px solid white;
 }
 
-input, textarea, select, .uneditable-input {
-    width: 100%;
-}
-
 .task-view {
   font-size: 14px;
 }
@@ -95,13 +91,13 @@ input, textarea, select, .uneditable-input {
 }
 
 .red-note {
-  width: 32%;
+  width: 31%;
   min-height: 100px;
-  margin: 5px;
   position: relative;
   font-size: 14px;
   @include box-shadow(grey 1px 1px 3px);
   @include inline-block;
+  @include block(6px);
 }
 
 /*---------------------------------------------------------------------------------------*/
