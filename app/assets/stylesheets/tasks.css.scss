@@ -63,17 +63,6 @@
     @include block(5px);
 }
 
-.tasklist {
-    padding: 10px;
-    line-height: 22px;
-    font-size: 16px;
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: 100% center;
-    cursor: pointer;
-    border: 1px solid white;
-}
-
 .task-view {
   font-size: 14px;
 }
@@ -98,6 +87,7 @@
   @include box-shadow(grey 1px 1px 3px);
   @include inline-block;
   @include block(6px);
+  vertical-align: top;
 }
 
 /*---------------------------------------------------------------------------------------*/

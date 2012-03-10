@@ -103,7 +103,7 @@ class TasksController < ApplicationController
   def assign
     @task = Task.find(params[:taskid].sub('task', ''))
     userid = params[:userid].sub('user', '').to_i
-    @user = User.find(userid) if @task.estimate
+    @user = User.find(userid) if @task.estimate.to_f > 0
     respond_to do |format|
       if @user and @task.update_attributes(:assigned_to => userid)
         format.js

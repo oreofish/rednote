@@ -29,7 +29,7 @@ $(function() {
 </div>
 
 <h3>任务</h3>
-<div id="tasklist">
+<div class="tasklist">
   <% @tasks.each do |task| %>
   <%= render :partial => 'note', :locals => { :task => task } %>
   <% end %>
