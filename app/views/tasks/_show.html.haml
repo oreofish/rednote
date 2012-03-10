@@ -20,10 +20,9 @@
         .inplace= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消'
     %tr
       %td
-        %h4 估算时间：
+        %h4 估算时间(天)：
       %td
-        .inplace= best_in_place @task, :estimate, type: :select, :collection => [[0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3.5, '3.5']]
-        天
+        .inplace= best_in_place @task, :estimate, type: :select, :collection => [[0, '请选择'], [0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3, '3'], [3.5, '3.5']]
     %tr
       %td
         %h4 截止时间：

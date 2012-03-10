@@ -115,6 +115,10 @@ class TasksController < ApplicationController
   
   # GET /tasks/1/edit
   def edit
+#    @task = Task.find(params[:id])
+#    respond_to do |format|
+#      format.js # edit.js.erb
+#    end
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
     respond_with @task
