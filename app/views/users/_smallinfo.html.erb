@@ -1,20 +1,14 @@
 <%# encoding: utf-8 %>
 
-<div id="user<%= user.id %>" class="red-avatar useritem">
-  <div>
-    <div class ="pull-left">
-      <%= link_to image_tag(user.avatar_url(:small)), mytasks_user_path(user.id) %>
-    </div>
-    <div class ="">
-      <%= user.nickname %><br />
-      <% tasks = Task.find_all_by_assigned_to(user.id) %>
-      <% total = 0.0 %>
-      <% tasks.each {|task| total += task.estimate.to_f } %>
-      任务数: <%= tasks.count if tasks %><br />
-      本周时点: <%= total %>
-    </div>
-  </div>
-
+<div class="thumbnail useritem">
+  <%= link_to image_tag(user.avatar_url()), mytasks_user_path(user.id) %>
+  <%= user.nickname %><br />
+  <% tasks = Task.find_all_by_assigned_to(user.id) %>
+  <% total = 0.0 %>
+  <% tasks.each {|task| total += task.estimate.to_f } %>
+  任务数: <%= tasks.count if tasks %><br />
+  本周时点: <%= total %>
+  
   <div class="progress">
     <div class="bar" style="width: <%= 100.0*total/5 %>%;">
     </div>

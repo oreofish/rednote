@@ -22,11 +22,13 @@ $(function() {
 
 
 <h3>人员</h3>
-<div id="userlist">
+<ul class="thumbnails">
   <% User.all.each do |user| %>
-  <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
+  <li class="span2">
+    <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
+  </li>
   <% end %>
-</div>
+</ul>
 
 <h3>任务</h3>
 <div class="tasklist">
