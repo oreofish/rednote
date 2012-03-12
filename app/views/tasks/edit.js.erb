@@ -1,0 +1,9 @@
+<%# encoding: utf-8 %>
+
+(function() {
+  $('#edittask<%= @task.id %>').find('.modal-body').html( "<%= j render( 'edit' ) %>" );
+
+  setTimeout( function() {
+    $('#task_deadline').datepicker();
+  }, 100 );
+}());

@@ -5,7 +5,7 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="assigned_to_me">
-      <div id="tasklist">
+      <div class="tasklist">
         <% @assigned_to_me_tasks.each do |task| %>
         <%= render :partial => 'tasks/note', :locals => { :task => task } %>
         <% end %>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="tab-pane" id="created_by_me">
-      <div id="tasklist">
+      <div class="tasklist">
         <% @mytasks.each do |task| %>
         <%= render :partial => 'tasks/note', :locals => { :task => task } %>
         <% end %>

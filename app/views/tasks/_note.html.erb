@@ -1,12 +1,12 @@
 <%# encoding: utf-8 %>
 
-<div id="task<%= task.id %>" class="stretch-note-container taskitem ui-widget-content <%= task_css(task) %>">
-<div id="stretch-full">
+<div id="task<%= task.id %>" class="red-note taskitem ui-widget-content <%= task_css(task) %>">
   <div class ="pull-left">
     <%= image_tag '/images/todo-note.jpg' %>
   </div>
-  <%= task.content %><br />
-  估计时间：<%= task.estimate %>
+  <strong>内容：</strong><%= task.content %>
+  <br />
+  <strong>估计时间：</strong><%= task.estimate %>天
 
   <div id="edittask<%= task.id %>" taskid="<%= task.id %>" class="taskeditview modal hide fade" style="display: none; ">
     <div class="modal-header">
@@ -24,5 +24,4 @@
   <%= link_to "#edittask#{task.id}", :class => "bottom-right", 'data-toggle'=>"modal" do %>
     <i class="icon-edit"></i>
   <% end %>
-</div>
 </div>

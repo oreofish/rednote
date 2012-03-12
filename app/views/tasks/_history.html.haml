@@ -1,6 +1,5 @@
 - # encoding: utf-8
 
-%section#fluidGridSystem
-  %h3 历史任务
-  - @old_tasks.each do |task| 
-    = render :partial => 'note', :locals => { :task => task }
+%h3 历史任务
+- @old_tasks.each do |task|
+  = render :partial => 'note', :locals => { :task => task }
