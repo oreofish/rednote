@@ -1,6 +1,6 @@
 <%# encoding: utf-8 %>
 
-<div class="thumbnail useritem">
+<div id="user<%= user.id %>" class="thumbnail useritem">
   <%= link_to image_tag(user.avatar_url()), mytasks_user_path(user.id) %>
   <div class="caption">
     <% tasks = Task.find_all_by_assigned_to(user.id) %>
