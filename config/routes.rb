@@ -18,6 +18,7 @@ Rednote::Application.routes.draw do
   resources :comments, :only => [:new, :index, :create, :destroy]
   resources :likes, :only => [:create, :update, :destroy]
 
+  resources :attachements, :only => [:create]
 
   devise_for :users
   resources :users, :only => [:show] do

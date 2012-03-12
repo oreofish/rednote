@@ -1,0 +1,22 @@
+<% items.each do |item| %>
+<div class="span12">
+  <a data-toggle="modal" href="#attach_image<%= item.id %>">
+    <div class="offset1 span4 thumbnail">
+      <%= image_tag "#{item.url.url}" %>
+    </div>
+  </a>
+
+  <div class="modal hide fade" id="attach_image<%= item.id %>">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>细节</h3>
+    </div>
+    <div class="modal-body">
+      <%= image_tag "#{item.url.url}" %>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="close btn" data-dismiss="modal">关闭</a>
+    </div>
+  </div>
+</div>
+<% end %>

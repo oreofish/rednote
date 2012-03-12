@@ -1,5 +1,4 @@
 <%# encoding: utf-8 %>
-
 <div class="well">
   <div id="note_publish">
     <div class="pull-right" id="input_hint">
@@ -9,13 +8,24 @@
       <div class="span12">
         <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
         <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
+        <%= hidden_field_tag 'attachments', '', :id => "note_attachments" %>
         <button type="submit" class="btn btn-primary pull-right">
         发布
         </button>    
         <% end %>  <%# form_for end %>
       </div>
+
+      <div class="span12">
+        <div id="image_uploader" class="thumbnails">
+          <div id="filelist">
+          </div>
+          <a id="pickfiles" class="btn btn-primary" href="#">添加图片</a>
+          <a id="uploadfiles" class="btn btn-primary" href="#">upload</a>
+        </div>
+      </div>
+
     </div>
-  </div>
+  </div> <!-- note_publish -->
 
   <div id="flash_content">
     <a class="more label" href="#" data-toggle="collapse" data-target="#notifications">
@@ -37,3 +47,88 @@
 
   </div> <!-- notes_content -->
 </div>
+
+<% session_key_name = Rails.application.config.session_options[:key] %>
+<script type="text/javascript">
+    var uploader = new plupload.Uploader({
+      runtimes : 'html5,html4,gears,flash',
+      browse_button : "pickfiles",
+      container : "image_uploader",
+      url : '/attachements',
+      max_file_size : '40mb',
+      chunk_size : '1mb',
+      unique_names : true,
+
+      // Resize images on clientside if we can
+      // resize : {width : 320, height : 240, quality : 90},
+
+      multipart : true,
+      multipart_params : {
+          '_http_accept': 'application/javascript',
+          'authenticity_token' : '<%= form_authenticity_token %>',
+          '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
+      },
+
+      // Specify what files to browse for
+      filters : [
+          {title : "Image files", extensions : "jpg,gif,png"},
+      ],
+
+      // Flash settings
+      flash_swf_url : '/plupload/js/plupload.flash.swf',
+  });
+
+    uploader.bind('Init', function(up, params) {
+        $('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
+        });
+
+    $('#uploadfiles').click(function(e) {
+        uploader.start();
+        e.preventDefault();
+        });
+
+    uploader.init();
+
+    uploader.bind('FilesAdded', function(up, files) {
+        $.each(files, function(i, file) {
+          $('#filelist').append(
+            '<div id="' + file.id + '">' +
+            file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
+            '</div>');
+          });
+
+        up.refresh(); // Reposition Flash/Silverlight
+        });
+
+    uploader.bind('UploadProgress', function(up, file) {
+        $('#' + file.id + " b").html(file.percent + "%");
+        });
+
+    uploader.bind('Error', function(up, err) {
+        $('#filelist').append("<div>Error: " + err.code +
+          ", Message: " + err.message +
+          (err.file ? ", File: " + err.file.name : "") +
+          "</div>"
+          );
+
+        up.refresh(); // Reposition Flash/Silverlight
+        });
+
+    uploader.bind('FileUploaded', function(up, file, resp) {
+        var data, hidden_attach;
+
+        $('#' + file.id + " b").html("100%");
+        console.log(resp);
+        data = eval("(" + resp.response + ")");
+        $('#filelist').append( '<div class="span4 thumbnail"><img src="' + data.url + '"/></div>' );
+
+        hidden_attach = $('#new_note > #note_attachments').attr('value').trim();
+        console.log(hidden_attach);
+        if (hidden_attach.length) 
+            hidden_attach += ",";
+        hidden_attach += data.attachment_id;
+        $('#new_note > #note_attachments').attr('value', hidden_attach);
+        });
+
+</script>
+

@@ -11,6 +11,8 @@
 
       <div class="content">
         <span style="word-wrap: break-word;"> <%= note.summary %>  </span>
+
+        <%= render :partial => "notes/attachments", :locals => { :items => note.attachements } %>
       </div>
 
       <div class="pull-right">
