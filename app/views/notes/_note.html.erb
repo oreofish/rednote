@@ -12,7 +12,9 @@
       <div class="content">
         <span style="word-wrap: break-word;"> <%= note.summary %>  </span>
 
-        <%= render :partial => "notes/attachments", :locals => { :items => note.attachements } %>
+        <% if note.attachements.size > 0 %>
+          <%= render :partial => "notes/attachments", :locals => { :noteid => note.id, :items => note.attachements } %>
+        <% end %>
       </div>
 
       <div class="pull-right">

@@ -9,6 +9,7 @@
         <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
         <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
         <%= hidden_field_tag 'attachments', '', :id => "note_attachments" %>
+        <a id="pickfiles" href="#">添加图片和文档</a>
         <button type="submit" class="btn btn-primary pull-right">
         发布
         </button>    
@@ -16,11 +17,9 @@
       </div>
 
       <div class="span12">
-        <div id="image_uploader" class="thumbnails">
-          <div id="filelist">
+        <div id="image_uploader">
+          <div id="filelist" class="thumbnails">
           </div>
-          <a id="pickfiles" class="btn btn-primary" href="#">添加图片</a>
-          <a id="uploadfiles" class="btn btn-primary" href="#">upload</a>
         </div>
       </div>
 
@@ -71,7 +70,8 @@
 
       // Specify what files to browse for
       filters : [
-          {title : "Image files", extensions : "jpg,gif,png"},
+          {title : "Image files", extensions : "jpg,gif,png,jpeg"},
+          {title : "Document files", extensions : "pdf,doc,txt"},
       ],
 
       // Flash settings
@@ -79,7 +79,7 @@
   });
 
     uploader.bind('Init', function(up, params) {
-        $('#filelist').html("<div>Current runtime: " + params.runtime + "</div>");
+        // $('#filelist').html("<h2>Current runtime: " + params.runtime + "</h2>");
         });
 
     $('#uploadfiles').click(function(e) {
@@ -92,12 +92,13 @@
     uploader.bind('FilesAdded', function(up, files) {
         $.each(files, function(i, file) {
           $('#filelist').append(
-            '<div id="' + file.id + '">' +
+            '<li id="' + file.id + '" class="span4">' +
             file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
-            '</div>');
+            '</li>');
           });
 
         up.refresh(); // Reposition Flash/Silverlight
+        uploader.start();
         });
 
     uploader.bind('UploadProgress', function(up, file) {
@@ -105,22 +106,15 @@
         });
 
     uploader.bind('Error', function(up, err) {
-        $('#filelist').append("<div>Error: " + err.code +
-          ", Message: " + err.message +
-          (err.file ? ", File: " + err.file.name : "") +
-          "</div>"
-          );
-
-        up.refresh(); // Reposition Flash/Silverlight
+        rednote.flashController && rednote.flashController.doFailure('添加失败', err.message);
         });
 
     uploader.bind('FileUploaded', function(up, file, resp) {
         var data, hidden_attach;
-
-        $('#' + file.id + " b").html("100%");
-        console.log(resp);
+        var $file = $('#' + file.id);
         data = eval("(" + resp.response + ")");
-        $('#filelist').append( '<div class="span4 thumbnail"><img src="' + data.url + '"/></div>' );
+        $file.html( '<div class="thumbnail"><img src="' + data.url + '"/></div>' + 
+          '<div class="caption">' + file.name + '</div>' );
 
         hidden_attach = $('#new_note > #note_attachments').attr('value').trim();
         console.log(hidden_attach);

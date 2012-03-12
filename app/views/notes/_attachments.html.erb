@@ -1,22 +1,32 @@
-<% items.each do |item| %>
-<div class="span12">
-  <a data-toggle="modal" href="#attach_image<%= item.id %>">
-    <div class="offset1 span4 thumbnail">
-      <%= image_tag "#{item.url.url}" %>
-    </div>
-  </a>
+<% images = items.select { |item| item.url.url.end_with?('jpg', 'png', 'gif', 'jpeg') } %>
+<% docs = items - images %>
 
-  <div class="modal hide fade" id="attach_image<%= item.id %>">
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">×</a>
-      <h3>细节</h3>
-    </div>
-    <div class="modal-body">
-      <%= image_tag "#{item.url.url}" %>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="close btn" data-dismiss="modal">关闭</a>
-    </div>
+<div class="span12">
+  <div class="span6">
+    <% if images.size > 1 %>
+      <div class="carousel" id="attach_carousel<%= noteid %>">
+        <div class="carousel-inner">
+          <% images.each_index do |idx| %>
+            <div class="item<%= ' active' if idx == 0 %>">
+              <%= render :partial => "attach_image", :locals => { :item => images[idx] } %>
+            </div>
+          <% end %> <!-- items -->
+        </div>
+
+        <a class="carousel-control left" href="#attach_carousel<%= noteid %>" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#attach_carousel<%= noteid %>" data-slide="next">&rsaquo;</a>
+      </div>
+
+    <% elsif images.size == 1 %>
+      <%= render :partial => "attach_image", :locals => { :item => images[0] } %>
+    <% end %> <!-- if -->
   </div>
+
+
+  <% docs.each do |item| %>
+    <div class="thumbnail span8">
+      <a href="<%= item.url.url %>"> <%= item.url.url.sub(/.*\//, '') %> </a>
+    </div>
+  <% end %>
 </div>
-<% end %>
+
