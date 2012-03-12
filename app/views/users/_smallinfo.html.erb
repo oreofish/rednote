@@ -2,20 +2,20 @@
 
 <div class="thumbnail useritem">
   <%= link_to image_tag(user.avatar_url()), mytasks_user_path(user.id) %>
-  <%= user.nickname %><br />
-  <% tasks = Task.find_all_by_assigned_to(user.id) %>
-  <% total = 0.0 %>
-  <% tasks.each {|task| total += task.estimate.to_f } %>
-  任务数: <%= tasks.count if tasks %><br />
-  承担任务: 
-  <div class="progress small-progress">
-    <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %>
-    </div>
-  </div>
-
-  完成任务: 
-  <div class="progress small-progress">
-    <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %>
-    </div>
-  </div>
+  <div class="caption">
+    <% tasks = Task.find_all_by_assigned_to(user.id) %>
+    <% total = 0.0 %>
+    <% tasks.each {|task| total += task.estimate.to_f } %>
+    <p>
+      <%= user.nickname %><br />
+      任务数: <%= tasks.count if tasks %><br />
+      <div class="pull-left">承担任务:</div>
+      <div class="progress small-progress">
+        <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %></div>
+      </div>
+      <div class="pull-left">完成任务:</div>
+      <div class="progress small-progress">
+        <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %> </div>
+      </div>
+    </p>
 </div>
