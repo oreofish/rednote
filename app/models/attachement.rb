@@ -12,6 +12,8 @@
 
 class Attachement < ActiveRecord::Base
   mount_uploader :url, AttachmentUploader
+
+  
   belongs_to :note
   belongs_to :user
 end

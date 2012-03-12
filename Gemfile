@@ -2,9 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.1'
 
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag', '1.0.0'
 gem "ckeditor", "3.7.0.rc2"
@@ -26,6 +23,7 @@ gem "simple_form"
 gem 'acts-as-taggable-on'
 gem 'haml'
 gem 'cancan'
+gem "plupload-rails"
 
 group :development, :test do
   gem 'rspec-rails'

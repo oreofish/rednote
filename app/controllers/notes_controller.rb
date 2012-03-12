@@ -58,9 +58,15 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = current_user.notes.build(params[:note])
+    @attachids = params[:attachments].split(',')
 
     respond_to do |format|
       if @note.save
+        @attachids.each do |attachid|
+          attach = Attachement.find(attachid)
+          attach.note_id = @note.id and attach.save if not attach.nil?
+        end
+
         broadcast '/notes/new', %Q/
           {
             nickname: "#{current_user.nickname}", 
