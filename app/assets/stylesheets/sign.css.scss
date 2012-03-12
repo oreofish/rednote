@@ -1,0 +1,22 @@
+@import "compass/layout.scss";
+@import "compass/layout/stretching";
+@import "compass/utilities";
+@import "compass/css3";
+
+.input-text {
+    display: block;
+    width: 250px;
+    padding: 10px 5px;
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 18px;
+    background: #E8F4FC;
+    border: 1px solid #0D7BD5;
+    color: #888;
+    cursor: text;
+    ime-mode: disabled;
+    box-shadow: 0 1px 0 rgba(255,255,255,.3),0 1px 3px rgba(0,0,0,.3) inset;
+    background-clip: padding-box;
+    border-radius: 5px;
+}
+
