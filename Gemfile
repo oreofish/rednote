@@ -24,6 +24,7 @@ gem 'acts-as-taggable-on'
 gem 'haml'
 gem 'cancan'
 gem "plupload-rails"
+gem "rufus-scheduler"
 
 group :development, :test do
   gem 'rspec-rails'
