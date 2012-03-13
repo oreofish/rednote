@@ -77,10 +77,6 @@ class TasksController < ApplicationController
     
     respond_to do |format|
       if @task.save
-        totalpoint = Task.where(:assigned_to => current_user.id).sum("estimate")
-        donepoint = Task.where(:assigned_to => current_user.id, :status => 2 ).sum("estimate")
-        @results = 100.0*donepoint/totalpoint
-
         format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.js
       else
