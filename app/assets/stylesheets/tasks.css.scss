@@ -42,25 +42,35 @@
     background-image: url("/images/done.gif");
     background-position: right;
     background-repeat: no-repeat;
+    filter: Alpha(opacity=30);
+    -moz-opacity:0.3;
+    opacity:0.3;
 }
 
 .task-cancel {
     background-color: #fee;
+    filter: Alpha(opacity=30);
+    -moz-opacity:0.3;
+    opacity:0.3;
+}
+
+@mixin base-task {
+    line-height: 24px;
+    @include block(5px);
+    @include border-radius(3px);
 }
 
 .task-past {
-    @include block(5px);
-    @include border-radius(3px);
+    @include base-task;
 }
 
 .task-recent {
-    @include block(5px);
-    @include border-radius(3px);
+    @include base-task;
     @include box-shadow(grey 1px 1px 1px);
 }
 
 .task-coming {
-    @include block(5px);
+    @include base-task;
 }
 
 .task-view {

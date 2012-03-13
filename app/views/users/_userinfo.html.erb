@@ -9,8 +9,8 @@
       </h2>
       发布数: <%= user.notes.size %><br />
       创建时间: <%= user.created_at.to_date %><br />
-      上次登录时间: <%= user.last_sign_in_at.to_date %><br />
-      上次登录ip: <%= user.last_sign_in_ip %><br />
+      上次登录时间: <%= user.last_sign_in_at.to_date if user.last_sign_in_at %><br />
+      上次登录ip: <%= user.last_sign_in_ip if user.last_sign_in_ip %><br />
       登录次数: <%= user.sign_in_count %><br />
       <div class="progress">
         <div class="bar" style="width: 44%;">

@@ -13,16 +13,12 @@
   <% end %>
   </ul>
 
-  <div>时间进度</div>
-  <div id="timeprogress" class="progress progress-info progress-striped">
-    <div class="bar" style="width: 1%;">
-    </div>
+  <h4>任务/时间进度</h4>
+  <div id="taskprogress" class="progress small-progress progress-striped">
+    <div class="bar" style="width: <%= totalpoint == nil ? 1 : 100.0*donepoint/totalpoint %>%;"></div>
   </div>
-
-  <div>任务进度</div>
-  <div id="taskprogress" class="progress progress-striped">
-    <div class="bar" style="width: <%= totalpoint == nil ? 1 : 100.0*donepoint/totalpoint %>%;">
-    </div>
+  <div id="timeprogress" class="progress small-progress progress-info progress-striped">
+    <div class="bar" style="width: 1%;"></div>
   </div>
 
   <%= link_to mytasks_user_path(current_user), :class => "btn pull-right" do %>

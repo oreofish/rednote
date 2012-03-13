@@ -1,9 +1,6 @@
 <%# encoding: utf-8 %>
 
 <div id="task<%= task.id %>" class="red-note taskitem ui-widget-content <%= task_css(task) %>">
-  <div class ="pull-left">
-    <%= image_tag '/images/todo-note.jpg' %>
-  </div>
   <strong>内容：</strong><%= task.content %>
   <br />
   <strong>估计时间：</strong><%= task.estimate %>天

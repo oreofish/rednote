@@ -2,7 +2,7 @@
 
 .well
   .pull-right
-    = form_tag project_path, :class => :form do
+    = form_tag "/projects", :class => :form, :method => :post do
       = text_field :project, :name, :class => 'input-small', :placeholder => "项目名称"
       %button.btn{ :type=>"submit" } 新建
   %h3 项目
