@@ -41,4 +41,3 @@ $(function() {
         rednote.spin.spinning($('ul.nav-tabs'), $('#tabspin'));
     }
 });
-

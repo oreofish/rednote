@@ -22,6 +22,7 @@
 //= require rednote_utils
 //= require jquery.purr
 //= require best_in_place
+//= require books
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";
@@ -70,9 +71,46 @@ var commentsManager = {
     }
 };
 
+var removeAlert = {
+    remove: function() { 
+        var that = this;
+        $('#main-contents').find('a.toremove').each( function(idx, el) {
+            that.bindRemoveAlertHelper($(el));
+        });
+    },
+
+    bindRemoveAlertHelper: function(link) {
+        link.click(function(){
+//            link.alert({
+//                resizeable:false,
+//                height:140,
+//                modal:true,
+//                buttons:{
+//                    "Delete":function(){
+//                        $(this).dialog("close");
+//                        return true;
+//                    },
+//
+//                    Cancel: function() {
+//                        $(this).dialog("close");
+//                        return false;
+//                    }
+//                }
+//            });
+        });
+        link.confirm();
+    },
+
+    bindRemoveAlert: function(obj) {
+        var $link= obj.find('a.toremove').first();
+        this.bindRemoveAlertHelper($link);
+    },
+};
+
 $(document).ready( function() {
     scrolltop();
     commentsManager.bindHandlers();
+    removeAlert.remove();
 
     rednote.updateNoteTime();
 } );

@@ -6,6 +6,8 @@
       setTimeout( function() {
         <% @notes.each do |note| %>
           commentsManager.bindCommentHandler(<%= note.id %>);
+          var obj = $('#note<%= note.id %>');
+          removeAlert.bindRemoveAlert(obj);
         <% end %>
 
         rednote.updateNoteTime();

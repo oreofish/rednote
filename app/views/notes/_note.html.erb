@@ -16,7 +16,7 @@
       <div class="pull-right">
         <% if current_user.id==note_user.id %>
           <%= link_to '详细', note, :class => '' %>
-          <%= link_to '删除', note, confirm: 'Are you sure?', method: :delete, :remote => true, :class => '' %>
+          <%= link_to '删除', note, :confirm => "Are you sure?", method: :delete, :remote => true, :class => 'toremove' %>
         <% end %>
 
         <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning" : myclass="comments_link"%>

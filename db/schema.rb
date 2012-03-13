@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20120309072117) do
 
+  create_table "add_status_to_tasks", :force => true do |t|
+    t.integer  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "attachements", :force => true do |t|
     t.integer  "user_id"
     t.integer  "note_id"
@@ -79,19 +85,9 @@ ActiveRecord::Schema.define(:version => 20120309072117) do
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
     t.text     "summary"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "message",    :default => 0
-  end
-
-  create_table "projects", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "summary"
-    t.datetime "start_at"
-    t.datetime "finish_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -114,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20120309072117) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.float    "estimate"
+    t.integer  "estimate"
     t.datetime "deadline"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
@@ -125,18 +121,18 @@ ActiveRecord::Schema.define(:version => 20120309072117) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                         :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "nickname"
     t.string   "avatar"
     t.string   "preview"
