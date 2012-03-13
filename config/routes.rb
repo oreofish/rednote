@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  match '/calendar(/:year(/:month))' => 'projects#index', 
+    :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
   resources :projects do
     collection do

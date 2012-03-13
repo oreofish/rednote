@@ -6,6 +6,29 @@ class ProjectsController < ApplicationController
   def index
     @projects = Task.project_counts
 
+    @month = (params[:month] || Time.zone.now.month).to_i
+    @year = (params[:year] || Time.zone.now.year).to_i
+    @shown_month = Date.civil(@year, @month)
+
+    # filter out tasks that act as projects
+    start_d, end_d = Task.get_start_and_end_dates(@shown_month) 
+
+    #tasks = Task.events_for_date_range(start_d, end_d).sort do |x, y|
+      #x.project_counts[0].name <=> y.project_counts[0].name
+    #end
+
+    #i = 0
+    #project_like_tasks = tasks.select do |x|
+      #j = i
+      #i += 1
+      #j == 0 or (j > 0 and (x.project_list[0] != tasks[j-1].project_list[0]))
+    #end
+
+    project_like_tasks = Task.events_for_date_range(start_d, end_d).select do |task|
+       task.content == '新项目建立' and task.project_list.size > 0
+    end
+    @project_strips = Task.create_event_strips(start_d, end_d, project_like_tasks)
+
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb

@@ -25,6 +25,7 @@ gem 'haml'
 gem 'cancan'
 gem "plupload-rails"
 gem "rufus-scheduler"
+gem 'event-calendar', :require => 'event_calendar'
 
 group :development, :test do
   gem 'rspec-rails'

@@ -9,4 +9,6 @@
   %ul
     - @projects.each do |project|
       %li= link_to "#{project.name}(#{project.count})", project_path(project.name)
-  Show something about all projects here.
+  %h1 所有项目时间表
+  #project_calendar
+    = event_calendar.html_safe
