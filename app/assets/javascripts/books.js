@@ -17,8 +17,8 @@ $(function() {
                 }
                 $('#book_author').attr("value",name);
                 $('#book_subtitle').attr("value",book.attribute.subtitle);
-                $('#book_cover').attr("placeholder",book.link.image);
-                $('#book_url').attr("placeholder","http://book.douban.com/subject/"+idnumber);
+                $('#book_cover').attr("value",book.link.image);
+                $('#book_url').attr("value","http://book.douban.com/subject/"+idnumber);
             },
         });
 
