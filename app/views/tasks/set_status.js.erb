@@ -7,6 +7,9 @@
   $('#task<%= @task.id %>').removeClass("<%= cssstatus[@oldstatus] %>").addClass("<%= cssstatus[@task.status] %>")
   $('#task<%= @task.id %>').removeClass("<%= cssdo[@oldstatus] %>").addClass("<%= cssdo[@task.status] %>")
   $('#task<%= @task.id %>').effect('highlight', {}, 100);
+  <% if @task.status == Task::DONE or @oldstatus == Task::DONE %>
+      $('#taskprogress').find('div.bar').attr("style","width:<%= @results %>%");
+  <% end %>
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');
 <% end %>
