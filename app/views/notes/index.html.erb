@@ -57,8 +57,8 @@
       browse_button : "pickfiles",
       container : "image_uploader",
       url : '/attachements',
-      max_file_size : '40mb',
-      chunk_size : '1mb',
+      max_file_size : '50mb',
+      //chunk_size : '1mb',
       unique_names : true,
 
       // Resize images on clientside if we can
@@ -115,6 +115,10 @@
     uploader.bind('FileUploaded', function(up, file, resp) {
         var data, hidden_attach;
         var $file = $('#' + file.id);
+        console.log(resp);
+        if (resp.response.trim().length === 0)
+            return;
+
         data = eval("(" + resp.response + ")");
         $file.html( '<div class="thumbnail"><img src="' + data.url + '"/></div>' + 
           '<div class="caption">' + file.name + '</div>' );
