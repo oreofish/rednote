@@ -12,72 +12,14 @@
   <br/>
 
   <div class="row-fluid">
-    <% @bookstatuslist.each do |arr| %>
-      <div class="span9">
-        <div class="span4">
-          <div class="thumbnail">
-            <% if not arr["book"].cover.nil? %>
-              <%= image_tag "#{arr['book'].cover}" %>
-            <% end %>
-          </div>
+    <ul class="thumbnails">
+      <% @bookstatuslist.each do |arr| %>
+        <li class="span5">
+        <div class="thumbnail">
+          <%= render :partial => 'book', :locals => { :arr=> arr } %>
         </div>
-
-        <div class="span5">
-          <h2> <%= arr["book"].title %> </h2>
-        </div>
-
-        <div class="span5">
-          <h3> <%= arr["book"].subtitle %> </h3>
-        </div>
-
-        <div class="span5">
-          <h4> <%= arr["book"].author %> </h4>
-        </div>
-
-        <div class="span4">
-          <%= link_to "豆瓣链接", "#{arr['book'].url}" %>
-        </div>
-
-        <div class="span4">
-          <% if arr["book"].status == "keep" %>
-            <p>此书正在被<%= arr["owner"] %>保管</p>
-          <% elsif arr["book"].status == "reading" %>
-            <p>此书正在被<%= arr["owner"] %>阅读</p>
-          <% end %>
-        </div>
-
-        <div class="span5">
-          <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">排队者
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <% @user_list_for_one_book.each do |arr| %>
-                <p><%= arr %></p>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="span3">
-        <% if arr["display"] == "borrow" %>
-          <%= link_to '借阅此书', books_borrow_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
-        <% elsif arr["display"] == "want_wait" %>
-          <%= link_to '排队', new_debit_path(:book_id => arr["book"].id), :class => "btn btn-primary" %>
-        <% elsif arr["display"] == "waiting" %>
-          <label class="btn btn-info disabled">您正在排队中</label>
-          <%= link_to '取消排队', debits_unwaiting_path(:book_id => arr["book"].id), :method => :post, :class => "btn btn-primary" %>
-        <% elsif arr["display"] == "reading" %>
-          <label class="btn btn-success disabled">您正在阅读</label>
-        <% end %>
-      </div>
-
-      <div class="span7">
-        <hr/>
-      </div>
-    <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>
-
