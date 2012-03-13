@@ -1,33 +1,36 @@
 <%# encoding: utf-8 %>
-<div class='block' id='block-signup'>
-    <div class='content'>
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form"}) do |f| %>
-            <%= devise_error_messages! %>
 
-            <div id="nickname_input" class="control-group">
-                <%= f.label "帐号：" %>
-                <%= f.text_field :nickname %>
-                <span id="nickname_waring" class="help-inline">Ex. muhaha</span>
-            </div>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form"}) do |f| %>
+    <%= devise_error_messages! %>
 
-            <div id="email_input" class="control-group">
-                <%= f.label "邮箱：" %>
-                <%= f.email_field :email %>
-                <span id="email_waring" class="help-inline">Ex. test@test.com</span>
-            </div>
-
-            <div class="group wat-cf">
-                <%= f.label "密码：" %>
-                <%= f.password_field :password %>
-                <span class='description'>至少6个字符</span>
-            </div>
-
-            <div class="group wat-cf">
-                <%= f.label '确认密码'%>
-                <%= f.password_field :password_confirmation %>
-            </div>
-            <button class='btn' type='submit'>注册</button>
-        <% end %>
-        <%= render :partial => "devise/shared/links" %>
+    <div class="row">
+      <h3 class="span2">给工作添乐趣</h3>
     </div>
-</div>
+
+    <div class="row">
+      <%= f.text_field :nickname, :id => "user_login", :class => "span3 input-text", :placeholder => "帐号" %>
+      <span id="nickname_waring" class="help-inline">例如：muhaha</span>
+    </div>
+
+    <div class="row">
+      <%= f.email_field :email, :id => "user_email", :class => "span3 input-text", :placeholder => "邮箱" %>
+      <span id="email_waring" class="help-inline">例如：test@test.com</span>
+    </div>
+
+    <div class="row">
+      <%= f.password_field :password, :id => "user_password", :class => "span3 input-text", :placeholder => "密码" %>
+      <span class='description'>至少6个字符</span>
+    </div>
+    
+    <div class="row">
+      <%= f.password_field :password_confirmation, :id => "user_password", :class => "span3 input-text", :placeholder => "确认密码" %>
+    </div>
+
+    <div class="row">
+      <div class="span2 offset2">
+        <button class='btn btn-primary btn-large' type='submit'>注册</button>
+      </div>
+    </div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

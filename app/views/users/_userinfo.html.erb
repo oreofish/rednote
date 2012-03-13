@@ -1,15 +1,22 @@
-<div class ="pull-left">
-    <%= link_to image_tag(@user.avatar_url(:thumb)), nickname_users_path %>
-</div>
-<h2 class="title"> 
-    <%= @user.nickname %>
-</h2>
-<p>发布数: <%= @notes_size %></p>
-<p>创建时间: <%= @user.created_at%></p>
-<p>上次登录时间: <%= @user.last_sign_in_at%></p>
-<p>上次登录ip: <%= @user.last_sign_in_ip%></p>
-<p>登录次数: <%= @user.sign_in_count%></p>
-<div class="progress">
-    <div class="bar" style="width: 44%;">
+<div class ="thumbnail">
+  <div class="row-fluid">
+    <div class="span5">
+      <%= link_to image_tag(user.avatar_url(:thumb)), nickname_users_path %>
     </div>
+    <div class="span7">
+      <h2 class="title"> 
+        <%= user.nickname %>
+      </h2>
+      发布数: <%= user.notes.size %><br />
+      创建时间: <%= user.created_at.to_date %><br />
+      上次登录时间: <%= user.last_sign_in_at.to_date %><br />
+      上次登录ip: <%= user.last_sign_in_ip %><br />
+      登录次数: <%= user.sign_in_count %><br />
+      <div class="progress">
+        <div class="bar" style="width: 44%;">
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<br />

@@ -7,13 +7,9 @@
 
     $notes.prepend( "<%= j render :partial => 'notes/note', :locals => { :note => @note } %>" );
 
-    id = "<%= attachmentKind(@note.kind) %>";
-    $('#'+id).find('#new_note')[0].reset();
-    if (id === "text") {
-      if (CKEDITOR.instances["note_code"]) {
-        CKEDITOR.instances["note_code"].setData('');
-      }
-    }
+    $('#new_note')[0].reset();
+    $('#new_note > #note_attachments').attr('value', '');
+    $('#filelist').empty();
     $('#notes_content').find('ul.list div:first').hide().fadeIn(1000);
     commentsManager.bindCommentHandler(<%= @note.id %>);
     rednote.updateNoteTime();

@@ -1,9 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'rails', '3.2.2'
 
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag', '1.0.0'
@@ -25,6 +22,9 @@ gem 'best_in_place'
 gem "simple_form"
 gem 'acts-as-taggable-on'
 gem 'haml'
+gem 'cancan'
+gem "plupload-rails"
+gem "rufus-scheduler"
 
 group :development, :test do
   gem 'rspec-rails'

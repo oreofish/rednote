@@ -1,41 +1,30 @@
 - # encoding: utf-8
 
 - if current_user == @task.user
-  = link_to "删除任务", @task, :confirm => "确定删除吗?", :method => :delete, :class => "pull-right btn"
+  .row
+    .span5= link_to "删除任务", @task, :confirm => "确定删除吗?", :method => :delete, :class => "pull-right btn"
 
-%table.task-view
-  %tbody
-    %tr
-      %td
-        %h4 项目：
-      %td= @task.project_list[0]
-    %tr
-      %td
-        %h4 创建人：
-      %td= @task.user.nickname
-    %tr
-      %td
-        %h4 内容：
-      %td
-        .inplace= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消'
-    %tr
-      %td
-        %h4 估算时间：
-      %td
-        .inplace= best_in_place @task, :estimate, type: :select, :collection => [[0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3.5, '3.5']]
-        天
-    %tr
-      %td
-        %h4 截止时间：
-      %td
-        .inplace= best_in_place @task, :deadline, type: :date
-    %tr
-      %td
-      %td
+.task-view
+  .row
+    %h4.span1 项目：
+    .span4= @task.project_list[0]
+  .row
+    %h4.span1 创建人：
+    .span4= @task.user.nickname
+  .row
+    %h4.span1 内容：
+    .span4.inplace= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消'
+  .row
+    %h4.span1 估时(天)：
+    .span4.inplace= best_in_place @task, :estimate, type: :select, :collection => [[0, '请选择'], [0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3, '3'], [3.5, '3.5']]
+  .row
+    %h4.span1 截止时间：
+    .span4.inplace= best_in_place @task, :deadline, type: :date
 
 .form-actions
   = form_tag set_tag_tasks_path, :class => :form do
     = hidden_field :task, :id, :value => @task.id
-    所属项目：
-    = collection_select :project, :name,  @projects, :name, :name
-    %button.btn{ :type=>"submit"} 修改
+    .row
+      .span1 所属项目：
+      .span3= collection_select :project, :name,  @projects, :name, :name
+      %button.span1.btn{ :type=>"submit"} 修改

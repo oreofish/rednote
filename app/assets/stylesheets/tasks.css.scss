@@ -1,4 +1,3 @@
-@import "compass/reset.scss";
 @import "compass/layout.scss";
 @import "compass/layout/stretching";
 @import "compass/utilities";
@@ -22,8 +21,8 @@
 }
 
 @mixin block($size) {
-	margin: 10px 5px;
-	padding: $size 0;
+	margin: 5px 5px;
+	padding: $size;
     position: relative;
 }
 
@@ -33,14 +32,14 @@
 
 .task-doing {
     background-color: #bbdaf7;
-    background-image: url("/images/doing.jpeg");
+    background-image: url("/images/doing.gif");
     background-position: right;
     background-repeat: no-repeat;
 }
 
 .task-done {
     background-color: #eee;
-    background-image: url("/images/done.jpeg");
+    background-image: url("/images/done.gif");
     background-position: right;
     background-repeat: no-repeat;
 }
@@ -55,47 +54,20 @@
 }
 
 .task-recent {
-    @include block(10px);
+    @include block(5px);
     @include border-radius(3px);
-    @include box-shadow(grey 1px 1px 3px);
+    @include box-shadow(grey 1px 1px 1px);
 }
 
 .task-coming {
     @include block(5px);
 }
 
-.tasklist {
-    padding: 10px;
-    line-height: 22px;
-    font-size: 16px;
-    background-color: white;
-    background-repeat: no-repeat;
-    background-position: 100% center;
-    cursor: pointer;
-    border: 1px solid white;
-}
-
-
-/*---------------------------------------------------------------------------------------------*/
- 
-@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
- 
-#header {
-  background: #999999;
-  height: 72px; }
- 
-#footer {
-  background: #cccccc; }
-
-input, textarea, select, .uneditable-input {
-    width: 100%;
-}
-
 .task-view {
   font-size: 14px;
 }
 
-.stretch-small-container {
+.red-avatar {
   width: 200px;
   border: 1px solid #999999;
   height: 84px;
@@ -103,18 +75,34 @@ input, textarea, select, .uneditable-input {
   position: relative;
   font-size: 11px;
   @include box-shadow(grey 1px 1px 3px);
-  @include inline-block; }
+  @include inline-block;
+  @include block(5px);
+}
 
-.stretch-note-container {
-  width: 47%;
+.red-note {
+  width: 31%;
   min-height: 100px;
-  margin: 6px;
   position: relative;
-  font-size: 11px;
+  font-size: 14px;
   @include box-shadow(grey 1px 1px 3px);
-  @include inline-block; }
+  @include inline-block;
+  @include block(6px);
+  vertical-align: top;
+}
 
-.stretch-long-container {
+/*---------------------------------------------------------------------------------------*/
+
+@include sticky-footer(72px, "#layout", "#layout_footer", "#footer");
+
+#header {
+  background: #999999;
+  height: 72px; }
+
+#footer {
+  background: #cccccc; }
+
+.stretch-container {
+  width: 200px;
   border: 1px solid white;
   width: 100%;
   height: 20px;

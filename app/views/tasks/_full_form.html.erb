@@ -1,0 +1,18 @@
+<%= simple_form_for @task do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :content, :as => :text_field %>
+  <%= f.input :estimate, :collection => [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4] %>
+  <%= f.input :deadline, :as => :string %>
+  <%= f.button :submit %>
+<% end %>

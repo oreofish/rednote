@@ -1,4 +1,6 @@
 <div class="well">
+  <%= render :partial => 'users/userinfo', :locals => { :user => current_user } %>
+
   <h3>本周任务</h3>
 
   <ul class='unstyled'>

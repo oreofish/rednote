@@ -23,6 +23,13 @@
 //= require jquery.purr
 //= require best_in_place
 //= require books
+//= require plupload
+//= require plupload.settings
+//= require jquery.plupload.queue
+//= require plupload.flash
+//= require plupload.html4
+//= require plupload.html5
+//= require plupload.gears
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";
