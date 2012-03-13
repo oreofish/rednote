@@ -8,7 +8,7 @@
         <div class="carousel-inner">
           <% images.each_index do |idx| %>
             <div class="item<%= ' active' if idx == 0 %>">
-              <%= render :partial => "attach_image", :locals => { :item => images[idx] } %>
+              <%= render :partial => "notes/attach_image", :locals => { :item => images[idx] } %>
             </div>
           <% end %> <!-- items -->
         </div>
@@ -18,7 +18,7 @@
       </div>
 
     <% elsif images.size == 1 %>
-      <%= render :partial => "attach_image", :locals => { :item => images[0] } %>
+      <%= render :partial => "notes/attach_image", :locals => { :item => images[0] } %>
     <% end %> <!-- if -->
   </div>
 
