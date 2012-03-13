@@ -8,8 +8,10 @@
       </a>
 
       <% @highlight = (local_ip == '172.16.82.163' ? 'color: #f33' : '' ) %>
-      <%= link_to 'Red Note', notes_path, :class => "brand", :style => @highlight %>
-
+      <%= link_to notes_path, :class => "brand-img" do %>
+        <%= image_tag "/images/hippo2.png", :size => "45x34", :alt => "Happy Work" %>
+      <% end %>
+      <%= link_to "河马", notes_path, :class => "brand", :style => @highlight %>
       <div class="container nav-collapse">
         <ul class="nav">
           <% if user_signed_in? %>
