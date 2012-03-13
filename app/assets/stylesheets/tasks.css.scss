@@ -144,17 +144,6 @@
   @extend .stretched;
   @include stretch-y; }
 
-/*---------------------------------------------------------------------------------------------*/
-	
-
-.navbar-fixed-top{
-    background: #800;
-    background: -moz-linear-gradient(bottom,#800,#400);
-    background: -webkit-linear-gradient(bottom,#800,#400);
-    border-bottom: 1px solid whiteSmoke;
-    box-shadow: 0 0 8px rgba(0,0,0,.7);
-}
-
 
 /* corners of block
 -------------------------------------------------- */

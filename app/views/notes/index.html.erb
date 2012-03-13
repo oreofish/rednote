@@ -10,7 +10,7 @@
     <div class="row-fluid">
       <div class="span12">
         <%= form_for(@note, :html => { :multipart => true, :remote => true }) do |f| %>
-        <%= f.text_area :summary, :rows => 4, "placeholder" => "写点什么吧", :class => "span12" %>
+        <%= f.text_area :summary, :rows => 3, "placeholder" => "写点什么吧", :class => "span12" %>
         <%= hidden_field_tag 'attachments', '', :id => "note_attachments" %>
         <a id="pickfiles" href="#">添加图片和文档</a>
         <button type="submit" class="btn btn-primary pull-right">

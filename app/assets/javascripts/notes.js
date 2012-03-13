@@ -11,11 +11,11 @@ $(function() {
         $('#note_publish').on('input', '#note_summary', function(e) {
             console.log(e.type);
             var $this = $(this);
-            var remain = (500 - $this.attr('value').length);
+            var remain = (160 - $this.attr('value').length);
 
             if (remain < 0) {
                 $('#input_hint').html('<span class="alert alert-warning">输入超出范围'+remain+'</span>');
-            } else if (remain == 500) {
+            } else if (remain == 160) {
                 $('#input_hint').empty();
             } else {
                 $('#input_hint').html('<span class="alert alert-info">还可以输入'+remain+'字</span>');
