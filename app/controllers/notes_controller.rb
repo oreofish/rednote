@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  include ERB::Util
   before_filter :authorized_user, :only => :destroy
 
   # GET /notes
@@ -59,6 +60,8 @@ class NotesController < ApplicationController
   def create
     @note = current_user.notes.build(params[:note])
     @attachids = params[:attachments].split(',')
+
+    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
 
     respond_to do |format|
       if @note.save

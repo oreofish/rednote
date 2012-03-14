@@ -10,10 +10,7 @@
     <div class="span11 item">
 
       <div class="content">
-        <span style="word-wrap: break-word;"> <%= h(note.summary).gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"").html_safe%>  </span>
-        <% if note.summary[/\?$/] %>
-          <%= image_tag("/images/wenhao.jpg", :width => "18", :height => "18") %>
-        <% end %>
+        <span style="word-wrap: break-word;"> <%= note.summary.html_safe%>  </span>
 
         <% if note.attachements.size > 0 %>
           <%= render :partial => "notes/attachments", :locals => { :noteid => note.id, :items => note.attachements } %>
