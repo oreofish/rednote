@@ -1,0 +1,14 @@
+%a{ "data-toggle" =>"modal", :href => "#attach_image#{item.id}"}
+  .thumbnail
+    =image_tag "#{item.url.url}" 
+
+  .modal.hide.fade{:id => "attach_image#{ item.id }"}
+    .modal-header
+      %a.close(data-dismiss="modal") ×
+      %h3 细节
+
+    .modal-body
+      =image_tag "#{item.url.url}" 
+
+    .modal-footer
+      %a.close.btn(href="#" data-dismiss="modal") 关闭
