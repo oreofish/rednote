@@ -22,23 +22,26 @@
 
       <div class="pull-right">
         <% if current_user.id==note_user.id %>
-          <%= link_to '详细', note, :class => '' %>
-          <%= link_to '删除', note, :confirm => "Are you sure?", method: :delete, :remote => true, :class => 'toremove' %>
+          <%= link_to '删除', note, :confirm => "Are you sure?", method: :delete, :remote => true, :class => 'toremove small-link' %>
+          <i class="vline">|</i>
         <% end %>
 
-        <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning" : myclass="comments_link"%>
-        <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
         <% my_like = current_user.likes.find_by_note_id(note.id) %>
         <% if not my_like %>
-          <%= link_to '我想读', likes_path(:note_id => note.id),:method => :post, :remote => true, :class => "tags" %> 
+          <%= link_to '我想读', likes_path(:note_id => note.id),:method => :post, :remote => true, :class => "tags small-link" %> 
         <% elsif not my_like.status and controller.action_name == "mytags" %>
-          <%= link_to '取消标记', like_path(my_like), :method => :delete, :remote => true, :class => "tags" %>
-          <%= link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags" %>
+          <%= link_to '取消标记', like_path(my_like), :method => :delete, :remote => true, :class => "tags small-link" %>
+          <%= link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags small-link" %>
         <% elsif not my_like.status and not controller.action_name == "mytags" %>
           已标记
         <% else %>
           已读完
         <% end %>
+        <i class="vline">|</i>
+        <%= link_to '详细', note, :class => 'small-link' %>
+        <i class="vline">|</i>
+        <% (current_user.id == note.user_id and not note.message == 0)? myclass="comments_link label-warning small-link" : myclass="comments_link small-link"%>
+        <%= link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), :remote => true, :class => myclass %>
       </div>
       <div class="time" data="<%= note.created_at %>">
       </div>
