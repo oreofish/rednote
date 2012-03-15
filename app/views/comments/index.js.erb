@@ -1,10 +1,10 @@
 (function() {
-    var $item = $('#note<%= @note.id %>').find('div.item');
-    var $link = $item.find('a.comments_link');
+    var $item = $('#note<%= @note.id %>')
+    var $link = $item.find('#comments_link');
     $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
     $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
 
-    var $list = $item.find('div.comments_list');
+    var $list = $item.find('#comments_list');
     $list.html( "<%= j render( 'comment_box') %>" );
     $list.find('#comment_comment').focus();
     

@@ -36,11 +36,12 @@
 
         %i.vline |
         = link_to '详细', note, :class => 'small-link'
-        -myclass = (current_user.id == note.user_id and not note.message == 0)? "comments_link label-warning small-link" : "comments_link small-link"
+        - myclass = "small-link"
+        - myclass += " label-warning" if current_user.id == note.user_id and not note.message == 0
         %i.vline |
         = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
-          :remote => true, :class => myclass 
+          :remote => true, :class => myclass, :id => "comments_link" 
 
       .time(data="#{note.created_at}")
       %br
-      .comments_list.well(style="display:none")
+      #comments_list.well(style="display:none")

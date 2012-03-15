@@ -2,15 +2,12 @@
 #
 # Table name: notes
 #
-#  id          :integer(4)      not null, primary key
-#  user_id     :integer(4)
-#  summary     :text
-#  kind        :integer(4)      default(0)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  description :text
-#  upload      :string(255)
-#  message     :integer(4)      default(0)
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)
+#  summary    :text
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  message    :integer(4)      default(0)
 #
 
 require 'spec_helper'

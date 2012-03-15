@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20120314073628) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.integer  "estimate"
+    t.float    "estimate"
     t.datetime "deadline"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false

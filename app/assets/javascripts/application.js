@@ -66,8 +66,8 @@ var commentsManager = {
     }, 
 
     _bindCommentHandlerHelper: function(obj) {
-        var $link = obj.find('a.comments_link');
-        var $list = obj.find('div.comments_list');
+        var $link = obj.find('#comments_link');
+        var $list = obj.find('#comments_list');
 
         $link.unbind('click');
         $link.bind( {

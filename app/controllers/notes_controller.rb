@@ -36,6 +36,13 @@ class NotesController < ApplicationController
   # GET /notes/1.json
   def show
     @note = Note.find(params[:id])
+    if @note.user_id == current_user.id
+      @note.message = 0
+      @note.save
+    end
+
+    @comment = Comment.new(:commentable_id => @note.id)
+    @comments = @note.comments
 
     respond_to do |format|
       format.html # show.html.erb

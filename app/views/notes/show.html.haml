@@ -1,3 +1,40 @@
-.well
+-# encoding: utf-8
+%div.well(id="note#{@note.id}")
   .row-fluid
-    = render :partial => 'notes/note', :locals => { :note => @note }
+    - note_user = User.find(@note.user_id)
+    .span1
+      = link_to image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}"), user_path(note_user), :method => :get
+
+    .span11.item
+      .content
+        %span(style="word-wrap: break-word;")
+          = @note.summary.html_safe
+
+        - if @note.attachements.size > 0
+          = render :partial => "notes/attachments",
+            :locals => { :noteid => @note.id, :items => @note.attachements } 
+
+      .pull-right
+        - if current_user.id==note_user.id
+          = link_to '删除', @note, :confirm => "Are you sure?", method: :delete, 
+            :remote => true, :class => 'toremove small-link'
+        %i.vline |
+        - my_like = current_user.likes.find_by_note_id(@note.id)
+        - if not my_like
+          = link_to '我想读', likes_path(:note_id => @note.id), :method => :post,
+            :remote => true, :class => "tags small-link"
+
+        - elsif not my_like.status and controller.action_name == "mytags"
+          = link_to '取消标记', like_path(my_like), :method => :delete,
+            :remote => true, :class => "tags small-link"
+          = link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags"
+        - elsif not my_like.status and not controller.action_name == "mytags small-link"
+          已标记
+        - else
+          已读完
+
+      .time(data="#{@note.created_at}")
+  .row-fluid
+    #comments_list.well
+      = render 'comments/comment_box'
+
