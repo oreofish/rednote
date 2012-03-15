@@ -75,6 +75,18 @@ class UsersController < ApplicationController
       end
   end
 
+  def myats
+      @user = User.find(params[:id])
+      @avatar = @user.avatar
+      @nickname = @user.nickname
+      @notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT at_id FROM ats WHERE user_id=#{@user.id} ) ORDER BY created_at DESC")
+      
+      respond_to do |format|
+          format.html { render 'show' }
+          format.js { render 'show' }
+      end
+  end
+
   def avatar
       respond_to do |format|
           format.html { render 'settings' }

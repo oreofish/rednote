@@ -8,6 +8,8 @@
       $space.html( "<%= j render :partial => 'mytags' %>" ); 
   <% elsif controller.action_name == "mytasks" %> 
       $space.html( "<%= j render :partial => 'mytasks' %>" ); 
+  <% elsif controller.action_name == "myats" %> 
+      $space.html( "<%= j render :partial => 'myats' %>" ); 
   <% else %> 
       $space.html( "<%= j render :partial => 'mycomments' %> " );
   <% end %>;

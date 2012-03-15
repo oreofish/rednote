@@ -6,6 +6,7 @@
     <li class=<%= 'active' if controller.action_name == "mycomments" %> ><%= link_to "#{nickname}的评论", mycomments_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
     <li class=<%= 'active' if controller.action_name == "mytags" %> ><%= link_to "#{nickname}的标记", mytags_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
     <li class=<%= 'active' if controller.action_name == "mytasks" %> ><%= link_to "#{nickname}的任务", mytasks_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
+    <li class=<%= 'active' if controller.action_name == "myats" %> ><%= link_to "@#{nickname}的", myats_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#" %></li>
   </ul>
   </div>
 
@@ -13,5 +14,6 @@
     <%= render :partial => 'mytags' if ( controller.action_name == 'show' or controller.action_name == 'mytags') %>
     <%= render :partial => 'mycomments' if ( controller.action_name == 'mycomments') %>
     <%= render :partial => 'mytasks' if ( controller.action_name == 'mytasks') %>
+    <%= render :partial => 'myats' if ( controller.action_name == 'myats') %>
   </div>
 </div>

@@ -61,10 +61,21 @@ class NotesController < ApplicationController
     @note = current_user.notes.build(params[:note])
     @attachids = params[:attachments].split(',')
 
+    @ats = @note.summary.scan(/@[a-zA-Z0-9_]+/)
+    @at = At.new
     @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
 
     respond_to do |format|
       if @note.save
+        @ats.each do |at|
+          user =  User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at.from(1)}'")
+          if user.size == 1
+            @at.user_id = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at.from(1)}'")[0].id
+            @at.at_type = "Note"
+            @at.at_id = @note.id
+            @at.save!
+          end
+        end
         @attachids.each do |attachid|
           attach = Attachement.find(attachid)
           attach.note_id = @note.id and attach.save if not attach.nil?
@@ -76,7 +87,7 @@ class NotesController < ApplicationController
             status: true 
           }/
 
-        cookies[:offset] = cookies[:offset].to_i + 1
+          cookies[:offset] = cookies[:offset].to_i + 1
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.js 
       else
