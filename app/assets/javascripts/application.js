@@ -105,7 +105,7 @@ var removeAlert = {
 //                }
 //            });
         });
-        link.confirm();
+        //link.confirm();
     },
 
     bindRemoveAlert: function(obj) {
