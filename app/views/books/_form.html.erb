@@ -3,7 +3,7 @@
     <div class="control-group">
       <%= f.label "书名", :class => "control-label" %>
       <div class="controls">
-        <%= f.text_field :title, :class => "input" %>
+        <%= f.text_field :title, :class => "input-xlarge" %>
       </div>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="control-group">
       <%= f.label "作者", :class => "control-label" %>
       <div class="controls">
-        <%= f.text_field :author, :class => "input" %>
+        <%= f.text_field :author, :class => "input-xlarge" %>
       </div>
     </div>
 
@@ -31,7 +31,7 @@
     <div class="control-group">
       <%= f.label "封面图片", :class => "control-label" %>
       <div class="controls">
-        <%= f.text_field :cover, :class => "input-xlarge", :placeholder => "http://" %>
+        <%= f.text_field :remote_cover_url, :class => "input-xlarge", :placeholder => "http://" %>
       </div>
     </div>
 
