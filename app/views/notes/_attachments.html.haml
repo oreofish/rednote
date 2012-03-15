@@ -1,0 +1,23 @@
+-images = items.select do |item| 
+  -item.url.url.end_with?('jpg', 'png', 'gif', 'jpeg') 
+-docs = items - images 
+
+.span12
+  .span6
+    -if images.size > 1
+      .carousel(id="attach_carousel#{noteid}")
+        .carousel-inner
+          -images.each_index do |idx|
+            -cls = 'active' if idx == 0
+            %div{:class => ["item", cls]}
+              =render :partial => "notes/attach_image", :locals => { :item => images[idx] } 
+
+        %a.carousel-control.left(href="#attach_carousel#{noteid}" data-slide="prev") &lsaquo;
+        %a.carousel-control.right(href="#attach_carousel#{noteid}" data-slide="next") &rsaquo;
+
+    -elsif images.size == 1
+      =render :partial => "notes/attach_image", :locals => { :item => images[0] } 
+
+  -docs.each do |item|
+    .thumbnail.span8
+      %a(href="#{item.url.url}")= item.url.url.sub(/.*\//, '') 
