@@ -4,18 +4,17 @@
   <h3>本周任务</h3>
 
   <ul class='unstyled'>
-  <% totalpoint = 0 %>
+  <% totalpoint = 5.0 - Task::MEETING_TIME %>
   <% donepoint = 0 %>
   <% Task.find_by_sql("select * from tasks where assigned_to=#{current_user.id} and ( status <> 2 or (status=2 and finish_at > #{Date.today.beginning_of_week}))").each do |task| %>
     <% donepoint += task.estimate.to_f if task.status == Task::DONE %>
-    <% totalpoint += task.estimate.to_f %>
     <%= render :partial => 'tasks/item', :locals => { :task => task } %>
   <% end %>
   </ul>
 
   <h4>任务/时间进度</h4>
   <div id="taskprogress" class="progress small-progress progress-striped">
-    <div class="bar" style="width: <%= totalpoint == nil ? 1 : 100.0*donepoint/totalpoint %>%;" total=<%= totalpoint %> done=<%= donepoint %> ></div>
+    <div class="bar" style="width: <%= 100.0*donepoint/totalpoint %>%;" total=<%= totalpoint %> done=<%= donepoint %> ></div>
   </div>
   <div id="timeprogress" class="progress small-progress progress-info progress-striped">
     <div class="bar" style="width: 1%;"></div>
