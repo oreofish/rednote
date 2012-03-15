@@ -3,9 +3,13 @@
 <div id="user<%= user.id %>" class="thumbnail useritem">
   <%= link_to image_tag(user.avatar_url()), mytasks_user_path(user.id) %>
   <div class="caption">
-    <% tasks = Task.find_all_by_assigned_to(user.id) %>
-    <% total = 0.0 %>
-    <% tasks.each {|task| total += task.estimate.to_f } %>
+    <% tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status <> 2 or (status=2 and finish_at > #{Date.today.beginning_of_week}))") %>
+    <% total = Task::MEETING_TIME %>
+    <% done = 0 %>
+    <% tasks.each do |task| %>
+      <% total += task.estimate.to_f  %>
+      <% done += task.estimate.to_f if task.status == Task::DONE %>
+    <% end %>
     <p>
       <%= user.nickname %><br />
       任务数: <%= tasks.count if tasks %><br />
@@ -15,7 +19,7 @@
       </div>
       <div class="pull-left">完成任务:</div>
       <div class="progress small-progress">
-        <div class="bar" style="width: <%= 100.0*total/5 %>%;"><%= total %> </div>
+        <div class="bar" style="width: <%= (total == Task::MEETING_TIME)? 0:100.0*done/(total-1) %>%;"><%= done %> </div>
       </div>
     </p>
 </div>

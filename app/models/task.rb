@@ -39,4 +39,6 @@ class Task < ActiveRecord::Base
   HIGH = 4 # reserve
   CANCELED = 5 # reserve
   MERGED = 6 # reserve
+
+  MEETING_TIME = 1
 end
