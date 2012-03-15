@@ -17,26 +17,29 @@
 
       .pull-right
         -if current_user.id==note_user.id
-          = link_to '详细', note, :class => ''
           = link_to '删除', note, :confirm => "Are you sure?", method: :delete, 
-            :remote => true, :class => 'toremove'
-
-        -myclass = (current_user.id == note.user_id and not note.message == 0)? "comments_link label-warning" : "comments_link"
-        = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
-          :remote => true, :class => myclass 
+            :remote => true, :class => 'toremove small-link'
+        %i.vline |
         -my_like = current_user.likes.find_by_note_id(note.id)
         -if not my_like
           =link_to '我想读', likes_path(:note_id => note.id), :method => :post,
-            :remote => true, :class => "tags"
+            :remote => true, :class => "tags small-link"
 
         -elsif not my_like.status and controller.action_name == "mytags"
           =link_to '取消标记', like_path(my_like), :method => :delete,
-            :remote => true, :class => "tags"
+            :remote => true, :class => "tags small-link"
           =link_to '读完？', like_path(my_like), :method => :put, :remote => true, :class => "tags"
-        -elsif not my_like.status and not controller.action_name == "mytags"
+        -elsif not my_like.status and not controller.action_name == "mytags small-link"
           已标记
         -else
           已读完
+
+        %i.vline |
+        = link_to '详细', note, :class => 'small-link'
+        -myclass = (current_user.id == note.user_id and not note.message == 0)? "comments_link label-warning small-link" : "comments_link small-link"
+        %i.vline |
+        = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
+          :remote => true, :class => myclass 
 
       .time(data="#{note.created_at}")
       %br

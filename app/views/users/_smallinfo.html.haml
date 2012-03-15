@@ -1,0 +1,22 @@
+- # encoding: utf-8
+
+.thumbnail.useritem{:id => "user#{user.id}"}
+  = link_to image_tag(user.avatar_url()), mytasks_user_path(user.id)
+  .caption
+    - tasks = Task.find_all_by_assigned_to(user.id)
+    - total = 0.0
+    - tasks.each {|task| total += task.estimate.to_f }
+    %p
+      = user.nickname
+      %br
+      任务数:
+      = tasks.count if tasks
+      %br
+      .pull-left 承担任务:
+      .progress.small-progress
+        .bar{ :style=>"width: #{100.0*total/5}%;" }
+          = total
+      .pull-left 完成任务:
+      .progress.small-progress
+        .bar{ :style=>"width: #{100.0*total/5}%;"}
+          = total
