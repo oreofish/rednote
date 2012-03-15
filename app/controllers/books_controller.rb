@@ -84,7 +84,7 @@ class BooksController < ApplicationController
   # POST /debits.json
   def create
     @books = Book.all
-    @book = Book.new(params[:book])
+    @book = Book.create(params[:book])
     @book.user_id = current_user.id
 
     respond_to do |format|
