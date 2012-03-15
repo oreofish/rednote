@@ -211,7 +211,7 @@ rednote.spin = {
 };
 
 rednote.updateNoteTime = function() {
-    $('ul.list').find('.time').updateNoteTime();
+    $('.live-timestamp').updateNoteTime();
     setTimeout(function() {
         rednote.updateNoteTime();
     }, 60000);

@@ -2,15 +2,23 @@
 
 <ul class='comment unstyled'>
   <% @comments.each do |comment| %>
-    <li id="comment<%= comment.id %>">
+    <li id="comment<%= comment.id %>" class="row-fluid">
     <% user = User.find(comment.user_id) %>
-    <%= link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), user_path(user), :title => "#{user.nickname}"%>
-    <%= comment.comment %>
-    <% if(comment.user_id==current_user.id) %>
-      <%= link_to 'x', comment, :method => :delete, :class => 'small-button toremove', :remote => true %>
-    <%end%>
+    <div class = "span1">
+      <%= link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), user_path(user), :title => "#{user.nickname}" %>
+    </div>
+    <div class="span11">
+      <%= comment.comment %>
+      <div class="live-timestamp pull-right" data="<%= comment.created_at %>"></div>
+      <% if(comment.user_id == current_user.id) %>
+        <%= link_to 'x', comment, :method => :delete, :class => 'small-button toremove', :remote => true %>
+      <% end %>
+    </div>
     </li>
+    <hr>
   <% end %>
 </ul>
+<%= link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' %>
 <br />
+
 <%= render 'comments/form' %>

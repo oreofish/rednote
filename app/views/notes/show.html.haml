@@ -33,7 +33,7 @@
         - else
           已读完
 
-      .time(data="#{@note.created_at}")
+      .live-timestamp(data="#{@note.created_at}")
   .row-fluid
     #comments_list.well
       = render 'comments/comment_box'
