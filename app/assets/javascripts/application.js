@@ -30,6 +30,8 @@
 //= require plupload.html4
 //= require plupload.html5
 //= require plupload.gears
+//= require jquery-ui
+//= require fullcalendar
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";
