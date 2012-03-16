@@ -122,6 +122,8 @@ GEM
       thin (~> 1.2)
     ffi (1.0.11)
     fssm (0.2.8.1)
+    fullcalendar-rails (1.5.2)
+      railties (>= 3.1.0)
     gravatar_image_tag (1.0.0)
     haml (3.1.4)
     hike (1.2.1)
@@ -281,6 +283,7 @@ DEPENDENCIES
   factory_girl_rails (= 1.0)
   faker
   faye
+  fullcalendar-rails
   gravatar_image_tag (= 1.0.0)
   haml
   jcrop-rails

@@ -27,6 +27,7 @@ gem "plupload-rails"
 gem "rufus-scheduler"
 gem 'event-calendar', :require => 'event_calendar'
 gem 'rdiscount'
+gem 'fullcalendar-rails'
 
 group :development, :test do
   gem 'rspec-rails'
