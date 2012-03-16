@@ -11,9 +11,20 @@ class NotesController < ApplicationController
     cookies[:offset] = 20 # note offset
     cookies[:current_user_id] = current_user.id
     @notes = Note.where('').offset(0).limit(cookies[:limit]).reverse_order
+    @tags = Note.tag_counts.map {|tag| tag.name}
 
     respond_to do |format|
       format.html # index.html.erb
+    end
+  end
+
+  # GET /notes/taglist
+  # get tags
+  def taglist
+    @tags = Note.tag_counts.map {|tag| tag.name}
+
+    respond_to do |format|
+      format.json { render json: @tags }
     end
   end
 

@@ -12,6 +12,8 @@
 
 class Note < ActiveRecord::Base
   acts_as_commentable
+  acts_as_taggable_on :tags
+
   belongs_to :user
   has_many :likes, :dependent => :destroy
   has_many :attachements, :dependent => :destroy
@@ -19,5 +21,5 @@ class Note < ActiveRecord::Base
   validates :summary, :presence => true,
                       :length   => { :maximum => 500 }
   validates :user_id, :presence => true
-  attr_accessible :summary
+  attr_accessible :summary, :tag_list
 end

@@ -22,6 +22,28 @@ $(function() {
             }
         });
 
+        // bootstrap-typeahead captures key events, so delegation won't work here.
+        $('#tag_input').on('keypress', function(e) {
+            var text;
+            if (e.which == 13 || e.which == 10) {
+                text = $('#pending_tag_list').text();
+                if (text.length) 
+                    text += ",";
+                text += $(this).val();
+
+                $('#pending_tag_list').append( $('<span class="label">'+$(this).val()+'</span>') );
+                $('#note_tag_list').attr('value', text);
+                $(this).val('');
+            }
+        });
+
+        // update data-source for tags completion
+        $('#new_note').on('ajax:success', function() {
+            $.getJSON("/notes/taglist", function(data) {
+                // HACK: force typeahead to update its data-source
+                $('#tag_input').removeData('typeahead').data('source', data);
+            });
+        });
 
     } else if (location.pathname.match(/^\/users\/\d+/)) {
         var user_id=location.pathname.match(/\d+/g);

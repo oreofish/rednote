@@ -9,10 +9,18 @@
     .row-fluid
       .span12
         = form_for(@note, :html => { :multipart => true, :remote => true }) do |f|
-          = f.text_area :summary, :rows => 3, "placeholder" => "写点什么吧", :class => "span12" 
-          = hidden_field_tag 'attachments', '', :id => "note_attachments" 
+          =f.text_area :summary, :rows => 3, "placeholder" => "写点什么吧", :class => "span12" 
+          =hidden_field_tag 'attachments', '', :id => "note_attachments" 
+          =f.hidden_field :tag_list
           %a#pickfiles(href="#") 添加图片和文档
           %button.btn.btn-primary.pull-right(type="submit") 发布
+
+      .row-fluid
+        %label.span2 Tags:
+        %span.span10#pending_tag_list 
+        -ds = @tags.map{|t| '"' + t + '"'}.join(",")
+        =text_field_tag "tag_input", "", "data-provide" => "typeahead",
+          "data-source" => "[#{ds}]", "data-items" => "4", :class => "span4"
 
       .span12
         #image_uploader

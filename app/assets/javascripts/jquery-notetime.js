@@ -44,11 +44,11 @@
           var $time = $(this.element);
           var creation, a, b, c;
 
-          var creation = getTime(new Date($time.attr('data')));
+          var creation = getTime(new Date($time.data('notetime')));
           if ($.browser.mozilla) {
-              creation = getTime(new Date($time.attr('data').replace(/-/g, '/')));
+              creation = getTime(new Date($time.data('notetime').replace(/-/g, '/')));
           } else {
-              creation = getTime(new Date($time.attr('data')));
+              creation = getTime(new Date($time.data('notetime')));
           }
 
           if (now.year == creation.year) {
@@ -80,7 +80,7 @@
   $.fn.updateNoteTime = function () {
       return this.each(function () {
           var $this = $(this)
-          , data = $this.data('noteTime')
+          , data = $this.data('noteTime');
           if (!data) 
               $this.data('noteTime', (data = new TimeUpdater(this)));
           data.updateTime();

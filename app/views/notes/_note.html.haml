@@ -15,6 +15,10 @@
           =render :partial => "notes/attachments",
             :locals => { :noteid => note.id, :items => note.attachements } 
 
+        .note_tags
+          -note.tag_list.each do |tag|
+            %span.label.label-info= "#{tag}"
+
       .pull-right
         -if current_user.id==note_user.id
           = link_to '删除', note, :confirm => "Are you sure?", method: :delete, 
@@ -40,6 +44,6 @@
         = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
           :remote => true, :class => myclass, :id => "comments_link" 
 
-      .live-timestamp(data="#{note.created_at}")
+      .live-timestamp(data-notetime="#{note.created_at}")
       %br
       #comments_list.well(style="display:none")
