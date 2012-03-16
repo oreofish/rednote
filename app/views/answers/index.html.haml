@@ -1,17 +1,10 @@
-%h1 Listing answers
+- # encoding: utf-8
 
-%table
-  %tr
-    %th User
-    %th Question
-    %th Score
-    %th Content
-    %th Attachment
-    %th Done
-    %th
-    %th
-    %th
-
+.well
+  %h3 wenti
+  - @questions.each do |question|
+    = render
+    
   - @answers.each do |answer|
     %tr
       %td= answer.user_id

@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    @questions = Answer.find_all_by_question_id(0)
     @answer = Answer.new
 
     respond_to do |format|

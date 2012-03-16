@@ -19,8 +19,12 @@
             <%= link_to "首页", notes_path %>
             </li>
 
-            <li class='<%= "active" if controller_name == "index" %>'>
+            <li class='<%= "active" if controller_name == "books" %>'>
               <%= link_to "借书", books_path %>
+            </li>
+
+            <li class='<%= "active" if controller_name == "answers" %>'>
+              <%= link_to "爱问", answers_path %>
             </li>
 
             <li class='<%= "active" if controller_name == "projects" %>'>
