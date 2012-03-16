@@ -120,4 +120,8 @@ $(document).ready( function() {
     removeAlert.remove();
 
     rednote.updateNoteTime();
+    $('body').on('ajax:success', function() {
+        console.log('update notetime');
+        rednote.updateNoteTime();
+    });
 } );

@@ -18,7 +18,10 @@
     <hr>
   <% end %>
 </ul>
-<%= link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' %>
+
+<% if @comments.size > 0 %>
+  <%= link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' %>
+<% end %>
 <br />
 
 <%= render 'comments/form' %>
