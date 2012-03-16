@@ -37,8 +37,9 @@ class User < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :attachements, :dependent => :destroy
-  has_one :debit, :dependent => :destroy
+  has_one  :debit, :dependent => :destroy
   has_many :books
+  has_many :answers, :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader

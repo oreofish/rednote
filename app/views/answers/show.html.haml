@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @answer.user_id
+%p
+  %b Question:
+  = @answer.question_id
+%p
+  %b Score:
+  = @answer.score
+%p
+  %b Content:
+  = @answer.content
+%p
+  %b Attachment:
+  = @answer.attachment
+%p
+  %b Done:
+  = @answer.done
+
+= link_to 'Edit', edit_answer_path(@answer)
+\|
+= link_to 'Back', answers_path

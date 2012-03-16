@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  resources :answers
+
   resources :ats
 
   match '/calendar(/:year(/:month))' => 'projects#index', 

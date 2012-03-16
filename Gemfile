@@ -22,6 +22,7 @@ gem 'best_in_place'
 gem "simple_form"
 gem 'acts-as-taggable-on'
 gem 'haml'
+gem 'haml-rails'
 gem 'cancan'
 gem "plupload-rails"
 gem "rufus-scheduler"
