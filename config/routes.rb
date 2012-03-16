@@ -52,6 +52,7 @@ Rednote::Application.routes.draw do
   resources :notes do
     collection do
       get 'page'
+      get 'taglist'
     end
   end
 

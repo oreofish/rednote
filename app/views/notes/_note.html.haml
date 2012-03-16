@@ -15,6 +15,10 @@
           =render :partial => "notes/attachments",
             :locals => { :noteid => note.id, :items => note.attachements } 
 
+        .note_tags
+          -note.tag_list.each do |tag|
+            %span.label.label-info= "#{tag}"
+
       .pull-right
         -if current_user.id==note_user.id
           = link_to '删除', note, :confirm => "Are you sure?", method: :delete, 

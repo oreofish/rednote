@@ -8,7 +8,9 @@
     $notes.prepend( "<%= j render :partial => 'notes/note', :locals => { :note => @note } %>" );
 
     $('#new_note')[0].reset();
-    $('#new_note > #note_attachments').attr('value', '');
+    $('#new_note').find('#note_attachments').attr('value', '');
+    $('#new_note').find('#note_tag_list').attr('value', '');
+    $('#pending_tag_list').empty();
     $('#filelist').empty();
     $('#notes_content').find('ul.list div:first').hide().fadeIn(1000);
     commentsManager.bindCommentHandler(<%= @note.id %>);
