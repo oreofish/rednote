@@ -44,6 +44,6 @@
         = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
           :remote => true, :class => myclass, :id => "comments_link" 
 
-      .live-timestamp(data="#{note.created_at}")
+      .live-timestamp(data-notetime="#{note.created_at}")
       %br
       #comments_list.well(style="display:none")
