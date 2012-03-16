@@ -72,7 +72,7 @@ module Rednote
     
     config.generators do |g|
       g.scaffold_controller :red_scaffold_controller
-#      g.template_engine :red_erb
+      g.template_engine :haml
       g.stylesheets     false
     end
   end

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314073628) do
+ActiveRecord::Schema.define(:version => 20120316093951) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.integer  "score"
+    t.text     "content"
+    t.string   "attachment"
+    t.boolean  "done"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "ats", :force => true do |t|
     t.integer  "user_id"
@@ -87,8 +98,8 @@ ActiveRecord::Schema.define(:version => 20120314073628) do
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
     t.text     "summary"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "message",    :default => 0
   end
 
@@ -123,20 +134,20 @@ ActiveRecord::Schema.define(:version => 20120314073628) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "",                      :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",                      :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "nickname"
-    t.string   "avatar",                                :default => "/images/icons/00.jpeg"
+    t.string   "avatar"
     t.string   "preview"
   end
 
