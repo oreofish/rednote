@@ -7,7 +7,6 @@
 #  question_id :integer(4)
 #  score       :integer(4)
 #  content     :text
-#  attachment  :string(255)
 #  done        :boolean(1)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
@@ -20,7 +19,6 @@ class Answer < ActiveRecord::Base
   has_many :answers, :foreign_key => 'question_id'
 
   validates :content, :presence => true, :length => { :maximum => 10000 }
-  validates :attachment, :length => { :maximum => 255 }
 
   attr_accessible :question_id, :score, :content, :attachment, :done
 end

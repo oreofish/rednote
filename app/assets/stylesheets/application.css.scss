@@ -51,3 +51,20 @@
 .jcrop img {
     max-width: none;
 }
+
+/* visiable elements
+-------------------------------------------------- */
+@import "compass/layout.scss";
+@import "compass/utilities";
+@import "compass/css3";
+
+.board {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: white;
+    border: 1px solid #EEE;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    @include box-shadow(grey 1px 1px 3px);
+    @include border-radius(10px);
+}
