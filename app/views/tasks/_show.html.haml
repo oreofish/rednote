@@ -15,11 +15,9 @@
     %h4.span1 内容：
     .span4.inplace= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消'
   .row
-    %h4.span1 估时(天)：
-    .span4.inplace= best_in_place @task, :estimate, type: :select, :collection => [[0, '请选择'], [0.5,'0.5'], [1, '1'], [1.5, '1.5'], [2, '2'], [2.5, '2.5'], [3, '3'], [3.5, '3.5']]
+    %h4.span1 估时：
+    .span4.inplace= best_in_place @task, :estimate, :type => :select, :nil => '点击修改', :collection => [[0, '请选择'], [0.5,'0.5天'], [1, '1天'], [1.5, '1.5天'], [2, '2天'], [3, '3天'], [4, '4天'], [5, '5天']]
   .row
-    %h4.span1 截止时间：
-    .span4.inplace= best_in_place @task, :deadline, type: :date
 
 .form-actions
   = form_tag set_tag_tasks_path, :class => :form do
