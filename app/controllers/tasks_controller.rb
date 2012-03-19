@@ -121,6 +121,21 @@ class TasksController < ApplicationController
     end
   end
   
+  def mytasks
+    @user = User.find(params[:id])
+    @avatar = @user.avatar
+    @nickname = @user.nickname
+    
+    @mytasks = @user.tasks
+    @assigned_to_me_tasks = Task.find_all_by_assigned_to(@user.id)
+    @projects = Task.top_projects
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
   # GET /tasks/1/edit
   def edit
 #    @task = Task.find(params[:id])

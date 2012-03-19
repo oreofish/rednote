@@ -1,0 +1,15 @@
+.board.tabbable{ :style=>"margin-bottom: 9px;"}
+  %h4= "#{@user.nickname}的任务"
+  %ul.nav.nav-tabs
+    %li.active= link_to "负责的", "#assigned_to_me", "data-toggle" => "tab"
+    %li= link_to "创建的", "#created_by_me", "data-toggle" => "tab"
+  .tab-content
+    .tab-pane.active#assigned_to_me
+      .tasklist
+        - @assigned_to_me_tasks.each do |task|
+          = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
+    .tab-pane#created_by_me
+      .tasklist
+        - @mytasks.each do |task|
+          = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
+

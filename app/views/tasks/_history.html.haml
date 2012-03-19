@@ -1,5 +1,4 @@
 - # encoding: utf-8
 
-%h3 历史任务
 - @old_tasks.each do |task|
-  = render :partial => 'note', :locals => { :task => task }
+  = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
