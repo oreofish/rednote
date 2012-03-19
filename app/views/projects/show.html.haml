@@ -1,12 +1,13 @@
 - # encoding: utf-8
 
-.well
-  .row
-    .btn-group.span12{ "data-toggle" => "buttons-radio" }
+.board
+  .row-fluid
+    %h3.span4 项目
+    .span8.btn-group{ "data-toggle" => "buttons-radio" }
       - @projects.each do |project|
         - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
         = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
-  %hr
+
   #myself
     #projecttab
       %ul.nav.nav-tabs

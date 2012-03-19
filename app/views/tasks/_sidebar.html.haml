@@ -1,0 +1,5 @@
+
+.board
+  - User.all.each do |user|
+    = render :partial => 'tasks/smallinfo', :locals => { :user => user }
+

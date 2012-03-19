@@ -20,17 +20,6 @@ $(function() {
 });
 </script>
 
-
-<h3>人员</h3>
-<ul class="thumbnails">
-  <% User.all.each do |user| %>
-  <li class="span2">
-    <%= render :partial => 'users/smallinfo', :locals => { :user => user } %>
-  </li>
-  <% end %>
-</ul>
-
-<h3>任务</h3>
 <div class="tasklist">
   <% @tasks.each do |task| %>
   <%= render :partial => 'note', :locals => { :task => task, :show => :edit } %>
