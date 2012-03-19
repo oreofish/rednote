@@ -121,9 +121,14 @@ $(document).ready( function() {
     commentsManager.bindHandlers();
     removeAlert.remove();
 
-    rednote.updateNoteTime();
-    $('body').on('ajax:success', function() {
+    $('body').on('ajax:success timeupdate', function() {
         console.log('update notetime');
-        rednote.updateNoteTime();
+        $('.live-timestamp').updateNoteTime();
     });
+
+    (function repeatSelf() {
+        $('body').trigger('timeupdate');
+        setTimeout(repeatSelf, 60000);
+    })();
+
 } );

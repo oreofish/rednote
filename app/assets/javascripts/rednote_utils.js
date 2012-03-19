@@ -210,13 +210,6 @@ rednote.spin = {
     }
 };
 
-rednote.updateNoteTime = function() {
-    $('.live-timestamp').updateNoteTime();
-    setTimeout(function() {
-        rednote.updateNoteTime();
-    }, 60000);
-};
-
 rednote.logger = {
     notifyCreate: function(msg) {
         console.log(msg);
