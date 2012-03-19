@@ -63,6 +63,9 @@ Rednote::Application.routes.draw do
   match '/mails/invite', :to => 'mails#invite'
 
   resources :tasks do
+    member do
+      get 'show_partical'
+    end
     collection do
       get 'history'
       get  'set_status'
