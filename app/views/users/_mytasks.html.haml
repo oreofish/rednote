@@ -6,9 +6,9 @@
     .tab-pane.active#assigned_to_me
       .tasklist
         - @assigned_to_me_tasks.each do |task|
-          = render :partial => 'tasks/note', :locals => { :task => task }
+          = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
     .tab-pane#created_by_me
       .tasklist
         - @mytasks.each do |task|
-          = render :partial => 'tasks/note', :locals => { :task => task }
+          = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
 
