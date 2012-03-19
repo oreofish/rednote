@@ -81,7 +81,7 @@ class NotesController < ApplicationController
 
     @ats = @note.summary.scan(/@[a-zA-Z0-9_]+/)
     @at = At.new
-    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
+    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height='18' src='/images/wenhao.jpg' width='18'>").html_safe
 
     respond_to do |format|
       if @note.save

@@ -1,6 +1,6 @@
 - # encoding: utf-8
 
 .board
-  %h3 wenti
+  %h3 问答
   - @questions.each do |question|
     = render :partial => 'item', :locals => { :question => question }

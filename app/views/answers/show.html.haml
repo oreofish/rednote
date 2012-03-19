@@ -1,18 +1,29 @@
 .board
-  %p
-    %b 提问:
-    = @question.content.html_safe
-  .pull-right= link_to '编辑', edit_answer_path(@question)
-  %br
+  .row-fluid
+    %h3.span12 提问:
+  .row-fluid
+    .span1
+      - question_user = User.find(@question.user_id)
+      = link_to image_tag(question_user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
+    
+    .span10
+      = @question.content.html_safe
+    .span1.pull-right= link_to '编辑', edit_answer_path(@question)
   %hr
-  %p
-    - @answers.each do |answer|
-      %b 回答:
-      = answer.content.html_safe
-      .pull-right= link_to '编辑', edit_answer_path(answer)
+  - @answers.each do |answer|
+    .row-fluid
+      %h4.span12 回答:
+    .row-fluid
+      .span1
+        = link_to image_tag(answer.user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
+      .span10
+        = answer.content.html_safe
+      .span1.pull-right
+        = link_to '编辑', edit_answer_path(answer)
   
 .board
-  %h3 回答
+  .row-fluid
+    %h3.span12 回答
   = form_for @new_answer do |f|
     - if @new_answer.errors.any?
       #error_explanation
