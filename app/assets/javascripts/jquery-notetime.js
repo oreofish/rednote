@@ -45,11 +45,7 @@
           var creation, a, b, c;
 
           var creation = getTime(new Date($time.data('notetime')));
-          if ($.browser.mozilla) {
-              creation = getTime(new Date($time.data('notetime').replace(/-/g, '/')));
-          } else {
-              creation = getTime(new Date($time.data('notetime')));
-          }
+          creation = getTime(new Date($time.data('notetime').replace(/-/g, '/')));
 
           if (now.year == creation.year) {
               if (now.year == creation.year && now.month == creation.month && 
