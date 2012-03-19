@@ -3,10 +3,9 @@
 .thumbnail.useritem{:id => "user#{user.id}"}
   = link_to image_tag(user.avatar_url()), mytasks_user_path(user.id)
   .caption
-    - tasks = Task.find_all_by_assigned_to(user.id)
     - total = Task::MEETING_TIME
     - done = 0.0
-    - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status <> 2 or (status=2 and finish_at > #{Date.today.beginning_of_week}))")
+    - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at < #{Date.today.beginning_of_week}))")
     - tasks.each do |task|
       - total += task.estimate.to_f
       - done += task.estimate.to_f if task.status == Task::DONE

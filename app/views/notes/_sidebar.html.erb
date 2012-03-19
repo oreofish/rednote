@@ -6,7 +6,7 @@
   <ul class='unstyled'>
   <% totalpoint = 5.0 - Task::MEETING_TIME %>
   <% donepoint = 0 %>
-  <% Task.find_by_sql("select * from tasks where assigned_to=#{current_user.id} and ( status <> 2 or (status=2 and finish_at > #{Date.today.beginning_of_week}))").each do |task| %>
+  <% Task.find_by_sql("select * from tasks where assigned_to=#{current_user.id} and ( status <> 2 or (status=2 and finish_at < #{Date.today.beginning_of_week}))").each do |task| %>
     <% donepoint += task.estimate.to_f if task.status == Task::DONE %>
     <%= render :partial => 'tasks/item', :locals => { :task => task } %>
   <% end %>
