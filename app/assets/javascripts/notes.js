@@ -1,6 +1,6 @@
 $(function() {
     if (location.pathname === "/" || location.pathname === "/notes") {
-        rednote.pager('/notes/page').start();
+        rednote.createPager('/notes/page').start();
 
         $('#note_publish').on('keypress', '#note_summary', function(e) {
             if (e.ctrlKey && (e.which == 13 || e.which == 10)) {
@@ -47,7 +47,16 @@ $(function() {
 
     } else if (location.pathname.match(/^\/users\/\d+/)) {
         var user_id=location.pathname.match(/\d+/g);
-        rednote.pager('/users/'+user_id+'/page').start();
+        var pager = rednote.createPager('/users/'+user_id+'/page');
+        pager.start();
+        $('a[data-toggle="tab"]').on('shown', function() {
+            if ($(this).attr('href').match(/\/users\/\d+$/)) {
+                pager.start();
+            } else {
+                pager.stop();
+            }
+        });
+
         rednote.spin.spinning($('ul.nav-tabs'), $('#tabspin'));
     }
 });

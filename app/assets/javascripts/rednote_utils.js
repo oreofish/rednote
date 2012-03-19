@@ -61,28 +61,29 @@ rednote.util = {
     }
 };
 
-rednote.pager = function(action) {
+rednote.createPager = function(action) {
     var update_action = action;
-    return {
+    var pager = {
         start: function() {
-            var that = this;
             if (!rednote.util.isScrollVisible()) {
                 //TODO: add timeout loading of nextpage
             }
 
-            $(window).bind("scroll", function() {
-                that.checkAndLoadNextPage();
-            });
+            $(window).unbind('scroll', pager.checkAndLoadNextPage);
+            $(window).bind("scroll", pager.checkAndLoadNextPage);
         },
 
         checkAndLoadNextPage: function() {
             if (rednote.util.scrollNearBottom()) {
-                this.refreshNextPage();
+                pager.refreshNextPage();
             }
         },
 
+        stop: function() {
+            $(window).unbind('scroll', pager.checkAndLoadNextPage);
+        },
+
         refreshNextPage: function() {
-            var that = this;
             console.log('try refreshNextPage');
             $.ajax({
                 url: update_action,
@@ -105,13 +106,13 @@ rednote.pager = function(action) {
                         $('#pager_loading').spin(false);
                     }, 600);
 
-                    $(window).bind("scroll", function() {
-                        that.checkAndLoadNextPage();
-                    });
+                    $(window).bind("scroll", pager.checkAndLoadNextPage);
                 }
             });
         },
     };
+
+    return pager;
 };
 
 // handle flash messages and animations
