@@ -50,6 +50,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def show_partical
+    @task = Task.find(params[:id])
+
+    respond_to do |format|
+      format.json { render json: @task }
+    end
+  end
+
   def set_status
     @task = Task.find(params[:id])
     

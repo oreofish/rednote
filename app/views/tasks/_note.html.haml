@@ -3,11 +3,11 @@
 %div{ :id => "task#{task.id}", :class => "red-note taskitem ui-widget-content #{task_css(task)}"}
   %p
     %strong 内容：
-    = task.content
+    %p1.task-content= task.content
   = link_to "编辑", "#edittask#{task.id}", :class => "pull-right", 'data-toggle'=>"modal"
   .estimate-time
     %strong 估计时间：
-    = task.estimate
+    %p1.task-estimate= task.estimate
     天
 
   .taskeditview.modal.hide.fade{:id => "edittask#{task.id}", :taskid => "#{task.id}", :style => "display: none;"}
