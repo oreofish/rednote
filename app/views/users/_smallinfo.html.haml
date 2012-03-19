@@ -12,9 +12,6 @@
     %p
       = user.nickname
       %br
-      任务数:
-      = tasks.count if tasks
-      %br
       .pull-left 承担任务:
       .progress.small-progress
         .bar{ :style=>"width: #{100.0*total/5}%;" }

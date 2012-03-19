@@ -27,10 +27,15 @@
 }
 
 .task-todo {
-    background-color: #f9eca0;
+    border-bottom-color: #0083D4;
+    border-bottom-style: solid;
+    border-bottom-width: 6px;
 }
 
 .task-doing {
+    border-bottom-color: #83D400;
+    border-bottom-style: solid;
+    border-bottom-width: 6px;
     background-color: #bbdaf7;
     background-image: url("/images/doing.gif");
     background-position: bottom right;
@@ -38,7 +43,10 @@
 }
 
 .task-done {
-    background-color: #eee;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 6px;
+    background-color: #0083D4;
     background-image: url("/images/done.gif");
     background-position: bottom right;
     background-repeat: no-repeat;
@@ -54,50 +62,50 @@
     opacity:0.3;
 }
 
-@mixin base-task {
-    line-height: 24px;
-    @include block(5px);
-    @include border-radius(3px);
-}
-
-.task-past {
-    @include base-task;
-}
-
-.task-recent {
-    @include base-task;
-    @include box-shadow(grey 1px 1px 1px);
-}
-
-.task-coming {
-    @include base-task;
-}
-
 .task-view {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 .red-avatar {
-  width: 200px;
-  border: 1px solid #999999;
-  height: 84px;
-  margin: 6px;
-  position: relative;
-  font-size: 11px;
-  @include box-shadow(grey 1px 1px 3px);
-  @include inline-block;
-  @include block(5px);
+    width: 200px;
+    border: 1px solid #999999;
+    height: 84px;
+    margin: 6px;
+    position: relative;
+    font-size: 11px;
+    @include box-shadow(grey 1px 1px 3px);
+    @include inline-block;
+    @include block(5px);
 }
 
 .red-note {
-  width: 31%;
-  min-height: 100px;
-  position: relative;
-  font-size: 14px;
-  @include box-shadow(grey 1px 1px 3px);
-  @include inline-block;
-  @include block(6px);
-  vertical-align: top;
+    width: 95%;
+    max-width: 348px;
+    min-height: 120px;
+    font-size: 14px;
+    vertical-align: top;
+    background-color: #fff;
+    @include box-shadow(grey 1px 1px 3px);
+    @include inline-block;
+    @include block(6px);
+    @include border-radius(2px);
+}
+
+/*.task-action {
+    display: block;
+}
+
+.red-note:hover .task-action{ */
+.task-action {
+    display: block;
+    border-color: #000;
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    z-index: 1;
+    a {
+        color: #aaa;
+    }
 }
 
 /*---------------------------------------------------------------------------------------*/

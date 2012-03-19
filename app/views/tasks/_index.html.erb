@@ -33,7 +33,7 @@ $(function() {
 <h3>任务</h3>
 <div class="tasklist">
   <% @tasks.each do |task| %>
-  <%= render :partial => 'note', :locals => { :task => task } %>
+  <%= render :partial => 'note', :locals => { :task => task, :show => :edit } %>
   <% end %>
 </div>
 
