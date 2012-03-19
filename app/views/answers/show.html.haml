@@ -1,24 +1,28 @@
-%p#notice= notice
-
-%p
-  %b User:
-  = @answer.user_id
-%p
-  %b Question:
-  = @answer.question_id
-%p
-  %b Score:
-  = @answer.score
-%p
-  %b Content:
-  = @answer.content
-%p
-  %b Attachment:
-  = @answer.attachment
-%p
-  %b Done:
-  = @answer.done
-
-= link_to 'Edit', edit_answer_path(@answer)
-\|
-= link_to 'Back', answers_path
+.board
+  %p
+    %b 提问:
+    = @question.content.html_safe
+  .pull-right= link_to '编辑', edit_answer_path(@question)
+  %br
+  %hr
+  %p
+    - @answers.each do |answer|
+      %b 回答:
+      = answer.content.html_safe
+      .pull-right= link_to '编辑', edit_answer_path(answer)
+  
+.board
+  %h3 回答
+  = form_for @new_answer do |f|
+    - if @new_answer.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@new_answer.errors.count, "error")} prohibited this answer from being saved:"
+        %ul
+          - @new_answer.errors.full_messages.each do |msg|
+            %li= msg
+    .field
+      = f.text_area :content, :rows => 10
+    .field
+      = f.hidden_field :question_id, :value => @question.id
+    .actions
+      %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成

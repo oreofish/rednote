@@ -1,28 +1,14 @@
-= form_for @answer do |f|
-  -if @answer.errors.any?
+= form_for @new_answer do |f|
+  - if @new_answer.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@answer.errors.count, "error")} prohibited this answer from being saved:"
+      %h2= "#{pluralize(@new_answer.errors.count, "error")} prohibited this answer from being saved:"
       %ul
-        - @answer.errors.full_messages.each do |msg|
+        - @new_answer.errors.full_messages.each do |msg|
           %li= msg
 
   .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = f.text_area :content, :rows => 5
   .field
-    = f.label :question_id
-    = f.number_field :question_id
-  .field
-    = f.label :score
-    = f.number_field :score
-  .field
-    = f.label :content
-    = f.text_area :content
-  .field
-    = f.label :attachment
-    = f.text_field :attachment
-  .field
-    = f.label :done
-    = f.check_box :done
+    = f.hidden_field :question_id, :value => 0
   .actions
-    = f.submit 'Save'
+    %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成

@@ -7,7 +7,6 @@
 #  question_id :integer(4)
 #  score       :integer(4)
 #  content     :text
-#  attachment  :string(255)
 #  done        :boolean(1)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null

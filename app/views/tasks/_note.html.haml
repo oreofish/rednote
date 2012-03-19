@@ -1,0 +1,21 @@
+- # encoding: utf-8 
+
+%div{ :id => "task#{task.id}", :class => "red-note taskitem ui-widget-content #{task_css(task)}"}
+  %p
+    %strong 内容：
+    = task.content
+  = link_to "编辑", "#edittask#{task.id}", :class => "pull-right", 'data-toggle'=>"modal"
+  .estimate-time
+    %strong 估计时间：
+    = task.estimate
+    天
+
+  .taskeditview.modal.hide.fade{:id => "edittask#{task.id}", :taskid => "#{task.id}", :style => "display: none;"}
+    .modal-header
+      %a.close(data-dismiss="modal") ×
+      %h3 任务
+    .modal-body
+      %h3 Please waiting
+    .modal-footer
+      %a.btn{:href => "close", "data-dismiss" => "modal"} 关闭
+
