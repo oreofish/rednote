@@ -37,8 +37,11 @@ class AnswersController < ApplicationController
   def create
     @questions = Answer.find_all_by_question_id(0)
     @new_answer = Answer.new
-    content = RDiscount.new(params[:answer][:content]).to_html
     question_id = params[:answer][:question_id].to_i
+    content = params[:answer][:content]
+    if question_id != 0
+      content = RDiscount.new(content).to_html
+    end
     answer = current_user.answers.new(:content => content,
                                        :question_id => question_id,
                                        :done => false )

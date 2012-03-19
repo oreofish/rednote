@@ -6,7 +6,7 @@
       %h4.span2 给工作添乐趣
       .span7#pending_tag_list 
         - ds = @tags.map{|t| '"' + t + '"'}.join(",")
-        = text_field_tag "tag_input", "", "data-provide" => "typeahead", "data-source" => "[#{ds}]", "data-items" => "4", :class => "input-mini", :placeholder => "添加标签"
+        = text_field_tag "tag_input", "", "data-provide" => "typeahead", "data-source" => "[#{ds}]", "data-items" => "4", :class => "input-small", :placeholder => "添加标签"
       .span3.pull-right#input_hint
 
     .row-fluid
