@@ -28,7 +28,7 @@
               %a.close(data-dismiss="modal") ×
               %h3 确定删除吗？
             .modal-footer
-              = link_to '删除', note, :method => "delete",  "data-dismiss" => "modal", :class => "btn"
+              = link_to '删除', note, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
               %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
         %i.vline |
         -my_like = current_user.likes.find_by_note_id(note.id)

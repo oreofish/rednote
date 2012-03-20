@@ -11,7 +11,17 @@
         =comment.comment
         .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
         -if(comment.user_id == current_user.id) 
-          =link_to 'x', comment, :method => :delete, :class => 'small-button toremove', :remote => true
+          = link_to 'x', "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link'
+          .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
+            .modal-header
+              %a.close(data-dismiss="modal") ×
+              %h3 删除评论
+            .modal-body
+              %h3 确定删除吗？
+            .modal-footer
+              = link_to '删除', comment, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
+              %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
+
     %hr
 
 -if @comments.size > 0
