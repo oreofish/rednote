@@ -1,20 +1,21 @@
 - # encoding: utf-8
 
-.thumbnail.row-fluid.useritem{:id => "user#{user.id}"}
-  = link_to image_tag(user.avatar_url()), mytasks_tasks_path(:id => user.id), :class => "span4"
-  .span7
-    - total = Task::MEETING_TIME
-    - done = 0.0
-    - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at >= '#{Date.today.beginning_of_week.to_datetime.to_formatted_s(:db)}'))")
-    - tasks.each do |task|
-      - total += task.estimate.to_f
-      - done += task.estimate.to_f if task.status == Task::DONE
-    %h4= user.nickname
-    .pull-left 承担任务
-    .progress.small-progress
-      .bar{ :style=>"width: #{100.0*total/5}%;" }
-        = total
-    .pull-left 完成任务
-    .progress.small-progress
-      .bar{ :style=>"width: #{ (total == Task::MEETING_TIME)? 0:100.0*done/(total-1)}%;"}
-        = done
+.red-avatar
+  .thumbnail.row-fluid.useritem{:id => "user#{user.id}"}
+    = link_to image_tag(user.avatar_url()), mytasks_tasks_path(:id => user.id), :class => "span5"
+    .span7
+      - total = Task::MEETING_TIME
+      - done = 0.0
+      - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at >= '#{Date.today.beginning_of_week.to_datetime.to_formatted_s(:db)}'))")
+      - tasks.each do |task|
+        - total += task.estimate.to_f
+        - done += task.estimate.to_f if task.status == Task::DONE
+      %h4= user.nickname
+      .pull-left 承担任务
+      .progress.small-progress
+        .bar{ :style=>"width: #{100.0*total/5}%;" }
+          = total
+      .pull-left 完成任务
+      .progress.small-progress
+        .bar{ :style=>"width: #{ (total == Task::MEETING_TIME)? 0:100.0*done/(total-1)}%;"}
+          = done

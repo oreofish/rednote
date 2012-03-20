@@ -23,10 +23,6 @@
               <%= link_to "借书", books_path %>
             </li>
 
-            <li class='<%= "active" if controller_name == "questions" %>'>
-              <%= link_to "问答", questions_path %>
-            </li>
-
             <li class='<%= "active" if controller_name == "projects" %>'>
                 <li class="dropdown" id="project-menu">
                 <%= link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>

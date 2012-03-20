@@ -30,3 +30,4 @@ jQuery ->
   )
 
   $('#taskprogresslink').click()
+  $('#oldtasklink').click()
