@@ -53,33 +53,6 @@ function scrolltop() {
     __backtopfuc();
 };
 
-var commentsManager = {
-    bindHandlers: function() {
-        var that = this;
-        $('#main-contents ul.list').find('div.item').each( function(idx, el) {
-            that._bindCommentHandlerHelper($(el));
-        });
-    },
-
-    // called by js response for newly created comments
-    bindCommentHandler: function(id) {
-        $note = $('#note'+id);
-        this._bindCommentHandlerHelper($note);
-    }, 
-
-    _bindCommentHandlerHelper: function(obj) {
-        var $link = obj.find('#comments_link');
-        var $list = obj.find('#comments_list');
-
-        $link.unbind('click');
-        $link.bind( {
-            'click': function(ev) {
-                $list.toggle('blind');
-            }
-        });
-    }
-};
-
 var removeAlert = {
     remove: function() { 
         var that = this;
@@ -118,7 +91,6 @@ var removeAlert = {
 
 $(document).ready( function() {
     scrolltop();
-    commentsManager.bindHandlers();
     removeAlert.remove();
 
     $('body').on('ajax:success timeupdate', function() {

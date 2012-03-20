@@ -49,9 +49,9 @@
         - myclass += " label-warning" if current_user.id == note.user_id and not note.message == 0
         %i.vline |
         = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
-          :remote => true, :class => myclass, :id => "comments_link" 
+          :remote => true, :class => myclass, :id => "comments_link#{note.id}",
+          "data-toggle" => "collapse", "data-target" => "\#comments_list#{note.id}"
 
       .live-timestamp(data-notetime="#{note.created_at}")
       %br
-      #comments_list.well(style="display:none")
-  
+      %div.collapse.fade(style="height: 0px;" id="comments_list#{note.id}")

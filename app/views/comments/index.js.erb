@@ -1,22 +1,21 @@
 (function() {
-    var $item = $('#note<%= @note.id %>')
-    var $link = $item.find('#comments_link');
-    $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
-    $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
+  var $link = $('#comments_link<%= @note.id %>');
+  $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
+  $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
 
-    var $list = $item.find('#comments_list');
-    $list.html( "<%= j render( 'comment_box') %>" );
-    $list.find('#comment_comment').focus();
-    
+  var $list = $('#comments_list<%= @note.id %>');
+  $list.html( "<%= j render( 'comment_box') %>" );
+  $list.find('#comment_comment').focus();
 
-    <% if @note.user_id == current_user.id  %>
+
+  <% if @note.user_id == current_user.id  %>
       $link.removeClass("label-warning");
-      $num = $('#update_info');
-      var new_num = <%= current_user.notes.sum("message")%>;
-      $num.text( $num.text().replace(/\d+/, new_num) );
-      if( Number(new_num) === 0 ) {
-        $num.attr("style","display:none;");
-      }
+    $num = $('#update_info');
+    var new_num = <%= current_user.notes.sum("message")%>;
+    $num.text( $num.text().replace(/\d+/, new_num) );
+    if( Number(new_num) === 0 ) {
+      $num.attr("style","display:none;");
+    }
 
-    <%end%>
+  <%end%>
 }());
