@@ -1,0 +1,13 @@
+<%# encoding: utf-8 %>
+
+(function() {
+<% if @question.valid? %>
+  $('.answerlist').append( "<%= j render :partial => 'questions/item', :locals => { :question => @question } %>" );
+  $('.answerlist').effect('highlight', {}, 3000);
+  $('#question_content')[0].value = '';
+<% else %>
+   // something like flashController.doFailure('<p>创建失败</p>');
+<% end %>
+
+}());
+
