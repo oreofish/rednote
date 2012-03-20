@@ -68,3 +68,11 @@
     @include box-shadow(grey 1px 1px 3px);
     @include border-radius(10px);
 }
+
+
+.framed {
+  padding: 10px 20px 10px 10px;
+  color: darken(#FFF, 40%);
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
