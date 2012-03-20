@@ -4,7 +4,8 @@
   .row-fluid
     -note_user = User.find(note.user_id)
     .span1
-      =link_to image_tag(note_user.avatar_url(:small), :class => "avatar", :title => "#{note_user.nickname}"), user_path(note_user), :method => :get
+      =link_to image_tag(note_user.avatar_url(:small), :class => "avatar",
+        :title => "#{note_user.nickname}"), user_path(note_user), :method => :get
 
     .span11.item
       .content
