@@ -2,7 +2,9 @@
 
 (function() {
 <% if @user %>
-  $('#task<%= @task.id %>').hide();
+  $('#task<%= @task.id %>').fadeOut(1000,function(){
+    $(this).remove();
+  } );
   $('#user<%= @user.id %>')
       .replaceWith("<%= j render :partial => 'tasks/smallinfo', :locals => { :user => @user } %>");
 <% else %>
