@@ -38,18 +38,18 @@ class AnswersController < ApplicationController
     question_id = params[:answer][:question_id].to_i
     @question = Question.find(question_id)
     content = RDiscount.new(params[:answer][:content]).to_html
-    answer = current_user.answers.new(:content => content,
-                                      :question_id => question_id)
+    @answer = current_user.answers.new(:content => content,
+                                       :question_id => question_id)
 
     respond_to do |format|
-      if answer.save
+      if @answer.save
         format.html { redirect_to @question, notice: 'Answer was successfully created.' }
         format.js # create.js.erb
-        format.json { render json: answer, status: :created, location: answer }
+        format.json { render json: @answer, status: :created, location: @answer }
       else
         format.html { redirect_to @question, notice: 'Answer was successfully created.' }
         format.js # create.js.erb
-        format.json { render json: answer.errors, status: :unprocessable_entity }
+        format.json { render json: @answer.errors, status: :unprocessable_entity }
       end
     end
   end
