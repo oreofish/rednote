@@ -3,10 +3,14 @@
   #note_publish
 
     .row-fluid
-      %h4.span2 给工作添乐趣
-      .span7#pending_tag_list 
-        - ds = @tags.map{|t| '"' + t + '"'}.join(",")
-        = text_field_tag "tag_input", "", "data-provide" => "typeahead", "data-source" => "[#{ds}]", "data-items" => "4", :class => "input-small", :placeholder => "添加标签"
+      .span2
+        %h4 给工作添乐趣
+      - ds = @tags.map{|t| '"' + t + '"'}.join(",")
+      .span7 
+        = text_field_tag "tag_input", "", "data-provide" => "typeahead", 
+          "data-source" => "[#{ds}]", "data-items" => "4", :class => "input-small span2",
+          :placeholder => "添加标签"
+        #pending_tag_list.pull-right
       .span3.pull-right#input_hint
 
     .row-fluid

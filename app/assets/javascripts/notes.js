@@ -24,17 +24,19 @@ $(function() {
 
         // bootstrap-typeahead captures key events, so delegation won't work here.
         $('#tag_input').on('keypress', function(e) {
-            var text;
             if (e.which == 13 || e.which == 10) {
-                text = $('#pending_tag_list').text();
-                if (text.length) 
-                    text += ",";
-                text += $(this).val();
-
-                $('#pending_tag_list').append( $('<span class="label">'+$(this).val()+'</span>') );
-                $('#note_tag_list').attr('value', text);
+                var span = $('<span><span class="label">'+$(this).val()+
+                             '</span><a data-dismiss="alert" href="#">×</a></span>');
+                $('#pending_tag_list').append(span);
                 $(this).val('');
             }
+        });
+
+        $('#new_note').on('submit', function() {
+            var list = $('#pending_tag_list').find('span.label').map( function(){
+                return $(this).text(); 
+            });
+            $('#note_tag_list').attr('value', Array.prototype.join.call(list, ','));
         });
 
         // update data-source for tags completion
