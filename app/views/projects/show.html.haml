@@ -1,24 +1,18 @@
 - # encoding: utf-8
 
 .board
-  .page-header
-    %h1
-      项目
-      %small 项目列表
-  .btn-group{ "data-toggle" => "buttons-radio" }
-    - @projects.each do |project|
-      - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
-      = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
-
-  .page-header
-    %h1
-      人员
-      %small 本项目参与人员
-  - User.all.each do |user|
-    = render :partial => 'tasks/smallinfo', :locals => { :user => user }
+  %ul.nav.nav-pills
+    %li.active
+      = link_to "待定任务", "#taskcontent"
+    %li
+      = link_to "文档", "#answercontent"
+    %li
+      = link_to "回顾", "#historycontent"
 
   #taskcontent
     = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
+  #answercontent
+    = link_to "文档", questions_path(:project => @project_name), :id => "answerlink", :remote => true
   #historycontent
     = link_to "回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
 

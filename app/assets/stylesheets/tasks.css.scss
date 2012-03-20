@@ -37,9 +37,6 @@
     border-bottom-style: solid;
     border-bottom-width: 6px;
     background-color: #bbdaf7;
-    background-image: url("/images/doing.gif");
-    background-position: bottom right;
-    background-repeat: no-repeat;
 }
 
 .task-done {
@@ -67,7 +64,7 @@
 }
 
 .red-avatar {
-    width: 200px;
+    width: 150px;
     margin: 6px;
     font-size: 11px;
     @include inline-block;

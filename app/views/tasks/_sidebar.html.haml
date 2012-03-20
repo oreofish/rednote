@@ -1,12 +1,17 @@
 
 .board
-  %h3 按项目
+  .page-header
+    %h3
+      项目
+      %small 项目列表
   .btn-group{ "data-toggle" => "buttons-radio" }
     - @projects.each do |project|
       - css_class = ( @project_name == project.name ? 'btn active' : 'btn' )
       = link_to "#{project.name}(#{project.count})", project_path(project.name), :class => css_class
-  %hr
-  %h3 按用户  
+  .page-header
+    %h3
+      人员
+      %small 本项目人员
   - User.all.each do |user|
     = render :partial => 'tasks/smallinfo', :locals => { :user => user }
 

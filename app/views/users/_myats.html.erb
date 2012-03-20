@@ -1,4 +1,50 @@
-<h1>myats</h1>
-<ul class="list">
-  <%= render "notes/list" %>
-</ul>
+<!--
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <strong class="accordion-toggle muted" data-toggle="collapse" data-parent="#accordion2" href="#at.id"></strong>
+      </div>
+      <div id="at.id" class="accordion-body collapse" style="height:0px;">
+        <div class="accordion-inner">
+        </div>
+      </div>
+    </div>
+</div>
+-->
+
+<p>新评论</p>
+  <% @notes_for_new_comments.each do |note| %>
+    <% if note.messages.sum("read") == 0 %>
+    <strong class="muted">
+    <% else %>
+    <strong>
+    <% end %>
+    <%= "有人评论了：#{note.summary}".html_safe%>
+    </strong>
+    <%= link_to '查看', note, :class => 'small-link' %>
+    <br />
+  <% end %>
+<p>@了你的note</p>
+  <% @at_in_notes.each do |note| %>
+    <% if note.messages.sum("read") == 0 %>
+    <strong class="muted">
+    <% else %>
+    <strong>
+    <% end %>
+    <%= "有人在note中@了你：#{note.summary}".html_safe%>
+    </strong>
+    <%= link_to '查看', note, :class => 'small-link' %>
+    <br />
+  <% end %>
+<p>@了你的评论</p>
+  <% @at_in_comments.each do |comment| %>
+    <% if comment.messages.sum("read") == 0 %>
+    <strong class="muted">
+    <% else %>
+    <strong>
+    <% end %>
+    <%= "有人在comment中@了你：#{comment.comment}".html_safe%>
+    </strong>
+    <%= link_to '查看', comment.commentable, :class => 'small-link' %>
+    <br />
+  <% end %>

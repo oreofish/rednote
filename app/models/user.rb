@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   has_many :books
   has_many :answers, :dependent => :destroy
   has_many :questions, :dependent => :destroy
+  has_many :messages, :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader

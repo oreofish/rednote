@@ -23,7 +23,7 @@
               <%= link_to "借书", books_path %>
             </li>
 
-            <li class='<%= "active" if controller_name == "projects" %>'>
+            <li class='<%= "active" if controller_name == "projects" || controller_name == "tasks" %>'>
                 <li class="dropdown" id="project-menu">
                 <%= link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
                   项目<b class="caret"></b>
@@ -47,14 +47,15 @@
 
         <ul class="pull-right nav">
             <% if user_signed_in? %>
+
                 <li class='<%= "active" if controller_name == "users" %>' id="mynote_notice">
-                <% noticenum = current_user.notes.sum("message")%>
+                <% noticenum = current_user.messages.sum("refer")%>
                 <% if noticenum == 0 %>
                   <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none" %>
                 <% else %>
                   <%= link_to "#{noticenum}", user_path(current_user), :id => "update_info" %>
                 <% end %>
-                <%= link_to "个人空间", user_path(current_user), :method => :get %>
+                <%= link_to "个人空间", myats_user_path(current_user), :method => :get %>
                 </li>
 
                 <li class="dropdown" id="user-menu">

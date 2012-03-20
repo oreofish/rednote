@@ -28,6 +28,8 @@ class Comment < ActiveRecord::Base
 
   attr_accessible :title, :comment, :commentable_id, :commentable_type
 
+  has_many :messages, :dependent => :destroy, :foreign_key => "message_id"
+
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
   #acts_as_voteable

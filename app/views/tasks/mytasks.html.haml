@@ -1,5 +1,9 @@
 .board.tabbable{ :style=>"margin-bottom: 9px;"}
-  %h4= "#{@user.nickname}的任务"
+  .page-header
+    %h3
+      = "#{@user.nickname}的任务"
+      %small 项目列表  
+  
   %ul.nav.nav-tabs
     %li.active= link_to "负责的", "#assigned_to_me", "data-toggle" => "tab"
     %li= link_to "创建的", "#created_by_me", "data-toggle" => "tab"
