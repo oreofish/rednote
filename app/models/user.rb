@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_one  :debit, :dependent => :destroy
   has_many :books
   has_many :answers, :dependent => :destroy
+  has_many :questions, :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader

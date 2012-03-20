@@ -2,7 +2,7 @@
 
 (function() {
 <% if @task.valid? %>
-  $('.tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task }) %>" );
+  $('.tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task, :show => :edit }) %>" );
   $('.tasklist').effect('highlight', {}, 3000);
   $('#task_content')[0].value = '';
 <% else %>

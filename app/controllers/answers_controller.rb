@@ -35,28 +35,19 @@ class AnswersController < ApplicationController
   # POST /answers
   # POST /answers.json
   def create
-    @questions = Answer.find_all_by_question_id(0)
-    @new_answer = Answer.new
     question_id = params[:answer][:question_id].to_i
-    content = params[:answer][:content]
-    if question_id != 0
-      content = RDiscount.new(content).to_html
-    end
+    @question = Question.find(question_id)
+    content = RDiscount.new(params[:answer][:content]).to_html
     answer = current_user.answers.new(:content => content,
-                                       :question_id => question_id,
-                                       :done => false )
-    path = answers_path
-    if question_id != 0
-      path = Answer.find(question_id)
-    end
+                                      :question_id => question_id)
 
     respond_to do |format|
       if answer.save
-        format.html { redirect_to path, notice: 'Answer was successfully created.' }
+        format.html { redirect_to @question, notice: 'Answer was successfully created.' }
         format.js # create.js.erb
         format.json { render json: answer, status: :created, location: answer }
       else
-        format.html { redirect_to path, notice: 'Answer was successfully created.' }
+        format.html { redirect_to @question, notice: 'Answer was successfully created.' }
         format.js # create.js.erb
         format.json { render json: answer.errors, status: :unprocessable_entity }
       end

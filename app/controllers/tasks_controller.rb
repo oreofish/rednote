@@ -15,6 +15,9 @@ class TasksController < ApplicationController
       @tasks << task if task.assigned_to == nil and task.status == Task::TODO
     end
 
+    @questions = Question.all
+    @question = Question.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.js # index.js.erb

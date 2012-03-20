@@ -20,10 +20,15 @@ $(function() {
 });
 </script>
 
+<h3>待定任务</h3>
 <div class="tasklist">
   <% @tasks.each do |task| %>
   <%= render :partial => 'note', :locals => { :task => task, :show => :edit } %>
   <% end %>
 </div>
-
 <%= render 'form' %>
+
+<h3>文档</h3>
+<div class="answerlist">
+  <%= render :partial => 'questions/index', :locals => { :questions => @questions } %>
+</div>

@@ -4,12 +4,11 @@
 #
 #  id          :integer(4)      not null, primary key
 #  user_id     :integer(4)
-#  question_id :integer(4)
 #  score       :integer(4)
 #  content     :text
-#  done        :boolean(1)
 #  created_at  :datetime        not null
 #  updated_at  :datetime        not null
+#  question_id :integer(4)
 #
 
 require 'spec_helper'

@@ -14,8 +14,3 @@
     = f.hidden_field :tag_list
   .actions
     %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成
-
-%span.input-small#pending_tag_list 
-  - tags = Answer.tag_counts.map {|tag| tag.name}
-  - ds = tags.map{|t| '"' + t + '"'}.join(",")
-  = text_field_tag "tag_input", "", "data-provide" => "typeahead", "data-source" => "[#{ds}]", "data-items" => "4", :class => "input-small", :placeholder => "添加标签"

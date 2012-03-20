@@ -1,0 +1,4 @@
+- # encoding: utf-8
+
+- questions.each do |question|
+  = render :partial => 'questions/item', :locals => { :question => question }

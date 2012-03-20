@@ -2,7 +2,7 @@
 
 %hr
 .row-fluid
-  - question_user = User.find(question.user_id)
+  - question_user = question.user
   .span1
     = link_to image_tag(question_user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
     
@@ -10,10 +10,4 @@
     .content
       %span(style="word-wrap: break-word;")
       = link_to question.content.html_safe, question
-        
-    .question_tags
-      - question.tag_list.each do |tag|
-        %span.label.label-info= "#{tag}"
-    .live-timestamp(data-questiontime="#{question.created_at}")
-      %br
 
