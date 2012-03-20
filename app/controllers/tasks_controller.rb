@@ -27,7 +27,6 @@ class TasksController < ApplicationController
 
   def history
     @current_project = params[:project]
-    @task = Task.new
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @old_tasks = Array.new
     all_tasks.each do |task|
