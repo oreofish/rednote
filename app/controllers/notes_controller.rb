@@ -93,14 +93,8 @@ class NotesController < ApplicationController
     @note = current_user.notes.build(params[:note])
     @attachids = params[:attachments].split(',')
 
-<<<<<<< HEAD
-    @ats = @note.summary.scan(/@[a-zA-Z0-9_]+/)
-    @at = At.new
-    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height='18' src='/images/wenhao.jpg' width='18'>").html_safe
-=======
     @at_users = @note.summary.scan(/@[a-zA-Z0-9_]+/)
     @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
->>>>>>> add message table and message function
 
     respond_to do |format|
       if @note.save
