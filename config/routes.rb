@@ -19,7 +19,12 @@ Rednote::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   match 'comments/dono', :to => 'comments#dono'
-  resources :comments, :only => [:new, :index, :create, :destroy]
+  resources :comments, :only => [:new, :index, :create, :destroy] do 
+    collection do 
+      get 'index_task'
+      post 'create_task'
+    end
+  end
   resources :likes, :only => [:create, :update, :destroy]
 
   resources :attachements, :only => [:create]
