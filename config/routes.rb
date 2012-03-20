@@ -62,7 +62,7 @@ Rednote::Application.routes.draw do
 
   resources :tasks do
     member do
-      get 'show_partical'
+      get 'show_partial'
     end
     collection do
       get 'mytasks'

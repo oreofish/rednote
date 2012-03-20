@@ -1,5 +1,5 @@
 $(function() {
-    $('#projectcontent').on('click', 'a[href="close"]', function(ev) {
+    $('#taskcontent').on('click', 'a[href="close"]', function(ev) {
         
         var $tag=$(ev.target).parents('div.taskeditview').first();
         var id = $tag.attr("taskid");
