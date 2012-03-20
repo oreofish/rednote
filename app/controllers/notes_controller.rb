@@ -47,16 +47,30 @@ class NotesController < ApplicationController
   # GET /notes/1.json
   def show
     @note = Note.find(params[:id])
-    if @note.user_id == current_user.id
-      @note.message = 0
-      @note.save
+    @comments = @note.comments
+    @messages = Array.new
+
+    @note.messages.each do |message|
+      @messages << message
     end
 
-    @comment = Comment.new(:commentable_id => @note.id)
-    @comments = @note.comments
+    @comments.each do |comment|
+      comment.messages.each do |message|
+        @messages << message
+      end
+    end
+
+    @messages.each do |message|
+      if @message.user_id == current_user.id
+        message.read = 0 # 0 means read and 1 means unread
+        message.refer = 0
+        message.save!
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js # show.js.erb
     end
   end
 
@@ -79,19 +93,27 @@ class NotesController < ApplicationController
     @note = current_user.notes.build(params[:note])
     @attachids = params[:attachments].split(',')
 
+<<<<<<< HEAD
     @ats = @note.summary.scan(/@[a-zA-Z0-9_]+/)
     @at = At.new
     @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height='18' src='/images/wenhao.jpg' width='18'>").html_safe
+=======
+    @at_users = @note.summary.scan(/@[a-zA-Z0-9_]+/)
+    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
+>>>>>>> add message table and message function
 
     respond_to do |format|
       if @note.save
-        @ats.each do |at|
-          user =  User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at.from(1)}'")
-          if user.size == 1
-            @at.user_id = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at.from(1)}'")[0].id
-            @at.at_type = "Note"
-            @at.at_id = @note.id
-            @at.save!
+        @at_users.each do |at_user|
+          user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
+          if user.size == 1 #because note can not edit so the create note unexist in message table
+            @message = Message.new
+            @message.user_id = user[0].id
+            @message.message_type = "at_in_note"
+            @message.message_id = @note.id
+            @message.refer = 1
+            @message.save!
+            broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_note' }"
           end
         end
         @attachids.each do |attachid|

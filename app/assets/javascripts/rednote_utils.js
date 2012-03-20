@@ -250,8 +250,8 @@ rednote.logger = {
         $info.text( $info.text().replace(/(\d+)/,num) );
         $info.attr("style","");
 
-        var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
-        $note.find('a.comments_link').addClass("label-warning");
+        //var $note = $( "#note"+ eval("(" + msg['data'] + ")").note_id);
+        //$note.find('a.comments_link').addClass("label-warning");
     }
 }
 
@@ -271,7 +271,11 @@ function setup_faye(){
         //eval(data);
     });
 
-    client.subscribe("/comments/new/"+str,function(data){
+    //client.subscribe("/comments/new/"+str,function(data){
+        //eval(data);
+    //});
+
+    client.subscribe("/ats/new/"+str,function(data){
         //eval(data);
     });
     // faye 
@@ -286,7 +290,11 @@ function setup_faye(){
                     rednote.logger.notifyDestroy(message['data']);
                     break;
 
-                case "/comments/new/"+str:
+                //case "/comments/new/"+str:
+                //    rednote.logger.updateinfo(message);
+                //    break;
+
+                case "/ats/new/"+str:
                     rednote.logger.updateinfo(message);
                     break;
             }

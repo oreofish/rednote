@@ -10,8 +10,8 @@
       .span11
         =comment.comment
         .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
-        -if(comment.user_id == current_user.id) 
-          = link_to 'x', "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link'
+        -if(comment.user_id == current_user.id and comment.commentable_type == "Note")
+          = link_to 'x', "#removecomment#{comment.id}",'data-toggle' => "commentremove", :class => 'toremove small-link'
           .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
             .modal-header
               %a.close(data-dismiss="modal") ×
@@ -21,6 +21,8 @@
             .modal-footer
               = link_to '删除', comment, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
               %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
+        -elsif(comment.user_id == current_user.id and comment.commentable_type == "Task")
+          = link_to 'x', comment, :method => :delete, :remote => true
 
     %hr
 
@@ -28,4 +30,6 @@
   =link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' 
 
 %br
-=render 'comments/form'
+=render 'comments/form' if @commentable_type == "note"
+=render 'comments/form_task' if @commentable_type == "task"
+

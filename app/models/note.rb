@@ -17,6 +17,7 @@ class Note < ActiveRecord::Base
   belongs_to :user
   has_many :likes, :dependent => :destroy
   has_many :attachements, :dependent => :destroy
+  has_many :messages, :dependent => :destroy, :foreign_key => "message_id"
 
   validates :summary, :presence => true,
                       :length   => { :maximum => 500 }

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include ERB::Util
   before_filter :authorized_user, :only => [:destroy]
 
   # GET /comments
@@ -12,9 +13,24 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(:commentable_id => @note.id)
     @comments = @note.comments
+    @commentable_type = "note"
 
     respond_to do |format|
       format.js # index.js.erb
+      format.json { render json: @comments }
+    end
+  end
+
+  def index_task
+    @task = Task.find(params[:task_id])
+
+    @comment = Comment.new(:commentable_id => @task.id)
+    @comments = @task.comments
+
+    @commentable_type = "task"
+
+    respond_to do |format|
+      format.js 
       format.json { render json: @comments }
     end
   end
@@ -25,20 +41,67 @@ class CommentsController < ApplicationController
     @note = Note.find(params[:comment][:commentable_id])
     @comment = @note.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
+    @commentable_type = "note"
+
+    @at_users = @comment.comment.scan(/@[a-zA-Z0-9_]+/)
+    @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
 
     respond_to do |format|
       if @comment.save
-        if not @note.user_id == @comment.user_id
-          broadcast "/comments/new/#{@note.user_id}", "{ note_id: #{@note.id} }"
-          @note.message += 1 
-          @note.save
+        if not @note.user_id == current_user.id
+          #message_exist_for_new_comment = Message.find_by_sql("SELECT messages.* FROM messages WHERE message_type='new_comment' and message_id=#{@note.id}") #check message is exist
+          #if message_exist_for_new_comment.size == 0
+            @message = Message.new
+            @message.user_id = @note.user_id
+            @message.message_type = "new_comment"
+            @message.message_id = @comment.id
+            @message.refer = 1
+            @message.save!
+          #elsif message_exist_for_new_comment.size == 1
+          #  message_exist_for_new_comment[0].refer += 1
+          #  message_exist_for_new_comment.save!
+          #end
+          broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'new_comment' }"
         end
-         @comments = @note.comments
-         @comment = Comment.new(:commentable_id => @note.id)
+
+        @at_users.each do |at_user|
+          user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
+          if user.size == 1 and not user[0].id == @note.user_id #the at_user is not the user who owner the note
+            @message = Message.new
+            @message.user_id = user[0].id
+            @message.message_type = "at_in_comment"
+            @message.message_id = @comment.id
+            @message.refer = 1
+            @message.save!
+            broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_comment' }"
+          end
+        end
+
+        @comments = @note.comments
+        @comment = Comment.new(:commentable_id => @note.id)
         format.js { render "index" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.js { render "index" }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def create_task
+    @task = Task.find(params[:comment][:commentable_id])
+    @comment = @task.comments.create(:comment => params[:comment][:comment])
+    @comment.user_id = current_user.id
+    @commentable_type = "task"
+
+    respond_to do |format|
+      if @comment.save
+         @comments = @task.comments
+         @comment = Comment.new(:commentable_id => @task.id)
+        format.js { render "index_task" }
+        format.json { render json: @comment, status: :created, location: @comment }
+      else
+        format.js { render "index_task" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

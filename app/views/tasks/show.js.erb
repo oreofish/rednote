@@ -1,7 +1,7 @@
 <%# encoding: utf-8 %>
 
 (function() {
-  $('#edittask<%= @task.id %>').find('.modal-body').html( "<%= j render( 'show' ) %>" );
+  $('#edittask<%= @task.id %> div.modal-body').find('.content').html( "<%= j render( 'show' ) %>" );
 
   setTimeout( function() {
     $('.best_in_place').best_in_place();
