@@ -21,8 +21,15 @@
 
       .pull-right
         -if current_user.id==note_user.id
-          = link_to '删除', note, :confirm => "Are you sure?", method: :delete, 
-            :remote => true, :class => 'toremove small-link'
+          = link_to '删除', "#removenote#{note.id}",
+            'data-toggle' => "modal", :class => 'toremove small-link'
+          .noteremove.modal.hide.fade{:id => "removenote#{note.id}", :noteid => "#{note.id}", :style => "display: none;"}
+            .modal-header
+              %a.close(data-dismiss="modal") ×
+              %h3 确定删除吗？
+            .modal-footer
+              = link_to '删除', note, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
+              %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
         %i.vline |
         -my_like = current_user.likes.find_by_note_id(note.id)
         -if not my_like
@@ -42,8 +49,9 @@
         - myclass += " label-warning" if current_user.id == note.user_id and not note.message == 0
         %i.vline |
         = link_to "评论(#{note.comments.count})", comments_path(:note_id => note.id), 
-          :remote => true, :class => myclass, :id => "comments_link" 
+          :remote => true, :class => myclass, :id => "comments_link#{note.id}",
+          "data-toggle" => "collapse", "data-target" => "\#comments_list#{note.id}"
 
       .live-timestamp(data-notetime="#{note.created_at}")
       %br
-      #comments_list.well(style="display:none")
+      %div.collapse.fade(style="height: 0px;" id="comments_list#{note.id}")

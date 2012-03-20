@@ -1,7 +1,4 @@
 (function() {
-    var $item = $('#note<%= @note_id %>');
-    var $link = $item.find('#comments_link');
-    $link.attr("href","<%= comments_path(:note_id => @note_id)%>");
-
-    
+  var $link = $('#comments_link<%= @note_id %>');
+  $link.attr("href","<%= comments_path(:note_id => @note_id)%>");
 }());

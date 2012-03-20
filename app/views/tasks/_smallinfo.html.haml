@@ -5,7 +5,7 @@
   .span7
     - total = Task::MEETING_TIME
     - done = 0.0
-    - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at < #{Date.today.beginning_of_week}))")
+    - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at >= '#{Date.today.beginning_of_week.to_datetime.to_formatted_s(:db)}'))")
     - tasks.each do |task|
       - total += task.estimate.to_f
       - done += task.estimate.to_f if task.status == Task::DONE

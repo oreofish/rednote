@@ -1,7 +1,6 @@
 <%# encoding: utf-8 %>
 
 (function() {
-
   var $space = $('#myself').find('div.mycontent');
 
   <% if controller.action_name == "show" or controller.action_name == "mytags" %> 
@@ -13,8 +12,4 @@
   <% else %> 
       $space.html( "<%= j render :partial => 'mycomments' %> " );
   <% end %>;
-
-
-  commentsManager.bindHandlers();
-  rednote.updateNoteTime();
 })();
