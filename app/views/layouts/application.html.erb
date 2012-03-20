@@ -36,15 +36,11 @@
     <%= render "layouts/header" %>
 
     <div class="container">
-      <% if controller_name == "projects" or controller_name == "tasks" %>
-        <div id="main-contents" class="span12"><%= yield %></div>
-      <% else %>
-        <div class="row">
-          <% content_for :sidebar, render(:partial => "#{controller_name}/sidebar") -%>
-          <div id="main-contents" class="span8"><%= yield %></div>
-          <div id='sidebar' class="span4"><%= yield :sidebar %></div>
-        </div>
-      <% end %>
+      <div class="row">
+        <% content_for :sidebar, render(:partial => "#{controller_name}/sidebar") -%>
+        <div id="main-contents" class="span8"><%= yield %></div>
+        <div id='sidebar' class="span4"><%= yield :sidebar %></div>
+      </div>
       <%= render "layouts/footer" %>
     </div> <!-- /container -->
 

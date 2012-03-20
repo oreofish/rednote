@@ -21,7 +21,7 @@ $(function() {
 </script>
 
 <div class="page-header">
-    <h1>待定任务 <small>未分配任务清单</small></h1>
+    <h2>待定任务 <small>未分配任务清单</small></h2>
 </div>
 <div class="tasklist">
   <% @tasks.each do |task| %>
@@ -30,10 +30,3 @@ $(function() {
 </div>
 <%= render 'form' %>
 
-<div class="page-header">
-    <h1>文档 <small>项目相关问题的回答</small></h1>
-</div>
-
-<div class="answerlist">
-  <%= render :partial => 'questions/index', :locals => { :questions => @questions } %>
-</div>
