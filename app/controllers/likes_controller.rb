@@ -5,7 +5,7 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.create(:note_id => params[:note_id], :status => false)
     note_id = @like.note_id
-    comment_content = "i have marked the note"
+    comment_content = t(".i have marked the note")
 
     respond_to do |format|
       if @like and @like.save!
@@ -21,7 +21,7 @@ class LikesController < ApplicationController
   # PUT /likes/1.json
   def update
     @like = Like.find(params[:id])
-    comment_content = "i have finished learning"
+    comment_content = t(".i have finished learning")
     note_id = @like.note_id
 
     respond_to do |format|
@@ -40,7 +40,7 @@ class LikesController < ApplicationController
   def destroy
     @like = Like.find(params[:id])
     note_id = @like.note_id
-    comment_content = "i have disabled marking the note"
+    comment_content = t(".i have disabled marking the note")
     @like.destroy
     create_comment!(note_id, comment_content)
 

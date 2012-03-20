@@ -2,6 +2,10 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  i have marked the note: '我想读'
+  i have finished learning: '我已读完'
+  i have disabled marking the note: '我取消了标记'
+
   activerecord:
     errors:
       template:
