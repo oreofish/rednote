@@ -1,0 +1,37 @@
+.row-fluid
+  %h3.span12 问题:
+.row-fluid
+  .span1
+    - question_user = @question.user
+    = link_to image_tag(question_user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
+    
+  .span10
+    = @question.content
+  .span1.pull-right= link_to '编辑', edit_question_path(@question)
+%hr
+- @answers.each do |answer|
+  .row-fluid
+    %h4.span12 回答:
+  .row-fluid
+    .span1
+      = link_to image_tag(answer.user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
+    .span10
+      = answer.content.html_safe
+    .span1.pull-right
+      = link_to '编辑', edit_answer_path(answer)
+  
+.row-fluid
+  %h3.span12 回答
+= form_for @new_answer do |f|
+  - if @new_answer.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@new_answer.errors.count, "error")} prohibited this answer from being saved:"
+      %ul
+        - @new_answer.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.text_area :content, :rows => 10
+  .field
+    = f.hidden_field :question_id, :value => @question.id
+  .actions
+    %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成

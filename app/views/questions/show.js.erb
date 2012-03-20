@@ -1,0 +1,5 @@
+<%# encoding: utf-8 %>
+
+(function() {
+  $('#question<%= @question.id %>').find('.modal-body').html( "<%= j render( 'show' ) %>" );
+}());

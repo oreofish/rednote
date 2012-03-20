@@ -12,11 +12,11 @@
 #
 
 class Question < ActiveRecord::Base
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :projects
   belongs_to :user
   has_many :answers, :dependent => :destroy
 
   validates :user_id, :presence => true
   validates :content, :presence => true, :length => { :maximum => 255 }
-  attr_accessible :content, :done, :tag_list
+  attr_accessible :content, :done, :project_list
 end

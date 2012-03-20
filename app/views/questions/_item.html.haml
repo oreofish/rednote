@@ -9,5 +9,14 @@
   .span11.item
     .content
       %span(style="word-wrap: break-word;")
-      = link_to question.content.html_safe, question
+      = link_to question.content.html_safe, "#question#{question.id}", 'data-toggle'=>"modal"
+
+  .question-show.modal.hide.fade{:id => "question#{question.id}", :questionid => "#{question.id}", :style => "display: none;"}
+    .modal-header
+      %a.close(data-dismiss="modal") ×
+      %h3 问题
+    .modal-body
+      %h3 请等待
+    .modal-footer
+      %a.btn{:href => "close", "data-dismiss" => "modal"} 关闭
 

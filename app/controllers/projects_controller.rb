@@ -58,15 +58,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def knowledgebase
-    #mock
-    respond_to do |format|
-      format.html # knowledgebase.html.erb
-      format.js # knowledgebase.js.erb
-      format.json { render json: @project }
-    end
-  end
-
   # GET /projects/1/edit
   def edit
   end

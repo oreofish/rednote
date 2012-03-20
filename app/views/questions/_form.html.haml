@@ -1,4 +1,4 @@
-= form_for @question do |f|
+= form_for @question, :remote => true do |f|
   - if @question.errors.any?
     #error_explanation
       %h2= "#{pluralize(@question.errors.count, "error")} prohibited this answer from being saved:"
@@ -9,6 +9,6 @@
   .field
     = f.text_area :content, :rows => 2
   .field
-    = f.hidden_field :tag_list
+    = f.hidden_field :project_list, :value => @current_project
   .actions
-    %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成
+    %button.btn.btn-primary.pull-right{ :type=>"submit"} 提问
