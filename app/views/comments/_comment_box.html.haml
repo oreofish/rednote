@@ -24,8 +24,8 @@
               %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
         -elsif(comment.user_id == current_user.id and comment.commentable_type == "Task")
           = link_to 'x', comment, :method => :delete, :remote => true
-
-    %hr
+      %br
+      %hr
 
 -if @comments.size > 0
   =link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' 
@@ -33,4 +33,3 @@
 %br
 =render 'comments/form' if @commentable_type == "note"
 =render 'comments/form_task' if @commentable_type == "task"
-
