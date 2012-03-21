@@ -24,16 +24,4 @@
 .board
   .row-fluid
     %h3.span12 回答
-  = form_for @new_answer do |f|
-    - if @new_answer.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@new_answer.errors.count, "error")} prohibited this answer from being saved:"
-        %ul
-          - @new_answer.errors.full_messages.each do |msg|
-            %li= msg
-    .field
-      = f.text_area :content, :rows => 10
-    .field
-      = f.hidden_field :question_id, :value => @question.id
-    .actions
-      %button.btn.btn-primary.pull-right{ :type=>"submit"} 完成
+  = render 'answers/form'

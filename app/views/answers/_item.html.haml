@@ -1,0 +1,13 @@
+-# encoding: utf-8
+
+%hr
+.row-fluid
+  %h4.span12 回答:
+  .row-fluid
+    .span1
+      = link_to image_tag(answer.user.avatar_url(:small), :class => "avatar", :title => "#{answer.user.nickname}"), user_path(answer.user), :method => :get
+    .span10
+      = answer.content.html_safe
+    .span1.pull-right
+      = link_to '编辑', edit_answer_path(answer)
+
