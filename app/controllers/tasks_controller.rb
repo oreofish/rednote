@@ -9,11 +9,7 @@ class TasksController < ApplicationController
   def index
     @current_project = params[:project]
     @task = Task.new
-    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @tasks = Array.new
-    all_tasks.each do |task|
-      @tasks << task if task.assigned_to == nil and task.status == Task::TODO
-    end
+    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -110,7 +106,7 @@ class TasksController < ApplicationController
   def assign
     @task = Task.find(params[:taskid].sub('task', ''))
     userid = params[:userid].sub('user', '').to_i
-    @user = User.find(userid) if @task.estimate.to_f > 0
+    @user = User.find(userid) if @task.estimate.to_f > 0 and @task.assigned_to.nil?
     respond_to do |format|
       if @user and @task.update_attributes(:assigned_to => userid)
         format.js

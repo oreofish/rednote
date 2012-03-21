@@ -3,7 +3,10 @@
 %div{ :id => "task#{task.id}", :class => "red-note taskitem #{task_css(task)}"}
   %span.task-action
     - if show == :edit
-      = link_to "认领", assign_tasks_path(:taskid =>"task#{task.id}", :userid => "user#{current_user.id}"), :confirm => "确定认领这个任务?", :remote => true if task.assigned_to == nil
+      - if task.assigned_to == nil
+        = link_to "认领", assign_tasks_path(:taskid =>"task#{task.id}", :userid => "user#{current_user.id}"), :confirm => "确定认领这个任务?", :remote => true
+      - else
+        = task.user.nickname
       = link_to "编辑", "#edittask#{task.id}", 'data-toggle'=>"modal"
     - else    
       = link_to "完成", set_status_tasks_path(:id => task), :class => "btn", :remote => true
