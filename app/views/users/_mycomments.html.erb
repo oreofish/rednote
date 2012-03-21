@@ -3,12 +3,18 @@
     <div id="comment<%= comment.id %>" >
       <div data-toggle="collapse" data-target="#note_link_commentid<%=comment.id%>" data-parent="#comment_list">
         <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
-        <%= comment.comment %>
+        <%= comment.comment.html_safe %>
         <% if comment.user_id == current_user.id %>
-          <%= link_to 'x', "#removecomment#{comment.id}", 'data-toggle'=>"modal", :class => 'small-button' %>
+          <%= link_to "#removecomment#{comment.id}", 'data-toggle'=>"modal", :class => 'small-button' do %>
+            <i class='icon-remove'>
+            </i>
+          <% end %>
           <div class="commentremove modal hide fade" id="removecomment<%=comment.id%>" style="display:none">
             <div class="modal-header">
-              <a class="close" data-dismiss="modal">x</a>
+              <a class="close" data-dismiss="modal">
+                <i class='icon-remove'>
+                </i>
+              </a>
               <h3>删除评论</h3>
             </div>
             <div class="modal-body">
