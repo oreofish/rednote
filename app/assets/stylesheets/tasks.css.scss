@@ -27,22 +27,22 @@
 }
 
 .task-todo {
-    border-bottom-color: #0083D4;
-    border-bottom-style: solid;
-    border-bottom-width: 6px;
+    border-left-color: #4ad;
+    border-left-style: solid;
+    border-left-width: 6px;
 }
 
 .task-doing {
     border-bottom-color: #83D400;
     border-bottom-style: solid;
-    border-bottom-width: 6px;
+    border-bottom-width: 4px;
     background-color: #bbdaf7;
 }
 
 .task-done {
     border-bottom-color: #ccc;
     border-bottom-style: solid;
-    border-bottom-width: 6px;
+    border-bottom-width: 4px;
     background-color: #0083D4;
     background-image: url("/images/done.gif");
     background-position: bottom right;
@@ -64,7 +64,7 @@
 }
 
 .red-avatar {
-    width: 150px;
+    width: 300px;
     margin: 6px;
     font-size: 11px;
     @include inline-block;
@@ -72,15 +72,13 @@
 
 .red-note {
     width: 95%;
-    max-width: 338px;
-    min-height: 120px;
-    font-size: 14px;
+    max-width: 335px;
+    min-height: 60px;
     vertical-align: top;
     background-color: #fff;
     @include box-shadow(grey 1px 1px 3px);
     @include inline-block;
     @include block(6px);
-    @include border-radius(2px);
 }
 
 /*.task-action {

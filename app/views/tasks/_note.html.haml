@@ -1,6 +1,6 @@
 - # encoding: utf-8 
 
-%div{ :id => "task#{task.id}", :class => "red-note taskitem ui-widget-content #{task_css(task)}"}
+%div{ :id => "task#{task.id}", :class => "red-note taskitem #{task_css(task)}"}
   %span.task-action
     - if show == :edit
       = link_to "认领", assign_tasks_path(:taskid =>"task#{task.id}", :userid => "user#{current_user.id}"), :confirm => "确定认领这个任务?", :remote => true if task.assigned_to == nil
@@ -8,13 +8,8 @@
     - else    
       = link_to "完成", set_status_tasks_path(:id => task), :class => "btn", :remote => true
 
-  %strong 内容：
-  %br
   .task-content= task.content
-  .estimate-time
-    %strong 估计时间：
-    %p1.task-estimate= task.estimate
-    天
+  %h4.task-estimate= task.estimate
 
   .taskeditview.modal.hide.fade{:id => "edittask#{task.id}", :taskid => "#{task.id}", :style => "display: none;"}
     .modal-header
