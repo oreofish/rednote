@@ -4,7 +4,7 @@
   %h2
     文档
     %small 项目相关问题的回答
-.answerlist
+.questionlist
   - questions.each do |question|
     = render :partial => 'questions/item', :locals => { :question => question }
 
