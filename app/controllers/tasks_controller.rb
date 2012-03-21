@@ -62,8 +62,8 @@ class TasksController < ApplicationController
     
     #update status of task
     @oldstatus = @task.status
-    @task.status += 1
-    @task.status = Task::DOING if @oldstatus == Task::DONE
+    @task.status += 2
+    @task.status = Task::TODO if @oldstatus == Task::DONE
     
     # set start_at and finish_at
     case @task.status

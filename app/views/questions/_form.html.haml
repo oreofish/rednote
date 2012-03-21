@@ -5,10 +5,8 @@
       %ul
         - @question.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.text_area :content, :rows => 2
-  .field
+  .row-fluid
     = f.hidden_field :project_list, :value => @current_project
-  .actions
-    %button.btn.btn-primary.pull-right{ :type=>"submit"} 提问
+    .span9= f.text_field :content
+    .span2
+      %button.btn.btn-primary{ :type=>"submit"} 提问

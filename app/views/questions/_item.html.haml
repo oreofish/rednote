@@ -3,7 +3,7 @@
 .row-fluid
   - question_user = question.user
   .span1
-    = link_to image_tag(question_user.avatar_url(:small), :size => '30x30', :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
+    = link_to image_tag(question_user.avatar_url(:small), :size => '20x20', :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
     
   .span11.item
     .content

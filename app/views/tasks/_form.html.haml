@@ -3,5 +3,4 @@
 = form_tag tasks_path, :class => :form, :remote => true do
   = text_area :task, :content, :class => '', :rows => 2, :placeholder => "任务描述"
   = hidden_field :project, :name, :value => @current_project
-  %br/
   %button.btn.btn-primary.pull-right{ :type=>"submit"} 添加任务

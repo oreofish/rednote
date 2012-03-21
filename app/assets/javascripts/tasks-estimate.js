@@ -5,8 +5,8 @@ $(function() {
         var id = $tag.attr("taskid");
 
         $.get("/tasks/"+id+"/show_partial/", {}, function(task){
-            $('#task'+id).find('p1.task-content').text(task.content);
-            $('#task'+id).find('p1.task-estimate').text(task.estimate);
+            $('#task'+id).find('.task-content').text(task.content);
+            $('#task'+id).find('.task-estimate').text(task.estimate);
         });
 
     });
