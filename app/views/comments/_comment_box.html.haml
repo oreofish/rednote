@@ -11,7 +11,8 @@
         =comment.comment
         .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
         -if(comment.user_id == current_user.id and comment.commentable_type == "Note")
-          = link_to 'x', "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link'
+          = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do
+            %i.icon-remove 
           .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
             .modal-header
               %a.close(data-dismiss="modal") ×
