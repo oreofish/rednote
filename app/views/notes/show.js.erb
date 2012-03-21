@@ -1,12 +1,4 @@
 (function() {
-  var $link = $('#comments_link<%= @note.id %>');
-  $link.text( $link.text().replace(/\d+/, <%= @comments.length %>) );
-  $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
-
-  var $list = $('#comments_list<%= @note.id %>');
-  $list.html( "<%= j render( 'comment_box') %>" );
-  $list.find('#comment_comment').focus();
-
   <% if @note.user_id == current_user.id  %>
       //$link.removeClass("label-warning");
     $num = $('#update_info');
