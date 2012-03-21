@@ -24,7 +24,7 @@
 
       .span12
         #image_uploader
-          #filelist.thumbnails
+          %ul#filelist.thumbnails
 
   #flash_content
     %a.more.label(href="#" data-toggle="collapse" data-target="#notifications")
@@ -84,7 +84,7 @@
     uploader.bind('FilesAdded', function(up, files) {
         $.each(files, function(i, file) {
           $('#filelist').append(
-            '<li id="' + file.id + '" class="span4">' +
+            '<li id="' + file.id + '" class="span3">' +
             file.name + ' (' + plupload.formatSize(file.size) + ') <b></b>' +
             '</li>');
           });
@@ -109,8 +109,8 @@
             return;
 
         data = eval("(" + resp.response + ")");
-        $file.html( '<div class="thumbnail"><img src="' + data.url + '"/></div>' + 
-          '<div class="caption">' + file.name + '</div>' );
+        $file.html( '<div class="thumbnail"><img src="' + data.url + 
+            '" alt="" /><div class="caption">' + file.name + '</div></div>' );
 
         hidden_attach = $('#new_note > #note_attachments').attr('value').trim();
         console.log(hidden_attach);
