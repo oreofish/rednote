@@ -16,7 +16,7 @@
     .row-fluid
       .span12
         = form_for(@note, :html => { :multipart => true, :remote => true }) do |f|
-          = f.text_area :summary, :rows => 3, "placeholder" => "写点什么吧", :class => "span12" 
+          = f.text_area :summary, :rows => 3, "placeholder" => "写点什么吧"
           = hidden_field_tag 'attachments', '', :id => "note_attachments" 
           = f.hidden_field :tag_list
           %a#pickfiles(href="#") 添加图片和文档
