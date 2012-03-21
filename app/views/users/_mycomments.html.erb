@@ -2,7 +2,6 @@
   <% @comments.each do |comment| %>
     <div id="comment<%= comment.id %>" >
       <div data-toggle="collapse" data-target="#note_link_commentid<%=comment.id%>" data-parent="#comment_list">
-        <%= image_tag(User.find(comment.user_id).avatar_url(:small), :class => "avatar") %>
         <%= comment.comment.html_safe %>
         <% if comment.user_id == current_user.id %>
           <%= link_to "#removecomment#{comment.id}", 'data-toggle'=>"modal", :class => 'small-button' do %>
@@ -30,19 +29,18 @@
         <% end %>
       </div>
 
-      <div id="note_link_commentid<%=comment.id%>" class="collapse" >
-        <% note = Note.find(comment.commentable_id)%>
-        <li id="note<%= note.id %>">
-        <div class="left"><%= image_tag(User.find(note.user_id).avatar_url(:small), :class => "avatar") %></div>
-        <div class="item">
-
-          <div class="content">
-            <%= note.summary %> 
+      <div id="note_link_commentid<%=comment.id%>" class="collapse in" >
+        <br/>
+        <div class="row-fluid">
+          <% note = Note.find(comment.commentable_id)%>
+          <div class="span1"><%= image_tag(User.find(note.user_id).avatar_url(:small), :height => "40", :width => "40", :class => "avatar") %></div>
+          <div class="span11 item">
+            <%= note.summary.html_safe %> 
+            <div class="live-timestamp" data-notetime="<%= note.created_at %>"></div>
           </div>
-          <div class="live-timestamp" data-notetime="<%= note.created_at %>"></div>
         </div>
-        </li>
       </div>
+    <hr>
     </div>
   <% end %>
 </div>
