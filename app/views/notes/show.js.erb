@@ -1,11 +1,8 @@
 (function() {
-  <% if @note.user_id == current_user.id  %>
-      //$link.removeClass("label-warning");
     $num = $('#update_info');
     var new_num = <%= current_user.messages.sum("refer")%>;
     $num.text( $num.text().replace(/\d+/, new_num) );
     if( Number(new_num) === 0 ) {
       $num.attr("style","display:none;");
     }
-  <%end%>
 }());

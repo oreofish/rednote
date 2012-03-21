@@ -61,7 +61,7 @@ class NotesController < ApplicationController
     end
 
     @messages.each do |message|
-      if @message.user_id == current_user.id
+      if message.user_id == current_user.id
         message.read = 0 # 0 means read and 1 means unread
         message.refer = 0
         message.save!
