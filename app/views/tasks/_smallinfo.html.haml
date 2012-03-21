@@ -1,8 +1,8 @@
 - # encoding: utf-8
 
 .red-avatar
-  .thumbnail.row-fluid.useritem{:id => "user#{user.id}"}
-    = link_to image_tag(user.avatar_url(:thumb)), mytasks_tasks_path(:id => user.id), :class => "span5"
+  .row-fluid.useritem{:id => "user#{user.id}"}
+    = link_to image_tag(user.avatar_url(:thumb)), mytasks_tasks_path(:id => user.id), :class => "span3 thumbnail"
     .span7
       - total = Task::MEETING_TIME
       - done = 0.0
