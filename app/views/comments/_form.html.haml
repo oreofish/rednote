@@ -9,6 +9,7 @@
       -@comment.errors.full_messages.each do |msg|
         %li= msg
 
-  =f.text_field :comment, :class => "span6" 
   =f.hidden_field :commentable_id 
-  =f.submit "评论", :class => "btn-info pull-right" 
+  .row-fluid
+    .span10=f.text_field :comment
+    .span2=f.submit "评论", :class => "btn-info"
