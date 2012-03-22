@@ -128,20 +128,20 @@ class UsersController < ApplicationController
     @user_by_nickname = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{@name}'")
 
     if @user_by_nickname.size == 0  
-      render :inline => "ture" 
+      render :inline => "unexsit" 
     else 
-      render :inline => "false" 
+      render :inline => "exsit" 
     end
   end
 
   def search_email
     @email = params[:val]
-    @user_by_email = User.find_by_sql("SELECT users.* FROM users WHERE email='#{@email}'")
+    @user_by_email = User.find_by_email("#{@email}")
 
-    if @user_by_email.size == 0
-      render :inline => "ture" 
+    if @user_by_email 
+      render :inline => "exsit" 
     else 
-      render :inline => "false" 
+      render :inline => "unexsit" 
     end
   end
 
