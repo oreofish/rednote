@@ -1,5 +1,5 @@
 $(function() {
-    if ($.inArray(location.pathname, ["/", "/notes"])) {
+    if ($.inArray(location.pathname, ["/notes"])) {
         rednote.createPager('/notes/page').start();
 
         $('#note_publish').on('keypress', '#note_summary', function(e) {
