@@ -31,9 +31,7 @@
     <%= render "layouts/header" %>
     <div class="row">
       <div class="container">
-        <div class="span2 offset3">
-          <%= image_tag "/images/hippo1.png" %>
-        </div>
+          <%= image_tag "/images/hippo1.png", :class => "span2 offset3"%>
         <div class="span6">
           <%= yield %>
           <%= render "layouts/footer" %>
