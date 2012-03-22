@@ -76,3 +76,11 @@
   background-color: #f7f7f9;
   border: 1px solid #e1e1e8;
 }
+
+// HACK: force all imgs get the same height, a better way?
+.carousel-inner .thumbnail > img {
+  overflow: hidden;
+  min-height: 150px;
+}
+
+
