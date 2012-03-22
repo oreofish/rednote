@@ -11,22 +11,14 @@
       <%= link_to notes_path, :class => "brand-img" do %>
         <%= image_tag "/images/hippo2.png", :size => "45x34", :alt => "Happy Work" %>
       <% end %>
-      <%= link_to "河马", notes_path, :class => "brand", :style => @highlight %>
+      <%= link_to "河马", projects_path, :class => "brand", :style => @highlight %>
       <div class="container nav-collapse">
         <ul class="nav">
           <% if user_signed_in? %>
-            <li class='<%= "active" if controller_name == "notes" %>'>
-            <%= link_to "首页", notes_path %>
-            </li>
-
-            <li class='<%= "active" if controller_name == "books" %>'>
-              <%= link_to "借书", books_path %>
-            </li>
-
             <li class='<%= "active" if controller_name == "projects" || controller_name == "tasks" %>'>
                 <li class="dropdown" id="project-menu">
                 <%= link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
-                  项目<b class="caret"></b>
+                  首页<b class="caret"></b>
                 <% end %>
                 <ul class="dropdown-menu">
                     <li>
@@ -42,6 +34,14 @@
                 </ul>
                 </li>
             </li>
+            <li class='<%= "active" if controller_name == "notes" %>'>
+            <%= link_to "微博", notes_path %>
+            </li>
+
+            <li class='<%= "active" if controller_name == "books" %>'>
+              <%= link_to "借书", books_path %>
+            </li>
+
           <% end %>
         </ul>
 

@@ -52,7 +52,8 @@ Rednote::Application.routes.draw do
   #get "users/mycomments"
   #get "users/mytags"
 
-  root :to => "notes#index"
+  #root :to => "notes#index"
+  root :to => "projects#index"
 
   resources :notes do
     collection do
