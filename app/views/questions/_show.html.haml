@@ -1,11 +1,11 @@
 .row-fluid
   %h3.span12 问题:
 .row-fluid
-  .span1
+  .span2
     - question_user = @question.user
     = link_to image_tag(question_user.avatar_url(:small), :class => "avatar", :title => "#{question_user.nickname}"), user_path(question_user), :method => :get
 
-  .span10
+  .span9
     = @question.content
   .span1.pull-right= link_to '编辑', edit_question_path(@question)
 %hr

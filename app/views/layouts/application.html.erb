@@ -13,12 +13,6 @@
 
     <!-- Le styles -->
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-
     <script type="text/javascript">
       CONFIG = {
         "user": "<%= current_user.nickname %>"
@@ -42,11 +36,15 @@
     <%= render "layouts/header" %>
 
     <div class="container">
-      <div class="row">
-        <% content_for :sidebar, render(:partial => "#{controller_name}/sidebar") -%>
-        <div id="main-contents" class="span8"><%= yield %></div>
-        <div id='sidebar' class="span4"><%= yield :sidebar %></div>
-      </div>
+      <% if controller_name == "projects" or controller_name == "tasks" %>
+        <div id="main-contents" class="span12"><%= yield %></div>
+      <% else %>
+        <div class="row">
+          <% content_for :sidebar, render(:partial => "#{controller_name}/sidebar") -%>
+          <div id="main-contents" class="span8"><%= yield %></div>
+          <div id='sidebar' class="span4"><%= yield :sidebar %></div>
+        </div>
+      <% end %>
       <%= render "layouts/footer" %>
     </div> <!-- /container -->
 
