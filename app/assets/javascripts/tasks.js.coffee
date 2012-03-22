@@ -4,6 +4,7 @@
 
 jQuery ->
   $('#task_deadline').datepicker();
+  $('.best_in_place').best_in_place();
 
   # modal task view in _note.html.erb
   $('.taskeditview').live('show', ()->

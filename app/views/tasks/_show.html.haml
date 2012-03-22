@@ -11,10 +11,14 @@
     .span4= @task.user.nickname
   .row
     %h4.span1 内容：
-    .span4.inplace= best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消'
+    .span4
+      = best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消', :activator => "#editcontent"
+      #editcontent= link_to "编辑", "#"
   .row
     %h4.span1 估时：
-    .span4.inplace= best_in_place @task, :estimate, :type => :select, :nil => '点击修改', :collection => [[0, '请选择'], [0.5,'0.5天'], [1, '1天'], [1.5, '1.5天'], [2, '2天'], [3, '3天'], [4, '4天'], [5, '5天']]
+    .span4
+      = best_in_place @task, :estimate, :type => :select, :activator => "#editestimate", :nil => '点击修改', :collection => [[0, '请选择'], [0.5,'0.5天'], [1, '1天'], [1.5, '1.5天'], [2, '2天'], [3, '3天'], [4, '4天'], [5, '5天']]
+      #editestimate= link_to "编辑", "#"
   .row
 
 //.form-actions

@@ -1,5 +1,9 @@
 <%# encoding: utf-8 %>
 
 (function() {
-$('#taskcontent').html( "<%= j render( 'index' ) %>" );
+  $('#taskcontent').html( "<%= j render( 'index' ) %>" );
+
+  setTimeout( function() {
+    $('.best_in_place').best_in_place();
+  }, 100 );
 }());
