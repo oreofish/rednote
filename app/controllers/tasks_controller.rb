@@ -173,11 +173,11 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     respond_to do |format|
-      if @task.update_attributes(params[:task])
+      if @task.assigned_to.nil? and @task.update_attributes(params[:task])
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { respond_with_bip(@task) }
       else
-        format.html { render action: "edit" }
+        format.html { render action: "edit", notice: 'Assigned task was not allowed to update, Please add comment.' }
         format.json { respond_with_bip(@task) }
       end
     end
@@ -187,10 +187,12 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
+    if @task.assigned_to.nil?
+      @task.destroy
+    end
 
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_to :back, notice: 'Assigned task was not allowed to destroy.' }
       format.js # destroy.js.erb
       format.json { head :no_content }
     end

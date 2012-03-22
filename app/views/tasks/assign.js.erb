@@ -2,11 +2,7 @@
 
 (function() {
 <% if @user %>
-  $('#task<%= @task.id %>').fadeOut(1000,function(){
-    $(this).remove();
-  } );
-  $('#user<%= @user.id %>')
-      .replaceWith("<%= j render :partial => 'tasks/smallinfo', :locals => { :user => @user } %>");
+  $('#task<%= @task.id %>').replaceWith("<%= j render :partial => 'tasks/note', :locals => { :task => @task } %>");
 <% else %>
   alert('请先为任务估算时间，再分配责任人。');
 <% end %>
