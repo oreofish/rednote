@@ -9,6 +9,15 @@
     %li
       = link_to "回顾", "#historycontent"
 
+  .page-header
+    .pull-right
+      - User.all.each do |user|
+        .red-avatar.useritem{:id => "user#{user.id}"}
+          = link_to image_tag(user.avatar_url(:small)), mytasks_tasks_path(:id => user.id), :class => "thumbnail"
+    %h2
+      当前项目：
+      %small= @project_name
+
   #taskcontent
     = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
   #answercontent

@@ -21,7 +21,7 @@
 }
 
 @mixin block($size) {
-	margin: 5px 5px;
+	margin: $size;
 	padding: $size;
     position: relative;
 }
@@ -33,16 +33,16 @@
 }
 
 .task-doing {
-    border-bottom-color: #83D400;
-    border-bottom-style: solid;
-    border-bottom-width: 4px;
+    border-left-color: #83D400;
+    border-left-style: solid;
+    border-left-width: 6px;
     background-color: #bbdaf7;
 }
 
 .task-done {
-    border-bottom-color: #ccc;
-    border-bottom-style: solid;
-    border-bottom-width: 4px;
+    border-left-color: #ccc;
+    border-left-style: solid;
+    border-left-width: 6px;
     background-color: #0083D4;
     background-image: url("/images/done.gif");
     background-position: bottom right;
@@ -64,21 +64,21 @@
 }
 
 .red-avatar {
-    width: 300px;
+/*    width: 300px;
     margin: 6px;
-    font-size: 11px;
+    font-size: 11px; */
     @include inline-block;
 }
 
 .red-note {
     width: 95%;
-    max-width: 335px;
+    max-width: 240px;
     min-height: 60px;
     vertical-align: top;
     background-color: #fff;
     @include box-shadow(grey 1px 1px 3px);
     @include inline-block;
-    @include block(6px);
+    @include block(8px);
 }
 
 /*.task-action {

@@ -9,7 +9,11 @@ class TasksController < ApplicationController
   def index
     @current_project = params[:project]
     @task = Task.new
-    @tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    @tasks = Array.new
+    all_tasks.each do |task|
+      @tasks << task if task.status == Task::TODO
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,7 +27,7 @@ class TasksController < ApplicationController
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @old_tasks = Array.new
     all_tasks.each do |task|
-      @old_tasks << task if task.status == Task::DONE and task.finish_at.to_datetime.cweek != Date.today.cweek
+      @old_tasks << task if task.status == Task::DONE # and task.finish_at.to_datetime.cweek != Date.today.cweek
     end
 
     respond_to do |format|
