@@ -5,9 +5,14 @@
     = form_tag "/projects", :class => :form, :method => :post do
       = text_field :project, :name, :class => 'input-small', :placeholder => "项目名称"
       %button.btn{ :type=>"submit" } 新建
-  %h3 项目
-  %ul
-    - @projects.each do |project|
-      %li= link_to "#{project.name}(#{project.count})", project_path(project.name)
-  %h1 所有项目时间表
+  .page-header
+    %h2
+      项目
+      %small 
+      - @projects.each do |project|
+        = link_to "#{project.name}(#{project.count})", project_path(project.name)
+  .page-header
+    %h2
+      时间表
+      %small 所有项目时间表
   #calendar
