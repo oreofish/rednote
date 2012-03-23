@@ -4,7 +4,8 @@
   $link.attr("href","<%= comments_dono_path(:note_id => @note.id )%>");
 
   var $list = $('#comments_list<%= @note.id %>');
-  $list.html( "<%= j render( 'comment_box') %>" );
+  $list.html( "<%= j render( 'comments/comment_box') %>" );
+  $list.append( "<%= j render( 'comments/form') %>" );
   $list.find('#comment_comment').focus();
 
 }());

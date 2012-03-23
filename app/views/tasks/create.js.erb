@@ -5,6 +5,11 @@
   $('.tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task, :show => :edit }) %>" );
   $('.tasklist').effect('highlight', {}, 3000);
   $('#task_content')[0].value = '';
+
+  // enable in place edit
+  setTimeout( function() {
+    $('.best_in_place').best_in_place();
+  }, 100 );
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');
 <% end %>

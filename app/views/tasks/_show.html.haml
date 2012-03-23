@@ -1,30 +1,29 @@
 - # encoding: utf-8
 
-.task-view
+.task-view.row-fluid
   - if current_user == @task.user
     .pull-right= link_to "删除任务", @task, :confirm => "确定删除吗?", :method => :delete, :class => "label"
   .row
-    %h4.span1 项目：
-    .span3= @task.project_list[0]
+    %h3.span1 项目：
+    .span7= @task.project_list[0]
   .row
-    %h4.span1 创建人：
-    .span4= @task.user.nickname
+    %h3.span1 创建：
+    .span7= @task.user.nickname
   .row
-    %h4.span1 内容：
-    .span4
-      = best_in_place @task, :content, type: :textarea, :activator => "#editcontent"
-      #editcontent= link_to "编辑", "#"
+    %h3.span1 内容：
+    .span7
+      = @task.content
   .row
-    %h4.span1 估时：
-    .span4
-      = best_in_place @task, :estimate, :type => :select, :activator => "#editestimate", :nil => '点击修改', :collection => [[0, '请选择'], [0.5,'0.5天'], [1, '1天'], [1.5, '1.5天'], [2, '2天'], [3, '3天'], [4, '4天'], [5, '5天']]
-      #editestimate= link_to "编辑", "#"
+    %h3.span1 估时：
+    .span7
+      = @task.estimate
   .row
 
-//.form-actions
-//  = form_tag set_tag_tasks_path, :class => :form do
-//    = hidden_field :task, :id, :value => @task.id
-//    .row
-//      .span1 所属项目：
-//      .span3= collection_select :project, :name,  @projects, :name, :name
-//      %button.span1.btn{ :type=>"submit"} 修改
+.page-header
+  %h3
+    评论
+    %small 相关讨论
+%ul.unstyled{:id => "comments_list#{@task.id}"}
+  - @comments.each do |comment|
+    = render :partial => "comments/comment", :locals => { :comment => comment }
+= render 'comments/form_task'

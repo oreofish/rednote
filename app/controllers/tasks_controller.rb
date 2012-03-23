@@ -41,9 +41,12 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
+    @comment = current_user.comments.new
+    @comments = @task.comments
     @projects = Task.top_projects
 
     respond_to do |format|
+      format.html # show.html.erb
       format.js # show.js.erb
       format.json { render json: @task }
     end

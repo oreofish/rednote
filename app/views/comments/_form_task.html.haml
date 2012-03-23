@@ -1,14 +1,13 @@
-=form_for(@comment, :url => create_task_comments_path, :remote => true, :class => "form-horizontal") do |f| 
-  -if @comment.errors.any?
+= form_for(@comment, :url => create_task_comments_path, :remote => true, :class => "form-horizontal") do |f| 
+  - if @comment.errors.any?
     #error_explanation
       %h2
         =pluralize(@comment.errors.count, "error") 
         prohibited this comment from being saved:
 
       %ul
-      -@comment.errors.full_messages.each do |msg|
+      - @comment.errors.full_messages.each do |msg|
         %li= msg
-
-  =f.text_area :comment, :class => "span5", :rows => "3"
-  =f.hidden_field :commentable_id 
-  =f.submit "评论", :class => "btn-info pull-right" 
+  = f.text_area :comment, :rows => "3"
+  = f.hidden_field :commentable_id, :value => @task.id
+  = f.submit "评论", :class => "btn-info pull-right"
