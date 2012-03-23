@@ -1,0 +1,6 @@
+= form_for @user do |f|
+  .field
+    = f.label "昵称："
+    = f.text_field :nickname, :size => 25
+  %button.btn.btn-primary{ :type => "submit" }确定
+

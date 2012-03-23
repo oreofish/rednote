@@ -1,0 +1,20 @@
+.board#myself
+  #tabspin
+    %ul.nav.nav-tabs
+      -(@user.id == current_user.id) ? nickname = "我":nickname = "#{@user.nickname}"
+      %li  
+        = link_to "#{nickname}的发布", user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+      %li  
+        = link_to "#{nickname}的评论", mycomments_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+      %li  
+        = link_to "#{nickname}的标记", mytags_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+      %li  
+        = link_to "#{nickname}的任务", mytasks_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+      %li  
+        = link_to "@#{nickname}的", myats_user_path(@user), :remote => true, "data-toggle" => "tab", "data-target" => "#"
+
+  .mycontent
+    = render :partial => 'mytags' if ( controller.action_name == 'show' or controller.action_name == 'mytags')
+    = render :partial => 'mycomments' if ( controller.action_name == 'mycomments')
+    = render :partial => 'mytasks' if ( controller.action_name == 'mytasks')
+    = render :partial => 'myats' if ( controller.action_name == 'myats')

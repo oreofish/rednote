@@ -1,0 +1,14 @@
+.well#settings
+  #tabspin
+    %ul.nav.nav-tabs
+      %li.active
+        = link_to "修改昵称", nickname_users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#"
+      %li
+        = link_to "修改头像", avatar_users_path, :remote => true, "data-toggle" => "tab", "data-target" => "#" 
+      %li
+        = link_to "修改密码", edit_user_registration_path, :method => :get, :remote => true, "data-toggle" => "tab", "data-target" => "#"
+  #modify
+    - if controller.action_name == 'edit'
+      = render :partial => "devise/registrations/edit"
+    - else
+      = render :partial => controller.action_name 

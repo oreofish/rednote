@@ -1,0 +1,17 @@
+.row-fluid
+  = link_to image_tag(user.avatar_url(:thumb)), nickname_users_path, :class => "span4 thumbnail"
+  .span7
+    %h2.title
+      = user.nickname
+    发布数: 
+    = user.notes.size 
+    %br
+    注册时间: 
+    = user.created_at.to_date 
+    %br
+    上次登录ip:
+    = user.last_sign_in_ip if user.last_sign_in_ip 
+    %br
+    .progress
+      .bar { :style => "width:44%;" }
+%br

@@ -1,0 +1,25 @@
+#preview_form
+  = form_for current_user, :html => {:multipart => true}, :url => { :action => 'avatar_update'} do |f|
+    %p
+      = f.file_field :preview 
+      = f.hidden_field :preview_cache
+      = f.submit "上传"
+
+.jcrop
+  .row
+    .span4
+      = image_tag current_user.preview_url(:large), :id => "cropbox", :date => current_user.preview_geometry[:width]
+    
+    .span3
+      .preview1
+        = image_tag current_user.preview_url(:large), :id => "preview1"
+      大尺寸图像180x180像素
+    .span1.offset1
+      .preview2
+        = image_tag current_user.preview_url(:large), :id => "preview2"
+      小尺寸图48x48像素
+    = form_for current_user, :url => { :action => "crop_update" } do |f|
+      - for attribute in [:crop_x, :crop_y, :crop_h, :crop_w]
+        = f.hidden_field attribute, :id => attribute
+      .pull-right
+        = f.submit "确定", :class => "btn btn-large btn-primary"

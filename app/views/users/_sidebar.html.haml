@@ -1,0 +1,7 @@
+.board
+  = render :partial => 'userinfo', :locals => { :user => @user }
+
+  %h3同事
+  - @users.each do |user|
+    %p
+      = link_to user.nickname, user_path(user), :method => :get

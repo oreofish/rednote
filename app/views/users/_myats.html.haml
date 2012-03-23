@@ -1,0 +1,11 @@
+%h4动态
+- @messages.each do |message|
+  - css = message.read == 0 ? "muted" : ""
+  %strong{:class => css }
+    - if message.message_type == "Note"
+      = "有人提到了你：#{message.message.summary}".html_safe
+      = link_to '查看', message.message, :class => 'small-link'
+    - elsif message.message_type == "Comment"
+      = "有新评论：#{message.message.comment}".html_safe
+      = link_to '查看', message.message.commentable, :class => 'small-link'
+  %br
