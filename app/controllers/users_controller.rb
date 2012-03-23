@@ -77,16 +77,7 @@ class UsersController < ApplicationController
 
   def myats
     @user = User.find(params[:id])
-    @new_comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE id IN (SELECT message_id FROM messages WHERE user_id=#{@user.id} and message_type='new_comment') ORDER BY created_at DESC")
-    @notes_for_new_comments = Array.new()
-    @new_comments.each do |comment|
-      @notes_for_new_comments |= [comment.commentable]
-    end
-
-    @at_in_notes = Note.find_by_sql("SELECT notes.* FROM notes WHERE id IN (SELECT message_id FROM messages WHERE user_id=#{@user.id} and message_type='at_in_note') ORDER BY created_at DESC")
-    @at_in_comments = Comment.find_by_sql("SELECT comments.* FROM comments WHERE id IN (SELECT message_id FROM messages WHERE user_id=#{@user.id} and message_type='at_in_comment') ORDER BY created_at DESC")
-
-
+    @messages = @user.messages
 
     respond_to do |format|
       format.html { render 'show' }
@@ -137,20 +128,20 @@ class UsersController < ApplicationController
     @user_by_nickname = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{@name}'")
 
     if @user_by_nickname.size == 0  
-      render :inline => "ture" 
+      render :inline => "unexsit" 
     else 
-      render :inline => "false" 
+      render :inline => "exsit" 
     end
   end
 
   def search_email
     @email = params[:val]
-    @user_by_email = User.find_by_sql("SELECT users.* FROM users WHERE email='#{@email}'")
+    @user_by_email = User.find_by_email("#{@email}")
 
-    if @user_by_email.size == 0
-      render :inline => "ture" 
+    if @user_by_email 
+      render :inline => "exsit" 
     else 
-      render :inline => "false" 
+      render :inline => "unexsit" 
     end
   end
 

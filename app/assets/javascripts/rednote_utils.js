@@ -356,14 +356,14 @@ function judge(box,value) {
             span.text("不能为空"); 
         } else {
             $.get("/users/search_"+value,{val:input.val()},function(bool){
-                if (bool === "ture") {
+                if (bool === "exsit") {
+                    box.removeClass("success");
+                    box.addClass("error");
+                    span.text("用户已经存在或格式错误"); 
+                } else {
                     box.removeClass("error");
                     box.addClass("success");
                     span.text("可以注册");
-                } else {
-                    box.removeClass("success");
-                    box.addClass("error");
-                    span.text("用户已经存在"); 
                 }
             })
         }

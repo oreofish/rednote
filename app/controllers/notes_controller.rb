@@ -101,10 +101,9 @@ class NotesController < ApplicationController
         @at_users.each do |at_user|
           user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
           if user.size == 1 #because note can not edit so the create note unexist in message table
-            @message = Message.new
+            @message = @note.messages.create
             @message.user_id = user[0].id
-            @message.message_type = "at_in_note"
-            @message.message_id = @note.id
+            @message.message = @note
             @message.refer = 1
             @message.save!
             broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_note' }"

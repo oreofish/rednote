@@ -51,10 +51,9 @@ class CommentsController < ApplicationController
         if not @note.user_id == current_user.id
           #message_exist_for_new_comment = Message.find_by_sql("SELECT messages.* FROM messages WHERE message_type='new_comment' and message_id=#{@note.id}") #check message is exist
           #if message_exist_for_new_comment.size == 0
-            @message = Message.new
+            @message = @comment.messages.create
             @message.user_id = @note.user_id
-            @message.message_type = "new_comment"
-            @message.message_id = @comment.id
+            @message.message = @comment
             @message.refer = 1
             @message.save!
           #elsif message_exist_for_new_comment.size == 1
@@ -67,10 +66,9 @@ class CommentsController < ApplicationController
         @at_users.each do |at_user|
           user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
           if user.size == 1 and not user[0].id == @note.user_id #the at_user is not the user who owner the note
-            @message = Message.new
+            @message = @comment.messages.create
             @message.user_id = user[0].id
-            @message.message_type = "at_in_comment"
-            @message.message_id = @comment.id
+            @message.message = @comment
             @message.refer = 1
             @message.save!
             broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_comment' }"

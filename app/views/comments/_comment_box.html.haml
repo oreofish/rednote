@@ -8,7 +8,7 @@
         =link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
           user_path(user), :title => "#{user.nickname}" 
       .span11
-        =comment.comment
+        =comment.comment.html_safe
         .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
         -if(comment.user_id == current_user.id and comment.commentable_type == "Note")
           = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do
