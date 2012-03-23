@@ -2,11 +2,7 @@
 
 (function() {
 <% if @task.valid? %>
-  <% cssstatus = ['status0', 'status1', 'status2', 'status3'] %>
-  <% cssdo = ['task-todo', 'task-doing', 'task-done'] %>
-  $('#task<%= @task.id %>').removeClass("<%= cssstatus[@oldstatus] %>").addClass("<%= cssstatus[@task.status] %>")
-  $('#task<%= @task.id %>').removeClass("<%= cssdo[@oldstatus] %>").addClass("<%= cssdo[@task.status] %>")
-  $('#task<%= @task.id %>').effect('highlight', {}, 100);
+  $('#task<%= @task.id %>').replaceWith("<%= j render :partial => 'tasks/note', :locals => { :task => @task } %>");
   <% if @task.status == Task::DONE %>
       var totalpoint = $('#taskprogress').find('div.bar').attr("total");
       var donepoint = $('#taskprogress').find('div.bar').attr("done") * 1 + <%= @task.estimate %>;
@@ -22,8 +18,15 @@
       $('#taskprogress').find('div.bar').attr("style","width:"+results+"%");
       $('#taskprogress').find('div.bar').attr("done",donepoint);
   <% end %>
+
+  // enable in place edit
+  setTimeout( function() {
+    $('.best_in_place').best_in_place();
+  }, 100 );
+
 <% else %>
    // something like flashController.doFailure('<p>创建失败</p>');
 <% end %>
+
 }());
 

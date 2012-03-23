@@ -1,8 +1,7 @@
-<%# encoding: utf-8 %>
+- # encoding: utf-8
 
-<script>
-$(function() {
-
+:javascript
+  $(function() {
   // droppable user item in _smallinfo.html.erb
   $( ".useritem" ).droppable({
     activeClass: "ui-state-default",
@@ -17,16 +16,15 @@ $(function() {
       });
     }
   });
-});
-</script>
+  });
 
-<div class="page-header">
-    <h2>任务 <small>本期任务清单</small></h2>
-</div>
-<div class="tasklist">
-  <% @tasks.each do |task| %>
-  <%= render :partial => 'note', :locals => { :task => task, :show => :edit } %>
-  <% end %>
-</div>
-<%= render 'form' %>
+.page-header
+  %h2
+    任务
+    %small 本期任务清单
+.tasklist
+  - @tasks.each do |task|
+    = render :partial => 'note', :locals => { :task => task, :show => :edit }
+
+= render 'form'
 
