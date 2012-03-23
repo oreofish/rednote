@@ -11,8 +11,11 @@
 
       = link_to "完成", set_status_tasks_path(:id => task), :class => "btn", :remote => true
 
-  .task-content= task.content
-  %h4.task-estimate= task.estimate
+  = best_in_place task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消', :activator => "#editcontent#{task.id}"
+  %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)"
+  %br
+  %strong.task-estimate= best_in_place task, :estimate, :type => :select, :activator => "#editestimate#{task.id}", :nil => '0天', :collection => [[0, '请选择'], [0.5,'0.5天'], [1, '1天'], [1.5, '1.5天'], [2, '2天'], [3, '3天'], [4, '4天'], [5, '5天']]
+  %span(id="editestimate#{task.id}")= link_to "修改", "javascript:void(0)"
 
   .taskeditview.modal.hide.fade{:id => "edittask#{task.id}", :taskid => "#{task.id}", :style => "display: none;"}
     .modal-header
