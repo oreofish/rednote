@@ -5,7 +5,7 @@
     %li.active
       = link_to "任务", "#taskcontent"
     %li
-      = link_to "文档", "#answercontent"
+      = link_to "讨论", "#questioncontent"
     %li
       = link_to "回顾", "#historycontent"
 
@@ -20,8 +20,9 @@
 
   #taskcontent
     = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
-  #answercontent
-    = link_to "文档", questions_path(:project => @project_name), :id => "answerlink", :remote => true
+  #questioncontent
+    = link_to "讨论", questions_path(:project => @project_name), :id => "questionlink", :remote => true
   #historycontent
-    = link_to "回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
+    .page-header
+      %h2= link_to "回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
 

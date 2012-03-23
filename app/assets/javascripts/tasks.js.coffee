@@ -31,5 +31,4 @@ jQuery ->
   )
 
   $('#taskprogresslink').click()
-  $('#answerlink').click()
-  $('#oldtasklink').click()
+  $('#questionlink').click()

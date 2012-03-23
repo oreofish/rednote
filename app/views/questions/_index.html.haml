@@ -2,8 +2,8 @@
 
 .page-header
   %h2
-    文档
-    %small 项目相关问题的回答
+    讨论
+    %small 项目相关问题的讨论
 .questionlist
   - questions.each do |question|
     = render :partial => 'questions/item', :locals => { :question => question }

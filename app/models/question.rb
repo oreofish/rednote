@@ -12,6 +12,7 @@
 #
 
 class Question < ActiveRecord::Base
+  acts_as_commentable
   acts_as_taggable_on :projects
   belongs_to :user
   has_many :answers, :dependent => :destroy
