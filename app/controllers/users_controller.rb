@@ -111,6 +111,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def nickname_update
+    current_user.nickname = params[:user][:nickname]
+    current_user.save!
+
+    respond_to do |format|
+      format.html {redirect_to '/users/nickname'}
+    end
+  end
+
   def crop_update
     @user = current_user
     current_user.crop_x = params[:user]["crop_x"]

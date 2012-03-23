@@ -43,6 +43,7 @@ Rednote::Application.routes.draw do
       get 'nickname'
       match 'avatar'
       match 'avatar_update'
+      match 'nickname_update'
       get 'search_nickname'
       get 'search_email'
       match 'crop_update'

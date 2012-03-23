@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.js 
-      format.json { render json: @comments }
+@      format.json { render json: @comments }
     end
   end
 
@@ -41,39 +41,14 @@ class CommentsController < ApplicationController
     @note = Note.find(params[:comment][:commentable_id])
     @comment = @note.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
-    @commentable_type = "note"
+    @commentable_type = "Note"
 
-    @at_users = @comment.comment.scan(/@[a-zA-Z0-9_]+/)
     @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
 
     respond_to do |format|
       if @comment.save
-        if not @note.user_id == current_user.id
-          #message_exist_for_new_comment = Message.find_by_sql("SELECT messages.* FROM messages WHERE message_type='new_comment' and message_id=#{@note.id}") #check message is exist
-          #if message_exist_for_new_comment.size == 0
-            @message = @comment.messages.create
-            @message.user_id = @note.user_id
-            @message.message = @comment
-            @message.refer = 1
-            @message.save!
-          #elsif message_exist_for_new_comment.size == 1
-          #  message_exist_for_new_comment[0].refer += 1
-          #  message_exist_for_new_comment.save!
-          #end
-          broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'new_comment' }"
-        end
 
-        @at_users.each do |at_user|
-          user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
-          if user.size == 1 and not user[0].id == @note.user_id #the at_user is not the user who owner the note
-            @message = @comment.messages.create
-            @message.user_id = user[0].id
-            @message.message = @comment
-            @message.refer = 1
-            @message.save!
-            broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_comment' }"
-          end
-        end
+        create_message(@note,@comment)
 
         @comments = @note.comments
         @comment = Comment.new(:commentable_id => @note.id)
@@ -128,4 +103,29 @@ class CommentsController < ApplicationController
     comment = current_user.comments.find_by_id(params[:id])
     redirect_to root_url if comment.nil?
   end
+
+  def create_message(note,comment)
+    @at_users = comment.comment.scan(/@[a-zA-Z0-9_]+/)
+    if not note.user_id == current_user.id
+      @message = comment.messages.create ({
+        :user_id => note.user_id,
+        :message => comment,
+        :refer => 1
+      })
+      broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{note.id}, meg_type: 'new_comment' }"
+    end
+
+    @at_users.each do |at_user|
+      user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
+      if user.size == 1 and not user[0].id == note.user_id #the at_user is not the user who owner the note
+        @message = comment.messages.create ({
+          :user_id => user[0].id,
+          :refer => 1,
+          :message => comment
+        })
+        broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{note.id}, meg_type: 'at_in_comment' }"
+      end
+    end
+  end
+
 end
