@@ -12,7 +12,7 @@
   .row
     %h4.span1 内容：
     .span4
-      = best_in_place @task, :content, type: :textarea, :ok_button => '保存', :cancel_button => '取消', :activator => "#editcontent"
+      = best_in_place @task, :content, type: :textarea, :activator => "#editcontent"
       #editcontent= link_to "编辑", "#"
   .row
     %h4.span1 估时：

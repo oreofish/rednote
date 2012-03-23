@@ -16,7 +16,6 @@
 }
 
 .inplace {
-    text-decoration: underline;
     color: #0078B6;
 }
 
@@ -27,29 +26,29 @@
 }
 
 .task-todo {
-    border-left-color: #4ad;
-    border-left-style: solid;
-    border-left-width: 6px;
+    border-bottom-color: #4ad;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
 }
 
 .task-doing {
-    border-left-color: #83D400;
-    border-left-style: solid;
-    border-left-width: 6px;
+    border-bottom-color: #83D400;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
     background-color: #bbdaf7;
 }
 
 .task-done {
-    border-left-color: #ccc;
-    border-left-style: solid;
-    border-left-width: 6px;
+    border-bottom-color: #ccc;
+    border-bottom-style: solid;
+    border-bottom-width: 5px;
     background-color: #0083D4;
-    background-image: url("/images/done.gif");
+//    background-image: url("/images/done.gif");
     background-position: bottom right;
     background-repeat: no-repeat;
-    filter: Alpha(opacity=30);
-    -moz-opacity:0.3;
-    opacity:0.3;
+    filter: Alpha(opacity=80);
+    -moz-opacity:0.8;
+    opacity:0.8;
 }
 
 .task-cancel {
@@ -76,7 +75,7 @@
     min-height: 60px;
     vertical-align: top;
     background-color: #fff;
-    @include box-shadow(grey 1px 1px 3px);
+    @include box-shadow(grey 1px 1px 2px);
     @include inline-block;
     @include block(8px);
 }

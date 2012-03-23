@@ -173,7 +173,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
 
     respond_to do |format|
-      if @task.assigned_to.nil? and @task.update_attributes(params[:task])
+      if @task.update_attributes(params[:task])
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { respond_with_bip(@task) }
       else
