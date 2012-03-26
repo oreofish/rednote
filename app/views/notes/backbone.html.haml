@@ -1,0 +1,9 @@
+.board
+  #notes
+
+:javascript
+  $(function() {
+    // Rednote is the app name
+    window.router = new Rednote.Routers.NotesRouter({notes: #{@notes.to_json.html_safe}});
+    Backbone.history.start();
+  });

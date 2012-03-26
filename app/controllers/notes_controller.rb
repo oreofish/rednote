@@ -18,6 +18,13 @@ class NotesController < ApplicationController
     end
   end
 
+  def backbone
+    @notes = Note.all
+    respond_to do |format|
+      format.html # backbone.html.erb
+    end
+  end
+
   # GET /notes/taglist
   # get tags
   def taglist

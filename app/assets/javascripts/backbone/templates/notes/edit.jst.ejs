@@ -1,0 +1,25 @@
+<h1>Edit note</h1>
+
+<form id="edit-note" name="note">
+  <div class="field">
+    <label for="user_id"> user_id:</label>
+    <input type="text" name="user_id" id="user_id" value="<%= user_id %>" >
+  </div>
+
+  <div class="field">
+    <label for="summary"> summary:</label>
+    <input type="text" name="summary" id="summary" value="<%= summary %>" >
+  </div>
+
+  <div class="field">
+    <label for="message"> message:</label>
+    <input type="text" name="message" id="message" value="<%= message %>" >
+  </div>
+
+  <div class="actions">
+    <input type="submit" value="Update Note" />
+  </div>
+
+</form>
+
+<a href="#/index">Back</a>

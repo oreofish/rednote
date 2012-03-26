@@ -32,6 +32,11 @@
 //= require plupload.gears
 //= require jquery-ui
 //= require fullcalendar
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/rednote
 //= require_tree .
 function scrolltop() {
     var __backtoptxt = "回到顶部";

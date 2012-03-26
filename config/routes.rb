@@ -60,6 +60,7 @@ Rednote::Application.routes.draw do
     collection do
       get 'page'
       get 'taglist'
+      get 'backbone'
     end
   end
 

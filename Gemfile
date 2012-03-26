@@ -30,6 +30,9 @@ gem 'event-calendar', :require => 'event_calendar'
 gem 'rdiscount'
 gem 'fullcalendar-rails'
 
+#backbone
+gem 'rails-backbone'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
