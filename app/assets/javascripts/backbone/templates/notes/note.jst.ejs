@@ -1,7 +1,36 @@
-<td><%= user_id %></td>
-<td><%= summary %></td>
-<td><%= message %></td>
+<div id="note<%= id %>">
+    <hr/>
+    <div class="row-fluid">
+        <% var note_user = noteRouter.current_user; %>
+        <div class="span1">
+            <a href="#/users/<%= note_user.id %>">
+                <img alt="<%= note_user.nickname %>" class="avatar" src="<%= note_user.avatar.small.url %>" title="jianxing">
+            </a>
+        </div>
 
-<td><a href="#/<%= id %>">Show</td>
-<td><a href="#/<%= id %>/edit">Edit</td>
-<td><a href="#/<%= id %>/destroy" class="destroy">Destroy</a></td>
+        <div class="span11 item">
+            <div class="content">
+                <span style="word-wrap: break-word;">
+                    <%= summary %>
+                </span>
+
+                <!-- -if note.attachements.size > 0 -->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="pull-right">
+        <a href="#/comments?note_id=<%= id %>" class="small-link" data-target="#comments_list27" data-toggle="collapse" id="comments_link27">评论(0)</a>
+
+        <a href="#/<%= id %>">Show</a>
+        <a href="#/<%= id %>/edit">Edit</a>
+        <a href="#/<%= id %>/destroy" class="destroy">Destroy</a>
+    </div>
+    <div class="live-timestamp" data-notetime="<%= new Date().toString() %>">
+    </div>
+
+    <br>
+    <div class="collapse fade framed" style="height: 0px;" id="comments_list<%= id %>">
+    </div>
+</div>

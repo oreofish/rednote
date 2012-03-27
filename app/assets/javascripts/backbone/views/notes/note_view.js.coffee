@@ -6,8 +6,6 @@ class Rednote.Views.Notes.NoteView extends Backbone.View
   events:
     "click .destroy" : "destroy"
 
-  tagName: "tr"
-
   destroy: () ->
     @model.destroy()
     this.remove()

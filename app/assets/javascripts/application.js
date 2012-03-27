@@ -58,45 +58,8 @@ function scrolltop() {
     __backtopfuc();
 };
 
-var removeAlert = {
-    remove: function() { 
-        var that = this;
-        $('#main-contents').find('a.toremove').each( function(idx, el) {
-            that.bindRemoveAlertHelper($(el));
-        });
-    },
-
-    bindRemoveAlertHelper: function(link) {
-        link.click(function(){
-//            link.alert({
-//                resizeable:false,
-//                height:140,
-//                modal:true,
-//                buttons:{
-//                    "Delete":function(){
-//                        $(this).dialog("close");
-//                        return true;
-//                    },
-//
-//                    Cancel: function() {
-//                        $(this).dialog("close");
-//                        return false;
-//                    }
-//                }
-//            });
-        });
-        //link.confirm();
-    },
-
-    bindRemoveAlert: function(obj) {
-        var $link= obj.find('a.toremove').first();
-        this.bindRemoveAlertHelper($link);
-    },
-};
-
 $(document).ready( function() {
     scrolltop();
-    removeAlert.remove();
 
     $('body').on('ajax:success timeupdate', function() {
         console.log('update notetime');
@@ -107,5 +70,4 @@ $(document).ready( function() {
         $('body').trigger('timeupdate');
         setTimeout(repeatSelf, 60000);
     })();
-
 } );

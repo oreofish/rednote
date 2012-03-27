@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  $(function() {
+      window.noteRouter = new Rednote.Routers.NotesRouter({
+        notes: <%= @notes.to_json.html_safe %>,
+        current_user: <%= @current_user.to_json.html_safe %>
+      });
+      Backbone.history.start(); 
+  });
+</script>

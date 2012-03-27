@@ -5,16 +5,26 @@ class Rednote.Views.Notes.IndexView extends Backbone.View
 
   initialize: () ->
     @options.notes.bind('reset', @addAll)
+    @options.notes.bind('createNote',  (note) =>
+      @prependOne(note)
+    )
+    @new_view = new Rednote.Views.Notes.NewView(collection: @options.notes)
 
   addAll: () =>
     @options.notes.each(@addOne)
 
+  prependOne: (note) =>
+    view = new Rednote.Views.Notes.NoteView({model : note})
+    @$("#notes").prepend(view.render().el).find('ul.list :first').hide().fadeIn(1000)
+
   addOne: (note) =>
     view = new Rednote.Views.Notes.NoteView({model : note})
-    @$("tbody").append(view.render().el)
+    @$("#notes").append(view.render().el)
 
   render: =>
     $(@el).html(@template(notes: @options.notes.toJSON() ))
+    # without `@`, it won't work!
+    @$('#create_note').html(@new_view.render().el)
     @addAll()
 
     return this

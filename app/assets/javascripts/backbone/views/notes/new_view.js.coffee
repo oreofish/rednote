@@ -10,10 +10,6 @@ class Rednote.Views.Notes.NewView extends Backbone.View
     super(options)
     @model = new @collection.model()
 
-    @model.bind("change:errors", () =>
-      this.render()
-    )
-
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -22,8 +18,10 @@ class Rednote.Views.Notes.NewView extends Backbone.View
 
     @collection.create(@model.toJSON(),
       success: (note) =>
-        @model = note
-        window.location.hash = "/#{@model.id}"
+        @$('form')[0].reset()
+        @model = new @collection.model()
+        @$("form").backboneLink(@model)
+        @collection.trigger('createNote', note)
 
       error: (note, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
@@ -31,7 +29,6 @@ class Rednote.Views.Notes.NewView extends Backbone.View
 
   render: ->
     $(@el).html(@template(@model.toJSON() ))
-
     this.$("form").backboneLink(@model)
 
     return this

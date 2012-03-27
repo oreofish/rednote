@@ -1,16 +1,31 @@
-<h1>Listing notes</h1>
+<div class="board">
+    <div id="note_publish">
+        <div class="row-fluid">
+            <div class="span2">
+                <h4> 给工作添乐趣 </h4>
+            </div>
+            <div class="span7"></div>
+            <div class="span3 pull-right" id="input_hint"></div>
+        </div>
 
-<table id="notes-table">
-  <tr>
-    <th>User</th>
-    <th>Summary</th>
-    <th>Message</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-</table>
+        <div id="create_note">
+        </div>
+    </div>
 
-<br/>
+    <div id='flash_content'>
+        <a class='more label' data-target='#notifications' data-toggle='collapse' href='#'>
+            更多通知
+            <b class='caret'></b>
+        </a>
+        <div class='flash collapse' id='notifications'></div>
+    </div>
 
-<a href="#/new">New Note</a>
+
+    <div id="notes_content">
+        <ul class="list unstyled" id="notes">
+        </ul>
+
+        <div class="inner" id="pager_loading">
+        </div>
+    </div>
+</div>

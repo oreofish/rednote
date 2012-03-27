@@ -10,11 +10,13 @@ class NotesController < ApplicationController
     cookies[:limit] = 20
     cookies[:offset] = 20 # note offset
     cookies[:current_user_id] = current_user.id
+    @current_user = current_user
     @notes = Note.where('').offset(0).limit(cookies[:limit]).reverse_order
     @tags = Note.tag_counts.map {|tag| tag.name}
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @notes }
     end
   end
 
@@ -94,13 +96,17 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
+
   # POST /notes
   # POST /notes.json
   def create
+    @attachids = params[:note][:attachments].split(',') if not params[:note][:attachments].nil?
+    # HACK:
+    params[:note].delete(:attachments) 
     @note = current_user.notes.build(params[:note])
-    @attachids = params[:attachments].split(',')
 
     @at_users = @note.summary.scan(/@[a-zA-Z0-9_]+/)
+
     @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
 
     respond_to do |format|
@@ -119,7 +125,7 @@ class NotesController < ApplicationController
         @attachids.each do |attachid|
           attach = Attachement.find(attachid)
           attach.note_id = @note.id and attach.save if not attach.nil?
-        end
+        end if not @attachids.nil?
 
         broadcast '/notes/new', %Q/
           {
@@ -129,6 +135,7 @@ class NotesController < ApplicationController
 
           cookies[:offset] = cookies[:offset].to_i + 1
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
+        format.json { render json: @note }
         format.js 
       else
         broadcast '/notes/new', %Q/

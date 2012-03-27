@@ -1,25 +1,18 @@
-<h1>New note</h1>
+<div class="row-fluid">
+    <div class="span12">
+        <form id="new-note" name="note">
+            <textarea cols="40" id="summary" name="summary" placeholder="写点什么吧" rows="3"></textarea>
+            <input id="attachments" name="attachments" type="hidden" value="" />
+            <input id="tag_list" name="tag_list" type="hidden" value="" />
 
-<form id="new-note" name="note">
-  <div class="field">
-    <label for="user_id"> user_id:</label>
-    <input type="text" name="user_id" id="user_id" value="<%= user_id %>" >
-  </div>
+            <a id="pickfiles" href="#"> 添加图片和文档 </a>
+            <input class="btn btn-primary pull-right" type="submit"> 发布 </input>
+        </form>
+    </div>
+</div>
 
-  <div class="field">
-    <label for="summary"> summary:</label>
-    <input type="text" name="summary" id="summary" value="<%= summary %>" >
-  </div>
-
-  <div class="field">
-    <label for="message"> message:</label>
-    <input type="text" name="message" id="message" value="<%= message %>" >
-  </div>
-
-  <div class="actions">
-    <input type="submit" value="Create Note" />
-  </div>
-
-</form>
-
-<a href="#/index">Back</a>
+<div class="span12">
+    <div id="image_uploader">
+        <ul id="filelist" class="thumbnails"></ul>
+    </div>
+</div>
