@@ -8,10 +8,10 @@
   .span11
     = comment.comment.html_safe
     .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
-      - if(comment.user_id == current_user.id and comment.commentable_type == "Note")
-        = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do
-          %i.icon-remove 
-        .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
+    - if(comment.user_id == current_user.id and comment.commentable_type == "Note")
+      = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do
+        %i.icon-remove 
+      .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
         .modal-header
           %a.close(data-dismiss="modal") ×
           %h3 删除评论
@@ -20,7 +20,8 @@
         .modal-footer
           = link_to '删除', comment, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
           %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
-      - elsif(comment.user_id == current_user.id and comment.commentable_type == "Task")
-        = link_to 'x', comment, :method => :delete, :remote => true
+    - elsif(comment.user_id == current_user.id and comment.commentable_type == "Task")
+      = link_to comment, :method => :delete, :remote => true do
+        %i.icon-remove 
   %br
   %hr

@@ -1,3 +1,7 @@
+-if @comments.size > 0
+  =link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' 
+
+%br
 =form_for(@comment, :remote => true, :class => "form-horizontal") do |f| 
   -if @comment.errors.any?
     #error_explanation

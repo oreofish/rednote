@@ -4,7 +4,3 @@
   -@comments.each do |comment| 
     = render :partial => "comments/comment", :locals => { :comment => comment }
 
--if @comments.size > 0
-  =link_to '查看详情', @comments[0].commentable, :class => '', :target => '_blank' 
-
-%br

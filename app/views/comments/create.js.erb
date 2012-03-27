@@ -1,0 +1,12 @@
+(function() {
+  var $link = $('#comments_link<%= @comment.commentable_id %>');
+  var num = $link.text().match(/\d+/);
+  num = num * 1 + 1 ;
+  $link.text( $link.text().replace(/\d+/, num) );
+
+  var $list = $('#comments_list<%= @comment.commentable_id %>');
+  $list.find('ul.comment').append( "<%= j render :partial => 'comments/comment', :locals => { :comment => @comment } %>" );
+  $list.find('#new_comment')[0].reset();
+  $list.find('#comment_comment').focus();
+
+}());

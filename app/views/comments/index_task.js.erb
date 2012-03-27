@@ -1,8 +1,0 @@
-(function() {
-  var $link = $('#comments_link<%= @task.id %>');
-
-  var $list = $('#comments_list<%= @task.id %>');
-  $list.html( "<%= j render( 'comment_box') %>" );
-  $list.find('#comment_comment').focus();
-
-}());

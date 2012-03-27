@@ -13,25 +13,10 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(:commentable_id => @note.id)
     @comments = @note.comments
-    @commentable_type = "note"
 
     respond_to do |format|
       format.js # index.js.erb
       format.json { render json: @comments }
-    end
-  end
-
-  def index_task
-    @task = Task.find(params[:task_id])
-
-    @comment = Comment.new(:commentable_id => @task.id)
-    @comments = @task.comments
-
-    @commentable_type = "task"
-
-    respond_to do |format|
-      format.js 
-@      format.json { render json: @comments }
     end
   end
 
@@ -41,18 +26,14 @@ class CommentsController < ApplicationController
     @note = Note.find(params[:comment][:commentable_id])
     @comment = @note.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
-    @commentable_type = "Note"
 
     @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
 
     respond_to do |format|
       if @comment.save
-
         create_message(@note,@comment)
 
-        @comments = @note.comments
-        @comment = Comment.new(:commentable_id => @note.id)
-        format.js { render "index" }
+        format.js 
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.js { render "index" }
@@ -65,13 +46,12 @@ class CommentsController < ApplicationController
     @task = Task.find(params[:comment][:commentable_id])
     @comment = @task.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
-    @commentable_type = "task"
+
+    @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
 
     respond_to do |format|
       if @comment.save
-         @comments = @task.comments
-         @comment = Comment.new(:commentable_id => @task.id)
-        format.js { render "index_task" }
+        format.js { render "create" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.js { render "index_task" }

@@ -21,7 +21,6 @@ Rednote::Application.routes.draw do
   match 'comments/dono', :to => 'comments#dono'
   resources :comments, :only => [:new, :index, :create, :destroy] do 
     collection do 
-      get 'index_task'
       post 'create_task'
     end
   end

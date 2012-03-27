@@ -23,7 +23,6 @@
   %h3
     评论
     %small 相关讨论
-%ul.unstyled{:id => "comments_list#{@task.id}"}
-  - @comments.each do |comment|
-    = render :partial => "comments/comment", :locals => { :comment => comment }
-= render 'comments/form_task'
+.taskcomments{:id => "comments_list#{@task.id}"}
+  = render 'comments/comment_box'
+  = render 'comments/form_task'
