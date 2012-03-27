@@ -73,6 +73,7 @@ Rednote::Application.routes.draw do
     collection do
       get 'mytasks'
       get 'history'
+      get 'discuss'
       get  'set_status'
       post 'set_tag'
       get 'assign'

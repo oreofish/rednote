@@ -2,12 +2,9 @@
 
 .board
   %ul.nav.nav-pills
-    %li.active
-      = link_to "任务", "#taskcontent"
-    %li
-      = link_to "讨论", "#questioncontent"
-    %li
-      = link_to "回顾", "#historycontent"
+    %li.active= link_to "讨论", "#questioncontent"
+    %li= link_to "任务", "#taskcontent"
+    %li= link_to "回顾", "#historycontent"
 
   .page-header
     .pull-right
@@ -18,10 +15,10 @@
       当前项目：
       %small= @project_name
 
+  #questioncontent
+    = link_to "讨论", discuss_tasks_path(:project => @project_name), :id => "latest_commentslink", :remote => true
   #taskcontent
     = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
-  #questioncontent
-    = link_to "讨论", questions_path(:project => @project_name), :id => "questionlink", :remote => true
   #historycontent
     .page-header
       %h2= link_to "回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true

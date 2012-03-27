@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     @current_project = params[:project]
-    @questions = Question.tagged_with(@current_project.split(','), :on => :projects, :any => true)
     @question = Question.new
 
     respond_to do |format|
