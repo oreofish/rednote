@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        @task.update_attributes(:start_at => Date.today.beginning_of_week )
+        @task.touch
         format.js { render "create" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
