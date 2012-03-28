@@ -18,18 +18,3 @@
   %span(id="editestimate#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %br
 
-  .taskeditview.modal.hide.fade{:id => "edittask#{task.id}", :taskid => "#{task.id}", :style => "display: none;"}
-    .modal-header
-      %a.close(data-dismiss="modal") ×
-      %h3 任务
-    .modal-body
-      .content
-        %h3 Please waiting
-      .comments
-        = link_to "评论", index_task_comments_path(:task_id => task.id), :remote => true, :class => "small-link", |
-          :id => "comments_link#{task.id}","data-toggle" => "collapse", "data-target" => "#comments_list#{task.id}"
-        .collapse.fade(style="height: 0px;" id="comments_list#{task.id}")
-    .modal-footer
-      %a.btn{:href => "close", "data-dismiss" => "modal"} 关闭
-
-
