@@ -4,9 +4,10 @@
   %span.task-action
     .pull-left
       %span.small-link= link_to "查看评论(#{task.comments.size})", task
-      %i.vline
-      - linkname = task.status == Task::DONE ? "重做" : "完成"
-      %span.small-link= link_to linkname, set_status_tasks_path(:id => task), :remote => true if task.assigned_to != nil
+      - if task.assigned_to != nil
+        %i.vline
+        - linkname = task.status == Task::DONE ? "重做" : "完成"
+        %span.small-link= link_to linkname, set_status_tasks_path(:id => task), :remote => true
 
   = best_in_place task, :content, :type => :textarea, :ok_button => '保存', :activator => "#editcontent#{task.id}"
   %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
