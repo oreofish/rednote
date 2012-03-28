@@ -20,6 +20,5 @@
   #taskcontent
     = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
   #historycontent
-    .page-header
-      %h2= link_to "回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
+    %h3= link_to "查看回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
 

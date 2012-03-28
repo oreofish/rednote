@@ -59,8 +59,8 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /projects
   # POST /projects.json
@@ -87,11 +87,11 @@ class ProjectsController < ApplicationController
 
   # PUT /projects/1
   # PUT /projects/1.json
-  def update
-  end
+  #def update
+  #end
 
   # DELETE /projects/1
   # DELETE /projects/1.json
-  def destroy
-  end
+  #def destroy
+  #end
 end

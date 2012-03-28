@@ -2,14 +2,16 @@
 
 %div{ :id => "task#{task.id}", :class => "red-note taskitem #{task_css(task)}"}
   %span.task-action
-    - if task.assigned_to == nil
-      %span.small-link= best_in_place task, :assigned_to, :type => :select, :collection => User::list_user_options, :nil => '指派'
-    - else
-      %span.small-link= best_in_place task, :assigned_to, :type => :select, :collection => User::list_user_options
-      = link_to "完成", set_status_tasks_path(:id => task), :remote => true
-    %span.small-link= link_to "查看", task
+    .pull-left
+      %span.small-link= best_in_place task, :assigned_to, :type => :select, :collection => User::list_user_options, |
+        :nil => '指派' if task.status != Task::DONE
+      %i.vline
+      %span.small-link= link_to "查看评论", task
+      %i.vline
+      - linkname = task.status == Task::DONE ? "重做" : "完成"
+      = link_to linkname, set_status_tasks_path(:id => task), :remote => true if task.assigned_to != nil
 
-  = best_in_place task, :content, type: :textarea, :ok_button => '保存', :activator => "#editcontent#{task.id}"
+  = best_in_place task, :content, :type => :textarea, :ok_button => '保存', :activator => "#editcontent#{task.id}"
   %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %br
 
