@@ -7,9 +7,12 @@ class NotesController < ApplicationController
   def index
     @note = Note.new
 
-    cookies[:limit] = 20
-    cookies[:offset] = 20 # note offset
-    cookies[:current_user_id] = current_user.id
+    cookies = {
+      :limit => 20,
+      :offset => 20, # note offset
+      :current_user_id => current_user.id
+    }
+
     @notes = Note.where('').offset(0).limit(cookies[:limit]).reverse_order
     @tags = Note.tag_counts.map {|tag| tag.name}
 
@@ -94,41 +97,36 @@ class NotesController < ApplicationController
     @attachids = params[:attachments].split(',')
 
     @at_users = @note.summary.scan(/@[a-zA-Z0-9_]+/)
-    @note.summary = html_escape(@note.summary).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">").html_safe
+    
+    @note.summary = string_replace(3 , html_escape(@note.summary)) # repalce the string
 
-    respond_to do |format|
-      if @note.save
-        @at_users.each do |at_user|
-          user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
-          if user.size == 1 #because note can not edit so the create note unexist in message table
-            @message = @note.messages.create( {
-              :user_id => user[0].id,
-              :message => @note,
-              :refer => 1
-            })
-            broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_note' }"
-          end
+    if @note.save
+      @at_users.each do |at_user|
+        user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
+        if user.size == 1 #because note can not edit so the create note unexist in message table
+          @message = @note.messages.create( {
+            :user_id => user[0].id,
+            :message => @note,
+            :refer => 1
+          } )
+          broadcast "/ats/new/#{@message.user_id}", "{ note_id: #{@note.id}, meg_type: 'at_in_note' }"
         end
-        @attachids.each do |attachid|
-          attach = Attachement.find(attachid)
-          attach.note_id = @note.id and attach.save if not attach.nil?
-        end
+      end
+      @attachids.each do |attachid|
+        attach = Attachement.find(attachid)
+        attach.note_id = @note.id and attach.save if not attach.nil?
+      end
 
-        broadcast '/notes/new', %Q/
-          {
-            nickname: "#{current_user.nickname}", 
-            status: true 
-          }/
+      broadcast '/notes/new', %Q/ { nickname: "#{current_user.nickname}", status: true } /
 
           cookies[:offset] = cookies[:offset].to_i + 1
+      respond_to do |format|
         format.html { redirect_to notes_path, notice: 'Note was successfully created.' }
         format.js 
-      else
-        broadcast '/notes/new', %Q/
-          {
-            status: false,
-            errors: #{@note.errors.to_json}
-          }/
+      end
+    else
+      broadcast '/notes/new', %Q/ { status: false, errors: #{@note.errors.to_json} } /
+      respond_to do |format|
         format.html { redirect_to notes_path, notice: 'Note creation was failed.' }
         format.js 
       end
@@ -154,10 +152,8 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
-    broadcast '/notes/destroy', %Q/
-      { 
-        "nickname" : "#{current_user.nickname}"
-      }/
+
+    broadcast '/notes/destroy', %Q/ { "nickname" : "#{current_user.nickname}" } /
 
     cookies[:offset] = cookies[:offset].to_i - 1
     respond_to do |format|

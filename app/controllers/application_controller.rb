@@ -38,4 +38,12 @@ class ApplicationController < ActionController::Base
     Socket.do_not_reverse_lookup = orig
   end
 
+  def string_replace(num,obj)
+    #num is 1 can execute the first gsub ……
+    obj = obj.gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>') if (num >= 1) # replace @nickname to a link
+    obj = obj.gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>') if (num >= 2) # replace url to a link
+    obj = obj.gsub(/\?$/,"<img height=\"18\" src=\"/images/wenhao.jpg\" width=\"18\">") if (num >= 3) #replace question to a image
+    return obj.html_safe
+  end
+
 end
