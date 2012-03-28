@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
     @comment = @note.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
 
-    @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
+    @comment.comment = string_replace(2 , html_escape(@comment.comment)) # repalce the string
 
     respond_to do |format|
       if @comment.save
@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
     @comment = @task.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
 
-    @comment.comment = html_escape(@comment.comment).gsub(/@([a-zA-Z0-9_]+)/,'<a href=\1>@\1</a>').gsub(/(http+:\/\/[^\s]*)/,'<a href=\1>\1</a>').html_safe
+    @comment.comment = string_replace(2 , html_escape(@comment.comment)) # repalce the string
 
     respond_to do |format|
       if @comment.save
