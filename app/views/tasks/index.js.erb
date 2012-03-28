@@ -2,6 +2,7 @@
 
 (function() {
   $('#taskcontent').html( "<%= j render( 'index' ) %>" );
+  $('.tasklist').find('.small-link').attr("style","display:none")
 
   setTimeout( function() {
     $('.best_in_place').best_in_place();

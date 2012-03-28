@@ -30,5 +30,14 @@ jQuery ->
     )
   )
 
+  $('body').on('mouseover', '.task-todo', ()->
+    $(this).find(".small-link").attr style: ""
+    console.log "muhh"
+  )
+
+  $('body').on('mouseout', '.task-todo', ()->
+    $(this).find(".small-link").attr style: "display:none;"
+  )
+
   $('#taskprogresslink').click()
   $('#latest_commentslink').click()
