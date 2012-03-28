@@ -1,31 +1,41 @@
 Rednote::Application.routes.draw do
 
-  resources :questions
+  #resources :questions
+  #resources :answers
+  #resources :ats
 
-  resources :answers
-
-  resources :ats
+  match '/mails', :to => 'mails#index'
+  match '/mails/interview', :to => 'mails#interview'
+  match '/mails/invite', :to => 'mails#invite'
 
   match '/calendar(/:year(/:month))' => 'projects#index', 
     :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
 
+  root :to => "projects#index"
+  mount Ckeditor::Engine => '/ckeditor'
+
   resources :projects
 
-  resources :debits
-  match 'debits/unwaiting', :to => 'debits#unwaiting'
-  resources :books
-  get "books/wait"
-  match 'books/borrow', :to => 'books#borrow'
+  resources :debits, :only => [:new, :destroy] do
+    collection do
+      post 'unwaiting'
+    end
+  end
 
-  mount Ckeditor::Engine => '/ckeditor'
-  match 'comments/dono', :to => 'comments#dono'
+  resources :books, :only => [ :new, :index, :create, :show ] do
+    collection do 
+      post 'borrow'
+    end
+  end
+
   resources :comments, :only => [:new, :index, :create, :destroy] do 
     collection do 
       post 'create_task'
+      get 'dono'
     end
   end
-  resources :likes, :only => [:create, :update, :destroy]
 
+  resources :likes, :only => [:create, :update, :destroy]
   resources :attachements, :only => [:create]
 
   devise_for :users
@@ -37,7 +47,6 @@ Rednote::Application.routes.draw do
       get 'page'
       get 'myats'
     end
-
     collection do
       get 'nickname'
       match 'avatar'
@@ -49,22 +58,12 @@ Rednote::Application.routes.draw do
     end
   end
 
-  #get "users/mycomments"
-  #get "users/mytags"
-
-  #root :to => "notes#index"
-  root :to => "projects#index"
-
   resources :notes do
     collection do
       get 'page'
       get 'taglist'
     end
   end
-
-  match '/mails', :to => 'mails#index'
-  match '/mails/interview', :to => 'mails#interview'
-  match '/mails/invite', :to => 'mails#invite'
 
   resources :tasks do
     member do
