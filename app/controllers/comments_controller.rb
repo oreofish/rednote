@@ -51,8 +51,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        @task.commentupdate = Time.now.to_datetime
-        @task.save!
+        #@task.commentupdate = Time.now.to_datetime
+        #@task.save!
         format.js { render "create" }
         format.json { render json: @comment, status: :created, location: @comment }
       else
