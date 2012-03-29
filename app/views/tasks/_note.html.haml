@@ -12,12 +12,12 @@
   = best_in_place task, :content, :type => :textarea, :ok_button => '保存', :activator => "#editcontent#{task.id}"
   %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %br
-  %span= best_in_place task, :assigned_to, :type => :select, :activator => "#editowner#{task.id}", |
+  %span= best_in_place task, :assigned_to, :type => :select, :activator => "#editowner#{task.id}",
     :nil => '指派', :collection => User::list_user_options
   %span(id="editowner#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status != Task::DONE
-
-  %strong.task-estimate= best_in_place task, :estimate, :type => :select, :activator => "#editestimate#{task.id}", |
-    :nil => '0天', :collection => [[0, '0天'], [0.5,'0.5天'], [1,'1天'], [1.5,'1.5天'], [2,'2天'], [3,'3天'], [4,'4天'], [5,'5天']]
+  %strong.task-estimate= best_in_place task, :estimate, :type => :select, 
+    :activator => "#editestimate#{task.id}",:nil => '0天',
+    :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天'], [4.0,'4天'], [5.0,'5天']]
   %span(id="editestimate#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %br
 
