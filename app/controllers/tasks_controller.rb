@@ -40,8 +40,7 @@ class TasksController < ApplicationController
   def discuss
     @current_project = params[:project]
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @tasks = all_tasks.order("updated_at ASC").limit(6)
-    @tasks = @tasks.reverse
+    @tasks = all_tasks.order("commentupdate DESC").limit(6)
 
     respond_to do |format|
       format.html 
