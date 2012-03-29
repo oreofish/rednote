@@ -2,6 +2,7 @@ class Rednote.Routers.NotesRouter extends Backbone.Router
   initialize: (options) ->
     @notes = new Rednote.Collections.NotesCollection()
     @notes.reset options.notes
+
     @current_user = options.current_user
     console.log(@current_user)
 

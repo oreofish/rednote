@@ -1,0 +1,34 @@
+<li class="row-fluid" id="comment<%= id %>">
+<% var user = noteRouter.current_user; %>
+<div class="span1">
+    <a href="#/users/<%= user.id %>">
+        <img class="avatar" alt="<%= user.nickname %>" src="<%= user.avatar.small.url %>" height="30" width="30"/>
+    </a>
+</div>
+<div class="span11">
+    <%= comment %>
+    <div class="live-timestamp pull-right" data-notetime="<%= new Date(created_at).toString() %>">
+    </div>
+    <% if (user.id == noteRouter.current_user.id) { %>
+        <a href="#removecomment<%=id %>" 'data-toggle'="modal"  class='toremove small-link'>
+            <i class="icon-remove"></i>
+        </a>
+
+        <div class="commentremove modal hide fade" id="removecomment<%= id %>" commentid="<%= id %>" style="display: none;">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>删除评论</h3>
+            </div>
+            <div class="modal-body">
+                <h3> 确定删除吗？</h3>
+            </div>
+            <div class="modal-footer">
+                <a href="#/comments" "data-dismiss"="modal" class="btn">删除</a>
+                <a class="btn" href="close" "data-dismiss"="modal">取消</a>
+            </div>
+        </div>
+    <% } %>
+</div>
+<br/>
+<hr/>
+</li>

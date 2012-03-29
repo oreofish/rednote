@@ -103,7 +103,8 @@ class NotesController < ApplicationController
     @attachids = params[:note][:attachments].split(',') if not params[:note][:attachments].nil?
     # HACK:
     params[:note].delete(:attachments) 
-    @note = current_user.notes.build(params[:note])
+    # @note = current_user.notes.build(params[:note])
+    @note = current_user.notes.build pick(params[:note], :summary, :tag_list)
 
     @at_users = @note.summary.scan(/@[a-zA-Z0-9_]+/)
 

@@ -6,7 +6,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :local_ip 
   helper_method :broadcast
+  helper_method :pick # this is for assigning selected attributes only
   helper :all
+
+  def pick(hash, *keys)
+    filtered = {}
+    hash.each do |key, value| 
+      filtered[key.to_sym] = value if keys.include?(key.to_sym) 
+    end
+    filtered
+  end
 
   def broadcast(channel, *msg, &block)
     if block_given?

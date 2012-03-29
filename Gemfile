@@ -70,6 +70,8 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'compass-rails'
+  gem 'haml_coffee_assets'
+  gem 'execjs'
   gem 'uglifier'
 end
 

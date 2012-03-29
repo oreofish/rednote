@@ -16,6 +16,7 @@
 .*~
 *~
 .*.swp
+.zcache
 
 # Ignore db config
 config/database.yml

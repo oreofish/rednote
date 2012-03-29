@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.js 
-@      format.json { render json: @comments }
+      format.json { render json: @comments }
     end
   end
 
@@ -47,13 +47,10 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-
         create_message(@note,@comment)
 
-        @comments = @note.comments
-        @comment = Comment.new(:commentable_id => @note.id)
         format.js { render "index" }
-        format.json { render json: @comment, status: :created, location: @comment }
+        format.json { render json: @comment }
       else
         format.js { render "index" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
