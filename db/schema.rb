@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "question_id"
-    t.integer  "score"
+    t.integer  "question_id", :default => 0
+    t.integer  "score",       :default => 0
     t.text     "content"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   create_table "attachements", :force => true do |t|
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "infos", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "message_id"
+    t.string   "message_type"
+    t.integer  "read",         :default => 1
+    t.integer  "refer",        :default => 0
+  end
+
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "note_id"
@@ -86,14 +96,24 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "message_id"
-    t.string   "message_type"
-    t.integer  "read",         :default => 1
-    t.integer  "refer",        :default => 0
+    t.string   "topic"
+    t.text     "body"
+    t.integer  "received_messageable_id"
+    t.string   "received_messageable_type"
+    t.integer  "sent_messageable_id"
+    t.string   "sent_messageable_type"
+    t.boolean  "opened",                     :default => false
+    t.boolean  "recipient_delete",           :default => false
+    t.boolean  "sender_delete",              :default => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "ancestry"
+    t.boolean  "recipient_permanent_delete", :default => false
+    t.boolean  "sender_permanent_delete",    :default => false
   end
+
+  add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
+  add_index "messages", ["sent_messageable_id", "received_messageable_id"], :name => "acts_as_messageable_ids"
 
   create_table "notes", :force => true do |t|
     t.integer  "user_id"
@@ -132,10 +152,10 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.float    "estimate"
+    t.float    "estimate",      :default => 0.0
     t.datetime "deadline"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "assigned_to"
     t.datetime "start_at"
     t.datetime "finish_at"

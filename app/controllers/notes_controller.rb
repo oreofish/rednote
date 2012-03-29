@@ -53,12 +53,12 @@ class NotesController < ApplicationController
     @comments = @note.comments
     @messages = Array.new
 
-    @note.messages.each do |message|
+    @note.infos.each do |message|
       @messages << message
     end
 
     @comments.each do |comment|
-      comment.messages.each do |message|
+      comment.infos.each do |message|
         @messages << message
       end
     end
@@ -104,7 +104,7 @@ class NotesController < ApplicationController
       @at_users.each do |at_user|
         user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
         if user.size == 1 #because note can not edit so the create note unexist in message table
-          @message = @note.messages.create( {
+          @message = @note.infos.create( {
             :user_id => user[0].id,
             :message => @note,
             :refer => 1

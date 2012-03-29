@@ -37,7 +37,7 @@
         %ul.pull-right.nav
           - if user_signed_in?
             %li#mynote_notice{:class => controller_name == "users" && "active" }
-              - noticenum = current_user.messages.sum("refer")
+              - noticenum = current_user.infos.sum("refer")
               - if noticenum == 0 
                 = link_to "#{noticenum}", user_path(current_user), :id => "update_info", :style => "display:none"
               - else 

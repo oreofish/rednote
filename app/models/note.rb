@@ -18,7 +18,7 @@ class Note < ActiveRecord::Base
   has_many :likes, :dependent => :destroy
   has_many :attachements, :dependent => :destroy
 
-  has_many :messages, :dependent => :destroy, :as => :message
+  has_many :infos, :dependent => :destroy, :as => :message
 
   validates :summary, :presence => true,
                       :length   => { :maximum => 500 }

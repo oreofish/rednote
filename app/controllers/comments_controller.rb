@@ -89,7 +89,7 @@ class CommentsController < ApplicationController
   def create_message(note,comment)
     @at_users = comment.comment.scan(/@[a-zA-Z0-9_]+/)
     if not note.user_id == current_user.id
-      @message = comment.messages.create ({
+      @message = comment.infos.create ({
         :user_id => note.user_id,
         :message => comment,
         :refer => 1
@@ -100,7 +100,7 @@ class CommentsController < ApplicationController
     @at_users.each do |at_user|
       user = User.find_by_sql("SELECT users.* FROM users WHERE nickname='#{at_user.from(1)}'") #check user is exist
       if user.size == 1 and not user[0].id == note.user_id #the at_user is not the user who owner the note
-        @message = comment.messages.create ({
+        @message = comment.infos.create ({
           :user_id => user[0].id,
           :refer => 1,
           :message => comment

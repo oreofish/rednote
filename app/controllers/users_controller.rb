@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def myats
     @user = User.find(params[:id])
-    @messages = @user.messages
+    @messages = @user.infos
 
     respond_to do |format|
       format.html { render 'show' }
