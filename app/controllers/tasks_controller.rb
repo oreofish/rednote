@@ -40,7 +40,12 @@ class TasksController < ApplicationController
   def discuss
     @current_project = params[:project]
     all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @tasks = all_tasks.order("commentupdate DESC").limit(6)
+    @comments = Comment.find_by_sql("select distinct commentable_id from (select commentable_id from comments where commentable_type = 'Task' order by created_at DESC) as new limit 6")
+    @tasks = Array.new
+    @comments.each do |comment|
+      @task = Task.find(comment.commentable_id)
+      @tasks << @task 
+    end
 
     respond_to do |format|
       format.html 
