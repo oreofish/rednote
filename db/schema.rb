@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "infos", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "message_id"
+    t.string   "message_type"
+    t.integer  "read",         :default => 1
+    t.integer  "refer",        :default => 0
+  end
+
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "note_id"
@@ -86,14 +96,24 @@ ActiveRecord::Schema.define(:version => 20120329191155) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-    t.integer  "message_id"
-    t.string   "message_type"
-    t.integer  "read",         :default => 1
-    t.integer  "refer",        :default => 0
+    t.string   "topic"
+    t.text     "body"
+    t.integer  "received_messageable_id"
+    t.string   "received_messageable_type"
+    t.integer  "sent_messageable_id"
+    t.string   "sent_messageable_type"
+    t.boolean  "opened",                     :default => false
+    t.boolean  "recipient_delete",           :default => false
+    t.boolean  "sender_delete",              :default => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.string   "ancestry"
+    t.boolean  "recipient_permanent_delete", :default => false
+    t.boolean  "sender_permanent_delete",    :default => false
   end
+
+  add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
+  add_index "messages", ["sent_messageable_id", "received_messageable_id"], :name => "acts_as_messageable_ids"
 
   create_table "notes", :force => true do |t|
     t.integer  "user_id"

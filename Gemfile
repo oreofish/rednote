@@ -29,6 +29,7 @@ gem "rufus-scheduler"
 gem 'event-calendar', :require => 'event_calendar'
 gem 'rdiscount'
 gem 'fullcalendar-rails'
+gem 'acts-as-messageable'
 
 group :development, :test do
   gem 'rspec-rails'

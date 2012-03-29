@@ -29,10 +29,17 @@ GEM
     activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    acts-as-messageable (0.4.5)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      ancestry (~> 1.2.4)
+      railties (>= 3.0.0)
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
     acts_as_commentable (3.0.1)
     addressable (2.2.7)
+    ancestry (1.2.5)
+      activerecord (>= 2.2.2)
     annotate (2.4.0)
     arel (3.0.2)
     autotest (4.4.6)
@@ -263,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-messageable
   acts-as-taggable-on
   acts_as_commentable
   annotate

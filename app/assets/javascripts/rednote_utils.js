@@ -296,6 +296,7 @@ function setup_faye(){
 
                 case "/ats/new/"+str:
                     rednote.logger.updateinfo(message);
+        console.log("aaaaaaaaaaaa");
                     break;
             }
             callback(message);

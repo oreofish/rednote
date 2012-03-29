@@ -1,6 +1,6 @@
 (function() {
     $num = $('#update_info');
-    var new_num = <%= current_user.messages.sum("refer")%>;
+    var new_num = <%= current_user.infos.sum("refer")%>;
     $num.text( $num.text().replace(/\d+/, new_num) );
     if( Number(new_num) === 0 ) {
       $num.attr("style","display:none;");
