@@ -30,7 +30,7 @@ class Task < ActiveRecord::Base
   attr_accessible :assigned_to, :content, :estimate, :deadline,
                   :status, :start_at, :finish_at
   
-  default_scope order(:status, :updated_at)
+  #default_scope order(:status, :updated_at)
   
   TODO = 0
   DOING = 1

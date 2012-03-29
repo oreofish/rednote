@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320025821) do
+ActiveRecord::Schema.define(:version => 20120329191155) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "question_id", :default => 0
-    t.integer  "score",       :default => 0
+    t.integer  "question_id"
+    t.integer  "score"
     t.text     "content"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "attachements", :force => true do |t|
@@ -132,14 +132,15 @@ ActiveRecord::Schema.define(:version => 20120320025821) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.float    "estimate",    :default => 0.0
+    t.float    "estimate"
     t.datetime "deadline"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.integer  "assigned_to"
     t.datetime "start_at"
     t.datetime "finish_at"
-    t.integer  "status",      :default => 0
+    t.integer  "status",        :default => 0
+    t.datetime "commentupdate"
   end
 
   create_table "users", :force => true do |t|
