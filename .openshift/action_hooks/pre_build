@@ -3,3 +3,5 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the build step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+export $PATH:/var/lib/stickshift/340cc9e91a5443ecb9d064ae9bad67ce/rednote/runtime/software/usr/local/bin
