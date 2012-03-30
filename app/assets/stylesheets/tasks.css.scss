@@ -26,9 +26,11 @@
 }
 
 .task-todo {
-    border-top-color: #4ad;
-    border-top-style: solid;
-    border-top-width: 5px;
+  
+}
+
+.task-content {
+    text-decoration:line-through;
 }
 
 .task-doing {
@@ -39,16 +41,17 @@
 }
 
 .task-done {
-    border-top-color: #ccc;
-    border-top-style: solid;
-    border-top-width: 5px;
-    background-color: #0083D4;
+//    border-top-color: #ccc;
+//    border-top-style: solid;
+//    border-top-width: 5px;
+//    background-color: #0083D4;
 //    background-image: url("/images/done.gif");
     background-position: bottom right;
     background-repeat: no-repeat;
     filter: Alpha(opacity=80);
     -moz-opacity:0.8;
     opacity:0.8;
+
 }
 
 .task-cancel {

@@ -104,10 +104,10 @@ class TasksController < ApplicationController
     
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        #format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.js
       else
-        format.html { redirect_to tasks_path, notice: 'Task was failed to updated.' }
+        #format.html { redirect_to tasks_path, notice: 'Task was failed to updated.' }
         format.js
       end
     end

@@ -29,14 +29,9 @@ jQuery ->
       }
     )
   )
-
-  $('body').on('mouseover', '.task-todo', ()->
-    $(this).find(".small-link").attr style: ""
-    console.log "muhh"
-  )
-
-  $('body').on('mouseout', '.task-todo', ()->
-    $(this).find(".small-link").attr style: "display:none;"
+  $('body').on('click', ".js-change-status" , ()->
+    url = $(this).attr("data-url")
+    $.get(url, {})
   )
 
   $('#taskprogresslink').click()

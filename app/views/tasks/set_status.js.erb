@@ -2,14 +2,14 @@
 
 (function() {
 <% if @task.valid? %>
-  $('#task<%= @task.id %>').replaceWith("<%= j render :partial => 'tasks/note', :locals => { :task => @task } %>");
-  <% if @task.status == Task::DONE or @oldstatus == Task::DONE %>
-    var totalpoint = $('#taskprogress').find('div.bar').attr("total");
-    var donepoint = $('#taskprogress').find('div.bar').attr("done") * 1 + <%= @task.estimate %>;
-    var results = 100.0*donepoint/totalpoint;
-    $('#taskprogress').find('div.bar').attr("style","width:"+results+"%");
-    $('#taskprogress').find('div.bar').attr("done",donepoint);
-  <% end %>
+    var $task = $('#task<%= @task.id %>');
+  if($task.find(".js-change-status").attr("checked")=="checked"){
+    console.log("true");
+    $task.find(".js-add-throughline").addClass("task-content");
+  } else {
+    console.log("false");
+    $task.find(".js-add-throughline").removeClass("task-content");
+  }
 
   // enable in place edit
   setTimeout( function() {

@@ -1,23 +1,23 @@
 - # encoding: utf-8 
 
-%div{ :id => "task#{task.id}", :class => "red-note taskitem #{task_css(task)}"}
-  %span.task-action
-    .pull-left
-      %span.small-link= link_to "查看评论(#{task.comments.size})", task
-      - if task.assigned_to != nil
-        %i.vline
-        - linkname = task.status == Task::DONE ? "重做" : "完成"
-        %span.small-link= link_to linkname, set_status_tasks_path(:id => task), :remote => true
+%div{ :id => "task#{task.id}", :class => " taskitem #{task_css(task)}"}
 
-  = best_in_place task, :content, :type => :textarea, :ok_button => '保存', :activator => "#editcontent#{task.id}"
+  %input{:class => "js-change-status", "data-url" => "#{set_status_tasks_path(:id => task)}",
+    :type => "checkbox", "data-behavior" => "toggle",
+    :checked => task.status == Task::DONE ? true : false }
+  %span.js-add-throughline{:class => task.status == Task::DONE ? "task-content" : ""}
+    = best_in_place task, :content, :type => :input, :activator => "#editcontent#{task.id}"
   %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
+  %strong.small-link= best_in_place task, :assigned_to, :type => :select, :nil => '指派',
+    :collection => User::list_user_options if task.status != Task::DONE
+  %strong.small-link.task-estimate= best_in_place task, :estimate, :type => :select, :nil => '估时',
+    :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天'], [4.0,'4天'], [5.0,'5天']] if task.status != Task::DONE
+  
+  %span.small-link= link_to "查看评论(#{task.comments.size})", task
+  - if task.assigned_to != nil
+    %i.vline
+    - linkname = task.status == Task::DONE ? "重做" : "完成"
+    %span.small-link= link_to linkname, set_status_tasks_path(:id => task), :remote => true
   %br
-  %span= best_in_place task, :assigned_to, :type => :select, :activator => "#editowner#{task.id}",
-    :nil => '指派', :collection => User::list_user_options
-  %span(id="editowner#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status != Task::DONE
-  %strong.task-estimate= best_in_place task, :estimate, :type => :select, 
-    :activator => "#editestimate#{task.id}",:nil => '0天',
-    :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天'], [4.0,'4天'], [5.0,'5天']]
-  %span(id="editestimate#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %br
 
