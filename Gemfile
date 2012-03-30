@@ -35,7 +35,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'faker'
-  gem 'capybara'
   gem 'launchy'
 
   gem 'rspec'
@@ -48,9 +47,7 @@ group :development, :test do
     gem 'autotest-growl'
   end
   gem 'factory_girl_rails', '1.0'
-  gem 'capybara'
   gem 'database_cleaner'
-  gem 'capybara-webkit'
   gem 'launchy'
   gem 'simplecov-rcov'
 end
