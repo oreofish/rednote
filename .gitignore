@@ -17,9 +17,6 @@
 *~
 .*.swp
 
-# Ignore db config
-config/database.yml
-
 # Ignore public
 public/uploads
 
