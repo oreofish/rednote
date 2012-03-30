@@ -1,7 +1,9 @@
 CKEDITOR.editorConfig = function( config )
 {
-    config.language = 'en';
-    config.uiColor = '#AADC6E';
+    config.language = 'zh-cn';
+    config.uiColor = '#eeeeee';
+    config.skin = 'v2';
+    config.fontSize_defaultLabel = '14px';
 
     config.toolbar = 'Simple';
     config.toolbar_Text =   [
@@ -16,10 +18,10 @@ CKEDITOR.editorConfig = function( config )
     ];
 
     config.toolbar_Simple =   [
-        { name: 'clipboard', items : [ 'Cut','Copy','Paste','PasteText','SelectAll','Scayt','-','Undo','Redo' ] },
-        { name: 'insert', items : [ 'Image','HorizontalRule','Smiley','PageBreak'] },
-        { name: 'basicstyles', items : [ 'Bold','Italic','Strike','-','RemoveFormat','NumberedList','BulletedList'] },
-        { name: 'links', items : [ 'Link','Unlink','Anchor' ] },
+        { name: 'insert', items : [ 'Image','Smiley'] },
+        { name: 'basicstyles', items : [ 'Bold','NumberedList','BulletedList'] },
+        { name: 'links', items : [ 'Link','Unlink' ] },
     ];
     config.toolbarCanCollapse = false;
+    config.contentsCss = '/ckeditor_config.css';
 };
