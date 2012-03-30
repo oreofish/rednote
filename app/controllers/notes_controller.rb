@@ -8,9 +8,9 @@ class NotesController < ApplicationController
     @note = Note.new
 
     cookies = {
-      :limit => 20,
-      :offset => 20, # note offset
-      :current_user_id => current_user.id
+      "limit" => 20,
+      "offset" => 20, # note offset
+      "current_user_id" => current_user.id
     }
 
     @notes = Note.where('').offset(0).limit(cookies[:limit]).reverse_order
