@@ -28,3 +28,9 @@
 .taskcomments{:id => "comments_list#{@task.id}"}
   = render 'comments/comment_box'
   = render 'comments/form_task'
+
+:javascript
+  if (CKEDITOR.instances["comment_comment_disable_it"]) {
+    CKEDITOR.remove(CKEDITOR.instances["comment_comment_disable_it"]);
+  }
+  CKEDITOR.replace("comment_comment_disable_it", { "language":"zh-cn", "customConfig":"/ckeditor_config.js" });

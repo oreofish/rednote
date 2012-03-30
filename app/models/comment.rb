@@ -24,7 +24,7 @@ class Comment < ActiveRecord::Base
   validates :commentable_id, :presence => true
   validates :title,   :length       => { :maximum => 30 }
   validates :comment, :presence     => true,
-                      :length       => { :maximum => 255 }
+                      :length       => { :maximum => 10000 }
 
   attr_accessible :title, :comment, :commentable_id, :commentable_type
 
