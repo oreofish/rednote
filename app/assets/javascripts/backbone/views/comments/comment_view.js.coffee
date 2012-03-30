@@ -3,6 +3,10 @@ Rednote.Views.Comments ||= {}
 class Rednote.Views.Comments.CommentView extends Backbone.View
   template: JST["backbone/templates/comments/comment"]
 
+  initialize: () ->
+    @model.set({'user': @model.get('user_id')})
+    @model.fetchRelated('user')
+
   events:
     "click .destroy" : "destroy"
 
@@ -13,5 +17,6 @@ class Rednote.Views.Comments.CommentView extends Backbone.View
     return false
 
   render: ->
+    console.log @model.toJSON()
     $(@el).html(@template(@model.toJSON() ))
     return this

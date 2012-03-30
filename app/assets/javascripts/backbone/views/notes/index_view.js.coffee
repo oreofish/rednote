@@ -14,9 +14,9 @@ class Rednote.Views.Notes.IndexView extends Backbone.View
     @options.notes.each(@addOne)
 
   prependOne: (note) =>
-    view = new Rednote.Views.Notes.NoteView({model : note})
+    view = new Rednote.Views.Notes.NoteView({model: note})
     @$("#notes").prepend(view.render().el)
-    @$("#notes").find('ul.list :first').hide().fadeIn(1000)
+    @$("#note#{note.id}").hide().fadeIn(1000)
 
   addOne: (note) =>
     view = new Rednote.Views.Notes.NoteView({model : note})

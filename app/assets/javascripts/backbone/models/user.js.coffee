@@ -1,4 +1,5 @@
 class Rednote.Models.User extends Backbone.RelationalModel
+  urlRoot: "/users"
   paramRoot: 'user'
 
   defaults:

@@ -1,6 +1,14 @@
 class Rednote.Models.Comment extends Backbone.RelationalModel
   paramRoot: 'comment'
 
+  relations: [
+    {
+      type: Backbone.HasOne
+      key: 'user'
+      relatedModel: 'Rednote.Models.User'
+    }
+  ]
+
   defaults:
     comment: null
     commentable_id: null

@@ -4,10 +4,12 @@ class Rednote.Views.Notes.NoteView extends Backbone.View
   template: JST["backbone/templates/notes/note"]
 
   initialize: () ->
+    @model.set({'user': @model.get('user_id')})
+    @model.fetchRelated('user')
+
     @commentsLoaded = false
     @model.get('comments').fetch(
       success: (collection) =>
-        console.log @model.get('comments')
         @commentsLoaded = true
         @render()
 
@@ -27,7 +29,6 @@ class Rednote.Views.Notes.NoteView extends Backbone.View
 
   render: ->
     if @commentsLoaded
-      console.log "render note"
       $(@el).html(@template(@model.toJSON() ))
       @$("#comments_link#{ @model.id } > span").text @model.get('comments').length
     return this
