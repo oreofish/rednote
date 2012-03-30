@@ -15,7 +15,7 @@ gem 'faye'
 gem 'roadie' # send HTML mail
 gem 'acts_as_commentable'
 gem 'jcrop-rails'
-gem 'rmagick'
+#gem 'rmagick'
 gem 'twitter-bootstrap-rails'
 #gem 'compass_twitter_bootstrap'
 gem 'best_in_place'

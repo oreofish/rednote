@@ -183,7 +183,6 @@ GEM
     rdiscount (1.6.8)
     rdoc (3.12)
       json (~> 1.4)
-    rmagick (2.13.1)
     roadie (2.3.0)
       actionmailer (> 3.0.0, < 3.3.0)
       css_parser
@@ -282,7 +281,6 @@ DEPENDENCIES
   plupload-rails
   rails (= 3.2.2)
   rdiscount
-  rmagick
   roadie
   rspec
   rspec-rails
