@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405072915) do
+ActiveRecord::Schema.define(:version => 20120405112517) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "question_id"
     t.integer  "score"
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.integer  "question_id"
   end
 
   create_table "attachements", :force => true do |t|
@@ -142,6 +142,16 @@ ActiveRecord::Schema.define(:version => 20120405072915) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.integer  "message",    :default => 0
+  end
+
+  create_table "projects", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "owner_id"
+    t.string   "name"
+    t.string   "summary"
+    t.string   "tags"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "questions", :force => true do |t|
