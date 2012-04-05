@@ -14,6 +14,7 @@
 #  finish_at     :datetime
 #  status        :integer(4)      default(0)
 #  commentupdate :datetime
+#  project_id    :integer(4)
 #
 
 class Task < ActiveRecord::Base
