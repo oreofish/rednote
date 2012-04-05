@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405123550) do
+ActiveRecord::Schema.define(:version => 20120405151200) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -96,6 +96,29 @@ ActiveRecord::Schema.define(:version => 20120405123550) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "event_series", :force => true do |t|
+    t.integer  "frequency",  :default => 1
+    t.string   "period",     :default => "monthly"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.boolean  "all_day",    :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "event_series_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.boolean  "all_day",         :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
   create_table "infos", :force => true do |t|
