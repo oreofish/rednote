@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.3'
 
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'gravatar_image_tag', '1.0.0'
@@ -30,6 +30,7 @@ gem 'event-calendar', :require => 'event_calendar'
 gem 'rdiscount'
 gem 'fullcalendar-rails'
 gem 'acts-as-messageable'
+#gem 'acts_as_audited'
 
 group :development, :test do
   gem 'rspec-rails'
