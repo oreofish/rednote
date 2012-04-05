@@ -2,17 +2,18 @@
 #
 # Table name: tasks
 #
-#  id          :integer(4)      not null, primary key
-#  user_id     :integer(4)
-#  content     :string(255)
-#  estimate    :float
-#  deadline    :datetime
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  assigned_to :integer(4)
-#  start_at    :datetime
-#  finish_at   :datetime
-#  status      :integer(4)      default(0)
+#  id            :integer(4)      not null, primary key
+#  user_id       :integer(4)
+#  content       :string(255)
+#  estimate      :float
+#  deadline      :datetime
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  assigned_to   :integer(4)
+#  start_at      :datetime
+#  finish_at     :datetime
+#  status        :integer(4)      default(0)
+#  commentupdate :datetime
 #
 
 require 'spec_helper'

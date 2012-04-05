@@ -2,22 +2,24 @@
 #
 # Table name: tasks
 #
-#  id          :integer(4)      not null, primary key
-#  user_id     :integer(4)
-#  content     :string(255)
-#  estimate    :float
-#  deadline    :datetime
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  assigned_to :integer(4)
-#  start_at    :datetime
-#  finish_at   :datetime
-#  status      :integer(4)      default(0)
+#  id            :integer(4)      not null, primary key
+#  user_id       :integer(4)
+#  content       :string(255)
+#  estimate      :float
+#  deadline      :datetime
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  assigned_to   :integer(4)
+#  start_at      :datetime
+#  finish_at     :datetime
+#  status        :integer(4)      default(0)
+#  commentupdate :datetime
 #
 
 class Task < ActiveRecord::Base
   acts_as_commentable
   acts_as_taggable_on :projects
+  acts_as_audited
   #has_event_calendar :start_at_field => 'start_at', :end_at_field => 'finish_at'
   has_event_calendar :start_at_field => 'created_at', :end_at_field => 'updated_at'
   

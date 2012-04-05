@@ -36,6 +36,8 @@ GEM
       railties (>= 3.0.0)
     acts-as-taggable-on (2.2.2)
       rails (~> 3.0)
+    acts_as_audited (2.0.0)
+      rails (>= 3.0.3)
     acts_as_commentable (3.0.1)
     addressable (2.2.7)
     ancestry (1.2.5)
@@ -272,6 +274,7 @@ PLATFORMS
 DEPENDENCIES
   acts-as-messageable
   acts-as-taggable-on
+  acts_as_audited
   acts_as_commentable
   annotate
   autotest

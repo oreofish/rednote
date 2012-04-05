@@ -30,7 +30,7 @@ gem 'event-calendar', :require => 'event_calendar'
 gem 'rdiscount'
 gem 'fullcalendar-rails'
 gem 'acts-as-messageable'
-#gem 'acts_as_audited'
+gem 'acts_as_audited'
 
 group :development, :test do
   gem 'rspec-rails'

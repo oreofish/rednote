@@ -29,6 +29,12 @@
   = render 'comments/comment_box'
   = render 'comments/form_task'
 
+.page-header
+  %h3
+    历史
+    %small 修改记录
+= render 'tasks/audits'
+
 :javascript
   if (CKEDITOR.instances["comment_comment_disable_it"]) {
     CKEDITOR.remove(CKEDITOR.instances["comment_comment_disable_it"]);
