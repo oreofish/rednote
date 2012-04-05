@@ -23,40 +23,20 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @note = Note.find(params[:comment][:commentable_id])
-    @comment = @note.comments.create(:comment => params[:comment][:comment])
+    @commentable = Object.const_get(params[:comment][:commentable_type]).find(params[:comment][:commentable_id])
+    @comment = @commentable.comments.create(:comment => params[:comment][:comment])
     @comment.user_id = current_user.id
 
     @comment.comment = string_replace(2 , html_escape(@comment.comment)) # repalce the string
 
     respond_to do |format|
       if @comment.save
-        create_message(@note,@comment)
+        #create_message(@commentable,@comment)
 
         format.js 
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.js { render "index" }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def create_task
-    @task = Task.find(params[:comment][:commentable_id])
-    @comment = @task.comments.create(:comment => params[:comment][:comment])
-    @comment.user_id = current_user.id
-
-    @comment.comment = string_replace(2 , html_escape(@comment.comment)) # repalce the string
-
-    respond_to do |format|
-      if @comment.save
-        #@task.commentupdate = Time.now.to_datetime
-        #@task.save!
-        format.js { render "create" }
-        format.json { render json: @comment, status: :created, location: @comment }
-      else
-        format.js { render "index_task" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end

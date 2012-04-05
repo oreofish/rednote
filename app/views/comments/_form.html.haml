@@ -15,6 +15,7 @@
         %li= msg
 
   =f.hidden_field :commentable_id 
+  =f.hidden_field :commentable_type, :value => 'Note'
   .row-fluid
     .span10=f.text_field :comment
     .span2=f.submit "评论", :class => "btn-info"

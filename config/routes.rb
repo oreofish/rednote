@@ -30,7 +30,6 @@ Rednote::Application.routes.draw do
 
   resources :comments, :only => [:new, :index, :create, :destroy] do 
     collection do 
-      post 'create_task'
       get 'dono'
     end
   end
