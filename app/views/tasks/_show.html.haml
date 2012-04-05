@@ -1,13 +1,12 @@
 - # encoding: utf-8
-- taskname = @task.project_list[0]
 .task-view.row-fluid
   .row
     - if current_user == @task.user
       .pull-right= link_to "删除", @task, :confirm => "确定删除此任务吗?", :method => :delete, :class => "btn"
-    .span1= link_to taskname, project_path(taskname), :class => "btn"
+    .span1= link_to @project.name, @project, :class => "btn"
   .row
     %h3.span1 项目：
-    .span7= taskname
+    .span7= @project.name
   .row
     %h3.span1 创建：
     .span7= @task.user.nickname

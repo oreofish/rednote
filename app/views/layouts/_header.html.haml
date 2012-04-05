@@ -16,19 +16,7 @@
         %ul.nav
           - if user_signed_in?
             %li{:class => (controller_name == "projects" || controller_name == "tasks") && "active"}
-              %li.dropdown#project-menu
-                = link_to "#project-menu", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
-                  首页
-                  %b.caret
-                %ul.dropdown-menu
-                  %li
-                    - Task.project_counts.each do |project|
-                      = link_to "#{project.name}(#{project.count})", project_path(project.name)
-                  %li.divider
-                  %li
-                    = link_to projects_path do
-                      %i.icon-edit
-                      修改
+              = link_to "项目", projects_path
             %li{:class => controller_name == "notes" && "active" }
               = link_to "微博", notes_path
             %li{:class =>controller_name == "books" && "active"}

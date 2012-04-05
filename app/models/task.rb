@@ -19,12 +19,10 @@
 
 class Task < ActiveRecord::Base
   acts_as_commentable
-  acts_as_taggable_on :projects
   acts_as_audited
   #has_event_calendar :start_at_field => 'start_at', :end_at_field => 'finish_at'
-  has_event_calendar :start_at_field => 'created_at', :end_at_field => 'updated_at'
   
-  belongs_to :task
+  belongs_to :project
   belongs_to :user
   validates  :user_id, :presence => true
   validates  :content, :presence => true,

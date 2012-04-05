@@ -13,12 +13,12 @@
           = link_to image_tag(user.avatar_url(:small)), mytasks_tasks_path(:id => user.id), :class => "thumbnail"
     %h2
       当前项目：
-      %small= @project_name
+      %small= @project.name
 
   #questioncontent
-    = link_to "讨论", discuss_tasks_path(:project => @project_name), :id => "latest_commentslink", :remote => true
+    = link_to "讨论", discuss_tasks_path(:project => @project.id), :id => "latest_commentslink", :remote => true
   #taskcontent
-    = link_to "任务", tasks_path(:project => @project_name), :id => "taskprogresslink", :remote => true
+    = link_to "任务", tasks_path(:project => @project.id), :id => "taskprogresslink", :remote => true
   #historycontent
-    %h3= link_to "查看回顾", history_tasks_path(:project => @project_name), :id => "oldtasklink", :remote => true
+    %h3= link_to "查看回顾", history_tasks_path(:project => @project.id), :id => "oldtasklink", :remote => true
 

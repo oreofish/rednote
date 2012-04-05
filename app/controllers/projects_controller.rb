@@ -4,30 +4,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Task.project_counts
-
-    @month = (params[:month] || Time.zone.now.month).to_i
-    @year = (params[:year] || Time.zone.now.year).to_i
-    @shown_month = Date.civil(@year, @month)
-
-    # filter out tasks that act as projects
-    start_d, end_d = Task.get_start_and_end_dates(@shown_month) 
-
-    #tasks = Task.events_for_date_range(start_d, end_d).sort do |x, y|
-      #x.project_counts[0].name <=> y.project_counts[0].name
-    #end
-
-    #i = 0
-    #project_like_tasks = tasks.select do |x|
-      #j = i
-      #i += 1
-      #j == 0 or (j > 0 and (x.project_list[0] != tasks[j-1].project_list[0]))
-    #end
-
-    project_like_tasks = Task.events_for_date_range(start_d, end_d).select do |task|
-       task.content == '新项目建立' and task.project_list.size > 0
-    end
-    @project_strips = Task.create_event_strips(start_d, end_d, project_like_tasks)
+    @projects = Project.all
+    @project = Project.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,8 +17,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project_name = params[:id]
-    @projects = Task.project_counts
+    @project = Project.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -65,15 +42,10 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @new_task = current_user.tasks.new(:content => "新项目建立",
-                                       :status => Task::DONE,
-                                       :start_at => Date.today,
-                                       :finish_at => Date.today.to_datetime + 7
-                                       )
-    @new_task.project_list = params[:project][:name]
+    @project = current_user.projects.new(params[:project])
 
     respond_to do |format|
-      if @new_task.save
+      if @project.save
         format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
         format.js # create.js.erb
         format.json { render json: @project, status: :created, location: @project }

@@ -1,3 +1,8 @@
+.page-header
+  %h2
+    新建
+    %small 创建新项目
+
 = form_for @project do |f|
   -if @project.errors.any?
     #error_explanation
@@ -6,12 +11,6 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :owner_id
-    = f.number_field :owner_id
   .field
     = f.label :name
     = f.text_field :name
@@ -22,4 +21,4 @@
     = f.label :tags
     = f.text_field :tags
   .actions
-    = f.submit 'Save'
+    %button.btn.btn-primary.pull-right{:type=>"submit"} 创建

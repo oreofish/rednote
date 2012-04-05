@@ -2,7 +2,7 @@
 
 - @task.audits.each do |audit|
   = audit.created_at
-  %code= User.find(audit.user_id).nickname
+  %code= User.find(audit.user_id).nickname if audit.user_id
   = "#{audit.action}"
   - audit.audited_changes.each do |key, value|
     %code= key

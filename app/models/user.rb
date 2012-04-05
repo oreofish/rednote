@@ -34,16 +34,17 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :nickname, 
                   :avatar, :avatar_cache, :preview, :preview_cache
 
-  has_many :notes, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
-  has_many :tasks, :dependent => :destroy
-  has_many :likes, :dependent => :destroy
+  has_many :notes,     :dependent => :destroy
+  has_many :comments,  :dependent => :destroy
+  has_many :tasks,     :dependent => :destroy
+  has_many :likes,     :dependent => :destroy
   has_many :attachements, :dependent => :destroy
-  has_one  :debit, :dependent => :destroy
+  has_one  :debit,     :dependent => :destroy
   has_many :books
-  has_many :answers, :dependent => :destroy
+  has_many :answers,   :dependent => :destroy
   has_many :questions, :dependent => :destroy
-  has_many :infos, :dependent => :destroy
+  has_many :infos,     :dependent => :destroy
+  has_many :projects,  :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader

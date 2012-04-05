@@ -13,5 +13,15 @@
 #
 
 class Project < ActiveRecord::Base
-  attr_accessible :name, :owner_id, :summary, :tags, :user_id
+  attr_accessible :name, :owner_id, :summary, :tags
+  acts_as_commentable
+  belongs_to :user
+  has_many :tasks,  :dependent => :destroy
+  
+  validates :name,    :presence => true,
+                      :length   => { :maximum => 50 }
+  validates :summary, :presence => true,
+                      :length   => { :maximum => 200 }
+  validates :user_id, :presence => true
+  
 end

@@ -7,13 +7,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @current_project = params[:project]
+    @current_project = Project.find(params[:project])
     @task = Task.new
-    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @tasks = Array.new
-    all_tasks.each do |task|
-      @tasks << task if task.status == Task::TODO
-    end
+    @tasks = @current_project.tasks.find_all_by_status(Task::TODO)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,12 +19,8 @@ class TasksController < ApplicationController
   end
 
   def history
-    @current_project = params[:project]
-    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
-    @old_tasks = Array.new
-    all_tasks.each do |task|
-      @old_tasks << task if task.status == Task::DONE # and task.finish_at.to_datetime.cweek != Date.today.cweek
-    end
+    @current_project = Project.find(params[:project])
+    @old_tasks = @current_project.tasks.find_all_by_status(Task::DONE)
 
     respond_to do |format|
       format.html # history.html.erb
@@ -38,8 +30,7 @@ class TasksController < ApplicationController
   end
 
   def discuss
-    @current_project = params[:project]
-    all_tasks = Task.tagged_with(@current_project.split(','), :on => :projects, :any => true)
+    @current_project = Project.find(params[:project])
     @comments = Comment.find_by_sql("select distinct commentable_id from (select commentable_id from comments where commentable_type = 'Task' order by created_at DESC) as new limit 6")
     @tasks = Array.new
     @comments.each do |comment|
@@ -58,9 +49,9 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
     @task = Task.find(params[:id])
-    @comment = current_user.comments.new
+    @comment = Comment.new
     @comments = @task.comments
-    @projects = Task.top_projects
+    @project = @task.project
 
     respond_to do |format|
       format.html # show.html.erb
