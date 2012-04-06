@@ -9,10 +9,5 @@
     %h3
       = link_to project.name, project
       %small= project.summary
-
-  .page-header
-    %h2
-      时间表
-      %small 所有项目时间表
-
-  = render 'form'
+  .form-actions
+    = render 'form'

@@ -1,8 +1,3 @@
-.page-header
-  %h2
-    新建
-    %small 创建新项目
-
 = form_for @project do |f|
   -if @project.errors.any?
     #error_explanation
@@ -11,14 +6,13 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :summary
-    = f.text_field :summary
-  .field
-    = f.label :tags
-    = f.text_field :tags
+  .row-fluid
+    = f.label :name, :class => "span1"
+    = f.text_field :name, :class => "span4"
+    = f.label :tags, :class => "span1"
+    = f.text_field :tags, :class => "span5"
+  .row-fluid
+    = f.label :summary, :class => "span1"
+    = f.text_field :summary, :class => "span10"
   .actions
-    %button.btn.btn-primary.pull-right{:type=>"submit"} 创建
+    %button.btn.btn-primary.pull-right{:type=>"submit"} 新建项目

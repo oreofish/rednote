@@ -21,6 +21,7 @@
       user: '用户'
       idea: '点子'
       like: '喜欢'
+      project: '项目'
     attributes:
       user:
         email: '邮件：'
@@ -32,6 +33,10 @@
         content: '内容(请把你点子的意图描述清楚):'
       like:
         score: '分数'
+      project:
+        name: '名称'
+        tags: '标签'
+        summary: '简述'
 
 
   date:
