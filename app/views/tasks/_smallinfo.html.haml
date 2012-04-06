@@ -4,7 +4,7 @@
   .row-fluid.useritem{:id => "user#{user.id}"}
     = link_to image_tag(user.avatar_url(:thumb)), mytasks_tasks_path(:id => user.id), :class => "span3 thumbnail"
     .span7
-      - total = Task::MEETING_TIME
+      - total = 0.1 # a small value, but not be zero
       - done = 0.0
       - tasks = Task.find_by_sql("select * from tasks where assigned_to=#{user.id} and ( status < 2 or (status=2 and finish_at >= '#{Date.today.beginning_of_week.to_datetime.to_formatted_s(:db)}'))")
       - tasks.each do |task|
@@ -13,9 +13,9 @@
       %h4= user.nickname
       .pull-left 承担任务
       .progress.small-progress
-        .bar{ :style=>"width: #{100.0*total/5}%;" }
+        .bar{ :style=>"width: #{100.0*total/Task::MAX_WEEK_TASK_TIME}%;" }
           = total
       .pull-left 完成任务
       .progress.small-progress
-        .bar{ :style=>"width: #{ (total == Task::MEETING_TIME)? 0:100.0*done/(total-1)}%;"}
+        .bar{ :style=>"width: #{100.0*done/total}%;"}
           = done

@@ -41,5 +41,5 @@ class Task < ActiveRecord::Base
   CANCELED = 5 # reserve
   MERGED = 6 # reserve
 
-  MEETING_TIME = 1
+  MAX_WEEK_TASK_TIME = 4
 end
