@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader
+  has_associated_audits
 
   attr_accessor :crop_x, :crop_y, :crop_h, :crop_w
   after_update :reprocess_preview, :if => :cropping?

@@ -31,7 +31,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        #create_message(@commentable,@comment)
+        if @comment.commentable_type=='Note'
+          create_message(@commentable,@comment)
+        end
 
         format.js 
         format.json { render json: @comment, status: :created, location: @comment }
