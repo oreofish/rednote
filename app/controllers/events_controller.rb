@@ -23,7 +23,6 @@ class EventsController < ApplicationController
   
   def index
     @event = Event.new(:end_at => 1.hour.from_now, :period => "Does not repeat")
-    @events = Event.all
     
     respond_to do |format|
       format.html

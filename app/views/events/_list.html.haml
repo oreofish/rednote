@@ -1,4 +1,20 @@
-- @events.each do |event|
+.page-header
+  %h3
+    日程
+    %small 近期安排
+
+- Event.where("end_at > ?", Date.today.to_formatted_s(:db)).each do |event|
   = link_to event.title, event
   = event.start_at
+  %br
+
+.page-header
+  %h3
+    历史
+    %small 修改历史
+
+- Audit.unscoped.order("created_at DESC").limit(30).each do |audit|
+  = User.find(audit.user_id).nickname if audit.user_id
+  = audit.created_at.to_formatted_s(:db)
+  = audit.action
   %br

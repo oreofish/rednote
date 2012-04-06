@@ -34,14 +34,10 @@
     = render "layouts/header"
 
     .container
-      - if controller_name == "projects" or controller_name == "tasks"
-        #main-contents.span12
+      .row
+        - content_for :sidebar, render(:partial => "#{controller_name}/sidebar")
+        #main-contents.span9
           = yield
-      - else
-        .row
-          - content_for :sidebar, render(:partial => "#{controller_name}/sidebar")
-          #main-contents.span8
-            = yield
-          #sidebar.span4
-            = yield :sidebar
-      = render "layouts/footer"
+        #sidebar.span3
+          = yield :sidebar
+    = render "layouts/footer"

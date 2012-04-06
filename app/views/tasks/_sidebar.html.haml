@@ -1,11 +1,2 @@
-
-.board
-  .page-header
-    %h3
-      当前项目：
-      %small= @project_name
-  .page-header
-    %h3 本项目人员
-  - User.all.each do |user|
-    = render :partial => 'tasks/smallinfo', :locals => { :user => user }
+= render 'events/list'
 
