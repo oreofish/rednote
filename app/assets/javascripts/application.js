@@ -33,6 +33,7 @@
 //= require jquery-ui
 //= require fullcalendar
 //= require_tree .
+
 function scrolltop() {
     var __backtoptxt = "回到顶部";
     var __backtopele = $('<div class="backToTop"></div>').appendTo($("html body"))
@@ -126,6 +127,10 @@ function resizeEvent(event, dayDelta, minuteDelta){
         type: 'post',
         url: "/events/resize"
     });
+}
+
+function linkToEvent(event, dayDelta, minuteDelta){
+    window.location.href='/events/' + event.id;
 }
 
 function showEventDetails(event){
