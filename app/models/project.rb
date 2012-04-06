@@ -23,5 +23,6 @@ class Project < ActiveRecord::Base
   validates :summary, :presence => true,
                       :length   => { :maximum => 200 }
   validates :user_id, :presence => true
+  has_associated_audits
   
 end

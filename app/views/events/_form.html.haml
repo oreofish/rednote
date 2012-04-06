@@ -16,6 +16,9 @@
   %br
   = f.label :period, "Repeats"
   = f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);"
+  = f.label :project_id, "Project"
+  - projects_array = Project.all.map { |project| [project.name, project.id] }
+  = f.select :project_id, projects_array
 
   #frequency(style = "display:none;")
     = f.label :frequency, "Repeat every"
