@@ -19,6 +19,7 @@ class Event < ActiveRecord::Base
   attr_accessor :period, :frequency, :commit_button
   belongs_to :event_series
   acts_as_audited
+  acts_as_commentable
 
   validates  :title, :presence => true
   validates  :user_id, :presence => true

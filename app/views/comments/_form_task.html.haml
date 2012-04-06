@@ -9,6 +9,8 @@
       - @comment.errors.full_messages.each do |msg|
         %li= msg
   = f.text_area :comment, :rows => "3"
-  = f.hidden_field :commentable_id, :value => @task.id
-  = f.hidden_field :commentable_type, :value => "Task"
+  = f.hidden_field :commentable_id, :value => @task.id if not @task.nil?
+  = f.hidden_field :commentable_id, :value => @event.id if not @event.nil?
+  = f.hidden_field :commentable_type, :value => "Task" if not @task.nil?
+  = f.hidden_field :commentable_type, :value => "Event" if not @event.nil?
   = f.submit "评论", :class => "btn-info pull-right"

@@ -16,6 +16,14 @@
 
   .page-header
     %h3
+      评论
+      %small 相关讨论
+  .taskcomments{:id => "comments_list#{@event.id}"}
+    = render 'comments/comment_box'
+    = render 'comments/form_task'
+
+  .page-header
+    %h3
       历史
       %small 修改记录
   = render 'events/audits'

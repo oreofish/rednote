@@ -33,6 +33,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @comment = Comment.new
+    @comments = @event.comments
     @events = Event.all
     
     respond_to do |format|
