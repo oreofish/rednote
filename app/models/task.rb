@@ -29,7 +29,7 @@ class Task < ActiveRecord::Base
                        :length   => { :maximum => 255 }
 
   attr_accessible :assigned_to, :content, :estimate, :deadline,
-                  :status, :start_at, :finish_at
+                  :status, :start_at, :finish_at, :project_id
   
   #default_scope order(:status, :updated_at)
   

@@ -161,8 +161,9 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @tasks = current_user.tasks
-    @task = current_user.tasks.new(:content => params[:task][:content])
-    @task.project_list = params[:project][:name]
+    @task = current_user.tasks.new(:project_id => params[:task][:project_id],
+                                   :content => params[:task][:content]
+                                   )
     @task.status = Task::TODO
 
     respond_to do |format|

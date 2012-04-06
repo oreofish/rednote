@@ -1,6 +1,6 @@
 - # encoding: utf-8
 
-= form_tag tasks_path, :class => :form, :remote => true do
-  = text_area :task, :content, :class => '', :rows => 2, :placeholder => "任务描述"
-  = hidden_field :project, :name, :value => @current_project
+= form_for @task, :remote => true do |f|
+  = f.hidden_field :project_id, :value => @current_project.id
+  = f.text_area :content, :rows => 2, :placeholder => "任务描述"
   %button.btn.btn-primary.pull-right{ :type=>"submit"} 添加任务
