@@ -15,7 +15,8 @@ Rednote::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :projects
-
+  resources :events
+  
   resources :debits, :only => [:new, :destroy] do
     collection do
       post 'unwaiting'

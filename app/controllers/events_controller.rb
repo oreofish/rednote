@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
   
   def index
-    
+    @event = Event.new(:end_at => 1.hour.from_now, :period => "Does not repeat")
   end
   
   
@@ -26,7 +26,6 @@ class EventsController < ApplicationController
     end
     render :text => events.to_json
   end
-  
   
   
   def move

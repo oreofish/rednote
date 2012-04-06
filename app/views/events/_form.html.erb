@@ -1,4 +1,4 @@
-<%remote_form_for @event, :url => {:action => :create}, :before => "$('#creating_events').show();", :complete => "$('#creating_events').hide();" do |f| %>
+<% form_for @event, :remote => true do |f| %>
 <p>
   <%=f.label :title %>
   <br/>
@@ -10,14 +10,14 @@
   <%=f.text_area :description, :rows => 4, :cols => 30 %>
 </p>
 <p>
-  <%=f.label :starttime, 'Start Time' %>
+  <%=f.label :start_at, 'Start Time' %>
   <br/>
-  <%=f.datetime_select :starttime %>
+  <%=f.datetime_select :start_at %>
 </p>
 <p>
-  <%=f.label :endtime, 'End Time' %>
+  <%=f.label :end_at, 'End Time' %>
   <br/>
-  <%=f.datetime_select :endtime %>
+  <%=f.datetime_select :end_at %>
 </p>
 <p>
   <%=f.label :all_day %>
