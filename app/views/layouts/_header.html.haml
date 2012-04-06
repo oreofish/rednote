@@ -17,6 +17,8 @@
           - if user_signed_in?
             %li{:class => (controller_name == "projects" || controller_name == "tasks") && "active"}
               = link_to "项目", projects_path
+            %li{:class => controller_name == "events" && "active" }
+              = link_to "日程", events_path
             %li{:class => controller_name == "notes" && "active" }
               = link_to "微博", notes_path
             %li{:class =>controller_name == "books" && "active"}

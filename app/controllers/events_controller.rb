@@ -6,18 +6,41 @@ class EventsController < ApplicationController
   
   def create
     if params[:event][:period] == "Does not repeat"
-      @event = Event.new(params[:event])
+      @event = current_user.events.new(params[:event])
+      @event.save
     else
-      #      @event_series = EventSeries.new(:frequency => params[:event][:frequency], :period => params[:event][:repeats], :start_at => params[:event][:start_at], :end_at => params[:event][:end_at], :all_day => params[:event][:all_day])
-      @event_series = EventSeries.new(params[:event])
+      # @event_series = EventSeries.new(:frequency => params[:event][:frequency], :period => params[:event][:repeats],
+      # :start_at => params[:event][:start_at], :end_at => params[:event][:end_at], :all_day => params[:event][:all_day])
+      @event_series = current_user.eventSeries.new(params[:event])
+      @event_series.save
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to project_path(params[:project][:name]) }
+      format.js # create.js.erb
     end
   end
   
   def index
     @event = Event.new(:end_at => 1.hour.from_now, :period => "Does not repeat")
+    @events = Event.all
+    
+    respond_to do |format|
+      format.html
+      format.js # index.js.erb
+    end
   end
-  
-  
+
+  def show
+    @event = Event.find(params[:id])
+    @events = Event.all
+    
+    respond_to do |format|
+      format.html
+      format.js # index.js.erb
+    end
+  end
+
   def get_events
     @events = Event.find(:all, :conditions => ["start_at >= '#{Time.at(params['start'].to_i).to_formatted_s(:db)}' and end_at <= '#{Time.at(params['end'].to_i).to_formatted_s(:db)}'"] )
     events = [] 
@@ -65,8 +88,8 @@ class EventsController < ApplicationController
     end
 
     render :update do |page|
-      page<<"$('#calendar').fullCalendar( 'refetchEvents' )"
-      page<<"$('#desc_dialog').dialog('destroy')" 
+      page << "$('#calendar').fullCalendar( 'refetchEvents' )"
+      page << "$('#desc_dialog').dialog('destroy')" 
     end
     
   end  

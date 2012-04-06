@@ -1,0 +1,29 @@
+= form_for(@event, :remote => true) do |f|
+  = f.label :title
+  = f.text_field :title
+  %br
+  = f.label :description
+  = f.text_area :description, :rows => 4, :cols => 30
+  %br
+  = f.label :start_at, 'Start Time'
+  = f.datetime_select :start_at
+  %br
+  = f.label :end_at, 'End Time'
+  = f.datetime_select :end_at
+  %br
+  = f.label :all_day
+  = f.check_box :all_day
+  %br
+  = f.label :period, "Repeats"
+  = f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);"
+
+  #frequency(style = "display:none;")
+    = f.label :frequency, "Repeat every"
+    = f.select :frequency, (1..30).to_a
+    %span#period
+
+  = f.hidden_field :id, :value => @event.id
+  %br
+  = f.submit 'Create', :class => "btn-primary", :onclick => "$('#creating_events').show()"
+  %span#creating_events(style="display:none;")
+    Creating, Please wait...

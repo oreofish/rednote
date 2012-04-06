@@ -18,9 +18,9 @@
 class Event < ActiveRecord::Base
   attr_accessor :period, :frequency, :commit_button
   belongs_to :event_series
+  acts_as_audited
 
   validates  :title, :presence => true
-  validates  :description, :presence => true
   validates  :user_id, :presence => true
 
   REPEATS = [ "Does not repeat",

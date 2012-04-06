@@ -15,7 +15,14 @@ Rednote::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :projects
-  resources :events
+  resources :events do
+    collection do
+      get 'get_events'
+      post 'move'
+      post 'resize'
+    end
+  end
+    
   
   resources :debits, :only => [:new, :destroy] do
     collection do

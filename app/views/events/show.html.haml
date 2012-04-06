@@ -1,0 +1,21 @@
+- # encoding: utf-8
+
+.board
+  .page-header
+    %h3
+      日程安排
+      %small 日程安排
+  .event
+    = @event.title
+    %br
+    = @event.description
+    %br
+    = @event.start_at 
+    %br
+    = @event.end_at
+
+  .page-header
+    %h3
+      历史
+      %small 修改记录
+  = render 'events/audits'

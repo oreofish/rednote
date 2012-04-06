@@ -6,7 +6,7 @@ jQuery ->
   $('#calendar').fullCalendar({
     # put your options and callbacks here
     editable: true,
-    defaultView: 'agendaWeek',
+    defaultView: 'month',
     slotMinutes: 15,
     header: {
       left: 'prev,next today',
@@ -31,17 +31,12 @@ jQuery ->
       alert('a day has been clicked!' + view.title)
 
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->
-      if (confirm("Are you sure about this change?"))
-        moveEvent(event, dayDelta, minuteDelta, allDay)
-      else
-        revertFunc()
+      moveEvent(event, dayDelta, minuteDelta, allDay)
 
     eventResize: (event, dayDelta, minuteDelta, revertFunc) ->
-      if (confirm("Are you sure about this change?"))
-        resizeEvent(event, dayDelta, minuteDelta)
-      else
-        revertFunc()
+      resizeEvent(event, dayDelta, minuteDelta)
     
     eventClick: (event, jsEvent, view) ->
       showEventDetails(event);
   })
+

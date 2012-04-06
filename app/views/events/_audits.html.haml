@@ -1,0 +1,13 @@
+- # encoding: utf-8
+
+- @event.audits.each do |audit|
+  = audit.created_at
+  %code= User.find(audit.user_id).nickname if audit.user_id
+  = "#{audit.action}"
+  - audit.audited_changes.each do |key, value|
+    %code= key
+    from
+    %code= value[0]
+    to
+    %code= value[1]
+  %br

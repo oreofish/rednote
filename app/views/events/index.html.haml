@@ -1,0 +1,16 @@
+.board
+  %h1 工作日历
+  = link_to '创建提醒', new_event_path, :remote => true
+
+  %div
+    #calendar
+
+  #desc_dialog(style="display:none;")
+    #event_desc
+    %br
+    #event_actions
+      %span#edit_event
+      %span#delete_event
+
+  #create_event_dialog(style ="display:none;")
+    #create_event
