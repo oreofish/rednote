@@ -1,32 +1,23 @@
-= form_for(@event, :remote => true) do |f|
-  = f.label :title
-  = f.text_field :title
-  %br
-  = f.label :description
-  = f.text_area :description, :rows => 4, :cols => 30
-  %br
-  = f.label :start_at, 'Start Time'
-  = f.text_field :start_at
-  %br
-  = f.label :end_at, 'End Time'
-  = f.text_field :end_at
-  %br
-  = f.label :all_day
-  = f.check_box :all_day
-  %br
-  = f.label :period, "Repeats"
-  = f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);"
-  = f.label :project_id, "Project"
-  - projects_array = Project.all.map { |project| [project.name, project.id] }
-  = f.select :project_id, projects_array
-
-  #frequency(style = "display:none;")
-    = f.label :frequency, "Repeat every"
-    = f.select :frequency, (1..30).to_a
-    %span#period
+= simple_form_for @event, :remote => true, :html => {:class=>'form-inline'} do |f|
+  = f.input :title
+  = f.input :start_at, :as => :string
+  = f.input :end_at, :as => :string
+  = f.input :all_day
+  = # f.label :project_id, "Project"
+  - # projects_array = Project.all.map { |project| [project.name, project.id] }
+  = # f.select :project_id, projects_array
+  .row-fluid
+    .span4
+      = f.label :period, "Repeats"
+      = f.select :period, Event::REPEATS,{}, :onchange => "showPeriodAndFrequency(this.value);"
+    .span7
+      #frequency(style = "display:none;")
+        = f.label :frequency, "Repeat every"
+        = f.select :frequency, (1..30).to_a
+        %span#period
 
   = f.hidden_field :id, :value => @event.id
   %br
-  = f.submit 'Create', :class => "btn-primary", :onclick => "$('#creating_events').show()"
+  = f.submit 'Create', :class => "pull-right btn-primary", :onclick => "$('#creating_events').show()"
   %span#creating_events(style="display:none;")
     Creating, Please wait...

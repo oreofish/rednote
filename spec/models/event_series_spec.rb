@@ -10,6 +10,8 @@
 #  all_day    :boolean(1)      default(FALSE)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  project_id :integer(4)
+#  user_id    :integer(4)
 #
 
 require 'spec_helper'

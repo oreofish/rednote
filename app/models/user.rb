@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   has_many :infos,     :dependent => :destroy
   has_many :projects,  :dependent => :destroy
   has_many :events,    :dependent => :destroy
-  has_many :event_series, :dependent => :destroy
+  has_many :eventSeries, :dependent => :destroy
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :preview, PreviewUploader

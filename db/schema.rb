@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405151200) do
+ActiveRecord::Schema.define(:version => 20120406163246) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20120405151200) do
     t.boolean  "all_day",    :default => false
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
+    t.integer  "project_id"
+    t.integer  "user_id"
   end
 
   create_table "events", :force => true do |t|

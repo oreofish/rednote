@@ -10,15 +10,22 @@
 #  all_day    :boolean(1)      default(FALSE)
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
+#  project_id :integer(4)
+#  user_id    :integer(4)
 #
 
 class EventSeries < ActiveRecord::Base
   attr_accessor :title, :description, :commit_button
-
-  validates_presence_of :frequency, :period, :start_at, :end_at
-  validates_presence_of :title, :description
-
   has_many :events, :dependent => :destroy
+  belongs_to :user
+
+  validates  :frequency, :presence => true
+  validates  :period, :presence => true
+  validates  :start_at, :presence => true
+  validates  :end_at, :presence => true
+  validates  :title, :presence => true
+  validates  :description, :presence => true
+
 
   def after_create
     create_events_until(END_TIME)

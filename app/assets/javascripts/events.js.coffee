@@ -15,9 +15,9 @@ jQuery ->
     },
 
     loading: (bool) ->
-      if (bool) 
+      if (bool)
         $('#loading').show()
-      else 
+      else
         $('#loading').hide()
 
     weekends: false # will hide Saturdays and Sundays
@@ -27,15 +27,15 @@ jQuery ->
     timeFormat: 'h:mm t{ - h:mm t} ',
     dragOpacity: "0.5",
 
-    dayClick: (view) ->
-      alert('a day has been clicked!' + view.title)
+    dayClick: (date, allDay, jsEvent, view) ->
+      clickEvent(date, allDay, jsEvent, view)
 
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->
       moveEvent(event, dayDelta, minuteDelta, allDay)
 
     eventResize: (event, dayDelta, minuteDelta, revertFunc) ->
       resizeEvent(event, dayDelta, minuteDelta)
-    
+
     eventClick: (event, jsEvent, view) ->
       linkToEvent(event);
       # showEventDetails(event);
