@@ -24,8 +24,6 @@ class EventSeries < ActiveRecord::Base
   validates  :start_at, :presence => true
   validates  :end_at, :presence => true
   validates  :title, :presence => true
-  validates  :description, :presence => true
-
 
   def after_create
     create_events_until(END_TIME)
@@ -38,7 +36,7 @@ class EventSeries < ActiveRecord::Base
     nst, net = st, et
     
     while frequency.send(p).from_now(st) <= end_time
-#      puts "#{nst}           :::::::::          #{net}" if nst and net
+      puts "#{nst}           :::::::::          #{net}" if nst and net
       self.events.create(:title => title, :description => description, :all_day => all_day, :start_at => nst, :end_at => net)
       nst = st = frequency.send(p).from_now(st)
       net = et = frequency.send(p).from_now(et)

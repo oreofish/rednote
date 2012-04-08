@@ -13,8 +13,10 @@ class EventsController < ApplicationController
       @event = current_user.events.new(params[:event])
       @event.save
     else
-      # @event_series = EventSeries.new(:frequency => params[:event][:frequency], :period => params[:event][:repeats],
-      # :start_at => params[:event][:start_at], :end_at => params[:event][:end_at], :all_day => params[:event][:all_day])
+      # @event_series = EventSeries.new(:frequency => params[:event][:frequency],
+      # :period => params[:event][:repeats],
+      # :start_at => params[:event][:start_at], :end_at => params[:event][:end_at],
+      # :all_day => params[:event][:all_day])
       @event_series = current_user.eventSeries.new(params[:event])
       @event_series.save
     end

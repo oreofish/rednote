@@ -20,7 +20,7 @@ jQuery ->
       else
         $('#loading').hide()
 
-    weekends: false # will hide Saturdays and Sundays
+    weekends: true # will hide Saturdays and Sundays
     height: 600
     weekMode: 'variable'
     events: "/events/get_events",
