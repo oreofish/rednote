@@ -2,8 +2,9 @@
   %h3
     日程
     %small 近期安排
-
-- Event.where("end_at > ?", Date.today.to_formatted_s(:db)).each do |event|
+- today = Date.today.to_formatted_s(:db)
+- next_friday = Date.today.next_week(:saturday) # the end of friday
+- Event.where("end_at > ? and start_at < ?", today, next_friday).each do |event|
   = link_to event.title, event
   = event.start_at
   %br

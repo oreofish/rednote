@@ -36,11 +36,12 @@ class EventSeries < ActiveRecord::Base
     
     while frequency.send(p).from_now(st) <= end_time
       puts "#{nst}           :::::::::          #{net}" if nst and net
-      puts "#{title}           :::::::::          #{all_day}"
+      Event.disable_auditing
       self.events.create(:title => title, :description => description,
                          :user_id => self.user_id, :all_day => all_day,
                          :start_at => nst, :end_at => net
                          )
+      Event.enable_auditing
       nst = st = frequency.send(p).from_now(st)
       net = et = frequency.send(p).from_now(et)
 
