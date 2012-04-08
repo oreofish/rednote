@@ -1,7 +1,11 @@
 class EventsController < ApplicationController
   
   def new
-    @event = Event.new(:end_at => 1.hour.from_now, :period => "Does not repeat")
+    start_at = DateTime.now
+    start_at = Time.at(params[:date].to_i/1000) if params[:date]
+    @event = Event.new(:start_at => start_at,
+                       :end_at => start_at + 3600,
+                       :period => "Does not repeat")
   end
   
   def create

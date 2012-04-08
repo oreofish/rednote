@@ -113,7 +113,7 @@ $(document).ready( function() {
 
 function clickEvent(date, allDay, jsEvent, view){
     jQuery.ajax({
-        data: 'date=' + date,
+        data: 'date=' + date.getTime().toString(),
         dataType: 'script',
         type: 'get',
         url: "/events/new"

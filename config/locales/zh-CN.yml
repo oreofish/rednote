@@ -43,6 +43,7 @@
         start_at: '开始于'
         end_at: '结束于'
         all_day: '全天'
+        period: '重复'
         
 
 
