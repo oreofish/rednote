@@ -15,6 +15,8 @@
 #
 
 class EventSeries < ActiveRecord::Base
+  after_create :create_events_until
+
   attr_accessor :title, :description, :commit_button
   has_many :events, :dependent => :destroy
   belongs_to :user
@@ -25,11 +27,8 @@ class EventSeries < ActiveRecord::Base
   validates  :end_at, :presence => true
   validates  :title, :presence => true
 
-  def after_create
-    create_events_until(END_TIME)
-  end
-
-  def create_events_until(end_time)
+  def create_events_until
+    end_time = END_TIME
     st = start_at
     et = end_at
     p = r_period(period)
@@ -37,7 +36,11 @@ class EventSeries < ActiveRecord::Base
     
     while frequency.send(p).from_now(st) <= end_time
       puts "#{nst}           :::::::::          #{net}" if nst and net
-      self.events.create(:title => title, :description => description, :all_day => all_day, :start_at => nst, :end_at => net)
+      puts "#{title}           :::::::::          #{all_day}"
+      self.events.create(:title => title, :description => description,
+                         :user_id => self.user_id, :all_day => all_day,
+                         :start_at => nst, :end_at => net
+                         )
       nst = st = frequency.send(p).from_now(st)
       net = et = frequency.send(p).from_now(et)
 

@@ -22,7 +22,6 @@ class Event < ActiveRecord::Base
   acts_as_commentable
 
   validates  :title, :presence => true
-  validates  :user_id, :presence => true
 
   REPEATS = [ "Does not repeat",
               "Daily",
