@@ -181,7 +181,7 @@ function deleteEvent(event_id, delete_all){
     jQuery.ajax({
         data: 'id=' + event_id + '&delete_all='+delete_all,
         dataType: 'script',
-        type: 'post',
+        type: 'delete',
         url: "/events/destroy"
     });
 }
