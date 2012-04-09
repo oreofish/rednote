@@ -17,6 +17,7 @@ class Project < ActiveRecord::Base
   acts_as_commentable
   belongs_to :user
   has_many :tasks,  :dependent => :destroy
+  has_many :documents,  :dependent => :destroy
   
   validates :name,    :presence => true,
                       :length   => { :maximum => 50 }

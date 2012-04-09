@@ -1,5 +1,7 @@
 Rednote::Application.routes.draw do
 
+  resources :documents
+
   #resources :questions
   #resources :answers
   #resources :ats

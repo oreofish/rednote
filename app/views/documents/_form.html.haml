@@ -1,0 +1,14 @@
+= form_for(@document, :class => "form-horizontal") do |f|
+  -if @document.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(document.errors.count, "error")} prohibited this document from being saved:"
+      %ul
+        - @document.errors.full_messages.each do |msg|
+          %li= msg
+  = f.label "标题"
+  = f.text_field :title
+  = f.label "内容"
+  = f.text_area :content, :rows => "6"
+  = f.hidden_field :project_id, :value => @project.id
+  .actions
+    = f.submit 'Save'

@@ -36,3 +36,4 @@ jQuery ->
 
   $('#taskprogresslink').click()
   $('#latest_commentslink').click()
+  $('#documentfiles').click()

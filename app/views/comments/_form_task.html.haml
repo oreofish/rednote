@@ -11,6 +11,8 @@
   = f.text_area :comment, :rows => "3"
   = f.hidden_field :commentable_id, :value => @task.id if not @task.nil?
   = f.hidden_field :commentable_id, :value => @event.id if not @event.nil?
+  = f.hidden_field :commentable_id, :value => @document.id if not @document.nil?
   = f.hidden_field :commentable_type, :value => "Task" if not @task.nil?
   = f.hidden_field :commentable_type, :value => "Event" if not @event.nil?
+  = f.hidden_field :commentable_type, :value => "Document" if not @decument.nil?
   = f.submit "评论", :class => "btn-info pull-right"
