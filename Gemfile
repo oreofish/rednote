@@ -31,6 +31,8 @@ gem 'rdiscount'
 gem 'fullcalendar-rails'
 gem 'acts-as-messageable'
 gem 'acts_as_audited'
+gem 'mailboxer'
+gem 'ruport'
 
 group :development, :test do
   gem 'rspec-rails'
