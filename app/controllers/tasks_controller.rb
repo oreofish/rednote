@@ -31,7 +31,7 @@ class TasksController < ApplicationController
 
   def discuss
     @current_project = Project.find(params[:project])
-    @comments = Comment.find_by_sql("select distinct commentable_id from (select commentable_id from comments where commentable_type = 'Task' order by created_at DESC) as new limit 6")
+    @comments = Comment.find_by_sql("select distinct commentable_id from (select commentable_id from comments where commentable_type = 'Task' order by created_at DESC) as new where commentable_id in (select id from tasks where project_id = #{@current_project.id}) limit 6")
     @tasks = Array.new
     @comments.each do |comment|
       @task = Task.find(comment.commentable_id)
