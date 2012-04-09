@@ -11,7 +11,41 @@
 body {
     background: #c4c4c4 url("/assets/web-app-theme/themes/default/images/bgd.jpg");
     font-family: helvetica, arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
+}
+
+input, textarea, .uneditable-input {
+    width: 100%;
+}
+
+select {
+    width: 75px;
+}
+
+.small-progress {
+  margin-top: 1px;
+  margin-bottom: 4px;
+}
+
+/* Tweak navbar brand link to be super sleek
+-------------------------------------------------- */
+.navbar-fixed-top .brand-img {
+    float: left;
+    margin: 0;
+    padding: 0px 0px 0px 15px;
+    vertical-align: middle;
+}
+
+.navbar-fixed-top .brand:hover {
+}
+
+.navbar-inner {
+    background: #444;
+    border-bottom: 1px solid whiteSmoke;
+    box-shadow: 0 0 8px rgba(0,0,0,.7);
+    filter: Alpha(opacity=70);
+    -moz-opacity:0.7;
+    opacity:0.7;
 }
 
 label,input,button,select,textarea {
@@ -20,16 +54,12 @@ label,input,button,select,textarea {
 
 .small-link {
     color: #7AA5B9;
+    font-size: 12px;
 }
 
 .vline {
     margin: 0 2px;
     color: #E1E4E5;
-}
-
-/* Space out sub-sections more
--------------------------------------------------- */
-section {
 }
 
 /* Faded out hr */

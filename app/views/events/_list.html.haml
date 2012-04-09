@@ -5,17 +5,17 @@
 - today = Date.today.to_formatted_s(:db)
 - next_friday = Date.today.next_week(:saturday) # the end of friday
 - Event.where("end_at > ? and start_at < ?", today, next_friday).each do |event|
+  %span.live-timestamp(data-notetime="#{event.start_at}")
   = link_to event.title, event
-  = event.start_at
   %br
 
 .page-header
   %h3
     历史
-    %small 修改历史
+    %small 最近30个改动
 
 - Audit.unscoped.order("created_at DESC").limit(30).each do |audit|
+  %span.live-timestamp(data-notetime="#{audit.created_at}")
   = User.find(audit.user_id).nickname if audit.user_id
-  = audit.created_at.to_formatted_s(:db)
   = audit.action
   %br

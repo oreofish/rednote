@@ -1,4 +1,4 @@
-= form_for @project do |f|
+= simple_form_for @project, :wrapper => :bootstrap do |f|
   -if @project.errors.any?
     #error_explanation
       %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
@@ -6,13 +6,8 @@
         - @project.errors.full_messages.each do |msg|
           %li= msg
 
-  .row-fluid
-    = f.label :name, :class => "span1"
-    = f.text_field :name, :class => "span4"
-    = f.label :tags, :class => "span1"
-    = f.text_field :tags, :class => "span5"
-  .row-fluid
-    = f.label :summary, :class => "span1"
-    = f.text_field :summary, :class => "span10"
+  = f.input :name
+  = f.input :tags
+  = f.input :summary
   .actions
     %button.btn.btn-primary.pull-right{:type=>"submit"} 新建项目

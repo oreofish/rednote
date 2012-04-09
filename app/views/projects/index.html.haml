@@ -1,13 +1,11 @@
 - # encoding: utf-8
 
 .board
-  .page-header
-    %h2
-      项目
-      %small 全部项目
+  %h1 项目
   - @projects.each do |project|
-    %h3
-      = link_to project.name, project
-      %small= project.summary
+    .page-header
+      %h2
+        = link_to project.name, project
+        %small= project.summary
   .form-actions
     = render 'form'
