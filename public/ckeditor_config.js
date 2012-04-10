@@ -18,7 +18,7 @@ CKEDITOR.editorConfig = function( config )
     ];
 
     config.toolbar_Simple =   [
-        { name: 'insert', items : [ 'Image','Smiley'] },
+        { name: 'insert', items : ['Smiley'] },
         { name: 'basicstyles', items : [ 'Bold','NumberedList','BulletedList'] },
         { name: 'links', items : [ 'Link','Unlink' ] },
     ];

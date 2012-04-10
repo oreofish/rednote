@@ -1,6 +1,6 @@
 Rednote::Application.routes.draw do
 
-  resources :documents
+  resources :documents, :only => [:index, :create, :show, :destroy, :update]
 
   #resources :questions
   #resources :answers

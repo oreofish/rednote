@@ -1,14 +1,14 @@
 #comment_list
   -@comments.each do |comment|
-    #comment#{comment.id}
-      %div { "data-toggle" => "collapse", "data-target" => "#note_link_commentid#{comment.id}", "data-parent" => "#comment_list" }
+    %div{ :id => "comment#{comment.id}"}
+      %div{ "data-toggle" => "collapse", "data-target" => "#note_link_commentid#{comment.id}", "data-parent" => "#comment_list" }
         %i.icon-chevron-down
         = comment.comment.html_safe
         = link_to "#removecomment#{comment.id}", 'data-toggle'=>"modal", :class => 'small-button' do
           %i.icon-remove
-        .commentremove modal hide fade" id="removecomment<%=comment.id%>" style="display:none"
+        .commentremove.modal.hide.fade{ :id => "removecomment#{comment.id}", "style" => "display:none"}
           .modal-header
-            %a.close { "data-dismiss" => "modal" }
+            %a.close{ "data-dismiss" => "modal" }
               %i.icon-remove
             %h3删除评论
 
@@ -18,14 +18,14 @@
             = link_to '删除', comment, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
             = link_to '取消', "close", :class=>"btn", "data-dismiss" => "modal"
 
-      .collapse.in#note_link_commentid#{comment.id}
+      .collapse.in{:id => "note_link_commentid#{comment.id}"}
         %br
         .row-fluid
-        - note = Note.find(comment.commentable_id)
+          - note = Note.find(comment.commentable_id)
           .span1
             = image_tag(User.find(note.user_id).avatar_url(:small), :height => "40", :width => "40", :class => "avatar")
           .span11.item
             = note.summary.html_safe
-            .live-timestamp { "data-notetime" => "#{note.created_at}"
+            .live-timestamp{ "data-notetime" => "#{note.created_at}"}
     %hr
 
