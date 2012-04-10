@@ -179,7 +179,7 @@ function editEvent(event_id){
 
 function deleteEvent(event_id, delete_all){
     jQuery.ajax({
-        data: 'id=' + event_id + '&delete_all='+delete_all,
+        data: '_method=delete' + '&id=' + event_id + '&delete_all='+delete_all,
         dataType: 'script',
         type: 'post',
         url: "/events/destroy"

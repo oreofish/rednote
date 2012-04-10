@@ -37,7 +37,7 @@ jQuery ->
       resizeEvent(event, dayDelta, minuteDelta)
 
     eventClick: (event, jsEvent, view) ->
-      linkToEvent(event);
-      # showEventDetails(event);
+      showEventDetails(event);
+      # linkToEvent(event);
   })
 
