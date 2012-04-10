@@ -14,7 +14,7 @@
           .span1
             = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
             user_path(user), :title => "#{comment.user_id}" 
-          .span11
+          .span11.truncate
             = link_to task do
               %strong= task.content.html_safe
             = comment.comment.html_safe
