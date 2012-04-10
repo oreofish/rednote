@@ -1,6 +1,8 @@
 - # encoding: utf-8 
 %div{:id => "document#{document.id}", :class => "documentlist" }
-  - title = document.title
+  - @title = document.title
   - if document.title.nil?
-    - title = '未命名'
-  =link_to title, document
+    - @title = '未命名'
+  =link_to document do
+    %i.icon-file
+    = @title
