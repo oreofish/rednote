@@ -1,7 +1,7 @@
 - # encoding: utf-8
 
 - @task.audits.each do |audit|
-  = audit.created_at
+  %span.live-timestamp(data-notetime="#{audit.created_at}")
   %code= User.find(audit.user_id).nickname if audit.user_id
   = "#{audit.action}"
   - if audit.action == 'create'

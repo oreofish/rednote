@@ -2,7 +2,7 @@ CKEDITOR.editorConfig = function( config )
 {
     config.language = 'zh-cn';
     config.uiColor = '#eeeeee';
-    config.skin = 'v2';
+    //config.skin = 'v2';
     config.fontSize_defaultLabel = '14px';
 
     config.toolbar = 'Simple';
