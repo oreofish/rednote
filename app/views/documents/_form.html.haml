@@ -10,5 +10,5 @@
   = f.label "内容"
   = f.text_area :content, :rows => "6"
   = f.hidden_field :project_id, :value => @project.id
-  .actions
-    = f.submit 'Save'
+  %br 
+  = f.submit '保存', :class => "btn-info pull-right"
