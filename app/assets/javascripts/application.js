@@ -143,20 +143,20 @@ function linkToEvent(event, dayDelta, minuteDelta){
 }
 
 function showEventDetails(event){
-    $('#event_desc').html(event.description);
-    $('#edit_event').html("<a href = 'javascript:void(0);' onclick ='editEvent(" + event.id + ")'>Edit</a>");
+    $('#event_desc').html(event.title);
+    $('#edit_event').html("<a href = '/events/" + event.id + "' class='btn'>Show</a> <a href = 'javascript:void(0);' class='btn' onclick ='editEvent(" + event.id + ")'>Edit</a>");
     if (event.recurring) {
         title = event.title + "(Recurring)";
-        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
-        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
+        $('#delete_event').html("&nbsp; <a href = 'javascript:void(0);' class='btn' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete Only This Occurrence</a>");
+        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='btn' onclick ='deleteEvent(" + event.id + ", " + true + ")'>Delete All In Series</a>")
+        $('#delete_event').append("&nbsp;&nbsp; <a href = 'javascript:void(0);' class='btn' onclick ='deleteEvent(" + event.id + ", \"future\")'>Delete All Future Events</a>")
     }
     else {
         title = event.title;
         $('#delete_event').html("<a href = 'javascript:void(0);' onclick ='deleteEvent(" + event.id + ", " + false + ")'>Delete</a>");
     }
     $('#desc_dialog').dialog({
-        title: title,
+        title: 'Event',
         modal: true,
         width: 500,
         close: function(event, ui){
@@ -170,10 +170,10 @@ function showEventDetails(event){
 
 function editEvent(event_id){
     jQuery.ajax({
-        data: 'id=' + event_id,
+        data: '',
         dataType: 'script',
         type: 'get',
-        url: "/events/edit"
+        url: "/events/" + event_id + "/edit"
     });
 }
 

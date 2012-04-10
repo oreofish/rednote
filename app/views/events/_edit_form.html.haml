@@ -1,0 +1,20 @@
+= simple_form_for @event, :remote => true do |f|
+  = f.input :title
+  = f.input :start_at, :as => :string
+  = f.input :end_at, :as => :string
+  = f.input :all_day
+  = f.hidden_field :id, :value => @event.id
+  = f.hidden_field :commit_button, :value => ""
+  %br
+  - if @event.event_series
+    = f.submit 'Update Only This Occurrence', :class => "btn", |
+      :onclick => "document.getElementById('event_commit_button').value = this.value"
+    = f.submit 'Update All Occurrence', :class => "btn", |
+      :onclick => "document.getElementById('event_commit_button').value = this.value"
+    = f.submit 'Update All Following Occurrence', :class => "btn", |
+      :onclick => "document.getElementById('event_commit_button').value = this.value"
+  - else
+    = f.submit 'Update', :class => "btn", |
+      :onclick => "document.getElementById('event_commit_button').value = this.value"
+
+  %span#updating_events(style = "display:none;") Updating, Please wait...
