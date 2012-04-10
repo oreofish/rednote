@@ -6,7 +6,8 @@
     = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
     user_path(user), :title => "#{comment.user_id}" 
   .span11
-    = RDiscount.new(comment.comment).to_html.html_safe
+    //disable rdiscount
+    = comment.comment
     .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
     - if(comment.user_id == current_user.id and comment.commentable_type == "Note")
       = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do

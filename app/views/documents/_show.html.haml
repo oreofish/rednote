@@ -24,8 +24,12 @@
 = render 'documents/audits'
 
 :javascript
-  if (CKEDITOR.instances["comment_comment_disable_it"]) {
-    CKEDITOR.remove(CKEDITOR.instances["comment_comment_disable_it"]);
+  if (CKEDITOR.instances["comment_comment"]) {
+    CKEDITOR.remove(CKEDITOR.instances["comment_comment"]);
   }
-  CKEDITOR.replace("comment_comment_disable_it", { "language":"zh-cn", "customConfig":"/ckeditor_config.js" });
+  CKEDITOR.replace("comment_comment", { "language":"zh-cn", "customConfig":"/ckeditor_config.js", "height":"50"});
 
+  if (CKEDITOR.instances["document_content"]) {
+    CKEDITOR.remove(CKEDITOR.instances["document_content"]);
+  }
+  CKEDITOR.replace("document_content", { "language":"zh-cn", "customConfig":"/ckeditor_config.js" });

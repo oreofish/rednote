@@ -2,7 +2,8 @@
 .page-header
   %h2
     文档
-    %small= link_to '新建文档', new_document_path(:project => @project.id)
+    %small= link_to '新建文档', documents_path(:project => @project.id), :method => "post"
 .documentlist
   - @documents.each do |document|
     =render :partial => 'document', :locals => {:document => document }
+%br

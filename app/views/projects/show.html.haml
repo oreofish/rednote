@@ -23,5 +23,8 @@
   #documentcontent
     = link_to "文档", documents_path(:project => @project.id), :id => "documentfiles", :remote => true
   #historycontent
-    %h3= link_to "查看回顾", history_tasks_path(:project => @project.id), :id => "oldtasklink", :remote => true
+    %h3
+      = link_to history_tasks_path(:project => @project.id), :id => "oldtasklink", :remote => true do
+        查看回顾
+        %i.icon-chevron-down
 

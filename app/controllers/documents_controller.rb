@@ -28,34 +28,16 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/new
-  # GET /documents/new.json
-  def new
-    @project = Project.find(params[:project])
-    @document = Document.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.js # new.js.erb
-      format.json { render json: @document }
-    end
-  end
-
-  # GET /documents/1/edit
-  def edit
-    @document = Document.find(params[:id])
-    @project = @document.project
-  end
 
   # POST /documents
   # POST /documents.json
   def create
-    @project = Project.find(params[:document][:project_id])
-    @document = current_user.documents.new(params[:document])
+    @project = Project.find(params[:project])
+    @document = current_user.documents.new(:project_id => @project.id)
 
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @project, notice: 'Document was successfully created.' }
+        format.html { redirect_to @document, notice: 'Document was successfully created.' }
         format.js # create.js.erb
         format.json { render json: @document, status: :created, location: @document }
       else
@@ -88,10 +70,11 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document = Document.find(params[:id])
+    @project = @document.project
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_url }
+      format.html { redirect_to @project }
       format.js # destroy.js.erb
       format.json { head :no_content }
     end
