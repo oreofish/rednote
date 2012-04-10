@@ -62,6 +62,12 @@ label,input,button,select,textarea {
     color: #E1E4E5;
 }
 
+.truncate {
+    overflow:hidden; /*不显示超过对象宽度的内容*/ 
+    text-overflow:ellipsis; /*当对象内文本溢出时显示省略标记（...）*/ 
+    white-space:nowrap; /*限制在一行内显示所有文本*/     
+}
+
 /* Faded out hr */
 hr.soften {
   height: 1px;
