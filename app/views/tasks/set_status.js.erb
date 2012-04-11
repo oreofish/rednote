@@ -4,11 +4,18 @@
 <% if @task.valid? %>
     var $task = $('#task<%= @task.id %>');
   if($task.find(".js-change-status").attr("checked")=="checked"){
-    console.log("true");
     $task.find(".js-add-throughline").addClass("task-content");
+    if( $('.tasklist').find('#task<%= @task.id %>').length == 1 ){
+      if($('.tasklist').find('.taskcomplete').length == 0){
+        $('.tasklist').append("<b class='taskcomplete'>完成任务</b>");
+      }
+      $('.tasklist').find('.taskcomplete').after($task);
+    }
   } else {
-    console.log("false");
     $task.find(".js-add-throughline").removeClass("task-content");
+    if( $('.tasklist').find('#task<%= @task.id %>').length == 1 ){
+      $('.tasklist').find('.taskcomplete').before($task);
+    }
   }
 
   // enable in place edit
