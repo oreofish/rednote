@@ -11,7 +11,7 @@
     .pull-right
       - User.all.each do |user|
         .red-avatar.useritem{:id => "user#{user.id}"}
-          = link_to image_tag(user.avatar_url(:small)), mytasks_tasks_path(:id => user.id), :class => "thumbnail"
+          = link_to image_tag(user.avatar_url(:small)), mytasks_user_path(user), :class => "thumbnail"
     %h2= @project.name
 
   #questioncontent
