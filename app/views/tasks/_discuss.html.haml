@@ -4,22 +4,25 @@
   %h2
     讨论
     %small 项目相关问题的讨论
-.latest_commentslist
-  %ul.comment.unstyled
-    - @tasks.each do |task|
-      - comment = task.comments.last
-      - if not comment.nil?
-        %li.row-fluid(id="comment#{comment.id}")
+%table.table
+  - @tasks.each do |task|
+    - comment = task.comments.last
+    - if not comment.nil?
+      %tr
+        %td
           - user = User.find(comment.user_id)
-          .span1
-            = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
+          = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"),
             user_path(user), :title => "#{comment.user_id}" 
-          .span11
-            = link_to task do
-              %strong= task.content.html_safe
-            .truncate= comment.comment.html_safe
-            .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
-            %br
-            %hr
+        %td
+          .oneline= user.nickname
+        %td
+          = link_to task, :class => "truncate" do
+            %strong= task.content.html_safe
+            %span= comment.comment.html_safe
+        %td
+          .oneline.small.live-timestamp(data-notetime="#{comment.created_at}")
+        %td
+          .small= task.comments.count
+
 
 

@@ -1,3 +1,4 @@
+# encoding: utf-8
 # == Schema Information
 #
 # Table name: users
@@ -71,6 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def self.list_user_options 
-    User.select("id, nickname").map {|x| [x.id, x.nickname] }
+    userlist = User.select("id, nickname").map {|x| [x.id, x.nickname] }
+    [[0, "Unassigned"]] + userlist
   end
 end
