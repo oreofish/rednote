@@ -2,7 +2,11 @@
 
 (function() {
 <% if @task.valid? %>
-  $('.tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task, :show => :edit }) %>" );
+  if($('.tasklist').find('.taskcomplete').length == 0 ){
+    $('.tasklist').append( "<%= j render( :partial => 'note', :locals => { :task => @task, :show => :edit }) %>" );
+  }else {
+    $('.tasklist').find('.taskcomplete').before("<%= j render( :partial => 'note', :locals => { :task => @task, :show => :edit }) %>");
+  }
   $('.tasklist').effect('highlight', {}, 3000);
   $('#task_content')[0].value = '';
 
