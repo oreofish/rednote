@@ -47,8 +47,10 @@
           var creation = getTime(new Date($time.data('notetime')));
           creation = getTime(new Date($time.data('notetime').replace(/-/g, '/')));
 
-          var separate;
-          creation.minute > 10 ? separate = ":" : separate = ":0";
+          var prefixMinute;
+          var prefixHour;
+          creation.minute > 10 ? prefixMinute = ":" : prefixMinute = ":0";
+          creation.hour > 10 ? prefixHour= "" : prefixHour= "0";
 
           if (now.year == creation.year) {
               if (now.year == creation.year && now.month == creation.month && 
@@ -68,10 +70,10 @@
                       $time.html(c+"小时前");
                   }
               } else {
-                  $time.html(creation.month+"月"+creation.day+"日"+creation.hour+separate+creation.minute);
+                  $time.html(creation.month+"月"+creation.day+"日"+prefixHour+creation.hour+prefixMinute+creation.minute);
               }
           } else {
-              $time.html(creation.year+"年"+creation.month+"月"+creation.day+"日"+creation.hour+separate+creation.minute);
+              $time.html(creation.year+"年"+creation.month+"月"+creation.day+"日"+prefixHour+creation.hour+prefixMinute+creation.minute);
           }
       }
   };
