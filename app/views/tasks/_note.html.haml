@@ -8,10 +8,10 @@
   %span.js-add-throughline{:class => task.status == Task::DONE ? "task-content" : ""}
     = best_in_place task, :content, :type => :input, :activator => "#editcontent#{task.id}"
   %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
-  %strong.small-link= best_in_place task, :assigned_to, :type => :select, :nil => '指派',
+  %strong.small-link= best_in_place task, :assigned_to, :type => :select, :nil => '未指派',
     :collection => User::list_user_options if task.status != Task::DONE
-  %strong.small-link.task-estimate= best_in_place task, :estimate, :type => :select, :nil => '估时',
-    :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天'], [4.0,'4天'], [5.0,'5天']] if task.status != Task::DONE
+  %strong.small-link.task-estimate= best_in_place task, :estimate, :type => :select, :nil => '未估时',
+    :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天']] if task.status != Task::DONE
   
   %span.small-link= link_to "评论(#{task.comments.size})", task
   %br
