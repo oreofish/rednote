@@ -6,8 +6,10 @@
     :type => "checkbox", "data-behavior" => "toggle",
     :checked => task.status == Task::DONE ? true : false }
   %span.js-add-throughline{:class => task.status == Task::DONE ? "task-content" : ""}
-    = best_in_place task, :content, :type => :input, :activator => "#editcontent#{task.id}"
-  %span(id="editcontent#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
+    =link_to task.content, task
+
+  %span.js-editable{:style => "display:none;"}= best_in_place task, :content, :type => :input, :activator => "#editcontent#{task.id}"
+  %span.edittaskcontent(id="editcontent#{task.id}" taskid ="#{task.id}")= link_to "修改", "javascript:void(0)", :class => "small-link" if task.status == Task::TODO
   %strong.small-link= best_in_place task, :assigned_to, :type => :select, :nil => '指派',
     :collection => User::list_user_options if task.status != Task::DONE
   %strong.small-link.task-estimate= best_in_place task, :estimate, :type => :select, :nil => '估时',
