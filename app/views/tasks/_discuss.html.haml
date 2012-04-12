@@ -14,7 +14,7 @@
           = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"),
             user_path(user), :title => "#{comment.user_id}" 
         %td
-          = user.nickname
+          .oneline= user.nickname
         %td
           = link_to task, :class => "truncate" do
             %strong= task.content.html_safe

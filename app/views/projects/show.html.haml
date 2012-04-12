@@ -12,8 +12,7 @@
       - User.all.each do |user|
         .red-avatar.useritem{:id => "user#{user.id}"}
           = link_to image_tag(user.avatar_url(:small)), mytasks_tasks_path(:id => user.id), :class => "thumbnail"
-    %h2
-      %small= @project.name
+    %h2= @project.name
 
   #questioncontent
     = link_to "讨论", discuss_tasks_path(:project => @project.id), :id => "latest_commentslink", :remote => true
