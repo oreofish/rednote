@@ -58,15 +58,24 @@ label,input,button,select,textarea {
     font-size: 12px;
 }
 
+.small {
+    font-size: 12px;
+}
+
 .vline {
     margin: 0 2px;
     color: #E1E4E5;
 }
 
+.oneline {
+    white-space:nowrap; /*限制在一行内显示所有文本*/     
+}
+
 .truncate {
     overflow:hidden; /*不显示超过对象宽度的内容*/ 
     text-overflow:ellipsis; /*当对象内文本溢出时显示省略标记（...）*/ 
-    white-space:nowrap; /*限制在一行内显示所有文本*/     
+    max-height: 35px;
+    display: block;
 }
 
 /* Faded out hr */
