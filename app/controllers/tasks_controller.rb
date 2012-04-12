@@ -165,6 +165,8 @@ class TasksController < ApplicationController
                                    :content => params[:task][:content]
                                    )
     @task.status = Task::TODO
+    @task.assigned_to = @current_user.id
+    @task.estimate = 0.5
 
     respond_to do |format|
       if @task.save
