@@ -13,7 +13,6 @@
         .red-avatar.useritem{:id => "user#{user.id}"}
           = link_to image_tag(user.avatar_url(:small)), mytasks_tasks_path(:id => user.id), :class => "thumbnail"
     %h2
-      当前项目：
       %small= @project.name
 
   #questioncontent

@@ -166,7 +166,7 @@ class TasksController < ApplicationController
                                    )
     @task.status = Task::TODO
     @task.assigned_to = @current_user.id
-    @task.estimate = 0.5
+    @task.estimate = 0.0
 
     respond_to do |format|
       if @task.save
