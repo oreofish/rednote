@@ -4,7 +4,7 @@
   - user = User.find(comment.user_id)
   .span1
     = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
-    user_path(user), :title => "#{comment.user_id}" 
+    user_path(user), :title => "#{user.nickname}" 
   .span11
     //disable rdiscount
     = comment.comment.html_safe
