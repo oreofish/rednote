@@ -7,5 +7,20 @@
       %h2
         = link_to project.name, project
         %small= project.summary
+  .page-header
+    %h3
+      快速帮助
+  %ul
+    %li
+      %strong 写明确的任务
+      这个任务应该是你当前具体要做的事情，而不是你的近期工作目标。
+    %li
+      %strong 给自己的任务估时
+      默认估时是0天，表示这个事情可以很快搞定。如果估时超过3天，那么这个任务就是不明确的，需要对它进行细化和分解，重新创建任务。
+    %li
+      %strong 任务描述尽量写长点
+      写的任务描述让别人能看懂，如果别人看不懂，那么过一段时间，你自己也就看不懂了。
+    %li
+      %strong ...
   .form-actions
     = render 'form'
