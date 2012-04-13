@@ -41,11 +41,16 @@ jQuery ->
     $('#task'+id).find('.js-change-status').attr "disabled", "false"
   )
 
-  $('body').on('blur',".form_in_place", ()->
+  $('body').on('blur',".form_in_place", (e)->
     id = $(this).parent().attr("id").match(/\d+/)
     $('#task'+id).find('.js-change-status').removeAttr "disabled"
     $('#task'+id).find('.js-add-throughline').attr "style", ""
     $('#task'+id).find('.js-editable').attr "style", "display:none;"
+  )
+
+  $('body').on('change', ".js-editable", (e)->
+    id = $(this).find('.best_in_place').attr("id").match(/\d+/)
+    $('#task'+id).find('.js-add-throughline a').text(e.target.value)
   )
 
   $('#taskprogresslink').click()
