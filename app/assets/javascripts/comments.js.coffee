@@ -6,5 +6,4 @@ jQuery ->
   $('body').on('keypress', '#comment_comment', (e)->
     if e.ctrlKey and (e.which == 13 or e.which == 10)
       $(this).parent('form').find(':submit').trigger('click')
-    console.log e
   )

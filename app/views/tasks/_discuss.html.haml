@@ -18,7 +18,7 @@
         %td
           = link_to task, :class => "truncate" do
             %strong= task.content.html_safe
-            %span= comment.comment.html_safe
+            %span.small-link= comment.comment.html_safe
         %td
           .oneline.small.live-timestamp(data-notetime="#{comment.created_at}")
         %td

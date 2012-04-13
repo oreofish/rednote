@@ -14,7 +14,10 @@
     :collection => User::list_user_options if task.status != Task::DONE
   %strong.small-link.task-estimate= best_in_place task, :estimate, :type => :select, :nil => '未估时',
     :collection => [[0, '0天'], [0.5,'0.5天'], [1.0,'1天'], [1.5,'1.5天'], [2.0,'2天'], [3.0,'3天']] if task.status != Task::DONE
-  
-  %span.small-link= link_to "评论(#{task.comments.size})", task
+
+  %span= link_to "评论(#{task.comments.size})", task, :class => "small-link" if task.comments.size > 0
+  %span
+    - @user = task.assigned_to
+    = User.find(@user).nickname if task.status == Task::DONE and not @user.nil?
   %br
 

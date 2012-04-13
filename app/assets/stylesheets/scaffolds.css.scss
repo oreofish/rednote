@@ -58,8 +58,11 @@ label,input,button,select,textarea {
 }
 
 .small-link {
-    color: #7AA5B9;
+    color: #aaa;
     font-size: 12px;
+}
+.small-link:hover{
+    color:#222;
 }
 
 .small {
