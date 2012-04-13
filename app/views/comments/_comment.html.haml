@@ -1,17 +1,18 @@
 -# encoding: utf-8
 
-%li.row-fluid(id="comment#{comment.id}")
+%li.row-fluid.js-comment(id="comment#{comment.id}")
   - user = User.find(comment.user_id)
   .span1
     = link_to image_tag(user.avatar_url(:small), :height => "30", :width => "30"), 
     user_path(user), :title => "#{user.nickname}" 
   .span11
     //disable rdiscount
-    = comment.comment.html_safe
-    .live-timestamp.pull-right(data-notetime="#{comment.created_at}")
-    - if(comment.user_id == current_user.id and comment.commentable_type == "Note")
-      = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link' do
-        %i.icon-remove 
+    = best_in_place comment, :comment, :type => :input, :activator => "#editcomment#{comment.id}"
+    .pull-right.live-timestamp(data-notetime="#{comment.created_at}")
+    - if(comment.user_id == current_user.id)
+      = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link', :style => "display:none;" do
+        %i.icon-remove
+      %span(id="editcomment#{comment.id}")= link_to "修改", "javascript:void(0)", :class => "small-link", :style => "display:none;"
       .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
         .modal-header
           %a.close(data-dismiss="modal") ×
@@ -21,8 +22,5 @@
         .modal-footer
           = link_to '删除', comment, :method => "delete",  "data-dismiss" => "modal", :class => "btn", :remote => true
           %a.btn{:href => "close", "data-dismiss" => "modal"} 取消
-    - elsif(comment.user_id == current_user.id and comment.commentable_type != "Note")
-      = link_to comment, :method => :delete, :remote => true do
-        %i.icon-remove 
   %br
   %hr

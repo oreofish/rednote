@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   include ERB::Util
-  before_filter :authorized_user, :only => [:destroy]
+  before_filter :authorized_user, :only => [:destroy, :update]
 
   # GET /comments
   # GET /comments.json
@@ -44,6 +44,20 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @commentable = Object.const_get(@comment.commentable_type).find(@comment.commentable_id)
+
+    respond_to do |format|
+      if @comment.update_attributes(params[:comment])
+        format.html { redirect_to @commentable, notice: 'Comment was successfully updated.' }
+        format.json { respond_with_bip(@comment) }
+      else
+        format.html { render @commentable, notice: 'Comemnt was unsuccessfully updated.' }
+        format.json { respond_with_bip(@comment) }
+      end
+    end
+  end
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy

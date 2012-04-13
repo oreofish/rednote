@@ -38,7 +38,7 @@ Rednote::Application.routes.draw do
     end
   end
 
-  resources :comments, :only => [:new, :index, :create, :destroy] do 
+  resources :comments, :only => [:new, :index, :create, :destroy, :update] do 
     collection do 
       get 'dono'
     end
