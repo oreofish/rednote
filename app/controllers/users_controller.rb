@@ -51,10 +51,7 @@ class UsersController < ApplicationController
 
   def mytasks
     @user = User.find(params[:id])
-    @avatar = @user.avatar
-    @nickname = @user.nickname
 
-    @mytasks = @user.tasks
     @assigned_to_me_tasks = Task.find_all_by_assigned_to(@user.id)
 
     respond_to do |format|

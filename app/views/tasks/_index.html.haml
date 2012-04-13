@@ -1,23 +1,5 @@
 - # encoding: utf-8
 
-:javascript
-  $(function() {
-  // droppable user item in _smallinfo.html.erb
-  $( ".useritem" ).droppable({
-    activeClass: "ui-state-default",
-    hoverClass:  "ui-state-hover",
-    tolerance: 'pointer',
-    drop: function( event, ui ) {
-      $( this ).addClass( "ui-state-highlight" ).find("p").html(ui.draggable.attr("id"));
-      console.log('assign task to user');
-      $.get("/tasks/assign", {taskid: ui.draggable.attr("id"), userid: $(this).attr("id") }, function (data, textStatus){
-        this;
-        eval(data);
-      });
-    }
-  });
-  });
-
 .page-header
   %h2
     任务

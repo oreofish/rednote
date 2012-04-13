@@ -17,7 +17,7 @@
 
   %span= link_to "评论(#{task.comments.size})", task, :class => "small-link" if task.comments.size > 0
   %span
-    - @user = task.assigned_to
-    = User.find(@user).nickname if task.status == Task::DONE and not @user.nil?
+    - @assign_user = task.assigned_to
+    = User.find(@assign_user).nickname if task.status == Task::DONE and not @assign_user.nil?
   %br
 

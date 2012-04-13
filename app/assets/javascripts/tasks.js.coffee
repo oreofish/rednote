@@ -17,18 +17,18 @@ jQuery ->
   )
 
   # draggable task item in _note.html.erb
-  $( ".taskitem" ).live('mouseover', ()->
-    $(this).draggable({
-      distance: 20,
-      revert: true,
-      opacity: 0.7,
-      cursor: "move",
-      cursorAt: { top: 20, left: 20 },
-      helper: ( event ) ->
-         $( "<img src='/images/todo-note.jpg'>" );
-      }
-    )
-  )
+ # $( ".taskitem" ).live('mouseover', ()->
+ #   $(this).draggable({
+ #     distance: 20,
+ #     revert: true,
+ #     opacity: 0.7,
+ #     cursor: "move",
+ #     cursorAt: { top: 20, left: 20 },
+ #     helper: ( event ) ->
+ #        $( "<img src='/images/todo-note.jpg'>" );
+ #     }
+ #   )
+ # )
   $('body').on('click', ".js-change-status" , ()->
     url = $(this).attr("data-url")
     $.get(url, {})
