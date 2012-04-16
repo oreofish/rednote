@@ -10,9 +10,9 @@
     = best_in_place comment, :comment, :type => :input, :activator => "#editcomment#{comment.id}"
     .pull-right.live-timestamp(data-notetime="#{comment.created_at}")
     - if(comment.user_id == current_user.id)
+      %span(id="editcomment#{comment.id}")= link_to "修改", "", :class => "small-link", :style => "display:none;", :remote => true
       = link_to "#removecomment#{comment.id}",'data-toggle' => "modal", :class => 'toremove small-link', :style => "display:none;" do
         %i.icon-remove
-      %span(id="editcomment#{comment.id}")= link_to "修改", "javascript:void(0)", :class => "small-link", :style => "display:none;"
       .commentremove.modal.hide.fade{:id => "removecomment#{comment.id}", :commentid => "#{comment.id}", :style => "display: none;"}
         .modal-header
           %a.close(data-dismiss="modal") ×

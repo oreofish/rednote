@@ -8,4 +8,7 @@
   $list.append( "<%= j render( 'comments/form') %>" );
   $list.find('#comment_comment').focus();
 
+  setTimeout( function() {
+    $('.best_in_place').best_in_place();
+  }, 100 );
 }());
