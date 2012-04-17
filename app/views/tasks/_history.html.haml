@@ -1,8 +1,4 @@
 - # encoding: utf-8
 
-.page-header
-  %h2
-    回顾
-    %small 已完成任务列表
 - @old_tasks.each do |task|
   = render :partial => 'tasks/note', :locals => { :task => task, :show => :edit }
