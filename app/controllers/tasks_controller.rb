@@ -170,6 +170,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+        #current_user.send_message(@users, "#{current_user.nickname} 创建任务：#{@task.content}", "创建新任务")
         format.html { redirect_to project_path(params[:project][:name]) }
         format.js # create.js.erb
         format.json { render json: @task, status: :created, location: @task }
@@ -185,9 +186,16 @@ class TasksController < ApplicationController
   # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
+    @project = @task.project
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
+        if not params[:task][:assigned_to].nil?
+          @receiver = User.find(params[:task][:assigned_to])
+          subject = "[#{@project.name}]收到任务：#{@task.content}"
+          UserMailer.task_assign_notify(@receiver.email, subject, @task, current_user).deliver
+          # current_user.send_message(@receive_user, "<b>#{current_user.nickname} 将任务：#{@task.content}指派给你</b>", "收到新任务")
+        end
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { respond_with_bip(@task) }
       else

@@ -1,0 +1,67 @@
+<div class="padded" style="padding: 20px;">
+  <table style="background-color: #ffffff; width: 100%; text-align: left; border-collapse: collapse; border-spacing: 0; -premailer-cellspacing: 0; -premailer-cellpadding: 0; -premailer-width: 100%; margin: 0; padding: 0; border: 0;" bgcolor="#ffffff" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="background-color: #ffffff; text-align: left; vertical-align: top; font-size: 14px; line-height: 19px; font-family: 'Helvetica Neue', helvetica, sans-serif; color: #000000;" align="left" bgcolor="#ffffff" valign="top">
+        <table style="background-color: #ffffff; width: 100%; text-align: left; border-collapse: collapse; border-spacing: 0; -premailer-cellspacing: 0; -premailer-cellpadding: 0; -premailer-width: 100%; margin: 0; padding: 0; border: 0;" bgcolor="#ffffff" width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="text-align: left; vertical-align: top; font-size: 14px; line-height: 19px; font-family: 'Helvetica Neue', helvetica, sans-serif; color: #000000; background-color: #ffffff;" align="left" bgcolor="#ffffff" valign="top">
+              <div class="global_events" style="margin-bottom: 19px; padding-bottom: 15px; border-bottom-width: 1px; border-bottom-color: #cccccc; border-bottom-style: solid;">
+                <div class="logo" style="padding: 0 0 5px;">
+                  <table border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; width: 100%; text-align: left; border-collapse: collapse; border-spacing: 0; -premailer-cellspacing: 0; -premailer-cellpadding: 0; -premailer-width: 100%; margin: 0; padding: 0; border: 0;" bgcolor="#ffffff" width="100%">
+                    <tr>
+                      <th style="vertical-align: middle; width: 1%;" valign="middle">
+                        <%= image_tag "/images/hippo2.png", :size => "45x34", :alt => "Happy Work" %>
+                      </th>
+                      <td style="text-align: left; vertical-align: middle; font-size: 14px; line-height: 19px; font-family: 'Helvetica Neue', helvetica, sans-serif; color: #000000; width: 99%; background-color: #ffffff;" align="left" bgcolor="#ffffff" valign="middle">
+                        <h2 style="font-weight: bold; font-size: 18px; font-family: 'Helvetica Neue', helvetica, sans-serif; line-height: 24px; margin: 0; padding: 0 0 0 7px;">
+                          Hippo
+                        </h2>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="header" style="font-family: 'Helvetica Neue', helvetica, sans-serif; margin: 0 0 15px; padding: 0;">
+                  <table border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; width: 100%; text-align: left; border-collapse: collapse; border-spacing: 0; -premailer-cellspacing: 0; -premailer-cellpadding: 0; -premailer-width: 100%; margin: 0; padding: 0; border: 0;" bgcolor="#ffffff" width="100%">
+                    <tr>
+                      <td style="text-align: left; vertical-align: middle; font-size: 14px; line-height: 19px; font-family: 'Helvetica Neue', helvetica, sans-serif; color: #000000; width: 49%; background-color: #ffffff;" align="left" bgcolor="#ffffff" valign="middle">
+                        <hr style="border-bottom-width: 3px; border-bottom-color: #e5e5e5; margin: 0; padding: 0; border-style: none none solid;">
+                      </td>
+                      <th style="width: 2%; white-space: nowrap; vertical-align: middle; padding: 0 10px;" valign="middle">
+                        <h1 style="background-color: #ffffff; font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: 28px; line-height: normal; text-align: center; margin: 0 auto;" align="center">
+                          每日总结<br>
+                          <span class="inactive_title" style="font-weight: normal; font-size: 16px; font-family: 'Helvetica Neue', helvetica, sans-serif;">
+                            <%= Date.today %>
+                          </span>
+                        </h1>
+                      </th>
+                      <td style="text-align: left; vertical-align: middle; font-size: 14px; line-height: 19px; font-family: 'Helvetica Neue', helvetica, sans-serif; color: #000000; width: 49%; background-color: #ffffff;" align="left" bgcolor="#ffffff" valign="middle">
+                        <hr style="border-bottom-width: 3px; border-bottom-color: #e5e5e5; margin: 0; padding: 0; border-style: none none solid;">
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="section executive_summary" style="margin-bottom: 0; padding-bottom: 20px;">
+                  <h2 style="font-weight: normal; font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: 18px; line-height: 16px; color: #AA9C84; margin: 6px 0 20px;">
+                    <%= @projects.length %> 项目更新
+                  </h2>
+                  <ul class="projects_updated" style="list-style-type: none; margin: 0 0 10px; padding: 0;">
+                    <% @projects.each do |project|%>
+                      <li style="list-style-type: disc; margin: 0 0 0 18px; padding: 0;">
+                        <%= link_to project.name, project_url(project)%>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+
+                <div class="section project" style="margin-bottom: 0; padding-bottom: 20px;">
+                  <% @projects.each do |project|%>
+                    <%= render :partial => 'project', :locals => { :project => project } %>
+                  <% end %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+  </tr></table>
+</div>
