@@ -190,7 +190,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        if not params[:task][:assigned_to].nil?
+        if not params[:task][:assigned_to].nil? and params[:task][:assigned_to] > 0
           @receiver = User.find(params[:task][:assigned_to])
           subject = "[#{@project.name}]收到任务：#{@task.content}"
           UserMailer.task_assign_notify(@receiver.email, subject, @task, current_user).deliver

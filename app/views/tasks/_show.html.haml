@@ -4,22 +4,8 @@
     - if current_user == @task.user
       .pull-right= link_to "删除", @task, :confirm => "确定删除此任务吗?", :method => :delete, :class => "btn"
     .span1= link_to @project.name, @project, :class => "btn"
-  .row
-    %h3.span1 项目：
-    .span7= @project.name
-  .row
-    %h3.span1 创建：
-    .span7= @task.user.nickname
-  .row
-    %h3.span1 内容：
-    .span7
-      = @task.content
-  .row
-    %h3.span1 估时：
-    .span7
-      = @task.estimate
-  .row
-
+  %br
+  = render :partial => 'note', :locals => { :task => @task, :show => :edit }
 .page-header
   %h3
     评论
