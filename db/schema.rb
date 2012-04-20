@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120409200125) do
+ActiveRecord::Schema.define(:version => 20120416160056) do
 
   create_table "answers", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "question_id", :default => 0
-    t.integer  "score",       :default => 0
+    t.integer  "question_id"
+    t.integer  "score"
     t.text     "content"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "attachements", :force => true do |t|
@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(:version => 20120409200125) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "conversations", :force => true do |t|
+    t.string   "subject",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "debits", :force => true do |t|
     t.integer  "book_id"
@@ -178,6 +184,22 @@ ActiveRecord::Schema.define(:version => 20120409200125) do
     t.integer  "message",    :default => 0
   end
 
+  create_table "notifications", :force => true do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              :default => ""
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                :default => false
+    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at",                              :null => false
+    t.integer  "notified_object_id"
+    t.string   "notified_object_type"
+  end
+
+  add_index "notifications", ["conversation_id"], :name => "index_notifications_on_conversation_id"
+
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
     t.integer  "owner_id"
@@ -196,6 +218,20 @@ ActiveRecord::Schema.define(:version => 20120409200125) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "receipts", :force => true do |t|
+    t.integer  "receiver_id"
+    t.string   "receiver_type"
+    t.integer  "notification_id",                                  :null => false
+    t.boolean  "read",                          :default => false
+    t.boolean  "trashed",                       :default => false
+    t.boolean  "deleted",                       :default => false
+    t.string   "mailbox_type",    :limit => 25
+    t.datetime "created_at",                                       :null => false
+    t.datetime "updated_at",                                       :null => false
+  end
+
+  add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -217,10 +253,10 @@ ActiveRecord::Schema.define(:version => 20120409200125) do
   create_table "tasks", :force => true do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.float    "estimate",      :default => 0.0
+    t.float    "estimate"
     t.datetime "deadline"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "assigned_to"
     t.datetime "start_at"
     t.datetime "finish_at"
@@ -249,5 +285,9 @@ ActiveRecord::Schema.define(:version => 20120409200125) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
+
+  add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
 
 end
