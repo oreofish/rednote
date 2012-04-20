@@ -20,7 +20,7 @@ scheduler.cron '50 23 * * *' do
     @project_tasks[task.project_id] = [] if @project_tasks[task.project_id].nil?
     @project_users[task.project_id] = [] if @project_users[task.project_id].nil?
     @project_tasks[task.project_id] << task
-    @project_users[task.project_id] << task.user
+    @project_users[task.project_id] << User.find(task.assigned_to)
   end
 
   UserMailer.daily_notify(@project_tasks,@project_users).deliver
