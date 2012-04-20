@@ -42,20 +42,24 @@
                 </div>
                 <div class="section executive_summary" style="margin-bottom: 0; padding-bottom: 20px;">
                   <h2 style="font-weight: normal; font-family: 'Helvetica Neue', helvetica, sans-serif; font-size: 18px; line-height: 16px; color: #AA9C84; margin: 6px 0 20px;">
-                    <%= @projects.length %> 项目更新
+                    <%= @project_tasks.compact.length %> 项目更新
                   </h2>
                   <ul class="projects_updated" style="list-style-type: none; margin: 0 0 10px; padding: 0;">
                     <% @projects.each do |project|%>
-                      <li style="list-style-type: disc; margin: 0 0 0 18px; padding: 0;">
-                        <%= link_to project.name, project_url(project)%>
-                      </li>
+                      <% if not @project_tasks[project.id].nil? %>
+                        <li style="list-style-type: disc; margin: 0 0 0 18px; padding: 0;">
+                          <%= link_to project.name, project_url(project)%>
+                        </li>
+                      <% end %>
                     <% end %>
                   </ul>
                 </div>
 
                 <div class="section project" style="margin-bottom: 0; padding-bottom: 20px;">
                   <% @projects.each do |project|%>
-                    <%= render :partial => 'project', :locals => { :project => project } %>
+                    <% if not @project_tasks[project.id].nil? %>
+                      <%= render :partial => 'project', :locals => { :project => project } %>
+                    <%end%>
                   <% end %>
                 </div>
               </div>

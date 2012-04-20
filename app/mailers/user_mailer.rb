@@ -22,7 +22,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def daily_notify( update_task, update_user)
-    subject = "daily recap"
+    subject = "Daily Recap"
     @emails = ""
     User.all.each do |user|
       @emails += user.email + ","
@@ -31,13 +31,6 @@ class UserMailer < ActionMailer::Base
     @project_tasks = update_task
     @projects = Project.all
     tag = 0
-
-    @project_tasks.each do |project_task|
-      if project_task == [] and tag > 0
-        @projects -= Project.find(tag)
-      end
-      tag += 1
-    end
 
     mail( to: @emails, subject: subject ) do |format|
       format.html 
